@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* Copyright (c) 2007, 2013-2015, The Linux Foundation. All rights reserved.
+=======
+/* Copyright (c) 2007, 2013 The Linux Foundation. All rights reserved.
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  * Copyright (C) 2007 Google Incorporated
  *
  * This software is licensed under the terms of the GNU General Public
@@ -23,8 +27,11 @@
 #define PPP_BLUR_SCALE_MAX 128
 #define PPP_LUT_MAX 256
 
+<<<<<<< HEAD
 #define MDPOP_SMART_BLIT        BIT(31) /* blit optimization flag */
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 /* MDP PPP Operations */
 #define MDPOP_NOP               0
 #define MDPOP_LR                BIT(0)	/* left to right flip */
@@ -52,9 +59,13 @@
 #define PPP_OP_FLIP_LR			BIT(10)
 #define PPP_OP_FLIP_UD			BIT(11)
 #define PPP_OP_BLEND_ON			BIT(12)
+<<<<<<< HEAD
 #define PPP_OP_BLEND_CONSTANT_ALPHA	BIT(14)
 #define PPP_OP_BLEND_BG_ALPHA		BIT(13)
 #define PPP_OP_BLEND_EQ_REVERSE		BIT(15)
+=======
+#define PPP_OP_BLEND_CONSTANT_ALPHA BIT(14)
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #define PPP_OP_DITHER_EN		BIT(16)
 #define PPP_BLEND_CALPHA_TRNASP BIT(24)
 
@@ -298,6 +309,7 @@ struct ppp_table {
 	uint32_t val;
 };
 
+<<<<<<< HEAD
 struct ppp_resource {
 	u64 next_ab;
 	u64 next_ib;
@@ -306,6 +318,8 @@ struct ppp_resource {
 	u64 solid_fill_byte;
 };
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 struct ppp_csc_table {
 	int direction;			/* MDP_CCS_RGB2YUV or YUV2RGB */
 	uint16_t fwd_matrix[MDP_CCS_SIZE];	/* 3x3 color coefficients */
@@ -399,8 +413,11 @@ struct ppp_edge_rep {
 	int32_t luma_repeat_bottom;
 };
 
+<<<<<<< HEAD
 bool check_if_rgb(int color);
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 /* func for ppp register values */
 uint32_t ppp_bpp(uint32_t type);
 uint32_t ppp_src_config(uint32_t type);

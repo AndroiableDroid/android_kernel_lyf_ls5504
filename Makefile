@@ -702,9 +702,12 @@ ifeq ($(CONFIG_STRIP_ASM_SYMS),y)
 LDFLAGS_vmlinux	+= $(call ld-option, -X,)
 endif
 
+<<<<<<< HEAD
 LDFLAGS_vmlinux += $(call ld-option, --fix-cortex-a53-843419)
 LDFLAGS_MODULE += $(call ld-option, --fix-cortex-a53-843419)
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 # Default kernel image to build when no specific target is given.
 # KBUILD_IMAGE may be overruled on the command line or
 # set in the environment

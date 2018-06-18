@@ -252,10 +252,15 @@ struct buffer_info *get_registered_buf(struct msm_vidc_inst *inst,
 		goto err_invalid_input;
 	}
 
+<<<<<<< HEAD
 	WARN(!mutex_is_locked(&inst->registeredbufs.lock),
 		"Registered buf lock is not acquired for %s", __func__);
 
 	*plane = 0;
+=======
+	*plane = 0;
+	mutex_lock(&inst->registeredbufs.lock);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	list_for_each_entry(temp, &inst->registeredbufs.list, list) {
 		for (i = 0; (i < temp->num_planes)
 			&& (i < VIDEO_MAX_PLANES); i++) {
@@ -279,6 +284,10 @@ struct buffer_info *get_registered_buf(struct msm_vidc_inst *inst,
 		if (ret)
 			break;
 	}
+<<<<<<< HEAD
+=======
+	mutex_unlock(&inst->registeredbufs.lock);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 err_invalid_input:
 	return ret;
 }
@@ -495,7 +504,11 @@ int map_and_register_buf(struct msm_vidc_inst *inst, struct v4l2_buffer *b)
 			!b->m.planes[i].length) {
 			continue;
 		}
+<<<<<<< HEAD
 		mutex_lock(&inst->registeredbufs.lock);
+=======
+		mutex_lock(&inst->sync_lock);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		temp = get_registered_buf(inst, b, i, &plane);
 		if (temp && !is_dynamic_output_buffer_mode(b, inst)) {
 			dprintk(VIDC_DBG,
@@ -514,6 +527,10 @@ int map_and_register_buf(struct msm_vidc_inst *inst, struct v4l2_buffer *b)
 			* we receive RELEASE_BUFFER_REFERENCE EVENT from f/w.
 			*/
 			dprintk(VIDC_DBG, "[MAP] Buffer already prepared\n");
+<<<<<<< HEAD
+=======
+			mutex_lock(&inst->registeredbufs.lock);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			list_for_each_entry(iterator,
 				&inst->registeredbufs.list, list) {
 				if (iterator == temp) {
@@ -525,6 +542,7 @@ int map_and_register_buf(struct msm_vidc_inst *inst, struct v4l2_buffer *b)
 					break;
 				}
 			}
+<<<<<<< HEAD
 		}
 		mutex_unlock(&inst->registeredbufs.lock);
 		if (rc < 0)
@@ -534,6 +552,16 @@ int map_and_register_buf(struct msm_vidc_inst *inst, struct v4l2_buffer *b)
 			same_fd_handle = get_same_fd_buffer(
 						&inst->registeredbufs,
 						b->m.planes[i].reserved[0]);
+=======
+			mutex_unlock(&inst->registeredbufs.lock);
+		}
+		mutex_unlock(&inst->sync_lock);
+		if (rc < 0)
+			goto exit;
+
+		same_fd_handle = get_same_fd_buffer(&inst->registeredbufs,
+					b->m.planes[i].reserved[0]);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 		populate_buf_info(binfo, b, i);
 		if (same_fd_handle) {
@@ -597,8 +625,12 @@ int unmap_and_deregister_buf(struct msm_vidc_inst *inst,
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 	WARN(!mutex_is_locked(&inst->registeredbufs.lock),
 		"Registered buf lock is not acquired for %s", __func__);
+=======
+	mutex_lock(&inst->registeredbufs.lock);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	/*
 	* Make sure the buffer to be unmapped and deleted
@@ -659,6 +691,10 @@ int unmap_and_deregister_buf(struct msm_vidc_inst *inst,
 		dprintk(VIDC_DBG, "[UNMAP] NOT-FREED binfo: %p\n", temp);
 	}
 exit:
+<<<<<<< HEAD
+=======
+	mutex_unlock(&inst->registeredbufs.lock);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	return 0;
 }
 
@@ -741,8 +777,16 @@ int msm_vidc_prepare_buf(void *instance, struct v4l2_buffer *b)
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 	if (is_dynamic_output_buffer_mode(b, inst))
 		return 0;
+=======
+	if (is_dynamic_output_buffer_mode(b, inst)) {
+		dprintk(VIDC_ERR, "%s: not supported in dynamic buffer mode\n",
+				__func__);
+		return -EINVAL;
+	}
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	/* Map the buffer only for non-kernel clients*/
 	if (b->m.planes[0].reserved[0]) {
@@ -917,9 +961,14 @@ int msm_vidc_qbuf(void *instance, struct v4l2_buffer *b)
 			b->m.planes[i].m.userptr = 0;
 			continue;
 		}
+<<<<<<< HEAD
 		mutex_lock(&inst->registeredbufs.lock);
 		binfo = get_registered_buf(inst, b, i, &plane);
 		mutex_unlock(&inst->registeredbufs.lock);
+=======
+
+		binfo = get_registered_buf(inst, b, i, &plane);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		if (!binfo) {
 			dprintk(VIDC_ERR,
 				"This buffer is not registered: %d, %d, %d\n",
@@ -1032,9 +1081,13 @@ int msm_vidc_dqbuf(void *instance, struct v4l2_buffer *b)
 
 		dprintk(VIDC_DBG, "[DEQUEUED]: fd[0] = %d\n",
 			buffer_info->fd[0]);
+<<<<<<< HEAD
 		mutex_lock(&inst->registeredbufs.lock);
 		rc = unmap_and_deregister_buf(inst, buffer_info);
 		mutex_unlock(&inst->registeredbufs.lock);
+=======
+		rc = unmap_and_deregister_buf(inst, buffer_info);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	} else
 		rc = output_buffer_cache_invalidate(inst, buffer_info);
 

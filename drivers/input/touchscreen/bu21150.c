@@ -1,8 +1,12 @@
 /*
  * Japan Display Inc. BU21150 touch screen driver.
  *
+<<<<<<< HEAD
  * Copyright (c) 2014-2015, The Linux Foundation. All rights reserved.
  * Copyright (C) 2013-2015 Japan Display Inc.
+=======
+ * Copyright (C) 2013-2014 Japan Display Inc.
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,12 +31,16 @@
 #include <linux/spi/spi.h>
 #include <linux/gpio.h>
 #include <linux/input/bu21150.h>
+<<<<<<< HEAD
 #include <linux/device.h>
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #include <linux/regulator/consumer.h>
 #include <linux/delay.h>
 #include <linux/of_gpio.h>
 #include <linux/interrupt.h>
 #include <asm/byteorder.h>
+<<<<<<< HEAD
 #include <linux/timer.h>
 #include <linux/notifier.h>
 #include <linux/fb.h>
@@ -49,17 +57,29 @@
 #define SPI_HEADER_SIZE (3)
 #define SPI_BITS_PER_WORD_READ (8)
 #define SPI_BITS_PER_WORD_WRITE (8)
+=======
+
+/* define */
+#define DEVICE_NAME   "jdi-bu21150"
+#define REG_READ_DATA (0x0400)
+#define MAX_FRAME_SIZE (8*1024+16)  /* byte */
+#define SPI_HEADER_SIZE (3)
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #define FRAME_HEADER_SIZE (16)  /* byte */
 #define GPIO_LOW  (0)
 #define GPIO_HIGH (1)
 #define WAITQ_WAIT   (0)
 #define WAITQ_WAKEUP (1)
+<<<<<<< HEAD
 #define TIMEOUT_SCALE       (50)
 #define ESD_TEST_TIMER_MS	(10000)
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #define BU21150_MIN_VOLTAGE_UV	2700000
 #define BU21150_MAX_VOLTAGE_UV	3300000
 #define BU21150_VDD_DIG_VOLTAGE_UV	1800000
 #define BU21150_MAX_OPS_LOAD_UA	150000
+<<<<<<< HEAD
 #define BU21150_PIN_ENABLE_DELAY_US		1000
 #define BU21150_PINCTRL_VALID_STATE_CNT		2
 #define	BU21150_RESET_DURATION_US		10
@@ -91,16 +111,24 @@ struct bu21150_frame {
 	u8 frame[MAX_FRAME_SIZE];
 	struct timeval tv;
 };
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 /* struct */
 struct bu21150_data {
 	/* system */
 	struct spi_device *client;
+<<<<<<< HEAD
+=======
+	struct workqueue_struct *workq;
+	struct work_struct work;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	struct pinctrl *ts_pinctrl;
 	struct pinctrl_state *gpio_state_active;
 	struct pinctrl_state *gpio_state_suspend;
 	struct pinctrl_state *afe_pwr_state_active;
 	struct pinctrl_state *afe_pwr_state_suspend;
+<<<<<<< HEAD
 	struct pinctrl_state *mod_en_state_active;
 	struct pinctrl_state *mod_en_state_suspend;
 	struct pinctrl_state *disp_vsn_state_active;
@@ -131,6 +159,22 @@ struct bu21150_data {
 	u8 set_timer_flag;
 	u8 timeout_flag;
 	u32 timeout;
+=======
+	struct pinctrl_state *disp_vsn_state_active;
+	struct pinctrl_state *disp_vsn_state_suspend;
+	/* frame */
+	struct bu21150_ioctl_get_frame_data req_get;
+	u8 frame[MAX_FRAME_SIZE];
+	struct bu21150_ioctl_get_frame_data frame_get;
+	struct timeval tv;
+	struct mutex mutex_frame;
+	/* frame work */
+	u8 frame_work[MAX_FRAME_SIZE];
+	struct bu21150_ioctl_get_frame_data frame_work_get;
+	/* waitq */
+	u8 frame_waitq_flag;
+	wait_queue_head_t frame_waitq;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	/* spi */
 	u8 spi_buf[MAX_FRAME_SIZE];
 	/* power */
@@ -140,6 +184,7 @@ struct bu21150_data {
 	int irq_gpio;
 	int rst_gpio;
 	int afe_pwr_gpio;
+<<<<<<< HEAD
 	int mod_en_gpio;
 	int disp_vsn_gpio;
 	int ddic_rst_gpio;
@@ -156,6 +201,9 @@ struct bu21150_data {
 	u8 unblock_flag;
 	u8 force_unblock_flag;
 	bool lcd_on;
+=======
+	int disp_vsn_gpio;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 };
 
 struct ser_req {
@@ -179,14 +227,23 @@ static long bu21150_ioctl_suspend(void);
 static long bu21150_ioctl_resume(void);
 static long bu21150_ioctl_unblock(void);
 static long bu21150_ioctl_unblock_release(void);
+<<<<<<< HEAD
 static long bu21150_ioctl_set_timeout(unsigned long arg);
 static long bu21150_ioctl_set_scan_mode(unsigned long arg);
 static irqreturn_t bu21150_irq_thread(int irq, void *dev_id);
+=======
+static irqreturn_t bu21150_irq_handler(int irq, void *dev_id);
+static void bu21150_irq_work_func(struct work_struct *work);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static void swap_2byte(unsigned char *buf, unsigned int size);
 static int bu21150_read_register(u32 addr, u16 size, u8 *data);
 static int bu21150_write_register(u32 addr, u16 size, u8 *data);
 static void wake_up_frame_waitq(struct bu21150_data *ts);
+<<<<<<< HEAD
 static long wait_frame_waitq(struct bu21150_data *ts, u8 flag);
+=======
+static long wait_frame_waitq(struct bu21150_data *ts);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static int is_same_bu21150_ioctl_get_frame_data(
 	struct bu21150_ioctl_get_frame_data *data1,
 	struct bu21150_ioctl_get_frame_data *data2);
@@ -195,6 +252,7 @@ static void copy_frame(struct bu21150_data *ts);
 static void check_same_frame(struct bu21150_data *ts);
 #endif
 static bool parse_dtsi(struct device *dev, struct bu21150_data *ts);
+<<<<<<< HEAD
 static void get_frame_timer_init(void);
 static void get_frame_timer_handler(unsigned long data);
 static void get_frame_timer_delete(void);
@@ -202,10 +260,13 @@ static int bu21150_fb_suspend(struct device *dev);
 static int bu21150_fb_early_resume(struct device *dev);
 static int fb_notifier_callback(struct notifier_block *self,
 					unsigned long event, void *data);
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 /* static variables */
 static struct spi_device *g_client_bu21150;
 static int g_io_opened;
+<<<<<<< HEAD
 static struct timer_list get_frame_timer;
 
 static void bu21150_enable_irq(struct bu21150_data *ts)
@@ -352,6 +413,8 @@ static struct kobj_attribute bu21150_prop_attrs[] = {
 					bu21150_trigger_esd_store),
 
 };
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 static const struct of_device_id g_bu21150_psoc_match_table[] = {
 	{	.compatible = "jdi,bu21150", },
@@ -389,6 +452,11 @@ static struct spi_driver g_bu21150_spi_driver = {
 	},
 };
 
+<<<<<<< HEAD
+=======
+static int g_bu21150_ioctl_unblock;
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 module_spi_driver(g_bu21150_spi_driver);
 MODULE_AUTHOR("Japan Display Inc");
 MODULE_DESCRIPTION("JDI BU21150 Device Driver");
@@ -404,11 +472,15 @@ static int reg_set_optimum_mode_check(struct regulator *reg, int load_ua)
 
 static int bu21150_pinctrl_init(struct bu21150_data *data)
 {
+<<<<<<< HEAD
 	const char *statename;
 	int rc;
 	int state_cnt, i;
 	bool pinctrl_state_act_found = false;
 	bool pinctrl_state_sus_found = false;
+=======
+	int rc;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	data->ts_pinctrl = devm_pinctrl_get(&(data->client->dev));
 	if (IS_ERR_OR_NULL(data->ts_pinctrl)) {
@@ -418,6 +490,7 @@ static int bu21150_pinctrl_init(struct bu21150_data *data)
 		goto error;
 	}
 
+<<<<<<< HEAD
 	state_cnt = of_property_count_strings(data->client->dev.of_node,
 							"pinctrl-names");
 	if (state_cnt < BU21150_PINCTRL_VALID_STATE_CNT) {
@@ -549,6 +622,59 @@ static int bu21150_pinctrl_init(struct bu21150_data *data)
 		dev_err(&data->client->dev,
 					"missing required pinctrl states\n");
 		rc = -EINVAL;
+=======
+	data->gpio_state_active
+		= pinctrl_lookup_state(data->ts_pinctrl, "pmx_ts_active");
+	if (IS_ERR_OR_NULL(data->gpio_state_active)) {
+		dev_dbg(&data->client->dev,
+			"Can not get ts default pinstate\n");
+		rc = PTR_ERR(data->gpio_state_active);
+		goto error;
+	}
+
+	data->gpio_state_suspend
+		= pinctrl_lookup_state(data->ts_pinctrl, "pmx_ts_suspend");
+	if (IS_ERR_OR_NULL(data->gpio_state_suspend)) {
+		dev_dbg(&data->client->dev,
+			"Can not get ts sleep pinstate\n");
+		rc = PTR_ERR(data->gpio_state_suspend);
+		goto error;
+	}
+
+	data->afe_pwr_state_active
+		= pinctrl_lookup_state(data->ts_pinctrl, "afe_pwr_active");
+	if (IS_ERR_OR_NULL(data->afe_pwr_state_active)) {
+		dev_err(&data->client->dev,
+			"Can not get pwr default pinstate\n");
+		rc = PTR_ERR(data->afe_pwr_state_active);
+		goto error;
+	}
+
+	data->afe_pwr_state_suspend
+		= pinctrl_lookup_state(data->ts_pinctrl, "afe_pwr_suspend");
+	if (IS_ERR_OR_NULL(data->afe_pwr_state_suspend)) {
+		dev_err(&data->client->dev,
+			"Can not get pwr sleep pinstate\n");
+		rc = PTR_ERR(data->afe_pwr_state_suspend);
+		goto error;
+	}
+
+	data->disp_vsn_state_active
+		= pinctrl_lookup_state(data->ts_pinctrl, "disp_vsn_active");
+	if (IS_ERR_OR_NULL(data->disp_vsn_state_active)) {
+		dev_err(&data->client->dev,
+			"Can not get disp_vsn default pinstate\n");
+		rc = PTR_ERR(data->disp_vsn_state_active);
+		goto error;
+	}
+
+	data->disp_vsn_state_suspend
+		= pinctrl_lookup_state(data->ts_pinctrl, "disp_vsn_suspend");
+	if (IS_ERR_OR_NULL(data->disp_vsn_state_suspend)) {
+		dev_err(&data->client->dev,
+			"Can not get disp_vsn sleep pinstate\n");
+		rc = PTR_ERR(data->disp_vsn_state_suspend);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		goto error;
 	}
 
@@ -590,6 +716,7 @@ static int bu21150_pinctrl_enable(struct bu21150_data *ts, bool on)
 	if (!on)
 		goto pinctrl_suspend;
 
+<<<<<<< HEAD
 	rc = bu21150_pinctrl_select(ts, true);
 	if (rc < 0)
 		return -EINVAL;
@@ -650,10 +777,33 @@ static int bu21150_pinctrl_enable(struct bu21150_data *ts, bool on)
 			goto err_ddic_rst_pinctrl_enable;
 		}
 	}
+=======
+	rc = pinctrl_select_state(ts->ts_pinctrl,
+					ts->afe_pwr_state_active);
+	if (rc) {
+		dev_err(&ts->client->dev, "can not set afe pwr pins\n");
+		return -EINVAL;
+	}
+	usleep(1000);
+
+	rc = pinctrl_select_state(ts->ts_pinctrl,
+				ts->disp_vsn_state_active);
+	if (rc) {
+		dev_err(&ts->client->dev,
+				"can not set disp vsn pins\n");
+		goto err_disp_vsn_pinctrl_enable;
+	}
+	usleep(1000);
+
+	rc = bu21150_pinctrl_select(ts, true);
+	if (rc < 0)
+		goto err_ts_pinctrl_enable;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	return 0;
 
 pinctrl_suspend:
+<<<<<<< HEAD
 	if (ts->ddic_rst_state_suspend)
 		pinctrl_select_state(ts->ts_pinctrl,
 						ts->ddic_rst_state_suspend);
@@ -669,6 +819,13 @@ err_mod_en_pinctrl_enable:
 		pinctrl_select_state(ts->ts_pinctrl, ts->afe_pwr_state_suspend);
 err_afe_pwr_pinctrl_enable:
 	bu21150_pinctrl_select(ts, false);
+=======
+	bu21150_pinctrl_select(ts, false);
+err_ts_pinctrl_enable:
+	pinctrl_select_state(ts->ts_pinctrl, ts->disp_vsn_state_suspend);
+err_disp_vsn_pinctrl_enable:
+	pinctrl_select_state(ts->ts_pinctrl, ts->afe_pwr_state_suspend);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	return rc;
 }
@@ -680,6 +837,7 @@ static int bu21150_gpio_enable(struct bu21150_data *ts, bool on)
 	if (!on)
 		goto gpio_disable;
 
+<<<<<<< HEAD
 	/* set reset */
 	rc = gpio_request(ts->rst_gpio, "bu21150_ts_reset");
 	if (rc) {
@@ -754,6 +912,26 @@ static int bu21150_gpio_enable(struct bu21150_data *ts, bool on)
 		 */
 		usleep(BU21150_PIN_ENABLE_DELAY_US);
 	}
+=======
+	/* Panel and AFE Power on sequence */
+	rc = gpio_request(ts->afe_pwr_gpio, "afe_pwr");
+	if (rc) {
+		pr_err("%s: afe power gpio request failed\n", __func__);
+		return -EINVAL;
+	}
+	gpio_direction_output(ts->afe_pwr_gpio, 1);
+	gpio_set_value(ts->afe_pwr_gpio, 1);
+	usleep(1000);
+
+	rc = gpio_request(ts->disp_vsn_gpio, "disp_vsn");
+	if (rc) {
+		pr_err("%s: disp_vsn gpio request failed\n", __func__);
+		goto err_disp_vsn_gpio_enable;
+	}
+	gpio_direction_output(ts->disp_vsn_gpio, 1);
+	gpio_set_value(ts->disp_vsn_gpio, 1);
+	usleep(1000);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	rc = gpio_request(ts->irq_gpio, "bu21150_ts_int");
 	if (rc) {
@@ -762,6 +940,7 @@ static int bu21150_gpio_enable(struct bu21150_data *ts, bool on)
 	}
 	gpio_direction_input(ts->irq_gpio);
 
+<<<<<<< HEAD
 	return 0;
 
 gpio_disable:
@@ -780,6 +959,27 @@ err_mod_en_gpio_enable:
 		gpio_free(ts->afe_pwr_gpio);
 err_afe_pwr_gpio_enable:
 	gpio_free(ts->rst_gpio);
+=======
+	/* set reset */
+	rc = gpio_request(ts->rst_gpio, "bu21150_ts_reset");
+	if (rc) {
+		pr_err("%s: reset gpio_request failed\n", __func__);
+		goto err_rst_gpio_enable;
+	}
+
+	gpio_direction_output(ts->rst_gpio, GPIO_LOW);
+
+	return 0;
+
+gpio_disable:
+	gpio_free(ts->rst_gpio);
+err_rst_gpio_enable:
+	gpio_free(ts->irq_gpio);
+err_irq_gpio_enable:
+	gpio_free(ts->disp_vsn_gpio);
+err_disp_vsn_gpio_enable:
+	gpio_free(ts->afe_pwr_gpio);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	return rc;
 }
@@ -922,7 +1122,11 @@ err_get_vdd_dig:
 static int bu21150_probe(struct spi_device *client)
 {
 	struct bu21150_data *ts;
+<<<<<<< HEAD
 	int rc, i;
+=======
+	int rc;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	ts = kzalloc(sizeof(struct bu21150_data), GFP_KERNEL);
 	if (!ts) {
@@ -964,6 +1168,7 @@ static int bu21150_probe(struct spi_device *client)
 		goto err_pin_enable;
 	}
 
+<<<<<<< HEAD
 	INIT_LIST_HEAD(&ts->frame_list.list);
 
 	mutex_init(&ts->mutex_frame);
@@ -975,6 +1180,23 @@ static int bu21150_probe(struct spi_device *client)
 		dev_err(&client->dev, "Unable to register fb_notifier: %d\n",
 									rc);
 		goto err_register_fb_notif;
+=======
+	mutex_init(&ts->mutex_frame);
+	init_waitqueue_head(&(ts->frame_waitq));
+
+	ts->workq = create_singlethread_workqueue("bu21150_workq");
+	if (!ts->workq) {
+		dev_err(&client->dev, "Unable to create workq\n");
+		rc =  -ENOMEM;
+		goto err_create_wq;
+	}
+	INIT_WORK(&ts->work, bu21150_irq_work_func);
+
+	if (!client->irq) {
+		dev_err(&client->dev, "Bad irq\n");
+		rc = -EINVAL;
+		goto err_create_wq;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	}
 
 	rc = misc_register(&g_bu21150_misc_device);
@@ -985,6 +1207,7 @@ static int bu21150_probe(struct spi_device *client)
 
 	dev_set_drvdata(&client->dev, ts);
 
+<<<<<<< HEAD
 	ts->bu21150_obj = kobject_create_and_add(SYSFS_PROPERTY_PATH, NULL);
 	if (!ts->bu21150_obj) {
 		dev_err(&client->dev, "unable to create kobject\n");
@@ -1018,6 +1241,13 @@ err_register_misc:
 	fb_unregister_client(&ts->fb_notif);
 err_register_fb_notif:
 	mutex_destroy(&ts->mutex_frame);
+=======
+	return 0;
+
+err_register_misc:
+	destroy_workqueue(ts->workq);
+err_create_wq:
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	bu21150_pin_enable(ts, false);
 err_pin_enable:
 	bu21150_power_enable(ts, false);
@@ -1031,6 +1261,7 @@ err_parse_dt:
 	return rc;
 }
 
+<<<<<<< HEAD
 static int bu21150_fb_suspend(struct device *dev)
 {
 	struct bu21150_data *ts = spi_get_drvdata(g_client_bu21150);
@@ -1290,6 +1521,17 @@ static int bu21150_remove(struct spi_device *client)
 	bu21150_power_enable(ts, false);
 	bu21150_regulator_config(ts, false);
 	mutex_destroy(&ts->mutex_frame);
+=======
+static int bu21150_remove(struct spi_device *client)
+{
+	struct bu21150_data *ts = spi_get_drvdata(client);
+
+	misc_deregister(&g_bu21150_misc_device);
+	bu21150_power_enable(ts, false);
+	bu21150_regulator_config(ts, false);
+	destroy_workqueue(ts->workq);
+	free_irq(client->irq, ts);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	bu21150_pin_enable(ts, false);
 	kfree(ts);
 
@@ -1299,6 +1541,11 @@ static int bu21150_remove(struct spi_device *client)
 static int bu21150_open(struct inode *inode, struct file *filp)
 {
 	struct bu21150_data *ts = spi_get_drvdata(g_client_bu21150);
+<<<<<<< HEAD
+=======
+	struct spi_device *client = ts->client;
+	int error;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	if (g_io_opened) {
 		pr_err("%s: g_io_opened not zero.\n", __func__);
@@ -1306,6 +1553,7 @@ static int bu21150_open(struct inode *inode, struct file *filp)
 	}
 	++g_io_opened;
 
+<<<<<<< HEAD
 	get_frame_timer_delete();
 	ts->reset_flag = 0;
 	ts->set_timer_flag = 0;
@@ -1314,6 +1562,9 @@ static int bu21150_open(struct inode *inode, struct file *filp)
 	ts->unblock_flag = 0;
 	ts->force_unblock_flag = 0;
 	ts->scan_mode = AFE_SCAN_MUTUAL_CAP;
+=======
+	g_bu21150_ioctl_unblock = 0;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	memset(&(ts->req_get), 0, sizeof(struct bu21150_ioctl_get_frame_data));
 	/* set default value. */
 	ts->req_get.size = FRAME_HEADER_SIZE;
@@ -1322,6 +1573,17 @@ static int bu21150_open(struct inode *inode, struct file *filp)
 	memset(&(ts->frame_work_get), 0,
 		sizeof(struct bu21150_ioctl_get_frame_data));
 
+<<<<<<< HEAD
+=======
+	error = request_irq(client->irq, bu21150_irq_handler,
+				IRQF_TRIGGER_LOW | IRQF_ONESHOT,
+				client->dev.driver->name, ts);
+	if (error) {
+		dev_err(&client->dev, "Failed to register interrupt\n");
+		return error;
+	}
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	return 0;
 }
 
@@ -1339,6 +1601,7 @@ static int bu21150_release(struct inode *inode, struct file *filp)
 	if (g_io_opened < 0)
 		g_io_opened = 0;
 
+<<<<<<< HEAD
 	wake_up_frame_waitq(ts);
 	if (ts->timeout_enb)
 		get_frame_timer_delete();
@@ -1347,6 +1610,9 @@ static int bu21150_release(struct inode *inode, struct file *filp)
 		free_irq(client->irq, ts);
 		ts->irq_enabled = false;
 	}
+=======
+	free_irq(client->irq, ts);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	return 0;
 }
@@ -1381,12 +1647,15 @@ static long bu21150_ioctl(struct file *filp, unsigned int cmd,
 	case BU21150_IOCTL_CMD_RESUME:
 		ret = bu21150_ioctl_resume();
 		return ret;
+<<<<<<< HEAD
 	case BU21150_IOCTL_CMD_SET_TIMEOUT:
 		ret = bu21150_ioctl_set_timeout(arg);
 		return ret;
 	case BU21150_IOCTL_CMD_SET_SCAN_MODE:
 		ret = bu21150_ioctl_set_scan_mode(arg);
 		return ret;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	default:
 		pr_err("%s: cmd unknown.\n", __func__);
 		return -EINVAL;
@@ -1418,6 +1687,7 @@ static long bu21150_ioctl_get_frame(unsigned long arg)
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 
 	if (!ts->irq_enabled) {
 		ret = request_threaded_irq(ts->client->irq, NULL,
@@ -1440,11 +1710,17 @@ static long bu21150_ioctl_get_frame(unsigned long arg)
 		ts->req_get = data;
 		ret = wait_frame_waitq(ts, data.keep_block_flag);
 		ts->unblock_flag = 0;
+=======
+	do {
+		ts->req_get = data;
+		ret = wait_frame_waitq(ts);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		if (ret != 0)
 			return ret;
 	} while (!is_same_bu21150_ioctl_get_frame_data(&data,
 				&(ts->frame_get)));
 
+<<<<<<< HEAD
 	if (ts->timeout_enb == 1)
 		get_frame_timer_delete();
 
@@ -1480,6 +1756,21 @@ static long bu21150_ioctl_get_frame(unsigned long arg)
 	if (!list_empty(&ts->frame_list.list))
 		wake_up_frame_waitq(ts);
 
+=======
+	/* copy frame */
+	mutex_lock(&ts->mutex_frame);
+	frame_size = ts->frame_get.size;
+	if (copy_to_user(data.buf, ts->frame, frame_size)) {
+		mutex_unlock(&ts->mutex_frame);
+		pr_err("%s: Failed to copy_to_user().\n", __func__);
+		return -EFAULT;
+	}
+	if (copy_to_user(data.tv, &(ts->tv), sizeof(struct timeval))) {
+		mutex_unlock(&ts->mutex_frame);
+		pr_err("%s: Failed to copy_to_user().\n", __func__);
+		return -EFAULT;
+	}
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	mutex_unlock(&ts->mutex_frame);
 
 	return 0;
@@ -1488,13 +1779,17 @@ static long bu21150_ioctl_get_frame(unsigned long arg)
 static long bu21150_ioctl_reset(unsigned long reset)
 {
 	struct bu21150_data *ts = spi_get_drvdata(g_client_bu21150);
+<<<<<<< HEAD
 	int rc;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	if (!(reset == BU21150_RESET_LOW || reset == BU21150_RESET_HIGH)) {
 		pr_err("%s: arg unknown.\n", __func__);
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 	if (!ts->ts_pinctrl) {
 		gpio_set_value(ts->rst_gpio, reset);
 		goto reset_exit;
@@ -1523,6 +1818,13 @@ reset_exit:
 	ts->frame_waitq_flag = WAITQ_WAIT;
 	if (reset == BU21150_RESET_LOW)
 		ts->reset_flag = 1;
+=======
+	if (reset == BU21150_RESET_HIGH) {
+		usleep(1000);
+	}
+
+	gpio_set_value(ts->rst_gpio, reset);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	return 0;
 }
@@ -1532,7 +1834,10 @@ static long bu21150_ioctl_spi_read(unsigned long arg)
 	struct bu21150_data *ts = spi_get_drvdata(g_client_bu21150);
 	void __user *argp = (void __user *)arg;
 	struct bu21150_ioctl_spi_data data;
+<<<<<<< HEAD
 	int ret;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	if (arg == 0) {
 		pr_err("%s: arg == 0.\n", __func__);
@@ -1549,11 +1854,15 @@ static long bu21150_ioctl_spi_read(unsigned long arg)
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 	ret = bu21150_read_register(data.addr, data.count, ts->spi_buf);
 	if (ret) {
 		pr_err("%s: Failed to read register (%d).\n", __func__, ret);
 		return ret;
 	}
+=======
+	bu21150_read_register(data.addr, data.count, ts->spi_buf);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	if (copy_to_user(data.buf, ts->spi_buf, data.count)) {
 		pr_err("%s: Failed to copy_to_user().\n", __func__);
@@ -1568,11 +1877,14 @@ static long bu21150_ioctl_spi_write(unsigned long arg)
 	struct bu21150_data *ts = spi_get_drvdata(g_client_bu21150);
 	void __user *argp = (void __user *)arg;
 	struct bu21150_ioctl_spi_data data;
+<<<<<<< HEAD
 	unsigned int afe_active_mode = AFE_SCAN_SELF_CAP | AFE_SCAN_MUTUAL_CAP;
 	unsigned int afe_gesture_mode = AFE_SCAN_GESTURE_SELF_CAP |
 						AFE_SCAN_GESTURE_MUTUAL_CAP;
 	bool valid_op;
 	int ret;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	if (arg == 0) {
 		pr_err("%s: arg == 0.\n", __func__);
@@ -1583,6 +1895,7 @@ static long bu21150_ioctl_spi_write(unsigned long arg)
 		pr_err("%s: Failed to copy_from_user().\n", __func__);
 		return -EFAULT;
 	}
+<<<<<<< HEAD
 
 	valid_op = (data.next_mode == AFE_SCAN_DEFAULT) ||
 			((data.next_mode & afe_active_mode) && ts->lcd_on) ||
@@ -1593,6 +1906,8 @@ static long bu21150_ioctl_spi_write(unsigned long arg)
 		return -EINVAL;
 	}
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	if (data.buf == 0 || data.count == 0 ||
 		MAX_FRAME_SIZE < data.count) {
 		pr_err("%s: data.buf == 0 ...\n", __func__);
@@ -1603,18 +1918,28 @@ static long bu21150_ioctl_spi_write(unsigned long arg)
 		return -EFAULT;
 	}
 
+<<<<<<< HEAD
 	ret = bu21150_write_register(data.addr, data.count, ts->spi_buf);
 	if (ret)
 		pr_err("%s: Failed to write register (%d).\n", __func__, ret);
 
 	return ret;
+=======
+	bu21150_write_register(data.addr, data.count, ts->spi_buf);
+
+	return 0;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 }
 
 static long bu21150_ioctl_unblock(void)
 {
 	struct bu21150_data *ts = spi_get_drvdata(g_client_bu21150);
 
+<<<<<<< HEAD
 	ts->force_unblock_flag = 1;
+=======
+	g_bu21150_ioctl_unblock = 1;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	/* wake up */
 	wake_up_frame_waitq(ts);
 
@@ -1623,17 +1948,22 @@ static long bu21150_ioctl_unblock(void)
 
 static long bu21150_ioctl_unblock_release(void)
 {
+<<<<<<< HEAD
 	struct bu21150_data *ts = spi_get_drvdata(g_client_bu21150);
 
 	ts->force_unblock_flag = 0;
 
 	ts->frame_waitq_flag = WAITQ_WAIT;
 
+=======
+	g_bu21150_ioctl_unblock = 0;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	return 0;
 }
 
 static long bu21150_ioctl_suspend(void)
 {
+<<<<<<< HEAD
 	bu21150_ioctl_unblock();
 
 	return 0;
@@ -1646,10 +1976,19 @@ static long bu21150_ioctl_resume(void)
 	ts->force_unblock_flag = 0;
 
 	bu21150_enable_irq(ts);
+=======
+	struct bu21150_data *ts = spi_get_drvdata(g_client_bu21150);
+	struct spi_device *client = ts->client;
+
+	bu21150_ioctl_unblock();
+	disable_irq(client->irq);
+	bu21150_power_enable(ts, false);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	return 0;
 }
 
+<<<<<<< HEAD
 static long bu21150_ioctl_set_timeout(unsigned long arg)
 {
 	struct bu21150_data *ts = spi_get_drvdata(g_client_bu21150);
@@ -1672,10 +2011,21 @@ static long bu21150_ioctl_set_timeout(unsigned long arg)
 	} else {
 		get_frame_timer_delete();
 	}
+=======
+static long bu21150_ioctl_resume(void)
+{
+	struct bu21150_data *ts = spi_get_drvdata(g_client_bu21150);
+	struct spi_device *client = ts->client;
+
+	g_bu21150_ioctl_unblock = 0;
+	bu21150_power_enable(ts, true);
+	enable_irq(client->irq);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	return 0;
 }
 
+<<<<<<< HEAD
 static long bu21150_ioctl_set_scan_mode(unsigned long arg)
 {
 	struct bu21150_data *ts = spi_get_drvdata(g_client_bu21150);
@@ -1736,6 +2086,37 @@ static irqreturn_t bu21150_irq_thread(int irq, void *dev_id)
 
 err_read_reg:
 	return IRQ_HANDLED;
+=======
+static irqreturn_t bu21150_irq_handler(int irq, void *dev_id)
+{
+	struct bu21150_data *ts = dev_id;
+
+	disable_irq_nosync(irq);
+
+	/* add work to queue */
+	queue_work(ts->workq, &ts->work);
+
+	return IRQ_HANDLED;
+}
+
+static void bu21150_irq_work_func(struct work_struct *work)
+{
+	struct bu21150_data *ts = container_of(work, struct bu21150_data, work);
+	u8 *psbuf = (u8 *)ts->frame_work;
+	struct spi_device *client = ts->client;
+
+	/* get frame */
+	ts->frame_work_get = ts->req_get;
+	bu21150_read_register(REG_READ_DATA, ts->frame_work_get.size, psbuf);
+
+#ifdef CHECK_SAME_FRAME
+	check_same_frame(ts);
+#endif
+	copy_frame(ts);
+	wake_up_frame_waitq(ts);
+
+	enable_irq(client->irq);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 }
 
 static int bu21150_read_register(u32 addr, u16 size, u8 *data)
@@ -1762,6 +2143,7 @@ static int bu21150_read_register(u32 addr, u16 size, u8 *data)
 	req->xfer[0].rx_buf = output;
 	req->xfer[0].len = size+SPI_HEADER_SIZE;
 	req->xfer[0].cs_change = 0;
+<<<<<<< HEAD
 	req->xfer[0].bits_per_word = SPI_BITS_PER_WORD_READ;
 	spi_message_add_tail(&req->xfer[0], &req->msg);
 	ret = spi_sync(client, &req->msg);
@@ -1771,6 +2153,16 @@ static int bu21150_read_register(u32 addr, u16 size, u8 *data)
 		memcpy(data, output+SPI_HEADER_SIZE, size);
 		swap_2byte(data, size);
 	}
+=======
+	req->xfer[0].bits_per_word = 8;
+	spi_message_add_tail(&req->xfer[0], &req->msg);
+	ret = spi_sync(client, &req->msg);
+	if (ret)
+		pr_err("%s : spi_sync read data error:ret=[%d]", __func__, ret);
+
+	memcpy(data, output+SPI_HEADER_SIZE, size);
+	swap_2byte(data, size);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	kfree(req);
 	kfree(input);
@@ -1805,11 +2197,19 @@ static int bu21150_write_register(u32 addr, u16 size, u8 *data)
 	req->xfer[0].rx_buf = NULL;
 	req->xfer[0].len = size+SPI_HEADER_SIZE;
 	req->xfer[0].cs_change = 0;
+<<<<<<< HEAD
 	req->xfer[0].bits_per_word = SPI_BITS_PER_WORD_WRITE;
 	spi_message_add_tail(&req->xfer[0], &req->msg);
 	ret = spi_sync(client, &req->msg);
 	if (ret)
 		pr_err("%s: spi_sync write data error:ret=[%d]", __func__, ret);
+=======
+	req->xfer[0].bits_per_word = 8;
+	spi_message_add_tail(&req->xfer[0], &req->msg);
+	ret = spi_sync(client, &req->msg);
+	if (ret)
+		pr_err("%s : spi_sync read data error:ret=[%d]", __func__, ret);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	kfree(req);
 	kfree(input);
@@ -1823,12 +2223,18 @@ static void wake_up_frame_waitq(struct bu21150_data *ts)
 	wake_up_interruptible(&(ts->frame_waitq));
 }
 
+<<<<<<< HEAD
 static long wait_frame_waitq(struct bu21150_data *ts, u8 flag)
 {
 	if (ts->force_unblock_flag == 1)
 		return BU21150_UNBLOCK;
 
 	if (ts->unblock_flag == 1 && flag == 0)
+=======
+static long wait_frame_waitq(struct bu21150_data *ts)
+{
+	if (g_bu21150_ioctl_unblock == 1)
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		return BU21150_UNBLOCK;
 
 	/* wait event */
@@ -1839,6 +2245,7 @@ static long wait_frame_waitq(struct bu21150_data *ts, u8 flag)
 	}
 	ts->frame_waitq_flag = WAITQ_WAIT;
 
+<<<<<<< HEAD
 	if (ts->timeout_enb == 1) {
 		if (ts->timeout_flag == 1) {
 			ts->set_timer_flag = 0;
@@ -1852,6 +2259,9 @@ static long wait_frame_waitq(struct bu21150_data *ts, u8 flag)
 		return BU21150_UNBLOCK;
 
 	if (ts->unblock_flag == 1 && flag == 0)
+=======
+	if (g_bu21150_ioctl_unblock == 1)
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		return BU21150_UNBLOCK;
 
 	return 0;
@@ -1875,6 +2285,7 @@ static int is_same_bu21150_ioctl_get_frame_data(
 
 static void copy_frame(struct bu21150_data *ts)
 {
+<<<<<<< HEAD
 	struct bu21150_frame *temp;
 
 	mutex_lock(&(ts->mutex_frame));
@@ -1896,6 +2307,12 @@ static void copy_frame(struct bu21150_data *ts)
 	do_gettimeofday(&(temp->tv));
 	list_add_tail(&(temp->list), &(ts->frame_list.list));
 	ts->frame_count++;
+=======
+	mutex_lock(&(ts->mutex_frame));
+	ts->frame_get = ts->frame_work_get;
+	memcpy(ts->frame, ts->frame_work, MAX_FRAME_SIZE);
+	do_gettimeofday(&(ts->tv));
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	mutex_unlock(&(ts->mutex_frame));
 }
 
@@ -1917,6 +2334,7 @@ static void swap_2byte(unsigned char *buf, unsigned int size)
 static void check_same_frame(struct bu21150_data *ts)
 {
 	static int frame_no = -1;
+<<<<<<< HEAD
 	u16 *ps;
 	struct bu21150_frame *temp;
 	struct list_head *pos, *n;
@@ -1934,6 +2352,12 @@ static void check_same_frame(struct bu21150_data *ts)
 		frame_no = ps[2];
 	}
 	mutex_unlock(&ts->mutex_frame);
+=======
+	u16 *ps = (u16 *)ts->frame;
+	if (ps[2] == frame_no)
+		pr_err("%s:same_frame_no=[%d]\n", __func__, frame_no);
+	frame_no = ps[2];
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 }
 #endif
 
@@ -1941,6 +2365,7 @@ static bool parse_dtsi(struct device *dev, struct bu21150_data *ts)
 {
 	enum of_gpio_flags dummy;
 	struct device_node *np = dev->of_node;
+<<<<<<< HEAD
 	int rc;
 
 	if (of_find_property(np, "irq-gpio", NULL))
@@ -1977,6 +2402,13 @@ static bool parse_dtsi(struct device *dev, struct bu21150_data *ts)
 	ts->wake_up = of_property_read_bool(np, "jdi,wake-up");
 
 	ts->timeout_enable = of_property_read_bool(np, "jdi,timeout-enable");
+=======
+
+	ts->irq_gpio = of_get_named_gpio_flags(np,
+		"irq-gpio", 0, &dummy);
+	ts->rst_gpio = of_get_named_gpio_flags(np,
+		"rst-gpio", 0, &dummy);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	return true;
 }

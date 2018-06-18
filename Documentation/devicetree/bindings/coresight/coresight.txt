@@ -18,7 +18,10 @@ Required properties:
 	"arm,coresight-funnel" for coresight funnel devices,
 	"qcom,coresight-tpda" for coresight tpda device,
 	"qcom,coresight-tpdm" for coresight tpdm device,
+<<<<<<< HEAD
 	"qcom,coresight-dbgui" for coresight dbgui device
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	"arm,coresight-stm" for coresight stm trace device,
 	"arm,coresight-etm" for coresight etm trace devices,
 	"arm,coresight-etmv4" for coresight etmv4 trace devices,
@@ -73,10 +76,13 @@ Required properties:
 		compatible : should be "qcom,coresight-tpdm"
 		reg-names  : should be:
 			"tpdm-base" - physical base address of tpdm registers
+<<<<<<< HEAD
 	- for coresight dbgui device:
 		compatible : should be "qcom,coresight-dbgui"
 		reg-names  : should be:
 			"dbgui-base" - physical base address of dbgui registers
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	- for coresight stm trace device
 		compatible : should be "arm,coresight-stm"
 		reg-names  : should be:
@@ -120,9 +126,12 @@ Required properties:
 - coresight-nr-inports : number of input ports on the component
 - coresight-cti-cpu : cpu phandle for cpu cti, required when qcom,cti-save is true
 - coresight-etm-cpu : specifies phandle for the cpu associated with the ETM device
+<<<<<<< HEAD
 - qcom,dbgui-addr-offset : indicates the offset of dbgui address registers
 - qcom,dbgui-data-offset : indicates the offset of dbgui data registers
 - qcom,dbgui-size : indicates the size of dbgui address and data registers
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 coresight-outports, coresight-child-list and coresight-child-ports lists will
 be of the same length and will have a one to one correspondence among the
@@ -308,6 +317,7 @@ Examples:
 		clock-names = "core_clk", "core_a_clk";
 	};
 
+<<<<<<< HEAD
 	dbgui: dbgui@86d000 {
 		compatible = "qcom,coresight-dbgui";
 		reg = <0x86d000 0x1000>;
@@ -329,6 +339,8 @@ Examples:
 		clock-names = "core_clk", "core_a_clk";
 	};
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	stm: stm@fc321000 {
 		compatible = "arm,coresight-stm";
 		reg = <0xfc321000 0x1000>,

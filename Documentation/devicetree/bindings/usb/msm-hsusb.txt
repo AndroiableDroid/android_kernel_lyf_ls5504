@@ -66,7 +66,10 @@ Optional properties :
 - interrupt-names : Optional interrupt resource entries are:
     "async_irq" : Interrupt from HSPHY for asynchronous wakeup events in LPM.
     "pmic_id_irq" : Interrupt from PMIC for external ID pin notification.
+<<<<<<< HEAD
     "phy_irq" : Interrupt from PHY. Used for ID detection.
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 - qcom,hsusb-otg-disable-reset: If present then core is RESET only during
 	    init, otherwise core is RESET for every cable disconnect as well
 - qcom,hsusb-otg-pnoc-errata-fix: If present then workaround for PNOC
@@ -149,9 +152,12 @@ Optional properties :
 - qcom,usbin-vadc: Corresponding vadc device's phandle to read usbin voltage using VADC.
 	This will be used to get value of usb power supply's VOLTAGE_NOW property.
 - qcom,usbid-gpio: This corresponds to gpio which is used for USB ID detection.
+<<<<<<< HEAD
 - qcom,hub-reset-gpio: This corresponds to gpio which is used for HUB reset.
 - qcom,sw-sel-gpio: This corresponds to gpio which is used for switch select routing
 	of D+/D- between the USB HUB and type B USB jack for peripheral mode.
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 - qcom,bus-clk-rate: If present, indicates nominal bus frequency to be voted for
 	bimc/snoc/pcnoc clock with usb cable connected. If AHB2AHB bypass is enabled,
 	pcnoc value should be defined to very large number so that PNOC runs at max

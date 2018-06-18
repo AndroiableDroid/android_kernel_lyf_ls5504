@@ -2364,6 +2364,11 @@ static int etm_probe(struct platform_device *pdev)
 		goto err0;
 	}
 
+<<<<<<< HEAD
+=======
+	etmdrvdata[drvdata->cpu] = drvdata;
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	if (count++ == 0)
 		register_hotcpu_notifier(&etm_cpu_notifier);
 
@@ -2401,23 +2406,36 @@ static int etm_probe(struct platform_device *pdev)
 		}
 	}
 
+<<<<<<< HEAD
 	etmdrvdata[drvdata->cpu] = drvdata;
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	put_online_cpus();
 
 	clk_disable_unprepare(drvdata->clk);
 
+<<<<<<< HEAD
 	mutex_lock(&drvdata->mutex);
 	if (drvdata->os_unlock && !drvdata->init) {
+=======
+	if (drvdata->os_unlock) {
+		mutex_lock(&drvdata->mutex);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		ret = etm_late_init(drvdata);
 		if (ret) {
 			mutex_unlock(&drvdata->mutex);
 			goto err1;
 		}
 		drvdata->init = true;
+<<<<<<< HEAD
 	}
 	mutex_unlock(&drvdata->mutex);
 
+=======
+		mutex_unlock(&drvdata->mutex);
+	}
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	return 0;
 err1:
 	if (--count == 0)

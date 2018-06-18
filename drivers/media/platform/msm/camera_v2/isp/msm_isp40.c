@@ -30,11 +30,15 @@
 #define VFE40_STATS_BURST_LEN 1
 #define VFE40_STATS_BURST_LEN_8916_VERSION 2
 #define VFE40_UB_SIZE 1536 /* 1536 * 128 bits = 24KB */
+<<<<<<< HEAD
 #if (defined(CONFIG_N958ST_CAMERA)|| defined(CONFIG_N918ST_CAMERA))
 	#define VFE40_UB_SIZE_8916 2048
 #else
 	#define VFE40_UB_SIZE_8916 3072 /* 2048 * 128 bits = 32KB  change by congshan qcom patch*/
 #endif
+=======
+#define VFE40_UB_SIZE_8916 2048 /* 2048 * 128 bits = 32KB */
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #define VFE40_EQUAL_SLICE_UB 190 /* (UB_SIZE - STATS SIZE)/6 */
 #define VFE40_EQUAL_SLICE_UB_8916 276
 #define VFE40_TOTAL_WM_UB 1144 /* UB_SIZE - STATS SIZE */

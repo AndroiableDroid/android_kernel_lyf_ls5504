@@ -30,6 +30,10 @@
 #include <linux/highmem.h>
 #include <linux/slab.h>
 #include <linux/lzo.h>
+<<<<<<< HEAD
+=======
+#include <linux/lz4.h>
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #include <linux/string.h>
 #include <linux/vmalloc.h>
 #include <linux/ratelimit.h>
@@ -37,6 +41,38 @@
 
 #include "zram_drv.h"
 
+<<<<<<< HEAD
+=======
+static inline int z_decompress_safe(const unsigned char *src, size_t src_len,
+			unsigned char *dest, size_t *dest_len)
+{
+#ifdef CONFIG_ZRAM_LZ4_COMPRESS
+	return lz4_decompress_unknownoutputsize(src, src_len, dest, dest_len);
+#else
+	return lzo1x_decompress_safe(src, src_len, dest, dest_len);
+#endif
+}
+
+static inline int z_compress(const unsigned char *src, size_t src_len,
+			unsigned char *dst, size_t *dst_len, void *wrkmem)
+{
+#ifdef CONFIG_ZRAM_LZ4_COMPRESS
+	return lz4_compress(src, src_len, dst, dst_len, wrkmem);
+#else
+	return lzo1x_1_compress(src, src_len, dst, dst_len, wrkmem);
+#endif
+}
+
+static inline size_t z_scratch_size(void)
+{
+#ifdef CONFIG_ZRAM_LZ4_COMPRESS
+	return LZ4_MEM_COMPRESS;
+#else
+	return LZO1X_MEM_COMPRESS;
+#endif
+}
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 /* Globals */
 static int zram_major;
 static struct zram *zram_devices;
@@ -250,7 +286,11 @@ static struct zram_meta *zram_meta_alloc(u64 disksize)
 	if (!meta)
 		goto out;
 
+<<<<<<< HEAD
 	meta->compress_workmem = kzalloc(LZO1X_MEM_COMPRESS, GFP_KERNEL);
+=======
+	meta->compress_workmem = kzalloc(z_scratch_size(), GFP_KERNEL);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	if (!meta->compress_workmem)
 		goto free_meta;
 
@@ -377,7 +417,11 @@ static int zram_decompress_page(struct zram *zram, char *mem, u32 index)
 	if (meta->table[index].size == PAGE_SIZE)
 		copy_page(mem, cmem);
 	else
+<<<<<<< HEAD
 		ret = lzo1x_decompress_safe(cmem, meta->table[index].size,
+=======
+		ret = z_decompress_safe(cmem, meta->table[index].size,
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 						mem, &clen);
 	zs_unmap_object(meta->mem_pool, handle);
 
@@ -497,7 +541,11 @@ static int zram_bvec_write(struct zram *zram, struct bio_vec *bvec, u32 index,
 			zram_test_flag(meta, index, ZRAM_ZERO)))
 		zram_free_page(zram, index);
 
+<<<<<<< HEAD
 	ret = lzo1x_1_compress(uncmem, PAGE_SIZE, src, &clen,
+=======
+	ret = z_compress(uncmem, PAGE_SIZE, src, &clen,
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			       meta->compress_workmem);
 
 	if (!is_partial_io(bvec)) {
@@ -908,7 +956,10 @@ static int create_device(struct zram *zram, int device_id)
 	zram->disk->private_data = zram;
 	snprintf(zram->disk->disk_name, 16, "zram%d", device_id);
 
+<<<<<<< HEAD
 	__set_bit(QUEUE_FLAG_FAST, &zram->queue->queue_flags);
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	/* Actual capacity set using syfs (/sys/block/zram<id>/disksize */
 	set_capacity(zram->disk, 0);
 

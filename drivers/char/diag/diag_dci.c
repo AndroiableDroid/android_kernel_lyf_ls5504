@@ -1105,12 +1105,17 @@ void extract_dci_events(unsigned char *buf, int len, int data_source, int token)
 	/* Move directly to the start of the event series. 1 byte for
 	 * event code and 2 bytes for the length field.
 	 */
+<<<<<<< HEAD
 	/* The length field indicates the total length removing the cmd_code
 	 * and the lenght field. The event parsing in that case should happen
 	 * till the end.
 	 */
 	temp_len = 3;
 	while (temp_len < length) {
+=======
+	temp_len = 3;
+	while (temp_len < (length - 1)) {
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		event_id_packet = *(uint16_t *)(buf + temp_len);
 		event_id = event_id_packet & 0x0FFF; /* extract 12 bits */
 		if (event_id_packet & 0x8000) {
@@ -2095,13 +2100,21 @@ struct diag_dci_client_tbl *diag_dci_get_client_entry(int client_id)
 	return NULL;
 }
 
+<<<<<<< HEAD
 struct diag_dci_client_tbl *dci_lookup_client_entry_pid(int tgid)
+=======
+struct diag_dci_client_tbl *dci_lookup_client_entry_pid(int pid)
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 {
 	struct list_head *start, *temp;
 	struct diag_dci_client_tbl *entry = NULL;
 	list_for_each_safe(start, temp, &driver->dci_client_list) {
 		entry = list_entry(start, struct diag_dci_client_tbl, track);
+<<<<<<< HEAD
 		if (entry->client->tgid == tgid)
+=======
+		if (entry->client->tgid == pid)
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			return entry;
 	}
 	return NULL;

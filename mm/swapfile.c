@@ -73,6 +73,7 @@ static inline unsigned char swap_count(unsigned char ent)
 	return ent & ~SWAP_HAS_CACHE;	/* may include SWAP_HAS_CONT flag */
 }
 
+<<<<<<< HEAD
 bool is_swap_fast(swp_entry_t entry)
 {
 	struct swap_info_struct *p;
@@ -93,6 +94,8 @@ bool is_swap_fast(swp_entry_t entry)
 	return false;
 }
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 /* returns 1 if swap entry is freed */
 static int
 __try_to_reclaim_swap(struct swap_info_struct *si, unsigned long offset)
@@ -313,7 +316,11 @@ checks:
 		scan_base = offset = si->lowest_bit;
 
 	/* reuse swap entry of cache-only swap if not busy. */
+<<<<<<< HEAD
 	if (vm_swap_full(si) && si->swap_map[offset] == SWAP_HAS_CACHE) {
+=======
+	if (vm_swap_full() && si->swap_map[offset] == SWAP_HAS_CACHE) {
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		int swap_was_freed;
 		spin_unlock(&si->lock);
 		swap_was_freed = __try_to_reclaim_swap(si, offset);
@@ -402,8 +409,12 @@ scan:
 			spin_lock(&si->lock);
 			goto checks;
 		}
+<<<<<<< HEAD
 		if (vm_swap_full(si) &&
 			si->swap_map[offset] == SWAP_HAS_CACHE) {
+=======
+		if (vm_swap_full() && si->swap_map[offset] == SWAP_HAS_CACHE) {
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			spin_lock(&si->lock);
 			goto checks;
 		}
@@ -418,8 +429,12 @@ scan:
 			spin_lock(&si->lock);
 			goto checks;
 		}
+<<<<<<< HEAD
 		if (vm_swap_full(si) &&
 			si->swap_map[offset] == SWAP_HAS_CACHE) {
+=======
+		if (vm_swap_full() && si->swap_map[offset] == SWAP_HAS_CACHE) {
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			spin_lock(&si->lock);
 			goto checks;
 		}
@@ -785,8 +800,12 @@ int free_swap_and_cache(swp_entry_t entry)
 		 * Also recheck PageSwapCache now page is locked (above).
 		 */
 		if (PageSwapCache(page) && !PageWriteback(page) &&
+<<<<<<< HEAD
 				(!page_mapped(page) ||
 				vm_swap_full(page_swap_info(page)))) {
+=======
+				(!page_mapped(page) || vm_swap_full())) {
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			delete_from_swap_cache(page);
 			SetPageDirty(page);
 		}
@@ -2148,8 +2167,11 @@ SYSCALL_DEFINE2(swapon, const char __user *, specialfile, int, swap_flags)
 		}
 		if ((swap_flags & SWAP_FLAG_DISCARD) && discard_swap(p) == 0)
 			p->flags |= SWP_DISCARDABLE;
+<<<<<<< HEAD
 		if (blk_queue_fast(bdev_get_queue(p->bdev)))
 			p->flags |= SWP_FAST;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	}
 
 	mutex_lock(&swapon_mutex);

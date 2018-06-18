@@ -500,7 +500,10 @@ struct rq {
 
 #ifdef CONFIG_SCHED_FREQ_INPUT
 	unsigned int old_busy_time;
+<<<<<<< HEAD
 	int notifier_sent;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #endif
 #endif
 
@@ -713,9 +716,12 @@ extern unsigned int min_possible_efficiency;
 extern unsigned int max_capacity;
 extern unsigned int min_capacity;
 extern unsigned int max_load_scale_factor;
+<<<<<<< HEAD
 extern unsigned int max_possible_capacity;
 extern unsigned int min_max_possible_capacity;
 extern unsigned int min_max_capacity_delta_pct;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 extern unsigned long capacity_scale_cpu_efficiency(int cpu);
 extern unsigned long capacity_scale_cpu_freq(int cpu);
 extern unsigned int sched_mostly_idle_load;
@@ -727,10 +733,15 @@ extern unsigned int sched_init_task_load_windows;
 extern unsigned int sched_heavy_task;
 
 extern void fixup_nr_big_small_task(int cpu);
+<<<<<<< HEAD
+=======
+u64 scale_load_to_cpu(u64 load, int cpu);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 unsigned int max_task_load(void);
 extern void sched_account_irqtime(int cpu, struct task_struct *curr,
 				 u64 delta, u64 wallclock);
 
+<<<<<<< HEAD
 /*
  * 'load' is in reference to "best cpu" at its best frequency.
  * Scale that in reference to a given cpu, accounting for how bad it is
@@ -746,6 +757,8 @@ static inline u64 scale_load_to_cpu(u64 task_load, int cpu)
 	return task_load;
 }
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static inline void
 inc_cumulative_runnable_avg(struct rq *rq, struct task_struct *p)
 {

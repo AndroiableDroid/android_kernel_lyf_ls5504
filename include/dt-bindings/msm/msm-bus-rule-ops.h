@@ -28,7 +28,10 @@
 
 #define THROTTLE_ON	0
 #define THROTTLE_OFF	1
+<<<<<<< HEAD
 #define THROTTLE_REG	2
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 #endif

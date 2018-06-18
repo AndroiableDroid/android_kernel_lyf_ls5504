@@ -15,7 +15,11 @@
 #include "msm8909-qrd-skua.dtsi"
 
 / {
+<<<<<<< HEAD
 	model = "Qualcomm Technologies, Inc. MSM8909-PM8909 1GB QRD SKUA";
+=======
+	model = "Qualcomm Technologies, Inc. MSM8909 1GB QRD SKUA";
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	compatible = "qcom,msm8909-qrd", "qcom,msm8909", "qcom,qrd";
 	qcom,board-id= <0x1000b 0>;
 };

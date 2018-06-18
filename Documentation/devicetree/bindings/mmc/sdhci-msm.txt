@@ -48,8 +48,11 @@ Optional Properties:
 	- qcom,nonhotplug - specifies the card in slot is not hot pluggable.
 			    if card lost or removed manually at runtime, don't retry
 			    to redetect it until next reboot probe.
+<<<<<<< HEAD
 	- qcom,no-1p8v - specifies the system physically doesn't support 1.8v, even if the
 			  host does.
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	- qcom,bus-speed-mode - specifies supported bus speed modes by host.
 				The supported bus speed modes are :
 				"HS400_1p8v" - indicates that host can support HS400 at 1.8v.
@@ -58,6 +61,7 @@ Optional Properties:
 				"HS200_1p2v" - indicates that host can support HS200 at 1.2v.
 				"DDR_1p8v" - indicates that host can support DDR mode at 1.8v.
 				"DDR_1p2v" - indicates that host can support DDR mode at 1.2v.
+<<<<<<< HEAD
 	- qcom,qos-planes: Allows for multiple configurations of pm_qos. If not provided defaults
 			    to SDHCI_QOS_MAX_POLICY i.e 3.
 	- qcom,cpu-dma-latency-us: This is the default(read/write) qos plane for sdhci.
@@ -71,6 +75,18 @@ Optional Properties:
 				specifies acceptable DMA latencies(dynamic) in microseconds.
 				Default value is 200 ms.
 
+=======
+<<<<<<< HEAD
+	- qcom,cpu-dma-latency-us: specifies acceptable DMA latency in microseconds. There is
+				   no default value that the driver assumes if this property
+				   is not specified. So if this property is not specified,
+				   then SDHC driver will not vote for PM QOS.
+=======
+	- qcom,cpu-dma-latency-us: specifies array of acceptable DMA latencies in microseconds.
+				Default value is 200 us. If this property specified as 0,
+				then SDHC driver will not vote for PM QOS.
+>>>>>>> b83b59a... Revert "Revert "mmc: host: sdhci: update pm qos votes based on cpu clusters""
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
         - qcom,dat1-mpm-int:    specifies MPM interrupt number (e.g. sdhc_2 node below)
 				corresponding to DAT1 line of SDHC (used only if slot has dedicated
 				DAT1 MSM pin (not GPIO))
@@ -120,6 +136,7 @@ In the following, <supply> can be vdd (flash core voltage) or vdd-io (I/O voltag
 	  "affine_irq" - PM_QOS_REQ_AFFINE_IRQ request type shall update/apply
 	  the vote only to that CPU to which this IRQ's affinity is set to.
 	  "affine_cores" - PM_QOS_REQ_AFFINE_CORES request type is used for
+<<<<<<< HEAD
 	  targets that have little cluster and will update/apply the vote to
 	  all the cores in the little cluster.
 	  The default CPU affinity mode is PM_QOS_REQ_AFFINE_IRQ to maintain
@@ -128,10 +145,20 @@ In the following, <supply> can be vdd (flash core voltage) or vdd-io (I/O voltag
 				type.
 	- qcom,cpu-affinity-w: specifies cpu-affinity type for write qos plane. Default is IRQ
 				type.
+=======
+	  targets that have big/little architecture and will update/apply the vote
+	  to all the cores in the respective cluster.
+	  The default CPU affinity mode is PM_QOS_REQ_AFFINE_IRQ to maintain
+	  backward compatibility.
+
+	- qcom,wakeup-on-idle: if configured, the mmcqd thread will call
+	  set_wake_up_idle(), thereby voting for it to be called on idle CPUs.
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	- qcom,cpu-affinity-mask: this is a bitmap that specifies little cluster CPU
 	  cores used for PM QoS voting. This is parsed only for pm QoS request type of
 	  PM_QOS_REQ_AFFINE_CORES ("affine_cores").
+<<<<<<< HEAD
 	- qcom,cpu-affinity-mask-r: specifies cpu-affinity mask for read qos plane.
 	- qcom,cpu-affinity-mask-w: specifies cpu-affinity mask for write qos plane.
 
@@ -139,6 +166,12 @@ In the following, <supply> can be vdd (flash core voltage) or vdd-io (I/O voltag
 				is dynamic qos which uses default qos plane. If this is specified
 				then driver uses read/write qos plane to vote for read/write
 				requests based on the vote/type of qos specfied by read/write plane.
+=======
+
+	- qcom,cpu-affinity-mask: this is an array of bitmap that specifies
+	  big/little cluster CPU cores used for PM QoS voting. This is parsed only
+	  for pm QoS request type of PM_QOS_REQ_AFFINE_CORES ("affine_cores").
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 Example:
 

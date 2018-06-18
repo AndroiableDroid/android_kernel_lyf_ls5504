@@ -26,8 +26,11 @@ Optional properties:
 - qcom,safe-freq: Frequency in HZ
 	     When switching rates from A to B, the mux div clock will
              instead switch from A -> safe_freq -> B.
+<<<<<<< HEAD
 - qcom,enable-opp: This will allow to register the cpu clock with OPP
 	     framework.
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 Example:
 	qcom,acpuclk@f9011050 {

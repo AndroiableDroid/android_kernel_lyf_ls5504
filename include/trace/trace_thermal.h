@@ -18,6 +18,7 @@
 #define _TRACE_THERMAL_H
 
 #include <linux/tracepoint.h>
+<<<<<<< HEAD
 
 #ifdef TRACE_SUPPLY_LM
 DECLARE_EVENT_CLASS(supply_lm_scm_ctl,
@@ -87,6 +88,9 @@ DEFINE_EVENT(supply_lm_inp_ctl, supply_lm_inp_end_trig,
 
 #elif defined(TRACE_MSM_THERMAL)
 
+=======
+#ifdef TRACE_MSM_THERMAL
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 DECLARE_EVENT_CLASS(msm_thermal_post_core_ctl,
 
 	TP_PROTO(unsigned int cpu, unsigned int online),

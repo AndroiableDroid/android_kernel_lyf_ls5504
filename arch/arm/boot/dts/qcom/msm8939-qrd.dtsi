@@ -11,11 +11,19 @@
  */
 
 #include "msm8939-pinctrl.dtsi"
+<<<<<<< HEAD
 /*
 &blsp1_uart1 {
 	status = "disabled";
 };
 */
+=======
+
+&blsp1_uart1 {
+	status = "disabled";
+};
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 &blsp1_uart2 {
 	status = "ok";
 	pinctrl-names = "default";
@@ -24,7 +32,11 @@
 
 &soc {
 	i2c@78ba000 { /* BLSP1 QUP6 */
+<<<<<<< HEAD
 		/*nfc-nci@e {
+=======
+		nfc-nci@e {
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			compatible = "qcom,nfc-nci";
 			reg = <0x0e>;
 			qcom,irq-gpio = <&msm_gpio 21 0x00>;
@@ -40,7 +52,11 @@
 			qcom,clk-gpio = <&pm8916_gpios 2 0>;
 			clocks = <&clock_rpm clk_bb_clk2_pin>;
 			clock-names = "ref_clk";
+<<<<<<< HEAD
 		};*/
+=======
+		};
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	};
 };
 
@@ -155,9 +171,15 @@
 	interrupt-map-mask = <0xffffffff>;
 	interrupt-map = <0 &intc 0 125 0
 			1 &intc 0 221 0
+<<<<<<< HEAD
 			/*2 &msm_gpio 38 0*/>;
 	interrupt-names = "hc_irq", "pwr_irq", "status_irq";
 	/*cd-gpios = <&msm_gpio 38 0x0>;*/
+=======
+			2 &msm_gpio 38 0>;
+	interrupt-names = "hc_irq", "pwr_irq", "status_irq";
+	cd-gpios = <&msm_gpio 38 0x0>;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	status = "ok";
 };

@@ -20,6 +20,10 @@ LIBGCC 		:= $(shell $(CC) $(KBUILD_CFLAGS) -print-libgcc-file-name)
 KBUILD_DEFCONFIG := defconfig
 
 KBUILD_CFLAGS	+= -mgeneral-regs-only
+<<<<<<< HEAD
+=======
+KBUILD_CFLAGS	+= -fno-pic
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 ifeq ($(CONFIG_CPU_BIG_ENDIAN), y)
 KBUILD_CPPFLAGS	+= -mbig-endian
 AS		+= -EB

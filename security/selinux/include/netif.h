@@ -17,8 +17,11 @@
 #ifndef _SELINUX_NETIF_H_
 #define _SELINUX_NETIF_H_
 
+<<<<<<< HEAD
 void sel_netif_flush(void);
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 int sel_netif_sid(int ifindex, u32 *sid);
 
 #endif	/* _SELINUX_NETIF_H_ */

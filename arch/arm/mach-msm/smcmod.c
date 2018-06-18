@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 /*
  * Copyright (c) 2012-2015, The Linux Foundation. All rights reserved.
+=======
+/* Copyright (c) 2012-2014, The Linux Foundation. All rights reserved.
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -302,11 +306,14 @@ static int smcmod_send_cipher_cmd(struct smcmod_cipher_req *reqp)
 		}
 	}
 
+<<<<<<< HEAD
 	if (IS_ERR_OR_NULL(ion_key_handlep)) {
 		ret = -EINVAL;
 		goto buf_cleanup;
 	}
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	/* import the plain text buffer and get the physical address */
 	ret = smcmod_ion_fd_to_phys(reqp->ion_plain_text_fd, ion_clientp,
 		&ion_plain_handlep, &scm_req.plain_text_phys_addr, &size);
@@ -449,11 +456,14 @@ static int smcmod_send_msg_digest_cmd(struct smcmod_msg_digest_req *reqp)
 		}
 	}
 
+<<<<<<< HEAD
 	if (IS_ERR_OR_NULL(ion_key_handlep)) {
 		ret = -EINVAL;
 		goto buf_cleanup;
 	}
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	/* import the input buffer and get the physical address */
 	ret = smcmod_ion_fd_to_phys(reqp->ion_input_fd, ion_clientp,
 		&ion_input_handlep, &scm_req.input_phys_addr, &size);

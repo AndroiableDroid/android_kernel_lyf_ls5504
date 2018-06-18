@@ -125,10 +125,13 @@
 #define SPI_OP_STATE                  0x00000003
 
 #define SPI_OP_STATE_CLEAR_BITS       0x2
+<<<<<<< HEAD
 
 #define SPI_PINCTRL_STATE_DEFAULT "spi_default"
 #define SPI_PINCTRL_STATE_SLEEP "spi_sleep"
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 enum msm_spi_state {
 	SPI_OP_STATE_RESET = 0x00000000,
 	SPI_OP_STATE_RUN   = 0x00000001,
@@ -383,7 +386,10 @@ struct msm_spi {
 	struct pinctrl		*pinctrl;
 	struct pinctrl_state	*pins_active;
 	struct pinctrl_state	*pins_sleep;
+<<<<<<< HEAD
 	bool			is_init_complete;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 };
 
 /* Forward declaration */

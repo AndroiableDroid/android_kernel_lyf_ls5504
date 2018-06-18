@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* Copyright (c) 2011-2014, The Linux Foundation. All rights reserved.
+=======
+/* Copyright (c) 2011-2015, The Linux Foundation. All rights reserved.
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -23,6 +27,10 @@ struct msm_camera_i2c_client {
 	struct msm_camera_cci_client *cci_client;
 	struct msm_camera_spi_client *spi_client;
 	enum msm_camera_i2c_reg_addr_type addr_type;
+<<<<<<< HEAD
+=======
+	enum msm_camera_qup_i2c_write_batch_size_t  batch_size;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 };
 
 struct msm_camera_i2c_fn_t {

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* Copyright (c) 2011-2015, The Linux Foundation. All rights reserved.
+=======
+/* Copyright (c) 2011-2014, The Linux Foundation. All rights reserved.
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -19,7 +23,11 @@
 #include <linux/of_platform.h>
 #include <linux/of_device.h>
 #include <linux/of.h>
+<<<<<<< HEAD
 #define MAX_SPECIAL_SUPPORT_SIZE 10
+=======
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 enum msm_camera_device_type_t {
 	MSM_CAMERA_I2C_DEVICE,
@@ -147,8 +155,11 @@ struct msm_camera_sensor_board_info {
 	const char *eeprom_name;
 	const char *actuator_name;
 	const char *ois_name;
+<<<<<<< HEAD
 	const char *special_support_sensors[MAX_SPECIAL_SUPPORT_SIZE];
 	int32_t special_support_size;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	struct msm_camera_slave_info *slave_info;
 	struct msm_camera_csi_lane_params *csi_lane_params;
 	struct msm_camera_sensor_strobe_flash_data *strobe_flash_data;
@@ -205,10 +216,13 @@ struct msm_eeprom_memory_block_t {
 	uint32_t num_map;	/* number of map blocks */
 	uint8_t *mapdata;
 	uint32_t num_data;	/* size of total mapdata */
+<<<<<<< HEAD
 	//added by congshan start
 	uint32_t num_custom;
 	struct eeprom_map_t *zte_custom_map;
 	//added by congshan end
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 };
 
 struct msm_eeprom_cmm_t {

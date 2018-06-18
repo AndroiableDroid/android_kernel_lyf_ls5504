@@ -45,7 +45,10 @@ struct msm_bus_dbg_state {
 
 struct msm_bus_cldata {
 	const struct msm_bus_scale_pdata *pdata;
+<<<<<<< HEAD
 	const struct msm_bus_client_handle *handle;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	int index;
 	uint32_t clid;
 	int size;
@@ -286,17 +289,27 @@ static ssize_t client_data_read(struct file *file, char __user *buf,
 	int bsize = 0;
 	uint32_t cl = (uint32_t)(uintptr_t)file->private_data;
 	struct msm_bus_cldata *cldata = NULL;
+<<<<<<< HEAD
 	const struct msm_bus_client_handle *handle = file->private_data;
 	int found = 0;
 
 	list_for_each_entry(cldata, &cl_list, list) {
 		if ((cldata->clid == cl) ||
 			(cldata->handle && (cldata->handle == handle))) {
+=======
+	int found = 0;
+
+	list_for_each_entry(cldata, &cl_list, list) {
+		if (cldata->clid == cl) {
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			found = 1;
 			break;
 		}
 	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	if (!found)
 		return 0;
 
@@ -327,6 +340,7 @@ struct dentry *msm_bus_dbg_create(const char *name, mode_t mode,
 		&client_data_fops);
 }
 
+<<<<<<< HEAD
 int msm_bus_dbg_add_client(const struct msm_bus_client_handle *pdata)
 
 {
@@ -415,6 +429,8 @@ void msm_bus_dbg_remove_client(const struct msm_bus_client_handle *pdata)
 	}
 }
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static int msm_bus_dbg_record_client(const struct msm_bus_scale_pdata *pdata,
 	int index, uint32_t clid, struct dentry *file)
 {
@@ -508,6 +524,7 @@ static int msm_bus_dbg_fill_cl_buffer(const struct msm_bus_scale_pdata *pdata,
 
 	for (j = 0; j < pdata->usecase->num_paths; j++)
 		trace_bus_update_request((int)ts.tv_sec, (int)ts.tv_nsec,
+<<<<<<< HEAD
 		pdata->name,
 		pdata->usecase[index].vectors[j].src,
 		pdata->usecase[index].vectors[j].dst,
@@ -516,6 +533,14 @@ static int msm_bus_dbg_fill_cl_buffer(const struct msm_bus_scale_pdata *pdata,
 		pdata->active_only);
 
 	cldata->index = index;
+=======
+		pdata->name, index,
+		pdata->usecase[index].vectors[j].src,
+		pdata->usecase[index].vectors[j].dst,
+		pdata->usecase[index].vectors[j].ab,
+		pdata->usecase[index].vectors[j].ib);
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	cldata->size = i;
 	return i;
 }

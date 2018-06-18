@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* Copyright (c) 2013-2014, The Linux Foundation. All rights reserved.
+=======
+/* Copyright (c) 2013, The Linux Foundation. All rights reserved.
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -53,7 +57,10 @@ struct q6_hfi_device {
 	struct msm_vidc_platform_resources *res;
 	void *apr;
 	struct mutex session_lock;
+<<<<<<< HEAD
 	struct hfi_packetization_ops *pkt_ops;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 };
 
 struct q6_apr_cmd_sys_init_packet {

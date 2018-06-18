@@ -27,5 +27,8 @@ obj-$(CONFIG_INPUT_MISC)	+= misc/
 obj-$(CONFIG_INPUT_APMPOWER)	+= apm-power.o
 obj-$(CONFIG_INPUT_KEYRESET)	+= keyreset.o
 obj-$(CONFIG_INPUT_KEYCOMBO)	+= keycombo.o
+<<<<<<< HEAD
 obj-$(CONFIG_SENSORS_HALL)	+= hall_sensor.o
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 

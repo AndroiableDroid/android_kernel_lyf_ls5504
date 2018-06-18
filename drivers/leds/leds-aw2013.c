@@ -21,6 +21,10 @@
 #include <linux/slab.h>
 #include <linux/regulator/consumer.h>
 #include <linux/leds-aw2013.h>
+<<<<<<< HEAD
+=======
+#include <linux/of_gpio.h>
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 /* register address */
 #define AW_REG_RESET			0x00
@@ -93,11 +97,21 @@ static int aw2013_power_on(struct aw2013_led *led, bool on)
 			return rc;
 		}
 
+<<<<<<< HEAD
 		rc = regulator_enable(led->vcc);
 		if (rc) {
 			dev_err(&led->client->dev,
 				"Regulator vcc enable failed rc=%d\n", rc);
 			goto fail_enable_reg;
+=======
+		if (led->pdata->awgpio <= 0)  {
+			rc = regulator_enable(led->vcc);
+			if (rc) {
+				dev_err(&led->client->dev,
+						"Regulator vcc enable failed rc=%d\n", rc);
+				goto fail_enable_reg;
+			}
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		}
 		led->poweron = true;
 	} else {
@@ -108,11 +122,21 @@ static int aw2013_power_on(struct aw2013_led *led, bool on)
 			return rc;
 		}
 
+<<<<<<< HEAD
 		rc = regulator_disable(led->vcc);
 		if (rc) {
 			dev_err(&led->client->dev,
 				"Regulator vcc disable failed rc=%d\n", rc);
 			goto fail_disable_reg;
+=======
+		if (led->pdata->awgpio <= 0)  {
+			rc = regulator_disable(led->vcc);
+			if (rc) {
+				dev_err(&led->client->dev,
+						"Regulator vcc disable failed rc=%d\n", rc);
+				goto fail_disable_reg;
+			}
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		}
 		led->poweron = false;
 	}
@@ -135,6 +159,38 @@ fail_disable_reg:
 	return rc;
 }
 
+<<<<<<< HEAD
+=======
+static int aw2013_configure_gpio(struct aw2013_led *led, bool on)
+{
+	struct pinctrl *pinctrl;
+	struct pinctrl_state *pinctrl_state;
+	int rc;
+
+	pinctrl = devm_pinctrl_get(&led->client->dev);
+	if (IS_ERR_OR_NULL(pinctrl)) {
+		dev_err(&led->client->dev,
+				"Failed to get pinctrl\n");
+		return -EFAULT;
+	}
+	pinctrl_state = pinctrl_lookup_state(pinctrl,
+			on ? "aw2013_led_default" : "aw2013_led_suspend");
+	if (IS_ERR_OR_NULL(pinctrl_state)) {
+		dev_err(&led->client->dev,
+				"Failed to look up pinctrl state\n");
+		return -EFAULT;
+	}
+	rc = pinctrl_select_state(pinctrl, pinctrl_state);
+	if (rc) {
+		dev_err(&led->client->dev,
+				"Failed to select pinctrl state\n");
+		return -EIO;
+	}
+
+	return 0;
+}
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static int aw2013_power_init(struct aw2013_led *led, bool on)
 {
 	int rc;
@@ -159,6 +215,7 @@ static int aw2013_power_init(struct aw2013_led *led, bool on)
 			}
 		}
 
+<<<<<<< HEAD
 		led->vcc = regulator_get(&led->client->dev, "vcc");
 		if (IS_ERR(led->vcc)) {
 			rc = PTR_ERR(led->vcc);
@@ -174,6 +231,33 @@ static int aw2013_power_init(struct aw2013_led *led, bool on)
 				dev_err(&led->client->dev,
 				"Regulator set_vtg failed vcc rc=%d\n", rc);
 				goto reg_vcc_put;
+=======
+		if (led->pdata->awgpio > 0) {
+			rc = aw2013_configure_gpio(led, on);
+			if (rc) {
+				dev_dbg(&led->client->dev,
+						"Failed to configure GPIO: %d\n", rc);
+			}
+			gpio_request(led->pdata->awgpio, "aw2013-gpio");
+			gpio_direction_output(led->pdata->awgpio, 1);
+		} else {
+			led->vcc = regulator_get(&led->client->dev, "vcc");
+			if (IS_ERR(led->vcc)) {
+				rc = PTR_ERR(led->vcc);
+				dev_err(&led->client->dev,
+						"Regulator get failed vcc rc=%d\n", rc);
+				goto reg_vdd_set_vtg;
+			}
+
+			if (regulator_count_voltages(led->vcc) > 0) {
+				rc = regulator_set_voltage(led->vcc, AW2013_VI2C_MIN_UV,
+						AW2013_VI2C_MAX_UV);
+				if (rc) {
+					dev_err(&led->client->dev,
+							"Regulator set_vtg failed vcc rc=%d\n", rc);
+					goto reg_vcc_put;
+				}
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			}
 		}
 	} else {
@@ -182,10 +266,19 @@ static int aw2013_power_init(struct aw2013_led *led, bool on)
 
 		regulator_put(led->vdd);
 
+<<<<<<< HEAD
 		if (regulator_count_voltages(led->vcc) > 0)
 			regulator_set_voltage(led->vcc, 0, AW2013_VI2C_MAX_UV);
 
 		regulator_put(led->vcc);
+=======
+		if (!led->pdata->awgpio <= 0) {
+			if (regulator_count_voltages(led->vcc) > 0)
+				regulator_set_voltage(led->vcc, 0, AW2013_VI2C_MAX_UV);
+
+			regulator_put(led->vcc);
+		}
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	}
 	return 0;
 
@@ -261,7 +354,12 @@ static void aw2013_led_blink_set(struct aw2013_led *led, unsigned long blinking)
 		}
 	}
 
+<<<<<<< HEAD
 	led->cdev.brightness = blinking ? led->cdev.max_brightness : 0;
+=======
+	if (!led->cdev.brightness)
+		led->cdev.brightness = blinking ? led->cdev.max_brightness : 0;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	if (blinking > 0) {
 		aw2013_write(led, AW_REG_GLOBAL_CONTROL,
@@ -278,10 +376,38 @@ static void aw2013_led_blink_set(struct aw2013_led *led, unsigned long blinking)
 			led->pdata->fall_time_ms << 4 |
 			led->pdata->off_time_ms);
 		aw2013_read(led, AW_REG_LED_ENABLE, &val);
+<<<<<<< HEAD
+=======
+                // sync up the blinking by pulling them all down first
+		aw2013_write(led, AW_REG_GLOBAL_CONTROL,
+			0);
+		aw2013_write(led, AW_REG_LED_ENABLE, 0);
+		msleep(50);
+		aw2013_write(led, AW_REG_GLOBAL_CONTROL,
+			AW_LED_MOUDLE_ENABLE_MASK);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		aw2013_write(led, AW_REG_LED_ENABLE, val | (1 << led->id));
 	} else {
 		aw2013_read(led, AW_REG_LED_ENABLE, &val);
 		aw2013_write(led, AW_REG_LED_ENABLE, val & (~(1 << led->id)));
+<<<<<<< HEAD
+=======
+		if (led->cdev.brightness) {
+			// Disabling blink doesn't shut down the LED, put it
+			// back up after clearing the timers
+			if (led->cdev.brightness > led->cdev.max_brightness)
+				led->cdev.brightness = led->cdev.max_brightness;
+			aw2013_write(led, AW_REG_GLOBAL_CONTROL,
+					AW_LED_MOUDLE_ENABLE_MASK);
+			aw2013_write(led, AW_REG_LED_CONFIG_BASE + led->id,
+					led->pdata->max_current);
+			aw2013_write(led, AW_REG_LED_BRIGHTNESS_BASE + led->id,
+					led->cdev.brightness);
+			aw2013_write(led, AW_REG_LED_BRIGHTNESS_BASE + led->id,
+				led->cdev.brightness);
+			aw2013_write(led, AW_REG_LED_ENABLE, val);
+		}
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	}
 
 	aw2013_read(led, AW_REG_LED_ENABLE, &val);
@@ -467,6 +593,15 @@ static int aw2013_led_parse_child_node(struct aw2013_led *led_array,
 			goto free_pdata;
 		}
 
+<<<<<<< HEAD
+=======
+		rc = of_property_read_u32(temp, "aw2013,gpio",
+			&led->pdata->awgpio);
+		if (rc < 0) {
+			led->pdata->awgpio = 0;
+		}
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		rc = of_property_read_u32(temp, "aw2013,rise-time-ms",
 			&led->pdata->rise_time_ms);
 		if (rc < 0) {

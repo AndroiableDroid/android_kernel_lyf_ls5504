@@ -732,9 +732,12 @@ int msm_pcm_routing_reg_phy_stream(int fedai_id, int perf_mode,
 			acdb_dev_id = fe_dai_app_type_cfg[fedai_id].acdb_dev_id;
 			topology = msm_routing_get_adm_topology(path_type,
 								fedai_id);
+<<<<<<< HEAD
 			if (msm_bedais[i].port_id == VOICE_RECORD_RX ||
 			    msm_bedais[i].port_id == VOICE_RECORD_TX)
 				topology = NULL_COPP_TOPOLOGY;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			copp_idx = adm_open(msm_bedais[i].port_id, path_type,
 					    sample_rate, channels, topology,
 					    perf_mode, bits_per_sample,
@@ -743,6 +746,10 @@ int msm_pcm_routing_reg_phy_stream(int fedai_id, int perf_mode,
 				(copp_idx >= MAX_COPPS_PER_PORT)) {
 				pr_err("%s: adm open failed copp_idx:%d\n",
 					__func__, copp_idx);
+<<<<<<< HEAD
+=======
+				mutex_unlock(&routing_lock);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 				return -EINVAL;
 			}
 			pr_debug("%s: setting idx bit of fe:%d, type: %d, be:%d\n",
@@ -839,7 +846,11 @@ void msm_pcm_routing_dereg_phy_stream(int fedai_id, int stream_type)
 								__func__);
 				continue;
 			}
+<<<<<<< HEAD
 			topology = adm_get_topology_for_port_from_copp_id(
+=======
+			topology = adm_get_topology_for_port_copp_idx(
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 					msm_bedais[i].port_id, idx);
 			adm_close(msm_bedais[i].port_id, fdai->perf_mode, idx);
 			pr_debug("%s:copp:%ld,idx bit fe:%d,type:%d,be:%d\n",
@@ -946,9 +957,12 @@ static void msm_pcm_routing_process_audio(u16 reg, u16 val, int set)
 
 			topology = msm_routing_get_adm_topology(path_type, val);
 			acdb_dev_id = fe_dai_app_type_cfg[val].acdb_dev_id;
+<<<<<<< HEAD
 			if (msm_bedais[reg].port_id == VOICE_RECORD_RX ||
 			    msm_bedais[reg].port_id == VOICE_RECORD_TX)
 				topology = NULL_COPP_TOPOLOGY;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			copp_idx = adm_open(msm_bedais[reg].port_id, path_type,
 					    sample_rate, channels, topology,
 					    fdai->perf_mode, bits_per_sample,
@@ -990,16 +1004,32 @@ static void msm_pcm_routing_process_audio(u16 reg, u16 val, int set)
 		if (msm_bedais[reg].active && fdai->strm_id !=
 			INVALID_SESSION) {
 			int idx;
+<<<<<<< HEAD
+=======
+			int port_id;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			unsigned long copp =
 				session_copp_map[val][session_type][reg];
 			for (idx = 0; idx < MAX_COPPS_PER_PORT; idx++)
 				if (test_bit(idx, &copp))
 					break;
+<<<<<<< HEAD
 			topology = msm_routing_get_adm_topology(path_type, val);
 			adm_close(msm_bedais[reg].port_id, fdai->perf_mode,
 				  idx);
 			pr_debug("%s: copp: %ld, reset idx bit fe:%d, type: %d, be:%d\n",
 				 __func__, copp, val, session_type, reg);
+=======
+
+			port_id = msm_bedais[reg].port_id;
+			topology = adm_get_topology_for_port_copp_idx(port_id,
+								      idx);
+			adm_close(msm_bedais[reg].port_id, fdai->perf_mode,
+				  idx);
+			pr_debug("%s: copp: %ld, reset idx bit fe:%d, type: %d, be:%d topology=0x%x\n",
+				 __func__, copp, val, session_type, reg,
+				 topology);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			clear_bit(idx,
 				  &session_copp_map[val][session_type][reg]);
 			if ((DOLBY_ADM_COPP_TOPOLOGY_ID == topology ||
@@ -3649,10 +3679,17 @@ static int msm_routing_put_stereo_to_custom_stereo_control(
 	int flag = 0, i = 0, rc = 0, idx = 0;
 	int be_index = 0, port_id, topo_id;
 	unsigned int session_id = 0;
+<<<<<<< HEAD
 	uint16_t op_FL_ip_FL_weight;
 	uint16_t op_FL_ip_FR_weight;
 	uint16_t op_FR_ip_FL_weight;
 	uint16_t op_FR_ip_FR_weight;
+=======
+	uint16_t op_FL_ip_FL_weight = 0;
+	uint16_t op_FL_ip_FR_weight = 0;
+	uint16_t op_FR_ip_FL_weight = 0;
+	uint16_t op_FR_ip_FR_weight = 0;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	flag = ucontrol->value.integer.value[0];
 	pr_debug("%s E flag %d\n", __func__, flag);
 
@@ -5117,7 +5154,11 @@ static const struct snd_soc_dapm_route intercon[] = {
 	{"PRI_MI2S_RX", NULL, "PRI_MI2S_RX_DL_HL"},
 
 	{"QUAT_MI2S_RX_DL_HL", "Switch", "QUAT_MI2S_DL_HL"},
+<<<<<<< HEAD
 	{"QUAT_MI2S_RX", NULL, "QUAT_MI2S_RX_DL_HL"},
+=======
+	{"QUAT_MI2S_RX", NULL, "QUAT_MI2S_DL_HL"},
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	{"MI2S_UL_HL", NULL, "TERT_MI2S_TX"},
 	{"TERT_MI2S_UL_HL", NULL, "TERT_MI2S_TX"},
 	{"SEC_I2S_RX", NULL, "SEC_I2S_DL_HL"},
@@ -5349,16 +5390,30 @@ static int msm_pcm_routing_close(struct snd_pcm_substream *substream)
 		fdai = &fe_dai_map[i][session_type];
 		if (fdai->strm_id != INVALID_SESSION) {
 			int idx;
+<<<<<<< HEAD
+=======
+			int port_id;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			unsigned long copp =
 				session_copp_map[i][session_type][be_id];
 			for (idx = 0; idx < MAX_COPPS_PER_PORT; idx++)
 				if (test_bit(idx, &copp))
 					break;
 			fdai->be_srate = bedai->sample_rate;
+<<<<<<< HEAD
 			topology = msm_routing_get_adm_topology(path_type, i);
 			adm_close(bedai->port_id, fdai->perf_mode, idx);
 			pr_debug("%s: copp:%ld,idx bit fe:%d, type:%d,be:%d\n",
 				 __func__, copp, i, session_type, be_id);
+=======
+			port_id = bedai->port_id;
+			topology= adm_get_topology_for_port_copp_idx(port_id,
+								     idx);
+			adm_close(bedai->port_id, fdai->perf_mode, idx);
+			pr_debug("%s: copp:%ld,idx bit fe:%d, type:%d,be:%d topology=0x%x\n",
+				 __func__, copp, i, session_type, be_id,
+				 topology);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			clear_bit(idx,
 				  &session_copp_map[i][session_type][be_id]);
 			if ((fdai->perf_mode == LEGACY_PCM_MODE) &&
@@ -5453,9 +5508,12 @@ static int msm_pcm_routing_prepare(struct snd_pcm_substream *substream)
 			channels = bedai->channel;
 			acdb_dev_id = fe_dai_app_type_cfg[i].acdb_dev_id;
 			topology = msm_routing_get_adm_topology(path_type, i);
+<<<<<<< HEAD
 			if (bedai->port_id == VOICE_RECORD_RX ||
 			    bedai->port_id == VOICE_RECORD_TX)
 				topology = NULL_COPP_TOPOLOGY;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			copp_idx = adm_open(bedai->port_id, path_type,
 					    sample_rate, channels, topology,
 					    fdai->perf_mode, bits_per_sample,
@@ -5463,6 +5521,10 @@ static int msm_pcm_routing_prepare(struct snd_pcm_substream *substream)
 			if ((copp_idx < 0) ||
 				(copp_idx >= MAX_COPPS_PER_PORT)) {
 				pr_err("%s: adm open failed\n", __func__);
+<<<<<<< HEAD
+=======
+				mutex_unlock(&routing_lock);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 				return -EINVAL;
 			}
 			pr_debug("%s: setting idx bit of fe:%d, type: %d, be:%d\n",
@@ -5596,7 +5658,11 @@ static int msm_routing_put_device_pp_params_mixer(struct snd_kcontrol *kcontrol,
 			if (!test_bit(idx, &copp))
 				continue;
 			topo_id = adm_get_topology_for_port_copp_idx(port_id,
+<<<<<<< HEAD
 								     copp);
+=======
+								     idx);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			if (topo_id != COMPRESSED_PASSTHROUGH_DEFAULT_TOPOLOGY)
 				continue;
 		pr_debug("%s: port: 0x%x, copp %ld, be active: %d, passt: %d\n",

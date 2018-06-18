@@ -157,11 +157,19 @@
 &qcom_seecom {
 	status = "okay";
 };
+<<<<<<< HEAD
 /* xiesu del no used
 &ncp6335d {
 	status = "disabled";
 };
 */
+=======
+
+&ncp6335d {
+	status = "disabled";
+};
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 &fan53555 {
 	status = "disabled";
 };

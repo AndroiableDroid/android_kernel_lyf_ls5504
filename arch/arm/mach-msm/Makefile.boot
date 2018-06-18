@@ -19,6 +19,12 @@
 # FSM9010
    zreladdr-$(CONFIG_ARCH_FSM9010)	:= 0x00008000
 
+<<<<<<< HEAD
+=======
+# MSM8916
+   zreladdr-$(CONFIG_ARCH_MSM8916)	:= 0x80008000
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 # MSM8610
    zreladdr-$(CONFIG_ARCH_MSM8610)	:= 0x00008000
 

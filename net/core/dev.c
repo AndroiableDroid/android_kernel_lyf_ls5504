@@ -6025,21 +6025,38 @@ static int dev_cpu_callback(struct notifier_block *nfb,
 							poll_list);
 
 		list_del_init(&napi->poll_list);
+<<<<<<< HEAD
 		if (napi->poll != process_backlog)
 			____napi_schedule(sd, napi);
 	}
 
 	oldsd->backlog.state = 0;
+=======
+		if (napi->poll == process_backlog)
+			napi->state = 0;
+		else
+			____napi_schedule(sd, napi);
+	}
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	raise_softirq_irqoff(NET_TX_SOFTIRQ);
 	local_irq_enable();
 
 	/* Process offline CPU's input_pkt_queue */
 	while ((skb = __skb_dequeue(&oldsd->process_queue))) {
+<<<<<<< HEAD
 		kfree_skb(skb);
 		input_queue_head_incr(oldsd);
 	}
 	while ((skb = skb_dequeue(&oldsd->input_pkt_queue))) {
 		kfree_skb(skb);
+=======
+		netif_rx(skb);
+		input_queue_head_incr(oldsd);
+	}
+	while ((skb = skb_dequeue(&oldsd->input_pkt_queue))) {
+		netif_rx(skb);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		input_queue_head_incr(oldsd);
 	}
 

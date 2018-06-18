@@ -453,7 +453,11 @@ static struct device_attribute attrs[] = {
 			synaptics_rmi4_flipy_show,
 			synaptics_rmi4_flipy_store),
 #if defined(CONFIG_SECURE_TOUCH)
+<<<<<<< HEAD
 	__ATTR(secure_touch_enable, (S_IRUGO | S_IWUSR | S_IWGRP),
+=======
+	__ATTR(secure_touch_enable, (S_IRUGO | S_IWUGO),
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			synaptics_secure_touch_enable_show,
 			synaptics_secure_touch_enable_store),
 	__ATTR(secure_touch, S_IRUGO ,

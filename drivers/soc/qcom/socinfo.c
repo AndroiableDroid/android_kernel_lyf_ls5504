@@ -189,6 +189,7 @@ struct socinfo_v9 {
 	uint32_t foundry_id;
 };
 
+<<<<<<< HEAD
 struct socinfo_v10 {
 	struct socinfo_v9 v9;
 
@@ -196,6 +197,8 @@ struct socinfo_v10 {
 	uint32_t serial_number;
 };
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static union {
 	struct socinfo_v1 v1;
 	struct socinfo_v2 v2;
@@ -206,7 +209,10 @@ static union {
 	struct socinfo_v7 v7;
 	struct socinfo_v8 v8;
 	struct socinfo_v9 v9;
+<<<<<<< HEAD
 	struct socinfo_v10 v10;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 } *socinfo;
 
 static struct msm_soc_info cpu_of_id[] = {
@@ -474,10 +480,13 @@ static struct msm_soc_info cpu_of_id[] = {
 
 	/* 8909 IDs */
 	[245] = {MSM_CPU_8909, "MSM8909"},
+<<<<<<< HEAD
 	[258] = {MSM_CPU_8909, "MSM8209"},
 	[259] = {MSM_CPU_8909, "MSM8208"},
 	[265] = {MSM_CPU_8909, "APQ8009"},
 	[275] = {MSM_CPU_8909, "MSM8609"},
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	[260] = {MSM_CPU_8909, "MDMFERRUM"},
 	[261] = {MSM_CPU_8909, "MDMFERRUM"},
 	[262] = {MSM_CPU_8909, "MDMFERRUM"},
@@ -1047,7 +1056,10 @@ static void __init populate_soc_sysfs_files(struct device *msm_soc_device)
 	device_create_file(msm_soc_device, &select_image);
 
 	switch (legacy_format) {
+<<<<<<< HEAD
 	case 10:
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	case 9:
 		 device_create_file(msm_soc_device,
 					&msm_soc_attr_foundry_id);
@@ -1223,6 +1235,7 @@ static void socinfo_print(void)
 			socinfo->v7.pmic_die_revision,
 			socinfo->v9.foundry_id);
 		break;
+<<<<<<< HEAD
 	case 10:
 		pr_info("%s: v%u, id=%u, ver=%u.%u, raw_id=%u, raw_ver=%u, hw_plat=%u, hw_plat_ver=%u\n accessory_chip=%u, hw_plat_subtype=%u, pmic_model=%u, pmic_die_revision=%u foundry_id=%u serial_number=%u\n",
 			__func__,
@@ -1239,6 +1252,8 @@ static void socinfo_print(void)
 			socinfo->v9.foundry_id,
 			socinfo->v10.serial_number);
 		break;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	default:
 		pr_err("%s: Unknown format found\n", __func__);
@@ -1254,12 +1269,15 @@ int __init socinfo_init(void)
 		return 0;
 
 	socinfo = smem_find(SMEM_HW_SW_BUILD_ID,
+<<<<<<< HEAD
 				sizeof(struct socinfo_v10),
 				0,
 				SMEM_ANY_HOST_FLAG);
 
 	if (IS_ERR_OR_NULL(socinfo))
 		socinfo = smem_find(SMEM_HW_SW_BUILD_ID,
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 				sizeof(struct socinfo_v9),
 				0,
 				SMEM_ANY_HOST_FLAG);

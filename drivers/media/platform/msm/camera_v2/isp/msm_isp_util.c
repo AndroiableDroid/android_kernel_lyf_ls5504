@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* Copyright (c) 2013-2014, The Linux Foundation. All rights reserved.
+=======
+/* Copyright (c) 2013-2015, The Linux Foundation. All rights reserved.
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -182,6 +186,11 @@ int msm_isp_update_bandwidth(enum msm_isp_hw_client client,
 				isp_bandwidth_mgr.client_info[i].ib;
 		}
 	}
+<<<<<<< HEAD
+=======
+	ISP_DBG("%s: Total AB = %llu IB = %llu\n", __func__,
+			path->vectors[0].ab, path->vectors[0].ib);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	msm_bus_scale_client_update_request(isp_bandwidth_mgr.bus_client,
 		isp_bandwidth_mgr.bus_vector_active_idx);
 	/* Insert into circular buffer */
@@ -778,6 +787,17 @@ static long msm_isp_ioctl_unlocked(struct v4l2_subdev *sd,
 		rc = msm_isp_smmu_attach(vfe_dev->buf_mgr, arg);
 		mutex_unlock(&vfe_dev->core_mutex);
 		break;
+<<<<<<< HEAD
+=======
+	case VIDIOC_MSM_ISP_BUF_DONE:
+		mutex_lock(&vfe_dev->core_mutex);
+		rc = msm_isp_user_buf_done(vfe_dev, arg);
+		mutex_unlock(&vfe_dev->core_mutex);
+		break;
+	case MSM_SD_NOTIFY_FREEZE:
+		vfe_dev->isp_sof_debug = 0;
+		break;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	case MSM_SD_SHUTDOWN:
 		while (vfe_dev->vfe_open_cnt != 0)
 			msm_isp_close_node(sd, NULL);
@@ -823,6 +843,38 @@ static long msm_isp_ioctl_compat(struct v4l2_subdev *sd,
 		mutex_unlock(&vfe_dev->realtime_mutex);
 		break;
 	}
+<<<<<<< HEAD
+=======
+	case VIDIOC_MSM_ISP_BUF_DONE: {
+		struct msm_isp_event_data buf_event;
+		struct msm_isp_event_data32 *buf_event32;
+		memset(&buf_event, 0, sizeof(buf_event));
+		buf_event32 =
+		  (struct msm_isp_event_data32 *)arg;
+		buf_event.input_intf = buf_event32->input_intf;
+		buf_event.frame_id = buf_event32->frame_id;
+		buf_event.timestamp.tv_sec =
+				buf_event32->timestamp.tv_sec;
+		buf_event.timestamp.tv_usec =
+				buf_event32->timestamp.tv_usec;
+		buf_event.mono_timestamp.tv_sec =
+				buf_event32->mono_timestamp.tv_sec;
+		buf_event.mono_timestamp.tv_usec =
+				buf_event32->mono_timestamp.tv_usec;
+		buf_event.u.buf_done.session_id =
+		  buf_event32->u.buf_done.session_id;
+		buf_event.u.buf_done.stream_id =
+		  buf_event32->u.buf_done.stream_id;
+		buf_event.u.buf_done.output_format =
+			buf_event32->u.buf_done.output_format;
+		buf_event.u.buf_done.buf_idx =
+			buf_event32->u.buf_done.buf_idx;
+		buf_event.u.buf_done.handle =
+			buf_event32->u.buf_done.handle;
+		cmd = VIDIOC_MSM_ISP_BUF_DONE;
+		return msm_isp_ioctl_unlocked(sd, cmd, &buf_event);
+	}
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	default:
 		return msm_isp_ioctl_unlocked(sd, cmd, arg);
 	}
@@ -1749,6 +1801,10 @@ int msm_isp_open_node(struct v4l2_subdev *sd, struct v4l2_subdev_fh *fh)
 	}
 
 	vfe_dev->reset_pending = 0;
+<<<<<<< HEAD
+=======
+	vfe_dev->isp_sof_debug = 0;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	if (vfe_dev->hw_info->vfe_ops.core_ops.init_hw(vfe_dev) < 0) {
 		pr_err("%s: init hardware failed\n", __func__);
@@ -1789,6 +1845,14 @@ int msm_isp_open_node(struct v4l2_subdev *sd, struct v4l2_subdev_fh *fh)
 	vfe_dev->axi_data.hw_info = vfe_dev->hw_info->axi_hw_info;
 	vfe_dev->taskletq_idx = 0;
 	vfe_dev->vt_enable = 0;
+<<<<<<< HEAD
+=======
+	vfe_dev->bus_util_factor = 0;
+	rc = of_property_read_u32(vfe_dev->pdev->dev.of_node,
+			"bus-util-factor", &vfe_dev->bus_util_factor);
+	if (rc < 0)
+		ISP_DBG("%s: Use default bus utilization factor\n", __func__);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	iommu_set_fault_handler(vfe_dev->buf_mgr->iommu_domain,
 		msm_vfe_iommu_fault_handler, vfe_dev);
 	mutex_unlock(&vfe_dev->core_mutex);

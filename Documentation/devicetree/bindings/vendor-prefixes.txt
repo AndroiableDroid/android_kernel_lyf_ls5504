@@ -38,7 +38,11 @@ idt	Integrated Device Technologies, Inc.
 img	Imagination Technologies Ltd.
 intercontrol	Inter Control Group
 invn	InvenSense Inc.
+<<<<<<< HEAD
 jdi     Japan Display Inc.
+=======
+jdi	Japan Display Inc.
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 lattice	Lattice Semiconductor.
 linux	Linux-specific binding
 liteon	Lite-On Technology Corporation
@@ -68,7 +72,10 @@ stk	Sensortek Technology Corporation.(formerly Sitronix Technology Co., Ltd.)
 shinetech	Shine Tech Corporation, Ltd.
 sil	Silicon Image
 silabs	Silicon Laboratories
+<<<<<<< HEAD
 silergy	Silergy Corp.
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 simtek
 sirf	SiRF Technology, Inc.
 sne	Sony

@@ -23,10 +23,17 @@
 #include <linux/delay.h>
 #include <linux/input.h>
 #include <linux/platform_device.h>
+<<<<<<< HEAD
 #include <linux/input/synaptics_dsx.h>
 #include "synaptics_dsx_core.h"
 
 #define PROX_PHYS_NAME "synaptics_dsx/proximity"
+=======
+#include <linux/input/synaptics_dsx_v2.h>
+#include "synaptics_dsx_core.h"
+
+#define PROX_PHYS_NAME "synaptics_dsx/input1"
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 #define HOVER_Z_MAX (255)
 
@@ -336,7 +343,11 @@ static int prox_scan_pdt(void)
 				break;
 			}
 
+<<<<<<< HEAD
 			intr_count += fd.intr_src_count;
+=======
+			intr_count += (fd.intr_src_count & MASK_3BIT);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		}
 	}
 
@@ -363,7 +374,12 @@ f12_found:
 	intr_src = fd.intr_src_count;
 	intr_off = intr_count % 8;
 	for (ii = intr_off;
+<<<<<<< HEAD
 			ii < (intr_src + intr_off);
+=======
+			ii < ((intr_src & MASK_3BIT) +
+			intr_off);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			ii++) {
 		prox->intr_mask |= 1 << ii;
 	}
@@ -461,6 +477,7 @@ static int synaptics_rmi4_prox_init(struct synaptics_rmi4_data *rmi4_data)
 	int retval;
 	unsigned char attr_count;
 
+<<<<<<< HEAD
 	if (prox) {
 		dev_dbg(rmi4_data->pdev->dev.parent,
 				"%s: Handle already exists\n",
@@ -468,6 +485,8 @@ static int synaptics_rmi4_prox_init(struct synaptics_rmi4_data *rmi4_data)
 		return 0;
 	}
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	prox = kzalloc(sizeof(*prox), GFP_KERNEL);
 	if (!prox) {
 		dev_err(rmi4_data->pdev->dev.parent,
@@ -507,7 +526,11 @@ static int synaptics_rmi4_prox_init(struct synaptics_rmi4_data *rmi4_data)
 		goto exit_free_finger_data;
 	}
 
+<<<<<<< HEAD
 	prox->prox_dev->name = PROXIMITY_DRIVER_NAME;
+=======
+	prox->prox_dev->name = PLATFORM_DRIVER_NAME;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	prox->prox_dev->phys = PROX_PHYS_NAME;
 	prox->prox_dev->id.product = SYNAPTICS_DSX_DRIVER_PRODUCT;
 	prox->prox_dev->id.version = SYNAPTICS_DSX_DRIVER_VERSION;
@@ -594,10 +617,15 @@ exit:
 
 static void synaptics_rmi4_prox_reset(struct synaptics_rmi4_data *rmi4_data)
 {
+<<<<<<< HEAD
 	if (!prox) {
 		synaptics_rmi4_prox_init(rmi4_data);
 		return;
 	}
+=======
+	if (!prox)
+		return;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	prox_hover_finger_lift();
 
@@ -657,14 +685,22 @@ static struct synaptics_rmi4_exp_fn proximity_module = {
 
 static int __init rmi4_proximity_module_init(void)
 {
+<<<<<<< HEAD
 	synaptics_rmi4_new_function(&proximity_module, true);
+=======
+	synaptics_rmi4_dsx_new_function(&proximity_module, true);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	return 0;
 }
 
 static void __exit rmi4_proximity_module_exit(void)
 {
+<<<<<<< HEAD
 	synaptics_rmi4_new_function(&proximity_module, false);
+=======
+	synaptics_rmi4_dsx_new_function(&proximity_module, false);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	wait_for_completion(&prox_remove_complete);
 

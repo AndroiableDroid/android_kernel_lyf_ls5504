@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* Copyright (c) 2011-2015, The Linux Foundation. All rights reserved.
+=======
+/* Copyright (c) 2011-2014, The Linux Foundation. All rights reserved.
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -1118,7 +1122,10 @@ int sps_bam_pipe_set_params(struct sps_bam *dev, u32 pipe_index, u32 options)
 	int ack_xfers;
 	u32 size;
 	int n;
+<<<<<<< HEAD
 	bool atmc_enbl = false;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	/* Capture some options */
 	wake_up_is_one_shot = ((options & SPS_O_WAKEUP_IS_ONESHOT));
@@ -1165,6 +1172,7 @@ int sps_bam_pipe_set_params(struct sps_bam *dev, u32 pipe_index, u32 options)
 		/* Allocate both descriptor cache and user pointer array */
 		size = pipe->num_descs * sizeof(void *);
 
+<<<<<<< HEAD
 		if (pipe->desc_size + size <= PAGE_SIZE) {
 			if (dev->props.options & SPS_BAM_ATMC_MEM) {
 				pipe->sys.desc_cache =
@@ -1184,6 +1192,12 @@ int sps_bam_pipe_set_params(struct sps_bam *dev, u32 pipe_index, u32 options)
 				return -ENOMEM;
 			}
 		} else {
+=======
+		if (pipe->desc_size + size <= PAGE_SIZE)
+			pipe->sys.desc_cache =
+				kzalloc(pipe->desc_size + size, GFP_KERNEL);
+		else {
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			pipe->sys.desc_cache =
 				vmalloc(pipe->desc_size + size);
 
@@ -1197,6 +1211,16 @@ int sps_bam_pipe_set_params(struct sps_bam *dev, u32 pipe_index, u32 options)
 			memset(pipe->sys.desc_cache, 0, pipe->desc_size + size);
 		}
 
+<<<<<<< HEAD
+=======
+		if (pipe->sys.desc_cache == NULL) {
+			/*** MUST BE LAST POINT OF FAILURE (see below) *****/
+			SPS_ERR("sps:Desc cache error: BAM %pa pipe %d: %d\n",
+				BAM_ID(dev), pipe_index,
+				pipe->desc_size + size);
+			return SPS_ERROR;
+		}
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		pipe->sys.user_ptrs = (void **)(pipe->sys.desc_cache +
 						 pipe->desc_size);
 		pipe->sys.cache_offset = pipe->sys.acked_offset;

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
  /* Copyright (c) 2014-2015, The Linux Foundation. All rights reserved.
+=======
+ /* Copyright (c) 2014, The Linux Foundation. All rights reserved.
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -2243,6 +2247,7 @@ static struct snd_soc_dai_link msm8x16_dai[] = {
 		.codec_dai_name = "snd-soc-dummy-dai",
 		.codec_name = "snd-soc-dummy",
 	},
+<<<<<<< HEAD
 	{ /* hw:x, 28 */
 		.name = "QCHAT",
 		.stream_name = "QCHAT",
@@ -2259,6 +2264,8 @@ static struct snd_soc_dai_link msm8x16_dai[] = {
 		.codec_name = "snd-soc-dummy",
 		.be_id = MSM_FRONTEND_DAI_QCHAT,
 	},
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	{
 		.name = LPASS_BE_QUAT_MI2S_RX,
 		.stream_name = "Quaternary MI2S Playback",

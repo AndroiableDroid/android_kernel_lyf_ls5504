@@ -278,7 +278,11 @@ struct msm_mctl_post_proc_cmd {
 #define NUM_ACTUATOR_DIR 2
 #define MAX_ACTUATOR_SCENARIO 8
 #define MAX_ACTUATOR_REGION 5
+<<<<<<< HEAD
 #define MAX_ACTUATOR_INIT_SET 32
+=======
+#define MAX_ACTUATOR_INIT_SET 12
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #define MAX_ACTUATOR_TYPE_SIZE 32
 #define MAX_ACTUATOR_REG_TBL_SIZE 8
 

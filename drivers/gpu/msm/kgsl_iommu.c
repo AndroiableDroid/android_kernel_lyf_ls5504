@@ -800,8 +800,11 @@ static int kgsl_attach_pagetable_iommu_domain(struct kgsl_mmu *mmu)
 					iommu_unit->clks[2] = drvdata->aclk;
 					iommu_unit->clks[3] =
 							iommu->gtcu_iface_clk;
+<<<<<<< HEAD
 					iommu_unit->clks[4] =
 							iommu->gtbu_clk;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 				}
 			}
 		}
@@ -1313,7 +1316,10 @@ static int kgsl_iommu_init(struct kgsl_mmu *mmu)
 	int status = 0;
 	struct kgsl_iommu *iommu;
 	struct platform_device *pdev = mmu->device->pdev;
+<<<<<<< HEAD
 	struct adreno_device *adreno_dev = ADRENO_DEVICE(mmu->device);
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	size_t secured_pool_sz = 0;
 
 	atomic_set(&mmu->fault, 0);
@@ -1337,6 +1343,7 @@ static int kgsl_iommu_init(struct kgsl_mmu *mmu)
 						"gtcu_iface_clk") >= 0)
 		iommu->gtcu_iface_clk = clk_get(&pdev->dev, "gtcu_iface_clk");
 
+<<<<<<< HEAD
 	/* TBU clk needs to be voted for TLB invalidate on A405 */
 	if (adreno_is_a405(adreno_dev)) {
 		iommu->gtbu_clk = clk_get(&pdev->dev, "gtbu_clk");
@@ -1344,6 +1351,8 @@ static int kgsl_iommu_init(struct kgsl_mmu *mmu)
 			iommu->gtbu_clk = NULL;
 	}
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	mmu->pt_base = KGSL_MMU_MAPPED_MEM_BASE;
 	mmu->pt_size = (KGSL_MMU_MAPPED_MEM_SIZE - secured_pool_sz);
 

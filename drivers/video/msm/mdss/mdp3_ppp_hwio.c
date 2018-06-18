@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* Copyright (c) 2007, 2012-2015, The Linux Foundation. All rights reserved.
+=======
+/* Copyright (c) 2007, 2012-2013 The Linux Foundation. All rights reserved.
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  * Copyright (C) 2007 Google Incorporated
  *
  * This software is licensed under the terms of the GNU General Public
@@ -33,6 +37,7 @@
 #define PQF_PLUS_5_PLUS_2     (PQF_PLUS_5 + 2)
 #define PQF_PLUS_5_MINUS_2    (PQF_PLUS_5 - 2)
 
+<<<<<<< HEAD
 enum {
 	LAYER_FG = 0,
 	LAYER_BG,
@@ -40,6 +45,8 @@ enum {
 	LAYER_MAX,
 };
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static long long mdp_do_div(long long num, long long den)
 {
 	do_div(num, den);
@@ -369,6 +376,7 @@ bool check_if_rgb(int color)
 	return rgb;
 }
 
+<<<<<<< HEAD
 uint8_t *mdp_adjust_rot_addr(struct ppp_blit_op *iBuf,
 	uint8_t *addr, uint32_t bpp, uint32_t uv, uint32_t layer)
 {
@@ -391,15 +399,37 @@ uint8_t *mdp_adjust_rot_addr(struct ppp_blit_op *iBuf,
 	}
 	if (uv && ((color_fmt == MDP_Y_CBCR_H2V2) ||
 		(color_fmt == MDP_Y_CRCB_H2V2)))
+=======
+uint8_t *mdp_dst_adjust_rot_addr(struct ppp_blit_op *iBuf,
+	uint8_t *addr, uint32_t bpp, uint32_t uv)
+{
+	uint32_t dest_ystride = iBuf->dst.prop.width * bpp;
+	uint32_t h_slice = 1;
+
+	if (uv && ((iBuf->dst.color_fmt == MDP_Y_CBCR_H2V2) ||
+		(iBuf->dst.color_fmt == MDP_Y_CRCB_H2V2)))
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		h_slice = 2;
 
 	if (((iBuf->mdp_op & MDPOP_ROT90) == MDPOP_ROT90) ^
 		((iBuf->mdp_op & MDPOP_LR) == MDPOP_LR)) {
+<<<<<<< HEAD
 		addr += (roi_width - MIN(16, roi_width)) * bpp;
 	}
 	if ((iBuf->mdp_op & MDPOP_UD) == MDPOP_UD) {
 		addr += ((roi_height - MIN(16, roi_height))/h_slice) *
 			ystride;
+=======
+		addr +=
+		    (iBuf->dst.roi.width -
+			    MIN(16, iBuf->dst.roi.width)) * bpp;
+	}
+	if ((iBuf->mdp_op & MDPOP_UD) == MDPOP_UD) {
+		addr +=
+			((iBuf->dst.roi.height -
+			MIN(16, iBuf->dst.roi.height))/h_slice) *
+			dest_ystride;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	}
 
 	return addr;
@@ -407,7 +437,11 @@ uint8_t *mdp_adjust_rot_addr(struct ppp_blit_op *iBuf,
 
 void mdp_adjust_start_addr(struct ppp_blit_op *blit_op,
 	struct ppp_img_desc *img, int v_slice,
+<<<<<<< HEAD
 	int h_slice, uint32_t layer)
+=======
+	int h_slice, int layer)
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 {
 	uint32_t bpp = ppp_bpp(img->color_fmt);
 	int x = img->roi.x;
@@ -420,8 +454,13 @@ void mdp_adjust_start_addr(struct ppp_blit_op *blit_op,
 		img->p0 += (x + y * ALIGN(width, 128)) * bpp;
 	else
 		img->p0 += (x + y * width) * bpp;
+<<<<<<< HEAD
 	if (layer != LAYER_FG)
 		img->p0 = mdp_adjust_rot_addr(blit_op, img->p0, bpp, 0, layer);
+=======
+	if (layer != 0)
+		img->p0 = mdp_dst_adjust_rot_addr(blit_op, img->p0, bpp, 0);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	if (img->p1) {
 		/*
@@ -438,9 +477,15 @@ void mdp_adjust_start_addr(struct ppp_blit_op *blit_op,
 			img->p1 += ((x / h_slice) * h_slice +
 			((y == 0) ? 0 : ((y + 1) / v_slice - 1) * width)) * bpp;
 
+<<<<<<< HEAD
 		if (layer != LAYER_FG)
 			img->p0 = mdp_adjust_rot_addr(blit_op,
 					img->p0, bpp, 0, layer);
+=======
+		if (layer != 0)
+			img->p0 = mdp_dst_adjust_rot_addr(blit_op,
+					img->p0, bpp, 0);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	}
 }
 
@@ -572,7 +617,11 @@ int config_ppp_out(struct ppp_img_desc *dst, uint32_t yuv2rgb)
 	return 0;
 }
 
+<<<<<<< HEAD
 int config_ppp_background(struct ppp_img_desc *bg, uint32_t yuv2rgb)
+=======
+int config_ppp_background(struct ppp_img_desc *bg)
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 {
 	uint32_t val;
 
@@ -590,7 +639,11 @@ int config_ppp_background(struct ppp_img_desc *bg, uint32_t yuv2rgb)
 
 	PPP_WRITEL(ppp_src_config(bg->color_fmt),
 		MDP3_PPP_BG_FORMAT);
+<<<<<<< HEAD
 	PPP_WRITEL(ppp_pack_pattern(bg->color_fmt, yuv2rgb),
+=======
+	PPP_WRITEL(ppp_pack_pattern(bg->color_fmt, 0),
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		MDP3_PPP_BG_UNPACK_PATTERN1);
 	return 0;
 }
@@ -955,6 +1008,7 @@ int config_ppp_scale(struct ppp_blit_op *blit_op, uint32_t *pppop_reg_ptr)
 		if ((dstW != src->roi.width) ||
 		    (dstH != src->roi.height) || mdp_blur) {
 
+<<<<<<< HEAD
 			/*
 			 * Use source origin as 0 for computing initial
 			 * phase and step size. Incorrect initial phase and
@@ -968,6 +1022,16 @@ int config_ppp_scale(struct ppp_blit_op *blit_op, uint32_t *pppop_reg_ptr)
 				blit_op->src.roi.height,
 				dstH, 0, &phase_init_y,
 				&phase_step_y);
+=======
+				mdp_calc_scale_params(blit_op->src.roi.x,
+					blit_op->src.roi.width,
+					dstW, 1, &phase_init_x,
+					&phase_step_x);
+				mdp_calc_scale_params(blit_op->src.roi.y,
+					blit_op->src.roi.height,
+					dstH, 0, &phase_init_y,
+					&phase_step_y);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 			PPP_WRITEL(phase_init_x, MDP3_PPP_SCALE_PHASEX_INIT);
 			PPP_WRITEL(phase_init_y, MDP3_PPP_SCALE_PHASEY_INIT);
@@ -975,7 +1039,11 @@ int config_ppp_scale(struct ppp_blit_op *blit_op, uint32_t *pppop_reg_ptr)
 			PPP_WRITEL(phase_step_y, MDP3_PPP_SCALE_PHASEY_STEP);
 
 
+<<<<<<< HEAD
 			if (dstW > src->roi.width || dstH > src->roi.height)
+=======
+			if (dstW > src->roi.width || dstW > src->roi.height)
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 				ppp_load_up_lut();
 
 			if (mdp_blur)
@@ -1018,8 +1086,12 @@ int config_ppp_csc(int src_color, int dst_color, uint32_t *pppop_reg_ptr)
 }
 
 int config_ppp_blend(struct ppp_blit_op *blit_op,
+<<<<<<< HEAD
 			uint32_t *pppop_reg_ptr,
 			bool is_yuv_smart_blit, int smart_blit_bg_alpha)
+=======
+			uint32_t *pppop_reg_ptr)
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 {
 	struct ppp_csc_table *csc;
 	uint32_t alpha, trans_color;
@@ -1093,6 +1165,7 @@ int config_ppp_blend(struct ppp_blit_op *blit_op,
 		if (blit_op->mdp_op & MDPOP_TRANSP)
 			*pppop_reg_ptr |=
 				PPP_BLEND_CALPHA_TRNASP;
+<<<<<<< HEAD
 		if (is_yuv_smart_blit) {
 			*pppop_reg_ptr |= PPP_OP_ROT_ON |
 				PPP_OP_BLEND_ON |
@@ -1119,6 +1192,13 @@ int config_ppp_blend(struct ppp_blit_op *blit_op,
 			config_ppp_background(&blit_op->bg, 1);
 		else
 			config_ppp_background(&blit_op->bg, 0);
+=======
+		PPP_WRITEL(0, MDP3_PPP_BLEND_BG_ALPHA_SEL);
+	}
+
+	if (*pppop_reg_ptr & PPP_OP_BLEND_ON) {
+		config_ppp_background(&blit_op->bg);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 		if (blit_op->dst.color_fmt == MDP_YCRYCB_H2V1) {
 			*pppop_reg_ptr |= PPP_OP_BG_CHROMA_H2V1;
@@ -1130,6 +1210,7 @@ int config_ppp_blend(struct ppp_blit_op *blit_op,
 			}
 		}
 	}
+<<<<<<< HEAD
 	if (is_yuv_smart_blit) {
 		PPP_WRITEL(0, MDP3_PPP_BLEND_PARAM);
 	} else {
@@ -1137,6 +1218,11 @@ int config_ppp_blend(struct ppp_blit_op *blit_op,
 		val |= (trans_color & MDP_BLEND_TRASP_COL_MASK);
 		PPP_WRITEL(val, MDP3_PPP_BLEND_PARAM);
 	}
+=======
+	val = (alpha << MDP_BLEND_CONST_ALPHA);
+	val |= (trans_color & MDP_BLEND_TRASP_COL_MASK);
+	PPP_WRITEL(val, MDP3_PPP_BLEND_PARAM);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	return 0;
 }
 
@@ -1160,6 +1246,7 @@ int config_ppp_op_mode(struct ppp_blit_op *blit_op)
 	uint32_t ppp_operation_reg = 0;
 	int sv_slice, sh_slice;
 	int dv_slice, dh_slice;
+<<<<<<< HEAD
 	static struct ppp_img_desc bg_img_param;
 	static int bg_alpha;
 	static int bg_mdp_ops;
@@ -1174,6 +1261,8 @@ int config_ppp_op_mode(struct ppp_blit_op *blit_op)
 	if ((bg_img_param.p0) &&
 		(!(check_if_rgb(blit_op->src.color_fmt))))
 		is_yuv_smart_blit = true;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	sv_slice = sh_slice = dv_slice = dh_slice = 1;
 
@@ -1250,6 +1339,7 @@ int config_ppp_op_mode(struct ppp_blit_op *blit_op)
 		blit_op->dst.p1 = NULL;
 	}
 
+<<<<<<< HEAD
 	if ((bg_img_param.p0) && (!(blit_op->mdp_op & MDPOP_SMART_BLIT))) {
 		/* Use cached smart blit BG layer info in smart Blit FG request */
 		blit_op->bg = bg_img_param;
@@ -1313,6 +1403,21 @@ int config_ppp_op_mode(struct ppp_blit_op *blit_op)
 		blit_op->dst.roi.height, blit_op->dst.p0, blit_op->src.stride0,
                 blit_op->dst.p1, blit_op->dst.stride1);
 
+=======
+	blit_op->bg = blit_op->dst;
+	/* Jumping from Y-Plane to Chroma Plane */
+	/* first pixel addr calculation */
+	mdp_adjust_start_addr(blit_op, &blit_op->src, sv_slice, sh_slice, 0);
+	mdp_adjust_start_addr(blit_op, &blit_op->bg, dv_slice, dh_slice, 1);
+	mdp_adjust_start_addr(blit_op, &blit_op->dst, dv_slice, dh_slice, 2);
+
+	config_ppp_scale(blit_op, &ppp_operation_reg);
+
+	config_ppp_blend(blit_op, &ppp_operation_reg);
+
+	config_ppp_src(&blit_op->src, yuv2rgb);
+	config_ppp_out(&blit_op->dst, yuv2rgb);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	PPP_WRITEL(ppp_operation_reg, MDP3_PPP_OP_MODE);
 	mb();
 	return 0;

@@ -11,7 +11,10 @@ obj-$(CONFIG_INTEL_MID_DMAC) += intel_mid_dma.o
 obj-$(CONFIG_DMATEST) += dmatest.o
 obj-$(CONFIG_INTEL_IOATDMA) += ioat/
 obj-$(CONFIG_INTEL_IOP_ADMA) += iop-adma.o
+<<<<<<< HEAD
 obj-$(CONFIG_QCOM_SPS_DMA) += qcom-sps-dma.o
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 obj-$(CONFIG_FSL_DMA) += fsldma.o
 obj-$(CONFIG_MPC512X_DMA) += mpc512x_dma.o
 obj-$(CONFIG_PPC_BESTCOMM) += bestcomm/

@@ -13,11 +13,18 @@
 /dts-v1/;
 
 #include "msm8909.dtsi"
+<<<<<<< HEAD
 #include "msm8909-pm8909.dtsi"
 #include "msm8909-pinctrl.dtsi"
 
 / {
 	model = "Qualcomm Technologies, Inc. MSM8909-PM8909 RUMI";
+=======
+#include "msm8909-pinctrl.dtsi"
+
+/ {
+	model = "Qualcomm Technologies, Inc. MSM8909 RUMI";
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	compatible = "qcom,msm8909-rumi", "qcom,msm8909", "qcom,rumi";
 	qcom,board-id= <15 0>;
 };

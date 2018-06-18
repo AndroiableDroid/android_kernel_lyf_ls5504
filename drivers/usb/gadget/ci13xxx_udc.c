@@ -58,7 +58,10 @@
 #include <linux/interrupt.h>
 #include <linux/io.h>
 #include <linux/irq.h>
+<<<<<<< HEAD
 #include <linux/clk.h>
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #include <linux/kernel.h>
 #include <linux/slab.h>
 #include <linux/module.h>
@@ -390,7 +393,10 @@ static int hw_device_state(u32 dma)
 {
 	struct ci13xxx *udc = _udc;
 	struct usb_gadget *gadget = &udc->gadget;
+<<<<<<< HEAD
 	int ret;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	if (dma) {
 		if (gadget->streaming_enabled || !(udc->udc_driver->flags &
@@ -398,6 +404,7 @@ static int hw_device_state(u32 dma)
 			hw_cwrite(CAP_USBMODE, USBMODE_SDIS, 0);
 			pr_debug("%s(): streaming mode is enabled. USBMODE:%x\n",
 				 __func__, hw_cread(CAP_USBMODE, ~0));
+<<<<<<< HEAD
 
 			/* In streaming mode, allowed to increase USB system
 			 * clock upto 133MHz. But, going to 133MHz require
@@ -410,11 +417,14 @@ static int hw_device_state(u32 dma)
 					pr_err("fail to set system_clk: %d\n",
 						ret);
 			}
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		} else {
 			hw_cwrite(CAP_USBMODE, USBMODE_SDIS, USBMODE_SDIS);
 			pr_debug("%s(): streaming mode is disabled. USBMODE:%x\n",
 				__func__, hw_cread(CAP_USBMODE, ~0));
 
+<<<<<<< HEAD
 			/* In non-stream mode, due to HW limitation cannot go
 			 * beyond 80MHz, otherwise, may see EP prime failures.
 			 */
@@ -430,6 +440,9 @@ static int hw_device_state(u32 dma)
 		/* make sure clock set rate is finished before proceeding */
 		mb();
 
+=======
+		}
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		hw_cwrite(CAP_ENDPTLISTADDR, ~0, dma);
 
 
@@ -452,6 +465,7 @@ static int hw_device_state(u32 dma)
 			hw_awrite(ABS_AHBMODE, AHB2AHB_BYPASS, 0);
 			pr_debug("%s(): ByPass Mode is disabled. AHBMODE:%x\n",
 					__func__, hw_aread(ABS_AHBMODE, ~0));
+<<<<<<< HEAD
 
 		/* In non-stream mode, due to HW limitation cannot go
 		 * beyond 80MHz, otherwise, may see EP prime failures.
@@ -464,6 +478,8 @@ static int hw_device_state(u32 dma)
 
 		/* make sure clock set rate is finished before proceeding */
 		mb();
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		}
 	}
 	return 0;
@@ -521,10 +537,13 @@ static int hw_ep_flush(int num, int dir)
 					dir ? "IN" : "OUT");
 				debug_ept_flush_info(num, dir);
 				_udc->skip_flush = true;
+<<<<<<< HEAD
 				/* Notify to trigger h/w reset recovery later */
 				if (_udc->udc_driver->notify_event)
 					_udc->udc_driver->notify_event(_udc,
 						CI13XXX_CONTROLLER_ERROR_EVENT);
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 				return 0;
 			}
 		}
@@ -3624,6 +3643,7 @@ static int ci13xxx_vbus_session(struct usb_gadget *_gadget, int is_active)
 	return 0;
 }
 
+<<<<<<< HEAD
 #define VBUS_DRAW_BUF_LEN 10
 #define MAX_OVERRIDE_VBUS_ALLOWED 900	/* 900 mA */
 static char vbus_draw_mA[VBUS_DRAW_BUF_LEN];
@@ -3643,6 +3663,11 @@ static int ci13xxx_vbus_draw(struct usb_gadget *_gadget, unsigned mA)
 			mA = override_mA;
 		}
 	}
+=======
+static int ci13xxx_vbus_draw(struct usb_gadget *_gadget, unsigned mA)
+{
+	struct ci13xxx *udc = container_of(_gadget, struct ci13xxx, gadget);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	if (udc->transceiver)
 		return usb_phy_set_power(udc->transceiver, mA);
@@ -4035,10 +4060,15 @@ static int udc_probe(struct ci13xxx_udc_driver *driver, struct device *dev,
 	udc->gadget.ep0 = &udc->ep0in.ep;
 
 	pdata = dev->platform_data;
+<<<<<<< HEAD
 	if (pdata) {
 		udc->gadget.usb_core_id = pdata->usb_core_id;
 		udc->system_clk = pdata->system_clk;
 	}
+=======
+	if (pdata)
+		udc->gadget.usb_core_id = pdata->usb_core_id;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	if (udc->udc_driver->flags & CI13XXX_REQUIRE_TRANSCEIVER) {
 		udc->transceiver = usb_get_phy(USB_PHY_TYPE_USB2);

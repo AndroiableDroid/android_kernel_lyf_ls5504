@@ -1384,6 +1384,7 @@ get_reg_request_treatment(struct wiphy *wiphy,
 		}
 		return 0;
 	case NL80211_REGDOM_SET_BY_DRIVER:
+<<<<<<< HEAD
 
 		if (!regdom_changes(pending_request->alpha2))
 			return REG_REQ_ALREADY_SET;
@@ -1391,6 +1392,24 @@ get_reg_request_treatment(struct wiphy *wiphy,
 			return REG_REQ_INTERSECT;
 		else
 			return REG_REQ_OK;
+=======
+		if (lr->initiator == NL80211_REGDOM_SET_BY_CORE) {
+			if (regdom_changes(pending_request->alpha2))
+				return REG_REQ_OK;
+			return REG_REQ_ALREADY_SET;
+		}
+
+		/*
+		 * This would happen if you unplug and plug your card
+		 * back in or if you add a new device for which the previously
+		 * loaded card also agrees on the regulatory domain.
+		 */
+		if (lr->initiator == NL80211_REGDOM_SET_BY_DRIVER &&
+		    !regdom_changes(pending_request->alpha2))
+			return REG_REQ_ALREADY_SET;
+
+		return REG_REQ_INTERSECT;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	case NL80211_REGDOM_SET_BY_USER:
 		if (reg_request_cell_base(pending_request))
 			return reg_ignore_cell_hint(pending_request);

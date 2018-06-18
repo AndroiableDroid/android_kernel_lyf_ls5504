@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* Copyright (c) 2009, 2012-2014 The Linux Foundation. All rights reserved.
+=======
+/* Copyright (c) 2009, 2012-2013 The Linux Foundation. All rights reserved.
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -12,8 +16,11 @@
 #ifndef __MACH_CLK_H
 #define __MACH_CLK_H
 
+<<<<<<< HEAD
 #include <linux/notifier.h>
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #define CLKFLAG_INVERT			0x00000001
 #define CLKFLAG_NOINVERT		0x00000002
 #define CLKFLAG_NONEST			0x00000004
@@ -59,6 +66,7 @@ int parent_to_src_sel(struct clk_src *parents, int num_parents, struct clk *p);
 /* returns the mux selection index associated with a particular parent */
 int clk_get_parent_sel(struct clk *c, struct clk *parent);
 
+<<<<<<< HEAD
 /**
  * DOC: clk notifier callback types
  *
@@ -119,4 +127,6 @@ int msm_clk_notif_register(struct clk *clk, struct notifier_block *nb);
 
 int msm_clk_notif_unregister(struct clk *clk, struct notifier_block *nb);
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #endif

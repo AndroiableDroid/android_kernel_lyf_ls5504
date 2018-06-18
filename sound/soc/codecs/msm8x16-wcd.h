@@ -54,8 +54,11 @@ extern const u8 msm8x16_wcd_reg_readable[MSM8X16_WCD_CACHE_SIZE];
 extern const u8 msm8x16_wcd_reg_readonly[MSM8X16_WCD_CACHE_SIZE];
 extern const u8 msm8x16_wcd_reset_reg_defaults[MSM8X16_WCD_CACHE_SIZE];
 
+<<<<<<< HEAD
 extern int ext_spk_pa_gpio; 
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 enum codec_versions {
 	TOMBAK_1_0,
 	TOMBAK_2_0,
@@ -244,9 +247,12 @@ struct msm8x16_wcd_priv {
 	struct blocking_notifier_head notifier;
 	unsigned long status_mask;
 	int (*codec_spk_ext_pa_cb)(struct snd_soc_codec *codec, int enable);
+<<<<<<< HEAD
 
 	//chenjian
 	struct delayed_work work;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 };
 
 extern int msm8x16_wcd_mclk_enable(struct snd_soc_codec *codec, int mclk_enable,

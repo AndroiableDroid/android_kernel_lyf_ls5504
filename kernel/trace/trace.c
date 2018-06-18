@@ -4680,7 +4680,11 @@ tracing_mark_write(struct file *filp, const char __user *ubuf,
 	*fpos += written;
 
  out_unlock:
+<<<<<<< HEAD
 	for (i = nr_pages - 1; i >= 0; i--) {
+=======
+	for (i = 0; i < nr_pages; i++){
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		kunmap_atomic(map_page[i]);
 		put_page(pages[i]);
 	}

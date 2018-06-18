@@ -2,7 +2,11 @@
  * drivers/gpu/ion/ion_system_heap.c
  *
  * Copyright (C) 2011 Google, Inc.
+<<<<<<< HEAD
  * Copyright (c) 2011-2015, The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2011-2014, The Linux Foundation. All rights reserved.
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This software is licensed under the terms of the GNU General Public
  * License version 2, as published by the Free Software Foundation, and
@@ -405,12 +409,22 @@ static int ion_system_heap_debug_show(struct ion_heap *heap, struct seq_file *s,
 				pool->low_count, pool->order,
 				(1 << pool->order) * PAGE_SIZE *
 					pool->low_count);
+<<<<<<< HEAD
 		}
 
 		uncached_total += (1 << pool->order) * PAGE_SIZE *
 			pool->high_count;
 		uncached_total += (1 << pool->order) * PAGE_SIZE *
 			pool->low_count;
+=======
+		} else {
+			uncached_total += (1 << pool->order) * PAGE_SIZE *
+						pool->high_count;
+			uncached_total += (1 << pool->order) * PAGE_SIZE *
+						pool->low_count;
+		}
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	}
 
 	for (i = 0; i < num_orders; i++) {
@@ -425,6 +439,7 @@ static int ion_system_heap_debug_show(struct ion_heap *heap, struct seq_file *s,
 				pool->low_count, pool->order,
 				(1 << pool->order) * PAGE_SIZE *
 					pool->low_count);
+<<<<<<< HEAD
 		}
 
 		cached_total += (1 << pool->order) * PAGE_SIZE *
@@ -448,6 +463,19 @@ static int ion_system_heap_debug_show(struct ion_heap *heap, struct seq_file *s,
 				uncached_total + cached_total);
 		pr_info("-------------------------------------------------\n");
 	}
+=======
+		} else {
+			cached_total += (1 << pool->order) * PAGE_SIZE *
+						pool->high_count;
+			cached_total += (1 << pool->order) * PAGE_SIZE *
+						pool->low_count;
+		}
+	}
+
+	if (!use_seq)
+		pr_info("uncached pool total = %lu cached pool total %lu\n",
+				uncached_total, cached_total);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	return 0;
 }

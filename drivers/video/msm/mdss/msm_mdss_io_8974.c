@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* Copyright (c) 2012-2015, The Linux Foundation. All rights reserved.
+=======
+/* Copyright (c) 2012-2014, The Linux Foundation. All rights reserved.
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -149,6 +153,7 @@ static void mdss_dsi_28nm_phy_init(struct mdss_dsi_ctrl_pdata *ctrl_pdata)
 		}
 	}
 
+<<<<<<< HEAD
 	/* Regulator ctrl 0 */
 	MIPI_OUTP((temp_ctrl->phy_io.base) + 0x280, 0x0);
 	/* Regulator ctrl - CAL_PWR_CFG */
@@ -172,6 +177,50 @@ static void mdss_dsi_28nm_phy_init(struct mdss_dsi_ctrl_pdata *ctrl_pdata)
 		MIPI_OUTP((ctrl_pdata->phy_io.base) + 0x1dc, 0x25);
 	else
 		MIPI_OUTP((ctrl_pdata->phy_io.base) + 0x1dc, 0x00);
+=======
+	if (pd->reg_ldo_mode) {
+		/* Regulator ctrl 0 */
+		MIPI_OUTP((temp_ctrl->phy_io.base) + 0x280, 0x0);
+		/* Regulator ctrl - CAL_PWR_CFG */
+		MIPI_OUTP((temp_ctrl->phy_io.base) + 0x298, pd->regulator[6]);
+		/* Add H/w recommended delay */
+		udelay(1000);
+		/* Regulator ctrl - TEST */
+		MIPI_OUTP((temp_ctrl->phy_io.base) + 0x294, pd->regulator[5]);
+		/* Regulator ctrl 3 */
+		MIPI_OUTP((temp_ctrl->phy_io.base) + 0x28c, pd->regulator[3]);
+		/* Regulator ctrl 2 */
+		MIPI_OUTP((temp_ctrl->phy_io.base) + 0x288, pd->regulator[2]);
+		/* Regulator ctrl 1 */
+		MIPI_OUTP((temp_ctrl->phy_io.base) + 0x284, pd->regulator[1]);
+		/* Regulator ctrl 4 */
+		MIPI_OUTP((temp_ctrl->phy_io.base) + 0x290, pd->regulator[4]);
+		/* LDO ctrl */
+		if (MIPI_INP(ctrl_pdata->ctrl_base) == MDSS_DSI_HW_REV_103_1)
+			MIPI_OUTP((ctrl_pdata->phy_io.base) + 0x1dc, 0x05);
+		else
+			MIPI_OUTP((ctrl_pdata->phy_io.base) + 0x1dc, 0x0d);
+	} else {
+		/* Regulator ctrl 0 */
+		MIPI_OUTP((temp_ctrl->phy_io.base) + 0x280, 0x0);
+		/* Regulator ctrl - CAL_PWR_CFG */
+		MIPI_OUTP((temp_ctrl->phy_io.base) + 0x298, pd->regulator[6]);
+		/* Add H/w recommended delay */
+		udelay(1000);
+		/* Regulator ctrl 1 */
+		MIPI_OUTP((temp_ctrl->phy_io.base) + 0x284, pd->regulator[1]);
+		/* Regulator ctrl 2 */
+		MIPI_OUTP((temp_ctrl->phy_io.base) + 0x288, pd->regulator[2]);
+		/* Regulator ctrl 3 */
+		MIPI_OUTP((temp_ctrl->phy_io.base) + 0x28c, pd->regulator[3]);
+		/* Regulator ctrl 4 */
+		MIPI_OUTP((temp_ctrl->phy_io.base) + 0x290, pd->regulator[4]);
+		/* LDO ctrl */
+		MIPI_OUTP((ctrl_pdata->phy_io.base) + 0x1dc, 0x00);
+		/* Regulator ctrl 0 */
+		MIPI_OUTP((temp_ctrl->phy_io.base) + 0x280, pd->regulator[0]);
+	}
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	off = 0x0140;	/* phy timing ctrl 0 - 11 */
 	for (i = 0; i < 12; i++) {
@@ -572,10 +621,13 @@ struct dsiphy_pll_divider_config pll_divider_config;
 int mdss_dsi_clk_div_config(struct mdss_panel_info *panel_info,
 			    int frame_rate)
 {
+<<<<<<< HEAD
 	struct mdss_panel_data *pdata  = container_of(panel_info,
 			struct mdss_panel_data, panel_info);
 	struct  mdss_dsi_ctrl_pdata *ctrl_pdata = container_of(pdata,
 			struct mdss_dsi_ctrl_pdata, panel_data);
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	u32 fb_divider, rate, vco;
 	u32 div_ratio = 0;
 	u32 pll_analog_posDiv = 1;
@@ -611,7 +663,11 @@ int mdss_dsi_clk_div_config(struct mdss_panel_info *panel_info,
 	h_period = mdss_panel_get_htotal(panel_info, true);
 	v_period = mdss_panel_get_vtotal(panel_info);
 
+<<<<<<< HEAD
 	if (ctrl_pdata->refresh_clk_rate || (frame_rate !=
+=======
+	if ((frame_rate !=
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	     panel_info->mipi.frame_rate) ||
 	    (!panel_info->clk_rate)) {
 		h_period += panel_info->lcdc.xres_pad;
@@ -1389,9 +1445,13 @@ static int mdss_dsi_clk_ctrl_sub(struct mdss_dsi_ctrl_pdata *ctrl,
 			if (((mdss_dsi_ulps_feature_enabled(pdata)) &&
 				(pdata->panel_info.blank_state !=
 				 MDSS_PANEL_BLANK_BLANK)) ||
+<<<<<<< HEAD
 				(pdata->panel_info.ulps_suspend_enabled &&
 				(pdata->panel_info.blank_state ==
 				 MDSS_PANEL_BLANK_BLANK)))
+=======
+				(pdata->panel_info.ulps_suspend_enabled))
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 				mdss_dsi_ulps_config(ctrl, 1);
 
 			mdss_dsi_link_clk_stop(ctrl);

@@ -20,18 +20,24 @@
 #include <linux/pwm.h>
 #include <linux/pwm_backlight.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
 #include <linux/gpio.h>
 #include <linux/of_gpio.h>
 #include <linux/delay.h>
 #include <linux/mutex.h>
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 struct pwm_bl_data {
 	struct pwm_device	*pwm;
 	struct device		*dev;
 	unsigned int		period;
 	unsigned int		lth_brightness;
+<<<<<<< HEAD
 	unsigned int		bl_gpio;/*zhangwei add*/
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	unsigned int		*levels;
 	int			(*notify)(struct device *,
 					  int brightness);
@@ -41,6 +47,7 @@ struct pwm_bl_data {
 	void			(*exit)(struct device *);
 };
 
+<<<<<<< HEAD
 #define LEVEL_LIMIT 33
 
 static DEFINE_MUTEX(fix_lock);
@@ -97,15 +104,22 @@ set_bl_return:
 //		gpio_free(gpio_bl);
 		return 0;
 }
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static int pwm_backlight_update_status(struct backlight_device *bl)
 {
 	struct pwm_bl_data *pb = bl_get_data(bl);
 	int brightness = bl->props.brightness;
+<<<<<<< HEAD
 ///zhangwei del	int max = bl->props.max_brightness;
+=======
+	int max = bl->props.max_brightness;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	if (bl->props.power != FB_BLANK_UNBLANK ||
 	    bl->props.fb_blank != FB_BLANK_UNBLANK ||
 	    bl->props.state & BL_CORE_FBBLANK)
+<<<<<<< HEAD
 		{
 			brightness = 0;
 			pr_debug("[david] -- %s -- 1 -- %d,%d,%d\n", __func__, bl->props.power, bl->props.fb_blank, bl->props.state);
@@ -131,6 +145,17 @@ static int pwm_backlight_update_status(struct backlight_device *bl)
 	pr_debug("[david] -- %s --  4, %d\n\n", __func__, brightness);
 		//modify by david
 		/*
+=======
+		brightness = 0;
+
+	if (pb->notify)
+		brightness = pb->notify(pb->dev, brightness);
+
+	if (brightness == 0) {
+		pwm_config(pb->pwm, 0, pb->period);
+		pwm_disable(pb->pwm);
+	} else {
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		int duty_cycle;
 
 		if (pb->levels) {
@@ -144,11 +169,14 @@ static int pwm_backlight_update_status(struct backlight_device *bl)
 		     (duty_cycle * (pb->period - pb->lth_brightness) / max);
 		pwm_config(pb->pwm, duty_cycle, pb->period);
 		pwm_enable(pb->pwm);
+<<<<<<< HEAD
 		*/
 		if(pwm_set_pulse(brightness, pb->bl_gpio))//add by d.z 20141221
 		pr_info("%s, set pulse level fail\n", __func__);
 		
 		//end
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	}
 
 	if (pb->notify_after)
@@ -185,7 +213,10 @@ static int pwm_backlight_parse_dt(struct device *dev,
 	int length;
 	u32 value;
 	int ret;
+<<<<<<< HEAD
 	u32 bl_gpio_id;//zhangwei add
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	if (!node)
 		return -ENODEV;
@@ -217,6 +248,7 @@ static int pwm_backlight_parse_dt(struct device *dev,
 					   &value);
 		if (ret < 0)
 			return ret;
+<<<<<<< HEAD
 //zhangwei add
 		bl_gpio_id = of_get_named_gpio(node, "qcom,bl-gpio", 0);
 
@@ -227,6 +259,9 @@ static int pwm_backlight_parse_dt(struct device *dev,
 		}
 		data->bl_gpio = bl_gpio_id;
 ///add end
+=======
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		data->dft_brightness = value;
 		data->max_brightness--;
 	}
@@ -264,7 +299,10 @@ static int pwm_backlight_probe(struct platform_device *pdev)
 	unsigned int max;
 	int ret;
 
+<<<<<<< HEAD
 	pr_info("[david] -- %s\n", __func__);
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	if (!data) {
 		ret = pwm_backlight_parse_dt(&pdev->dev, &defdata);
 		if (ret < 0) {
@@ -300,6 +338,7 @@ static int pwm_backlight_probe(struct platform_device *pdev)
 	pb->exit = data->exit;
 	pb->dev = &pdev->dev;
 
+<<<<<<< HEAD
 	//modify by david
 	ret = gpio_request(data->bl_gpio, "bl_gpio_id");
 	if(ret < 0)
@@ -311,6 +350,8 @@ static int pwm_backlight_probe(struct platform_device *pdev)
 	pr_info("[david] -- %s -- get bl_gpio\n", __func__);
 	//del by d.z
 	/*
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	pb->pwm = devm_pwm_get(&pdev->dev, NULL);
 	if (IS_ERR(pb->pwm)) {
 		dev_err(&pdev->dev, "unable to request PWM, trying legacy API\n");
@@ -324,19 +365,30 @@ static int pwm_backlight_probe(struct platform_device *pdev)
 	}
 
 	dev_dbg(&pdev->dev, "got pwm for backlight\n");
+<<<<<<< HEAD
 */
+=======
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	/*
 	 * The DT case will set the pwm_period_ns field to 0 and store the
 	 * period, parsed from the DT, in the PWM device. For the non-DT case,
 	 * set the period from platform data.
 	 */
+<<<<<<< HEAD
 	 /*
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	if (data->pwm_period_ns > 0)
 		pwm_set_period(pb->pwm, data->pwm_period_ns);
 
 	pb->period = pwm_get_period(pb->pwm);
 	pb->lth_brightness = data->lth_brightness * (pb->period / max);
+<<<<<<< HEAD
 */
+=======
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	memset(&props, 0, sizeof(struct backlight_properties));
 	props.type = BACKLIGHT_RAW;
 	props.max_brightness = data->max_brightness;
@@ -385,6 +437,7 @@ static int pwm_backlight_suspend(struct device *dev)
 {
 	struct backlight_device *bl = dev_get_drvdata(dev);
 	struct pwm_bl_data *pb = bl_get_data(bl);
+<<<<<<< HEAD
 	pr_debug("[david] -- %s", __func__);
 
 	if (pb->notify)
@@ -395,6 +448,13 @@ static int pwm_backlight_suspend(struct device *dev)
 	*/
 	if(pwm_set_pulse(0, pb->bl_gpio))//add by d.z 20141221
 		pr_info("%s, set pulse level fail\n", __func__);
+=======
+
+	if (pb->notify)
+		pb->notify(pb->dev, 0);
+	pwm_config(pb->pwm, 0, pb->period);
+	pwm_disable(pb->pwm);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	if (pb->notify_after)
 		pb->notify_after(pb->dev, 0);
 	return 0;
@@ -403,10 +463,14 @@ static int pwm_backlight_suspend(struct device *dev)
 static int pwm_backlight_resume(struct device *dev)
 {
 	struct backlight_device *bl = dev_get_drvdata(dev);
+<<<<<<< HEAD
 	struct pwm_bl_data *pb = bl_get_data(bl);
 	pr_debug("[david] -- %s", __func__);
 	if(pwm_set_pulse(LEVEL_LIMIT, pb->bl_gpio))//add by d.z 20141221
 		pr_info("%s, set pulse level fail\n", __func__);
+=======
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	backlight_update_status(bl);
 	return 0;
 }

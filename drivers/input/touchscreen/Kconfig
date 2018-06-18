@@ -11,6 +11,10 @@ menuconfig INPUT_TOUCHSCREEN
 
 if INPUT_TOUCHSCREEN
 
+<<<<<<< HEAD
+=======
+source "drivers/input/touchscreen/synaptics_dsx/Kconfig"
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 config TOUCHSCREEN_88PM860X
 	tristate "Marvell 88PM860x touchscreen"
@@ -149,6 +153,22 @@ config TOUCHSCREEN_CY8CTMG110
 	  To compile this driver as a module, choose M here: the
 	  module will be called cy8ctmg110_ts.
 
+<<<<<<< HEAD
+=======
+config TOUCHSCREEN_CYPRESS_CYTTSP4
+	tristate "Cypress TMA463 touchscreen"
+	depends on I2C
+	help
+	  Say Y here if you have a Cypress TMA463  touchscreen.
+
+	  If unsure, say N.
+
+	  To compile this driver as a module, choose M here: the
+	  module will be called cyttsp4.
+
+source "drivers/input/touchscreen/cypress/Kconfig"
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 config TOUCHSCREEN_CYTTSP_CORE
 	tristate "Cypress TTSP touchscreen"
 	help
@@ -261,6 +281,29 @@ config TOUCHSCREEN_FUJITSU
 	  To compile this driver as a module, choose M here: the
 	  module will be called fujitsu-ts.
 
+<<<<<<< HEAD
+=======
+config TOUCHSCREEN_GSL1688E
+	tristate "SLIEAD GSL1688E I2C Touchscreen support (ARM)"
+	depends on I2C
+	help
+	  Say Y here if you have an EDT "Polytouch" touchscreen based
+	  on the SLIEAD GSL1688E family of controllers connected to
+	  your system.
+
+	  If unsure, say N.
+
+config TOUCHSCREEN_GSL1688E_ARM64
+	tristate "SLIEAD GSL1688E I2C Touchscreen support (ARM64)"
+	depends on I2C
+	help
+	  Say Y here if you have an EDT "Polytouch" touchscreen based
+	  on the SLIEAD GSL1688E family of controllers connected to
+	  your system.
+
+	  If unsure, say N.
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 config TOUCHSCREEN_ILI210X
 	tristate "Ilitek ILI210X based touchscreen"
 	depends on I2C
@@ -382,6 +425,27 @@ config TOUCHSCREEN_MMS114
 	  To compile this driver as a module, choose M here: the
 	  module will be called mms114.
 
+<<<<<<< HEAD
+=======
+config TOUCHSCREEN_MSG2XXX
+	bool "Mstar msg2xxx touchpanel"
+	depends on I2C
+	help
+	 Say Y here if you have a Mstar MSG2XXX touchscreen.
+	 MSG2XXX controllers are multi touch controllers which can
+	 report 2 or 5 touches at a time.
+
+	 If unsure, say N.
+
+config TOUCHSCREEN_PROXIMITY_SENSOR
+	tristate "Touchscreen proximity support"
+	depends on TOUCHSCREEN_MSG2XXX
+	default n
+	help
+	 Select for proximity sensor support in Mstar MSG2XXX touchscreen
+	 driver.
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 config TOUCHSCREEN_MTOUCH
 	tristate "MicroTouch serial touchscreens"
 	select SERIO
@@ -506,6 +570,20 @@ config TOUCHSCREEN_TNETV107X
 	  To compile this driver as a module, choose M here: the
 	  module will be called tnetv107x-ts.
 
+<<<<<<< HEAD
+=======
+config TOUCHSCREEN_SYNAPTICS_RMI4_I2C
+	tristate "Synaptics i2c touchscreen(ClearPad 3000)"
+	depends on I2C
+	select SYNA_MULTI_TOUCH
+	help
+	  This enables support for Synaptics RMI over I2C based touchscreens(ClearPad 3000).
+
+config SYNA_MULTI_TOUCH
+	tristate "Synaptics i2c touchscreen(ClearPad 3000) MutilTouch support"
+	depends on TOUCHSCREEN_SYNAPTICS_RMI4_I2C
+	default y
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 config TOUCHSCREEN_TOUCHRIGHT
 	tristate "Touchright serial touchscreen"
@@ -925,6 +1003,7 @@ config TOUCHSCREEN_FT5X06
          To compile this driver as a module, choose M here: the
          module will be called ft5x06_ts.
 
+<<<<<<< HEAD
 config TOUCHSCREEN_FT5X06_PSENSOR
        tristate "FocalTech proximity feature support"
        depends on TOUCHSCREEN_FT5X06 && SENSORS
@@ -943,6 +1022,8 @@ config TOUCHSCREEN_FT5X06_GESTURE
 
          If unsure, say N.
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 config TOUCHSCREEN_MSTAR21XX
        tristate "mstar touchscreens"
        depends on I2C
@@ -965,6 +1046,7 @@ config TOUCHSCREEN_GEN_VKEYS
          To compile this driver as a module, choose M here: the
          module will be called gen_vkeys.
 
+<<<<<<< HEAD
 config TOUCHSCREEN_SYNAPTICS_DSX
 	bool "Synaptics DSX touchscreen"
 	default n
@@ -973,6 +1055,58 @@ config TOUCHSCREEN_SYNAPTICS_DSX
 	  If unsure, say N.
 
 source "drivers/input/touchscreen/synaptics_dsx/Kconfig"
+=======
+config TOUCHSCREEN_SYNAPTICS_I2C_RMI4
+	tristate "Synaptics DSX I2C touchscreen"
+	depends on I2C
+	help
+	  Say Y here if you have a Synaptics DSX I2C touchscreen
+	  connected to your system.
+
+	  If unsure, say N.
+
+	  To compile this driver as a module, choose M here: the
+	  module will be called synaptics_i2c_rmi4.
+
+config TOUCHSCREEN_SYNAPTICS_DSX_RMI4_DEV
+	tristate "Synaptics I2C touchscreen rmi device"
+	depends on TOUCHSCREEN_SYNAPTICS_I2C_RMI4
+	help
+	  This enables support for character device channel for Synaptics
+	  RMI4 touchscreens.
+
+	  Say Y here if you have a Synaptics DSX I2C touchscreen
+	  connected to your system.
+
+	  If unsure, say N.
+
+	  To compile this driver as a module, choose M here: the
+	  module will be called synaptics_dsx_rmi4_dev.
+
+config TOUCHSCREEN_SYNAPTICS_DSX_FW_UPDATE
+	tristate "Synaptics I2C touchscreen firmware update"
+	depends on TOUCHSCREEN_SYNAPTICS_I2C_RMI4
+	help
+	  This enables support for firmware update for Synaptics RMI4
+	  touchscreens.
+
+	  Say Y here if you have a Synaptics DSX I2C touchscreen
+	  connected to your system.
+
+	  If unsure, say N.
+
+	  To compile this driver as a module, choose M here: the
+	  module will be called synaptics_dsx_fw_update.
+
+config SECURE_TOUCH
+	bool "Secure Touch"
+	depends on (TOUCHSCREEN_ATMEL_MXT || TOUCHSCREEN_SYNAPTICS_I2C_RMI4 || \
+	  TOUCHSCREEN_SYNAPTICS_DSX_I2C_v21 || TOUCHSCREEN_ATMEL_MAXTOUCH_TS)
+	help
+	  Say Y here to enable Secure Touch in supported drivers.
+
+	  If unsure, say N.
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 config TOUCHSCREEN_GT9XX
 	bool "Goodix touchpanel GT9xx series"
@@ -984,6 +1118,7 @@ config TOUCHSCREEN_GT9XX
 
           If unsure, say N.
 
+<<<<<<< HEAD
 source "drivers/input/touchscreen/gt9xx/Kconfig"
 
 config TOUCHSCREEN_CYPRESS_CYTTSP
@@ -997,6 +1132,31 @@ config TOUCHSCREEN_CYPRESS_CYTTSP
           If unsure, say N.
 
 source "drivers/input/touchscreen/cyttsp/Kconfig"
+=======
+config TOUCHSCREEN_WT_GT9XX
+	bool "Goodix touchpanel (Wingtech variant)"
+	depends on I2C
+	help
+	  Say Y here if you have a Goodix GT9xx touchscreen (Wingtech variant).
+	  Gt9xx controllers are multi touch controllers which can
+	  report 5 touches at a time.
+
+	  If unsure, say N.
+
+config TOUCHSCREEN_YL_GT9XX
+	bool "Goodix touchpanel (YL variant)"
+	depends on I2C
+	help
+	  Say Y here if you have a Goodix GT9xx touchscreen (YL variant).
+	  Gt9xx controllers are multi touch controllers which can
+	  report 5 touches at a time.
+
+	  If unsure, say N.
+
+source "drivers/input/touchscreen/gt9xx/Kconfig"
+source "drivers/input/touchscreen/gt9xx_wt/Kconfig"
+source "drivers/input/touchscreen/gt9xx_yl/Kconfig"
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 config TOUCHSCREEN_BU21150
 	tristate "JDI AFE BU21150"

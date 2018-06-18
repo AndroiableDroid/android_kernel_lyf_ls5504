@@ -673,8 +673,11 @@ struct lpm_cluster *parse_cluster(struct device_node *node,
 		}
 	}
 
+<<<<<<< HEAD
 	c->last_level = c->nlevels-1;
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	return c;
 
 failed_parse_cluster:

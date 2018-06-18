@@ -105,13 +105,19 @@ config ARCH_MSM8909
 	select CPU_FREQ_MSM
 	select CPU_FREQ
 	select PM_DEVFREQ
+<<<<<<< HEAD
 	select PM_OPP
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	select MSM_DEVFREQ_DEVBW
 	select DEVFREQ_SIMPLE_DEV
 	select DEVFREQ_GOV_MSM_BW_HWMON
 	select MSM_BIMC_BWMON
+<<<<<<< HEAD
 	select MSM_JTAG_MM if CORESIGHT_ETM
 	select RCU_BOOST if DEBUG_KMEMLEAK
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 config ARCH_MSM8916
 	bool "MSM8916"
@@ -151,7 +157,10 @@ config ARCH_MSM8916
 	select ARCH_WANT_KMAP_ATOMIC_FLUSH
 	select MSM_RPM_LOG
 	select MSM_JTAGV8 if CORESIGHT_ETMV4
+<<<<<<< HEAD
 	select RCU_BOOST if DEBUG_KMEMLEAK
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 config ARCH_FSM9900
 	bool "FSM9900"
@@ -428,6 +437,10 @@ config PHYS_OFFSET
 	hex
 	default "0x00000000" if ARCH_MSM8974
 	default "0x00000000" if ARCH_APQ8084
+<<<<<<< HEAD
+=======
+	default "0x80000000" if ARCH_MSM8916
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	default "0x00000000" if ARCH_MSM8226
 	default "0x00000000" if ARCH_MSM8610
 	default "0x0b600000" if ARCH_FSM9900

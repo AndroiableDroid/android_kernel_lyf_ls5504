@@ -118,6 +118,7 @@
 #define PM8916_V2P0_TYPE	0x51
 #define PM8916_V2P0_SUBTYPE	0x0B
 
+<<<<<<< HEAD
 #define PM8909_V1P0_REV1	0x00
 #define PM8909_V1P0_REV2	0x00
 #define PM8909_V1P0_REV3	0x00
@@ -132,6 +133,8 @@
 #define PM8909_V1P1_TYPE	0x51
 #define PM8909_V1P1_SUBTYPE	0x0D
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 struct pmic_revid_data {
 	u8	rev1;
 	u8	rev2;

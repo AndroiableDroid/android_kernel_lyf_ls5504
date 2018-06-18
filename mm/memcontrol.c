@@ -6941,6 +6941,7 @@ static void mem_cgroup_move_task(struct cgroup *cont,
 }
 #endif
 
+<<<<<<< HEAD
 static int mem_cgroup_allow_attach(struct cgroup *cgrp,
 				 struct cgroup_taskset *tset)
 {
@@ -6958,6 +6959,8 @@ static int mem_cgroup_allow_attach(struct cgroup *cgrp,
 	return 0;
 }
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 /*
  * Cgroup retains root cgroups across [un]mount cycles making it necessary
  * to verify sane_behavior flag on each mount attempt.
@@ -6983,7 +6986,10 @@ struct cgroup_subsys mem_cgroup_subsys = {
 	.can_attach = mem_cgroup_can_attach,
 	.cancel_attach = mem_cgroup_cancel_attach,
 	.attach = mem_cgroup_move_task,
+<<<<<<< HEAD
 	.allow_attach = mem_cgroup_allow_attach,
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	.bind = mem_cgroup_bind,
 	.base_cftypes = mem_cgroup_files,
 	.early_init = 0,

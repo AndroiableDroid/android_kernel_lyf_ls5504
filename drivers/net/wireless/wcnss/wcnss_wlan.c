@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* Copyright (c) 2011-2015, The Linux Foundation. All rights reserved.
+=======
+/* Copyright (c) 2011-2014, The Linux Foundation. All rights reserved.
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -55,8 +59,11 @@
 #define WCNSS_DISABLE_PC_LATENCY	100
 #define WCNSS_ENABLE_PC_LATENCY	PM_QOS_DEFAULT_VALUE
 #define WCNSS_PM_QOS_TIMEOUT	15000
+<<<<<<< HEAD
 #define IS_CAL_DATA_PRESENT     0
 #define WAIT_FOR_CBC_IND	2
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 /* module params */
 #define WCNSS_CONFIG_UNSPECIFIED (-1)
@@ -171,6 +178,13 @@ static DEFINE_SPINLOCK(reg_spinlock);
 #define MCU_FDBR_FDAHB_TIMEOUT_OFFSET		0x3ac
 
 #define WCNSS_DEF_WLAN_RX_BUFF_COUNT		1024
+<<<<<<< HEAD
+=======
+#define WCNSS_VBATT_THRESHOLD		3500000
+#define WCNSS_VBATT_GUARD		20000
+#define WCNSS_VBATT_HIGH		3700000
+#define WCNSS_VBATT_LOW			3300000
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 #define WCNSS_CTRL_CHANNEL			"WCNSS_CTRL"
 #define WCNSS_MAX_FRAME_SIZE		(4*1024)
@@ -373,7 +387,10 @@ static struct {
 	struct work_struct wcnss_pm_config_work;
 	struct work_struct wcnssctrl_nvbin_dnld_work;
 	struct work_struct wcnssctrl_rx_work;
+<<<<<<< HEAD
 	struct work_struct wcnss_vadc_work;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	struct wake_lock wcnss_wake_lock;
 	void __iomem *msm_wcnss_base;
 	void __iomem *riva_ccu_base;
@@ -409,7 +426,10 @@ static struct {
 	wait_queue_head_t read_wait;
 	struct qpnp_adc_tm_btm_param vbat_monitor_params;
 	struct qpnp_adc_tm_chip *adc_tm_dev;
+<<<<<<< HEAD
 	struct qpnp_vadc_chip *vadc_dev;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	struct mutex vbat_monitor_mutex;
 	u16 unsafe_ch_count;
 	u16 unsafe_ch_list[WCNSS_MAX_CH_NUM];
@@ -1051,6 +1071,7 @@ static void wcnss_log_iris_regs(void)
 	}
 }
 
+<<<<<<< HEAD
 int wcnss_get_mux_control(void)
 {
 	void __iomem *pmu_conf_reg;
@@ -1066,6 +1087,8 @@ int wcnss_get_mux_control(void)
 	return 1;
 }
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 void wcnss_log_debug_regs_on_bite(void)
 {
 	struct platform_device *pdev = wcnss_get_platform_device();
@@ -1095,8 +1118,11 @@ void wcnss_log_debug_regs_on_bite(void)
 
 		if (clk_rate) {
 			wcnss_pronto_log_debug_regs();
+<<<<<<< HEAD
 			if (wcnss_get_mux_control())
 				wcnss_log_iris_regs();
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		} else {
 			pr_err("clock frequency is zero, cannot access PMU or other registers\n");
 			wcnss_log_iris_regs();
@@ -1112,8 +1138,11 @@ void wcnss_reset_intr(void)
 {
 	if (wcnss_hardware_type() == WCNSS_PRONTO_HW) {
 		wcnss_pronto_log_debug_regs();
+<<<<<<< HEAD
 		if (wcnss_get_mux_control())
 			wcnss_log_iris_regs();
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		wmb();
 		__raw_writel(1 << 16, penv->fiq_reg);
 	} else {
@@ -1169,20 +1198,32 @@ static void wcnss_remove_sysfs(struct device *dev)
 
 static void wcnss_pm_qos_add_request(void)
 {
+<<<<<<< HEAD
 	pr_info("%s: add request\n", __func__);
+=======
+	pr_info("%s: add request", __func__);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	pm_qos_add_request(&penv->wcnss_pm_qos_request, PM_QOS_CPU_DMA_LATENCY,
 			PM_QOS_DEFAULT_VALUE);
 }
 
 static void wcnss_pm_qos_remove_request(void)
 {
+<<<<<<< HEAD
 	pr_info("%s: remove request\n", __func__);
+=======
+	pr_info("%s: remove request", __func__);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	pm_qos_remove_request(&penv->wcnss_pm_qos_request);
 }
 
 void wcnss_pm_qos_update_request(int val)
 {
+<<<<<<< HEAD
 	pr_info("%s: update request %d\n", __func__, val);
+=======
+	pr_info("%s: update request %d", __func__, val);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	pm_qos_update_request(&penv->wcnss_pm_qos_request, val);
 }
 
@@ -1235,8 +1276,12 @@ static void wcnss_smd_notify_event(void *data, unsigned int event)
 		schedule_work(&penv->wcnss_pm_config_work);
 		cancel_delayed_work(&penv->wcnss_pm_qos_del_req);
 		schedule_delayed_work(&penv->wcnss_pm_qos_del_req, 0);
+<<<<<<< HEAD
 		if (penv->wlan_config.is_pronto_v3 && (penv->vadc_dev))
 			schedule_work(&penv->wcnss_vadc_work);
+=======
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		break;
 
 	case SMD_EVENT_CLOSE:
@@ -1516,7 +1561,11 @@ int wcnss_device_ready(void)
 }
 EXPORT_SYMBOL(wcnss_device_ready);
 
+<<<<<<< HEAD
 bool wcnss_cbc_complete(void)
+=======
+int wcnss_cbc_complete(void)
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 {
 	if (penv && penv->pdev && penv->is_cbc_done &&
 		!wcnss_device_is_shutdown())
@@ -1815,6 +1864,7 @@ static int wcnss_smd_tx(void *data, int len)
 	return ret;
 }
 
+<<<<<<< HEAD
 static int wcnss_get_battery_volt(int *result_uv)
 {
 	int rc = -1;
@@ -1839,6 +1889,8 @@ static int wcnss_get_battery_volt(int *result_uv)
 	return 0;
 }
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static void wcnss_notify_vbat(enum qpnp_tm_state state, void *ctx)
 {
 	mutex_lock(&penv->vbat_monitor_mutex);
@@ -1901,6 +1953,7 @@ static int wcnss_setup_vbat_monitoring(void)
 	return rc;
 }
 
+<<<<<<< HEAD
 static void wcnss_send_vbatt_indication(struct work_struct *work)
 {
 	struct vbatt_message vbatt_msg;
@@ -1922,6 +1975,8 @@ static void wcnss_send_vbatt_indication(struct work_struct *work)
 	return;
 }
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static void wcnss_update_vbatt(struct work_struct *work)
 {
 	struct vbatt_message vbatt_msg;
@@ -2117,10 +2172,15 @@ static void wcnssctrl_rx_handler(struct work_struct *worker)
 		smd_read(penv->smd_ch, NULL, len);
 		return;
 	}
+<<<<<<< HEAD
 	if (len < sizeof(struct smd_msg_hdr)) {
 		pr_err("wcnss: incomplete header available len = %d\n", len);
 		return;
 	}
+=======
+	if (len < sizeof(struct smd_msg_hdr))
+		return;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	rc = smd_read(penv->smd_ch, buf, sizeof(struct smd_msg_hdr));
 	if (rc < sizeof(struct smd_msg_hdr)) {
@@ -2205,8 +2265,11 @@ static void wcnssctrl_rx_handler(struct work_struct *worker)
 		fw_status = wcnss_fw_status();
 		pr_debug("wcnss: received WCNSS_NVBIN_DNLD_RSP from ccpu %u\n",
 			fw_status);
+<<<<<<< HEAD
 		if (fw_status != WAIT_FOR_CBC_IND)
 			penv->is_cbc_done = 1;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		wcnss_setup_vbat_monitoring();
 		break;
 
@@ -2517,7 +2580,11 @@ static void wcnss_nvbin_dnld_main(struct work_struct *worker)
 	if (!FW_CALDATA_CAPABLE())
 		goto nv_download;
 
+<<<<<<< HEAD
 	if (!penv->fw_cal_available && IS_CAL_DATA_PRESENT
+=======
+	if (!penv->fw_cal_available && WCNSS_CONFIG_UNSPECIFIED
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		!= has_calibrated_data && !penv->user_cal_available) {
 		while (!penv->user_cal_available && retry++ < 5)
 			msleep(500);
@@ -2647,7 +2714,10 @@ static int
 wcnss_trigger_config(struct platform_device *pdev)
 {
 	int ret;
+<<<<<<< HEAD
 	int rc;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	struct qcom_wcnss_opts *pdata;
 	struct resource *res;
 	int is_pronto_vt;
@@ -2980,6 +3050,7 @@ wcnss_trigger_config(struct platform_device *pdev)
 		penv->fw_vbatt_state = WCNSS_CONFIG_UNSPECIFIED;
 	}
 
+<<<<<<< HEAD
 	if (penv->wlan_config.is_pronto_v3) {
 		penv->vadc_dev = qpnp_get_vadc(&penv->pdev->dev, "wcnss");
 
@@ -2997,6 +3068,8 @@ wcnss_trigger_config(struct platform_device *pdev)
 		}
 	}
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	do {
 		/* trigger initialization of the WCNSS */
 		penv->pil = subsystem_get(WCNSS_PIL_DEVICE);
@@ -3019,10 +3092,13 @@ wcnss_trigger_config(struct platform_device *pdev)
 	/* Remove pm_qos request */
 	wcnss_disable_pc_remove_req();
 
+<<<<<<< HEAD
 	if (of_property_read_bool(pdev->dev.of_node,
 		"qcom,wlan-indication-enabled"))
 		wcnss_en_wlan_led_trigger();
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	return 0;
 
 fail_ioremap2:

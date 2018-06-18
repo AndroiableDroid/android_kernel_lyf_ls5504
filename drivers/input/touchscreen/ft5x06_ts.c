@@ -3,7 +3,11 @@
  * FocalTech ft5x06 TouchScreen driver.
  *
  * Copyright (c) 2010  Focal tech Ltd.
+<<<<<<< HEAD
  * Copyright (c) 2012-2015, The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2014, The Linux Foundation. All rights reserved.
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This software is licensed under the terms of the GNU General Public
  * License version 2, as published by the Free Software Foundation, and
@@ -29,7 +33,10 @@
 #include <linux/regulator/consumer.h>
 #include <linux/firmware.h>
 #include <linux/debugfs.h>
+<<<<<<< HEAD
 #include <linux/sensors.h>
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #include <linux/input/ft5x06_ts.h>
 
 #if defined(CONFIG_FB)
@@ -74,6 +81,7 @@
 #define FT_REG_FW_MIN_VER	0xB2
 #define FT_REG_FW_SUB_MIN_VER	0xB3
 
+<<<<<<< HEAD
 /* psensor register address*/
 #define FT_REG_PSENSOR_ENABLE	0xB0
 #define FT_REG_PSENSOR_STATUS	0x01
@@ -108,6 +116,8 @@
 				FT_GESTURE_POINTER_NUM_FLAG_SIZE + \
 				FT_GESTURE_SET_FLAG_SIZE)
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 /* power register bits*/
 #define FT_PMODE_ACTIVE		0x00
 #define FT_PMODE_MONITOR	0x01
@@ -242,8 +252,11 @@ struct ft5x06_ts_data {
 	struct i2c_client *client;
 	struct input_dev *input_dev;
 	const struct ft5x06_ts_platform_data *pdata;
+<<<<<<< HEAD
 	struct ft5x06_psensor_platform_data *psensor_pdata;
 	struct ft5x06_gesture_platform_data *gesture_pdata;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	struct regulator *vdd;
 	struct regulator *vcc_i2c;
 	char fw_name[FT_FW_NAME_MAX_LEN];
@@ -268,6 +281,7 @@ struct ft5x06_ts_data {
 	struct pinctrl_state *pinctrl_state_release;
 };
 
+<<<<<<< HEAD
 static int ft5x06_ts_start(struct device *dev);
 static int ft5x06_ts_stop(struct device *dev);
 
@@ -299,6 +313,8 @@ static inline bool ft5x06_gesture_support_enabled(void)
 	return config_enabled(CONFIG_TOUCHSCREEN_FT5X06_GESTURE);
 }
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static int ft5x06_i2c_read(struct i2c_client *client, char *writebuf,
 			   int writelen, char *readbuf, int readlen)
 {
@@ -374,6 +390,7 @@ static int ft5x0x_read_reg(struct i2c_client *client, u8 addr, u8 *val)
 	return ft5x06_i2c_read(client, &addr, 1, val, 1);
 }
 
+<<<<<<< HEAD
 #ifdef CONFIG_TOUCHSCREEN_FT5X06_PSENSOR
 static void ft5x06_psensor_enable(struct ft5x06_ts_data *data, int enable)
 {
@@ -647,6 +664,8 @@ static int ft5x06_report_gesture(struct i2c_client *i2c_client,
 }
 #endif
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static void ft5x06_update_fw_vendor_id(struct ft5x06_ts_data *data)
 {
 	struct i2c_client *client = data->client;
@@ -690,7 +709,11 @@ static irqreturn_t ft5x06_ts_interrupt(int irq, void *dev_id)
 	struct input_dev *ip_dev;
 	int rc, i;
 	u32 id, x, y, status, num_touches;
+<<<<<<< HEAD
 	u8 reg, *buf, gesture_is_active;
+=======
+	u8 reg = 0x00, *buf;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	bool update_input = false;
 
 	if (!data) {
@@ -701,6 +724,7 @@ static irqreturn_t ft5x06_ts_interrupt(int irq, void *dev_id)
 	ip_dev = data->input_dev;
 	buf = data->tch_data;
 
+<<<<<<< HEAD
 	if (ft5x06_psensor_support_enabled() && data->pdata->psensor_support &&
 		data->psensor_pdata->tp_psensor_opened) {
 		rc = ft5x06_read_tp_psensor_data(data);
@@ -737,6 +761,10 @@ static irqreturn_t ft5x06_ts_interrupt(int irq, void *dev_id)
 	 */
 	reg = FT_REG_DEV_MODE;
 	rc = ft5x06_i2c_read(data->client, &reg, 1, buf, data->tch_data_len);
+=======
+	rc = ft5x06_i2c_read(data->client, &reg, 1,
+			buf, data->tch_data_len);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	if (rc < 0) {
 		dev_err(&data->client->dev, "%s: read data fail\n", __func__);
 		return IRQ_HANDLED;
@@ -1021,6 +1049,7 @@ err_pinctrl_get:
 }
 
 #ifdef CONFIG_PM
+<<<<<<< HEAD
 static int ft5x06_ts_start(struct device *dev)
 {
 	struct ft5x06_ts_data *data = dev_get_drvdata(dev);
@@ -1091,6 +1120,23 @@ static int ft5x06_ts_stop(struct device *dev)
 	struct ft5x06_ts_data *data = dev_get_drvdata(dev);
 	char txbuf[2];
 	int i, err;
+=======
+static int ft5x06_ts_suspend(struct device *dev)
+{
+	struct ft5x06_ts_data *data = dev_get_drvdata(dev);
+	char txbuf[2], i;
+	int err;
+
+	if (data->loading_fw) {
+		dev_info(dev, "Firmware loading in process...\n");
+		return 0;
+	}
+
+	if (data->suspended) {
+		dev_info(dev, "Already in suspend state\n");
+		return 0;
+	}
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	disable_irq(data->client->irq);
 
@@ -1166,11 +1212,16 @@ pwr_off_fail:
 	return err;
 }
 
+<<<<<<< HEAD
 static int ft5x06_ts_suspend(struct device *dev)
+=======
+static int ft5x06_ts_resume(struct device *dev)
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 {
 	struct ft5x06_ts_data *data = dev_get_drvdata(dev);
 	int err;
 
+<<<<<<< HEAD
 	if (data->loading_fw) {
 		dev_info(dev, "Firmware loading in process...\n");
 		return 0;
@@ -1263,6 +1314,72 @@ static int ft5x06_ts_resume(struct device *dev)
 		data->gesture_pdata->in_pocket = 0;
 	}
 	return 0;
+=======
+	if (!data->suspended) {
+		dev_dbg(dev, "Already in awake state\n");
+		return 0;
+	}
+
+	if (data->pdata->power_on) {
+		err = data->pdata->power_on(true);
+		if (err) {
+			dev_err(dev, "power on failed");
+			return err;
+		}
+	} else {
+		err = ft5x06_power_on(data, true);
+		if (err) {
+			dev_err(dev, "power on failed");
+			return err;
+		}
+	}
+
+	if (data->ts_pinctrl) {
+		err = pinctrl_select_state(data->ts_pinctrl,
+				data->pinctrl_state_active);
+		if (err < 0)
+			dev_err(dev, "Cannot get active pinctrl state\n");
+	}
+
+	err = ft5x06_gpio_configure(data, true);
+	if (err < 0) {
+		dev_err(&data->client->dev,
+			"failed to put gpios in resue state\n");
+		goto err_gpio_configuration;
+	}
+
+	if (gpio_is_valid(data->pdata->reset_gpio)) {
+		gpio_set_value_cansleep(data->pdata->reset_gpio, 0);
+		msleep(data->pdata->hard_rst_dly);
+		gpio_set_value_cansleep(data->pdata->reset_gpio, 1);
+	}
+
+	msleep(data->pdata->soft_rst_dly);
+
+	enable_irq(data->client->irq);
+
+	data->suspended = false;
+
+	return 0;
+
+err_gpio_configuration:
+	if (data->ts_pinctrl) {
+		err = pinctrl_select_state(data->ts_pinctrl,
+					data->pinctrl_state_suspend);
+		if (err < 0)
+			dev_err(dev, "Cannot get suspend pinctrl state\n");
+	}
+	if (data->pdata->power_on) {
+		err = data->pdata->power_on(false);
+		if (err)
+			dev_err(dev, "power off failed");
+	} else {
+		err = ft5x06_power_on(data, false);
+		if (err)
+			dev_err(dev, "power off failed");
+	}
+	return err;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 }
 
 static const struct dev_pm_ops ft5x06_ts_pm_ops = {
@@ -2044,12 +2161,15 @@ static int ft5x06_parse_dt(struct device *dev,
 	pdata->ignore_id_check = of_property_read_bool(np,
 						"focaltech,ignore-id-check");
 
+<<<<<<< HEAD
 	pdata->psensor_support = of_property_read_bool(np,
 						"focaltech,psensor-support");
 
 	pdata->gesture_support = of_property_read_bool(np,
 						"focaltech,gesture-support");
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	rc = of_property_read_u32(np, "focaltech,family-id", &temp_val);
 	if (!rc)
 		pdata->family_id = temp_val;
@@ -2085,11 +2205,16 @@ static int ft5x06_ts_probe(struct i2c_client *client,
 			   const struct i2c_device_id *id)
 {
 	struct ft5x06_ts_platform_data *pdata;
+<<<<<<< HEAD
 	struct ft5x06_psensor_platform_data *psensor_pdata;
 	struct ft5x06_gesture_platform_data *gesture_pdata;
 	struct ft5x06_ts_data *data;
 	struct input_dev *input_dev;
 	struct input_dev *psensor_input_dev;
+=======
+	struct ft5x06_ts_data *data;
+	struct input_dev *input_dev;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	struct dentry *temp;
 	u8 reg_value;
 	u8 reg_addr;
@@ -2177,8 +2302,12 @@ static int ft5x06_ts_probe(struct i2c_client *client,
 	err = input_register_device(input_dev);
 	if (err) {
 		dev_err(&client->dev, "Input device registration failed\n");
+<<<<<<< HEAD
 		input_free_device(input_dev);
 		return err;
+=======
+		goto free_inputdev;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	}
 
 	if (pdata->power_init) {
@@ -2253,17 +2382,22 @@ static int ft5x06_ts_probe(struct i2c_client *client,
 
 	err = request_threaded_irq(client->irq, NULL,
 				ft5x06_ts_interrupt,
+<<<<<<< HEAD
 	/*
 	* the interrupt trigger mode will be set in Device Tree with property
 	* "interrupts", so here we just need to set the flag IRQF_ONESHOT
 	*/
 				IRQF_ONESHOT,
+=======
+				pdata->irqflags | IRQF_ONESHOT,
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 				client->dev.driver->name, data);
 	if (err) {
 		dev_err(&client->dev, "request irq failed\n");
 		goto free_gpio;
 	}
 
+<<<<<<< HEAD
 	if (data->pdata->psensor_support && data->pdata->gesture_support) {
 		dev_err(&client->dev,
 			"Unsupport psensor & gesture at the same time\n");
@@ -2362,6 +2496,12 @@ static int ft5x06_ts_probe(struct i2c_client *client,
 	if (err) {
 		dev_err(&client->dev, "sys file creation failed\n");
 		goto free_pocket_sys;
+=======
+	err = device_create_file(&client->dev, &dev_attr_fw_name);
+	if (err) {
+		dev_err(&client->dev, "sys file creation failed\n");
+		goto irq_free;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	}
 
 	err = device_create_file(&client->dev, &dev_attr_update_fw);
@@ -2472,6 +2612,7 @@ free_update_fw_sys:
 	device_remove_file(&client->dev, &dev_attr_update_fw);
 free_fw_name_sys:
 	device_remove_file(&client->dev, &dev_attr_fw_name);
+<<<<<<< HEAD
 free_pocket_sys:
 	if (ft5x06_gesture_support_enabled() && data->pdata->gesture_support)
 		device_remove_file(&client->dev, &dev_attr_pocket);
@@ -2510,6 +2651,9 @@ irq_free:
 		data->pdata->gesture_support))
 
 		device_init_wakeup(&client->dev, 0);
+=======
+irq_free:
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	free_irq(client->irq, data);
 free_gpio:
 	if (gpio_is_valid(pdata->reset_gpio))
@@ -2539,6 +2683,12 @@ pwr_deinit:
 		ft5x06_power_init(data, false);
 unreg_inputdev:
 	input_unregister_device(input_dev);
+<<<<<<< HEAD
+=======
+	input_dev = NULL;
+free_inputdev:
+	input_free_device(input_dev);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	return err;
 }
 
@@ -2547,6 +2697,7 @@ static int ft5x06_ts_remove(struct i2c_client *client)
 	struct ft5x06_ts_data *data = i2c_get_clientdata(client);
 	int retval;
 
+<<<<<<< HEAD
 	if (ft5x06_gesture_support_enabled() && data->pdata->gesture_support) {
 		device_init_wakeup(&client->dev, 0);
 		device_remove_file(&client->dev, &dev_attr_pocket);
@@ -2566,6 +2717,8 @@ static int ft5x06_ts_remove(struct i2c_client *client)
 		data->psensor_pdata = NULL;
 	}
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	debugfs_remove_recursive(data->dir);
 	device_remove_file(&client->dev, &dev_attr_force_update_fw);
 	device_remove_file(&client->dev, &dev_attr_update_fw);

@@ -982,7 +982,10 @@ static int msm_ehci_reset(struct usb_hcd *hcd)
 
 	ehci->caps = USB_CAPLENGTH;
 	hcd->has_tt = 1;
+<<<<<<< HEAD
 	ehci->no_testmode_suspend = true;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	retval = ehci_setup(hcd);
 	if (retval)

@@ -23,7 +23,10 @@
 #include <linux/delay.h>
 #include <linux/input.h>
 #include <linux/types.h>
+<<<<<<< HEAD
 #include <linux/of_gpio.h>
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #include <linux/platform_device.h>
 #include <linux/input/synaptics_dsx.h>
 #include "synaptics_dsx_core.h"
@@ -31,6 +34,7 @@
 #define SPI_READ 0x80
 #define SPI_WRITE 0x00
 
+<<<<<<< HEAD
 #ifdef CONFIG_OF
 static int parse_dt(struct device *dev, struct synaptics_dsx_board_data *bdata)
 {
@@ -212,6 +216,8 @@ static int parse_dt(struct device *dev, struct synaptics_dsx_board_data *bdata)
 }
 #endif
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static int synaptics_rmi4_spi_set_page(struct synaptics_rmi4_data *rmi4_data,
 		unsigned short addr)
 {
@@ -302,7 +308,10 @@ static int synaptics_rmi4_spi_read(struct synaptics_rmi4_data *rmi4_data,
 
 	retval = synaptics_rmi4_spi_set_page(rmi4_data, addr);
 	if (retval != PAGE_SELECT_LEN) {
+<<<<<<< HEAD
 		mutex_unlock(&rmi4_data->rmi4_io_ctrl_mutex);
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		retval = -EIO;
 		goto exit;
 	}
@@ -322,6 +331,7 @@ static int synaptics_rmi4_spi_read(struct synaptics_rmi4_data *rmi4_data,
 
 	retval = spi_sync(spi, &msg);
 	if (retval == 0) {
+<<<<<<< HEAD
 		retval = secure_memcpy(data, length, rxbuf, length, length);
 		if (retval < 0) {
 			dev_err(rmi4_data->pdev->dev.parent,
@@ -330,6 +340,10 @@ static int synaptics_rmi4_spi_read(struct synaptics_rmi4_data *rmi4_data,
 		} else {
 			retval = length;
 		}
+=======
+		retval = length;
+		memcpy(data, rxbuf, length);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	} else {
 		dev_err(rmi4_data->pdev->dev.parent,
 				"%s: Failed to complete SPI transfer, error = %d\n",
@@ -380,6 +394,7 @@ static int synaptics_rmi4_spi_write(struct synaptics_rmi4_data *rmi4_data,
 
 	txbuf[0] = (addr >> 8) & ~SPI_READ;
 	txbuf[1] = addr & MASK_8BIT;
+<<<<<<< HEAD
 	retval = secure_memcpy(&txbuf[ADDRESS_WORD_LEN],
 			xfer_count - ADDRESS_WORD_LEN, data, length, length);
 	if (retval < 0) {
@@ -388,12 +403,18 @@ static int synaptics_rmi4_spi_write(struct synaptics_rmi4_data *rmi4_data,
 				__func__);
 		goto exit;
 	}
+=======
+	memcpy(&txbuf[ADDRESS_WORD_LEN], data, length);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	mutex_lock(&rmi4_data->rmi4_io_ctrl_mutex);
 
 	retval = synaptics_rmi4_spi_set_page(rmi4_data, addr);
 	if (retval != PAGE_SELECT_LEN) {
+<<<<<<< HEAD
 		mutex_unlock(&rmi4_data->rmi4_io_ctrl_mutex);
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		retval = -EIO;
 		goto exit;
 	}
@@ -464,6 +485,7 @@ static int synaptics_rmi4_spi_probe(struct spi_device *spi)
 		return -ENOMEM;
 	}
 
+<<<<<<< HEAD
 #ifdef CONFIG_OF
 	if (spi->dev.of_node) {
 		hw_if.board_data = devm_kzalloc(&spi->dev,
@@ -501,6 +523,8 @@ static int synaptics_rmi4_spi_probe(struct spi_device *spi)
 
 	hw_if.bus_access = &bus_access;
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	spi->bits_per_word = 8;
 	spi->mode = SPI_MODE_3;
 
@@ -512,6 +536,12 @@ static int synaptics_rmi4_spi_probe(struct spi_device *spi)
 		return retval;
 	}
 
+<<<<<<< HEAD
+=======
+	hw_if.board_data = spi->dev.platform_data;
+	hw_if.bus_access = &bus_access;
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	synaptics_dsx_spi_device->name = PLATFORM_DRIVER_NAME;
 	synaptics_dsx_spi_device->id = 0;
 	synaptics_dsx_spi_device->num_resources = 0;
@@ -537,6 +567,7 @@ static int synaptics_rmi4_spi_remove(struct spi_device *spi)
 	return 0;
 }
 
+<<<<<<< HEAD
 #ifdef CONFIG_OF
 static struct of_device_id synaptics_rmi4_of_match_table[] = {
 	{
@@ -549,14 +580,22 @@ MODULE_DEVICE_TABLE(of, synaptics_rmi4_of_match_table);
 #define synaptics_rmi4_of_match_table NULL
 #endif
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static struct spi_driver synaptics_rmi4_spi_driver = {
 	.driver = {
 		.name = SPI_DRIVER_NAME,
 		.owner = THIS_MODULE,
+<<<<<<< HEAD
 		.of_match_table = synaptics_rmi4_of_match_table,
 	},
 	.probe = synaptics_rmi4_spi_probe,
 	.remove = synaptics_rmi4_spi_remove,
+=======
+	},
+	.probe = synaptics_rmi4_spi_probe,
+	.remove = __devexit_p(synaptics_rmi4_spi_remove),
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 };
 
 

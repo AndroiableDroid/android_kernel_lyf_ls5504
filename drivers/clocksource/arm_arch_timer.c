@@ -325,6 +325,7 @@ static void arch_counter_set_user_access(void)
 	arch_timer_set_cntkctl(cntkctl);
 }
 
+<<<<<<< HEAD
 static void arch_timer_configure_evtstream(void)
 {
 	int evt_stream_div, pos;
@@ -339,6 +340,9 @@ static void arch_timer_configure_evtstream(void)
 }
 
 static int arch_timer_setup(struct clock_event_device *clk)
+=======
+static int __cpuinit arch_timer_setup(struct clock_event_device *clk)
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 {
 	__arch_timer_setup(ARCH_CP15_TIMER, clk);
 
@@ -351,8 +355,11 @@ static int arch_timer_setup(struct clock_event_device *clk)
 	}
 
 	arch_counter_set_user_access();
+<<<<<<< HEAD
 	if (IS_ENABLED(CONFIG_ARM_ARCH_TIMER_EVTSTREAM))
 		arch_timer_configure_evtstream();
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	return 0;
 }

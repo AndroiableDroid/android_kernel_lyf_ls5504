@@ -55,7 +55,11 @@
 #include "mdss_mdp_debug.h"
 
 #define CREATE_TRACE_POINTS
+<<<<<<< HEAD
 #include "mdss_mdp_trace.h"
+=======
+#include <trace/mdss_mdp_trace.h>
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 #define AXI_HALT_TIMEOUT_US	0x4000
 #define AUTOSUSPEND_TIMEOUT_MS	200
@@ -1130,10 +1134,13 @@ int mdss_hw_init(struct mdss_data_type *mdata)
 
 	mdss_hw_rev_init(mdata);
 
+<<<<<<< HEAD
 	/* Restoring Secure configuration during boot-up */
 	if (mdss_mdp_req_init_restore_cfg(mdata))
 		__mdss_restore_sec_cfg(mdata);
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	/* disable hw underrun recovery */
 	writel_relaxed(0x0, mdata->mdp_base +
 			MDSS_MDP_REG_VIDEO_INTF_UNDERFLOW_CTL);

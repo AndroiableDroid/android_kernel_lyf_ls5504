@@ -265,6 +265,10 @@ static struct usb_device_descriptor device_desc = {
 	.bDeviceClass         = USB_CLASS_PER_INTERFACE,
 	.idVendor             = __constant_cpu_to_le16(VENDOR_ID),
 	.idProduct            = __constant_cpu_to_le16(PRODUCT_ID),
+<<<<<<< HEAD
+=======
+	.bcdDevice            = __constant_cpu_to_le16(0xffff),
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	.bNumConfigurations   = 1,
 };
 
@@ -3110,7 +3114,10 @@ functions_store(struct device *pdev, struct device_attribute *attr,
 	strlcpy(buf, buff, sizeof(buf));
 	b = strim(buf);
 
+<<<<<<< HEAD
 	dev->cdev->gadget->streaming_enabled = false;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	while (b) {
 		conf_str = strsep(&b, ":");
 		if (!conf_str)
@@ -3207,8 +3214,12 @@ static ssize_t enable_store(struct device *pdev, struct device_attribute *attr,
 		 */
 		cdev->desc.idVendor = device_desc.idVendor;
 		cdev->desc.idProduct = device_desc.idProduct;
+<<<<<<< HEAD
 		if (device_desc.bcdDevice)
 			cdev->desc.bcdDevice = device_desc.bcdDevice;
+=======
+		cdev->desc.bcdDevice = device_desc.bcdDevice;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		cdev->desc.bDeviceClass = device_desc.bDeviceClass;
 		cdev->desc.bDeviceSubClass = device_desc.bDeviceSubClass;
 		cdev->desc.bDeviceProtocol = device_desc.bDeviceProtocol;
@@ -3440,6 +3451,13 @@ static void android_unbind_config(struct usb_configuration *c)
 {
 	struct android_dev *dev = cdev_to_android_dev(c->cdev);
 
+<<<<<<< HEAD
+=======
+	if (c->cdev->gadget->streaming_enabled) {
+		c->cdev->gadget->streaming_enabled = false;
+		pr_debug("setting streaming_enabled to false.\n");
+	}
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	android_unbind_enabled_functions(dev, c);
 }
 

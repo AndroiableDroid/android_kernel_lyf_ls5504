@@ -377,6 +377,14 @@ int regmap_raw_write(struct regmap *map, unsigned int reg,
 		     const void *val, size_t val_len);
 int regmap_bulk_write(struct regmap *map, unsigned int reg, const void *val,
 			size_t val_count);
+<<<<<<< HEAD
+=======
+int regmap_multi_reg_write(struct regmap *map, const struct reg_default *regs,
+			int num_regs);
+int regmap_multi_reg_write_bypassed(struct regmap *map,
+				    const struct reg_default *regs,
+				    int num_regs);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 int regmap_raw_write_async(struct regmap *map, unsigned int reg,
 			   const void *val, size_t val_len);
 int regmap_read(struct regmap *map, unsigned int reg, unsigned int *val);

@@ -26,6 +26,17 @@
 #include <linux/workqueue.h>
 #include <linux/freezer.h>
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_YL_POWEROFF_ALARM
+#include <linux/yl_params.h>
+
+#define YL_PARAM_BUF_SZ		512
+#endif
+
+#define ALARM_DELTA 120
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 /**
  * struct alarm_base - Alarm timer bases
  * @lock:		Lock for syncrhonized access to the base
@@ -55,6 +66,47 @@ static DEFINE_SPINLOCK(rtcdev_lock);
 static unsigned long power_on_alarm;
 static struct mutex power_on_alarm_lock;
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_YL_POWEROFF_ALARM
+static int set_yl_power_on_alarm(struct rtc_wkalrm *alarm)
+{
+	int rc;
+	unsigned long secs;
+	u8 value[4] = {0};
+	u8 param_buf[YL_PARAM_BUF_SZ] = "RETURNZERO";
+
+	if (alarm) {
+		rtc_tm_to_time(&alarm->time, &secs);
+
+		value[0] = secs & 0xFF;
+		value[1] = (secs >> 8) & 0xFF;
+		value[2] = (secs >> 16) & 0xFF;
+		value[3] = (secs >> 24) & 0xFF;
+	}
+
+	rc = yl_params_kernel_read(param_buf, YL_PARAM_BUF_SZ);
+	if (rc != YL_PARAM_BUF_SZ) {
+		return -EFAULT;
+	}
+
+	if (alarm) {
+		param_buf[RETURNZERO_ALARM_ASSIGNED] = 1;
+	} else {
+		param_buf[RETURNZERO_ALARM_ASSIGNED] = 0;
+	}
+	memcpy(&param_buf[RETURNZERO_ALARM_TIME], value, 4);
+
+	rc = yl_params_kernel_write(param_buf, YL_PARAM_BUF_SZ);
+	if (rc != YL_PARAM_BUF_SZ) {
+		return -EFAULT;
+	}
+
+	return 0;
+}
+#endif
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 void set_power_on_alarm(long secs, bool enable)
 {
 	int rc;
@@ -70,6 +122,12 @@ void set_power_on_alarm(long secs, bool enable)
 	if (enable) {
 			power_on_alarm = secs;
 	} else {
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_YL_POWEROFF_ALARM
+		set_yl_power_on_alarm(NULL);
+#endif
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		if (power_on_alarm == secs)
 			power_on_alarm = 0;
 		else
@@ -90,7 +148,13 @@ void set_power_on_alarm(long secs, bool enable)
 	 *to power up the device before actual alarm
 	 *expiration
 	 */
+<<<<<<< HEAD
 	if (alarm_time <= rtc_secs)
+=======
+	if ((alarm_time - ALARM_DELTA) > rtc_secs)
+		alarm_time -= ALARM_DELTA;
+	else
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		goto disable_alarm;
 
 	rtc_time_to_tm(alarm_time, &alarm.time);
@@ -99,6 +163,15 @@ void set_power_on_alarm(long secs, bool enable)
 	if (rc)
 		goto disable_alarm;
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_YL_POWEROFF_ALARM
+	rc = set_yl_power_on_alarm(&alarm);
+	if (rc)
+		goto disable_alarm;
+#endif
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	mutex_unlock(&power_on_alarm_lock);
 	return;
 
@@ -437,6 +510,7 @@ int alarm_start(struct alarm *alarm, ktime_t start)
  */
 int alarm_start_relative(struct alarm *alarm, ktime_t start)
 {
+<<<<<<< HEAD
 	struct alarm_base *base;
 
 	if (alarm->type >= ALARM_NUMTYPE) {
@@ -444,6 +518,10 @@ int alarm_start_relative(struct alarm *alarm, ktime_t start)
 		return -EINVAL;
 	}
 	base = &alarm_bases[alarm->type];
+=======
+	struct alarm_base *base = &alarm_bases[alarm->type];
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	start = ktime_add(start, base->gettime());
 	return alarm_start(alarm, start);
 }
@@ -469,6 +547,7 @@ void alarm_restart(struct alarm *alarm)
  */
 int alarm_try_to_cancel(struct alarm *alarm)
 {
+<<<<<<< HEAD
 	struct alarm_base *base;
 	unsigned long flags;
 	int ret;
@@ -478,6 +557,12 @@ int alarm_try_to_cancel(struct alarm *alarm)
 		return -EINVAL;
 	}
 	base = &alarm_bases[alarm->type];
+=======
+	struct alarm_base *base = &alarm_bases[alarm->type];
+	unsigned long flags;
+	int ret;
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	spin_lock_irqsave(&base->lock, flags);
 	ret = hrtimer_try_to_cancel(&alarm->timer);
 	if (ret >= 0)

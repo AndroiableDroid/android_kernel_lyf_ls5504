@@ -29,8 +29,11 @@ mdss-dsi-objs := mdss_dsi.o mdss_dsi_host.o mdss_dsi_cmd.o mdss_dsi_status.o
 mdss-dsi-objs += mdss_dsi_panel.o
 mdss-dsi-objs += msm_mdss_io_8974.o
 obj-$(CONFIG_FB_MSM_MDSS) += mdss-dsi.o
+<<<<<<< HEAD
 obj-$(CONFIG_FB_MSM_MDSS) += mdss_panel.o
 obj-$(CONFIG_FB_MSM_MDSS) += adv7533_dsi2hdmi.o
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 obj-$(CONFIG_FB_MSM_MDSS_EDP_PANEL) += mdss_edp.o
 obj-$(CONFIG_FB_MSM_MDSS_EDP_PANEL) += mdss_edp_aux.o
 
@@ -50,3 +53,10 @@ obj-$(CONFIG_FB_MSM_QPIC_ILI_QVGA_PANEL) += qpic_panel_ili_qvga.o
 
 obj-$(CONFIG_FB_MSM_MDSS) += mdss_fb.o mdss_util.o
 obj-$(CONFIG_COMPAT) += mdss_compat_utils.o
+<<<<<<< HEAD
+=======
+
+obj-$(CONFIG_YL_TPS65132) += tps_65132.o
+
+obj-$(CONFIG_FB_MSM_MDSS) += mdss_livedisplay.o
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130

@@ -79,6 +79,7 @@ config INTEL_IOP_ADMA
 	help
 	  Enable support for the Intel(R) IOP Series RAID engines.
 
+<<<<<<< HEAD
 config QCOM_SPS_DMA
 	tristate "Qualcomm technologies inc DMA driver for sps-BAM"
 	depends on ARCH_MSM
@@ -89,6 +90,8 @@ config QCOM_SPS_DMA
 	  engine callbacks are implemented using the sps-BAM functionality
 	  to access HW.
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 config DW_DMAC
 	tristate "Synopsys DesignWare AHB DMA support"
 	depends on GENERIC_HARDIRQS

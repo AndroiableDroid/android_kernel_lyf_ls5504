@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* Copyright (c) 2013-2015, The Linux Foundation. All rights reserved.
+=======
+/* Copyright (c) 2013-2014, The Linux Foundation. All rights reserved.
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -74,7 +78,11 @@
 			};
 			cdc_pdm_lines_sus: pdm_lines_off {
 				drive-strength = <2>;
+<<<<<<< HEAD
 				bias-pull-down;
+=======
+				bias-disable;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			};
 		};
 
@@ -181,11 +189,19 @@
 			label = "cd-gpio";
 			sdc2_cd_on: cd_on {
 				drive-strength = <2>;
+<<<<<<< HEAD
 				bias-pull-down;
 			};
 			sdc2_cd_off: cd_off {
 				drive-strength = <2>;
 				bias-pull-up;
+=======
+				bias-pull-up;
+			};
+			sdc2_cd_off: cd_off {
+				drive-strength = <2>;
+				bias-disable;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			};
 		};
 
@@ -301,7 +317,11 @@
 			qcom,pin-func = <1>;
 			label = "spi0-active";
 			/* active state */
+<<<<<<< HEAD
 			spi0_default: spi0_default {
+=======
+			spi0_default: default {
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 				drive-strength = <12>; /* 12 MA */
 				bias-disable = <0>; /* No PULL */
 			};
@@ -314,7 +334,11 @@
 			qcom,pin-func = <0>;
 			label = "spi0-suspend";
 			/* suspended state */
+<<<<<<< HEAD
 			spi0_sleep: spi0_sleep {
+=======
+			spi0_sleep: sleep {
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 				drive-strength = <2>; /* 2 MA */
 				bias-pull-down; /* pull down */
 			};
@@ -344,6 +368,7 @@
 			};
 		};
 
+<<<<<<< HEAD
 		spi2_active {
 			/* MOSI, MISO, CLK */
 			qcom,pins = <&gp 16>, <&gp 17>, <&gp 19>;
@@ -396,6 +421,8 @@
 
 
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		ice40-spi-usb-pins {
 			qcom,pins = <&gp 0>, <&gp 1>, <&gp 3>, <&gp 114>;
 			qcom,num-grp-pins = <4>;

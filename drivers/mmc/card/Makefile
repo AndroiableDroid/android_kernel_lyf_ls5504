@@ -9,3 +9,9 @@ obj-$(CONFIG_MMC_TEST)		+= mmc_test.o
 obj-$(CONFIG_SDIO_UART)		+= sdio_uart.o
 
 obj-$(CONFIG_MMC_BLOCK_TEST)		+= mmc_block_test.o
+<<<<<<< HEAD
+=======
+
+obj-$(CONFIG_MMC_YL_PARAMS)	+= yl_params.o
+obj-$(CONFIG_MMC_YL_PARAMS)	+= yl_params_if.o
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130

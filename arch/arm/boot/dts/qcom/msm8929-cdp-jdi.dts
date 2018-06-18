@@ -32,7 +32,11 @@
 &i2c_5 {  /* BLSP1 QUP5 */
 	status = "disabled";
 };
+<<<<<<< HEAD
 /*
+=======
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 &spi_5 {
 	status = "okay";
 	bu21150-ts-spi@0 {
@@ -59,7 +63,11 @@
 		jdi,afe-vendor = "rohm";
 	};
 };
+<<<<<<< HEAD
 */
+=======
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #include "dsi-panel-jdi-fhd-video.dtsi"
 #include "msm8939-mdss.dtsi"
 

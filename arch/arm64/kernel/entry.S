@@ -92,6 +92,7 @@
 	ldp	x21, x22, [sp, #S_PC]		// load ELR, SPSR
 	.if	\el == 0
 	ldr	x23, [sp, #S_SP]		// load return stack pointer
+<<<<<<< HEAD
 	msr	sp_el0, x23
 #ifdef CONFIG_ARM64_ERRATUM_845719
 	tbz x22, #4, 1f
@@ -104,6 +105,10 @@
 #endif
 	.endif
 1:	.if	\ret
+=======
+	.endif
+	.if	\ret
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	ldr	x1, [sp, #S_X1]			// preserve x0 (syscall return)
 	add	sp, sp, S_X2
 	.else

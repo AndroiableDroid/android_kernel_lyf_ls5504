@@ -12,7 +12,10 @@ struct platform_pwm_backlight_data {
 	unsigned int dft_brightness;
 	unsigned int lth_brightness;
 	unsigned int pwm_period_ns;
+<<<<<<< HEAD
 	unsigned int bl_gpio;/*zhangwei add one-line-mode*/
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	unsigned int *levels;
 	int (*init)(struct device *dev);
 	int (*notify)(struct device *dev, int brightness);

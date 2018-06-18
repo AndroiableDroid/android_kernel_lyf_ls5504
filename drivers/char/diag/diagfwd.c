@@ -1528,8 +1528,12 @@ static int diagfwd_mux_write_done(unsigned char *buf, int len, int buf_ctxt,
 			 * channels. This will ensure that the next read is not
 			 * missed.
 			 */
+<<<<<<< HEAD
 			if (driver->logging_mode == MEMORY_DEVICE_MODE &&
 					ctxt == DIAG_MEMORY_DEVICE_MODE) {
+=======
+			if (driver->logging_mode == MEMORY_DEVICE_MODE) {
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 				flush_workqueue(smd_info->wq);
 				wake_up(&driver->smd_wait_q);
 			}

@@ -55,7 +55,11 @@
 
 &mdss_dsi0 {
 	qcom,regulator-ldo-mode;
+<<<<<<< HEAD
 	qcom,platform-regulator-settings = [02 09 03 00 20 00 01];
+=======
+	qcom,platform-regulator-settings = [00 01 01 00 20 07 00];
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 };
 
 &soc {
@@ -158,6 +162,7 @@
 			qcom,vib-vtg-level-mV = <3100>;
 		};
 	};
+<<<<<<< HEAD
 	qcom,pm8916@0 {
 		qcom,leds@a100 {
 			status = "okay";
@@ -175,6 +180,8 @@
 			};
 		};
 	};
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 };
 
 &qcom_tzlog {

@@ -272,6 +272,19 @@ void msm_ion_heap_free_pages_mem(struct pages_mem *pages_mem);
 void ion_heap_init_shrinker(struct ion_heap *heap);
 
 /**
+<<<<<<< HEAD
+=======
+ * ion_heap_init_shrinker
+ * @heap:		the heap
+ *
+ * If a heap sets the ION_HEAP_FLAG_DEFER_FREE flag or defines the shrink op
+ * this function will be called to setup a shrinker to shrink the freelists
+ * and call the heap's shrink op.
+ */
+void ion_heap_init_shrinker(struct ion_heap *heap);
+
+/**
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  * ion_heap_init_deferred_free -- initialize deferred free functionality
  * @heap:		the heap
  *

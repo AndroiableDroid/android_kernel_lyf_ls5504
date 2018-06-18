@@ -173,6 +173,7 @@ static void ci13xxx_msm_reset(void)
 	}
 }
 
+<<<<<<< HEAD
 static void ci13xxx_msm_mark_err_event(void)
 {
 	struct ci13xxx *udc = _udc;
@@ -190,6 +191,8 @@ static void ci13xxx_msm_mark_err_event(void)
 	otg->err_event_seen = true;
 }
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static void ci13xxx_msm_notify_event(struct ci13xxx *udc, unsigned event)
 {
 	struct device *dev = udc->gadget.dev.parent;
@@ -216,10 +219,13 @@ static void ci13xxx_msm_notify_event(struct ci13xxx *udc, unsigned event)
 		dev_info(dev, "CI13XXX_CONTROLLER_RESUME_EVENT received\n");
 		ci13xxx_msm_resume();
 		break;
+<<<<<<< HEAD
 	case CI13XXX_CONTROLLER_ERROR_EVENT:
 		dev_info(dev, "CI13XXX_CONTROLLER_ERROR_EVENT received\n");
 		ci13xxx_msm_mark_err_event();
 		break;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	default:
 		dev_dbg(dev, "unknown ci13xxx_udc event\n");

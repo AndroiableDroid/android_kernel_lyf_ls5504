@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* Copyright (c) 2014-2015, The Linux Foundation. All rights reserved.
+=======
+/* Copyright (c) 2014, The Linux Foundation. All rights reserved.
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -31,7 +35,10 @@
 			interrupt-names = "kpdpwr", "resin";
 			qcom,pon-dbc-delay = <15625>;
 			qcom,system-reset;
+<<<<<<< HEAD
 			qcom,clear-warm-reset;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 			qcom,pon_1 {
 				qcom,pon-type = <0>;
@@ -530,6 +537,13 @@
 			qcom,cdc-vdd-mic-bias-voltage = <3075000 3075000>;
 			qcom,cdc-vdd-mic-bias-current = <5000>;
 
+<<<<<<< HEAD
+=======
+			cdc-vdd-spkdrv-supply = <&spk_vreg>;
+			qcom,cdc-vdd-spkdrv-voltage = <5000000 5000000>;
+			qcom,cdc-vdd-spkdrv-current = <20000>;
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			qcom,cdc-mclk-clk-rate = <9600000>;
 
 			qcom,cdc-static-supplies = "cdc-vdda-h",
@@ -537,7 +551,12 @@
 						   "cdc-vdd-pa",
 						   "cdc-vdda-cp";
 
+<<<<<<< HEAD
 			qcom,cdc-on-demand-supplies = "cdc-vdd-mic-bias";
+=======
+			qcom,cdc-on-demand-supplies = "cdc-vdd-mic-bias",
+						      "cdc-vdd-spkdrv";
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		};
 
 		pm8909_conga_analog: 8909_wcd_codec@f100 {
@@ -564,7 +583,10 @@
 			reg-names = "qpnp-lpg-channel-base";
 			qcom,channel-id = <0>;
 			qcom,supported-sizes = <6>, <9>;
+<<<<<<< HEAD
 			#pwm-cells = <2>;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		};
 	};
 };

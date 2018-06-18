@@ -52,12 +52,15 @@
 #include <asm/processor.h>
 #include <asm/stacktrace.h>
 
+<<<<<<< HEAD
 #ifdef CONFIG_CC_STACKPROTECTOR
 #include <linux/stackprotector.h>
 unsigned long __stack_chk_guard __read_mostly;
 EXPORT_SYMBOL(__stack_chk_guard);
 #endif
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static void setup_restart(void)
 {
 	/*

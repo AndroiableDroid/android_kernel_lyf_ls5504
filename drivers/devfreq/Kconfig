@@ -108,7 +108,11 @@ config DEVFREQ_GOV_MSM_GPUBW_MON
 
 config DEVFREQ_GOV_MSM_BW_HWMON
 	tristate "HW monitor based governor for device BW"
+<<<<<<< HEAD
 	depends on ARCH_MSM_KRAIT || ARCH_MSM_BIMC_BWMON
+=======
+	depends on ARCH_MSM_KRAIT || MSM_BIMC_BWMON
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	help
 	  HW monitor based governor for device to DDR bandwidth voting.
 
@@ -176,6 +180,7 @@ config MSM_DEVFREQ_DEVBW
 	  agnostic interface to so that some of the devfreq governors can be
 	  shared across SoCs.
 
+<<<<<<< HEAD
 config SPDM_SCM
 	bool "MSM SPDM SCM based call support"
 	depends on DEVFREQ_SPDM
@@ -185,6 +190,8 @@ config SPDM_SCM
           tz via SCM based call. If not selected then Hypervior interaction
           will be activated.
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 config DEVFREQ_SPDM
 	bool "MSM SPDM based bandwidth voting"
 	depends on ARCH_MSM

@@ -11,7 +11,10 @@
  */
 
 #include "msm8909.dtsi"
+<<<<<<< HEAD
 #include "msm8909-pm8909.dtsi"
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #include "msm8909-pinctrl.dtsi"
 
 / {
@@ -145,7 +148,10 @@
 	pinctrl-5 = <&qdsd_clk_spmi &qdsd_cmd_spmi
 		     &qdsd_data0_spmi &qdsd_data3_spmi>;
 };
+<<<<<<< HEAD
 
 &android_usb {
         qcom,android-usb-cdrom;
 };
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130

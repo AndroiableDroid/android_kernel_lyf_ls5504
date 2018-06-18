@@ -133,6 +133,7 @@ config CORESIGHT_TPDM_DEFAULT_ENABLE
 	  If unsure, say 'N' here to avoid potential power and performance
 	  penalty.
 
+<<<<<<< HEAD
 config CORESIGHT_DBGUI
 	bool "CoreSight DebugUI driver"
 	help
@@ -141,6 +142,8 @@ config CORESIGHT_DBGUI
 	  to select specified address and trigger mode based on user
 	  input.
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 config CORESIGHT_STM
 	bool "CoreSight System Trace Macrocell driver"
 	help

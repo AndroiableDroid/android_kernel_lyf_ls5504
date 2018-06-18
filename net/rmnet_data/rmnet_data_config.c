@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2013-2015, The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2013-2014, The Linux Foundation. All rights reserved.
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -25,7 +29,10 @@
 #include "rmnet_data_handlers.h"
 #include "rmnet_data_vnd.h"
 #include "rmnet_data_private.h"
+<<<<<<< HEAD
 #include "rmnet_data_trace.h"
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 RMNET_LOG_MODULE(RMNET_DATA_LOGMASK_CONFIG);
 
@@ -48,8 +55,12 @@ static struct notifier_block rmnet_dev_notifier = {
 
 struct rmnet_free_vnd_work {
 	struct work_struct work;
+<<<<<<< HEAD
 	int vnd_id[RMNET_DATA_MAX_VND];
 	int count;
+=======
+	int vnd_id;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 };
 
 /* ***************** Init and Cleanup *************************************** */
@@ -705,7 +716,10 @@ int rmnet_unassociate_network_device(struct net_device *dev)
 
 	/* Explicitly release the reference from the device */
 	dev_put(dev);
+<<<<<<< HEAD
 	trace_rmnet_unassociate(dev);
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	return RMNET_CONFIG_OK;
 }
 
@@ -838,7 +852,10 @@ int rmnet_associate_network_device(struct net_device *dev)
 
 	/* Explicitly hold a reference to the device */
 	dev_hold(dev);
+<<<<<<< HEAD
 	trace_rmnet_associate(dev);
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	return RMNET_CONFIG_OK;
 }
 
@@ -1100,6 +1117,7 @@ int rmnet_free_vnd(int id)
 
 static void _rmnet_free_vnd_later(struct work_struct *work)
 {
+<<<<<<< HEAD
 	int i;
 	struct rmnet_free_vnd_work *fwork;
 	fwork = container_of(work, struct rmnet_free_vnd_work, work);
@@ -1107,6 +1125,34 @@ static void _rmnet_free_vnd_later(struct work_struct *work)
 	for (i = 0; i < fwork->count; i++)
 		rmnet_free_vnd(fwork->vnd_id[i]);
 	kfree(fwork);
+=======
+	struct rmnet_free_vnd_work *fwork;
+	fwork = (struct rmnet_free_vnd_work *) work;
+	rmnet_free_vnd(fwork->vnd_id);
+	kfree(work);
+}
+
+/**
+ * rmnet_free_vnd_later() - Schedule a work item to free virtual network device
+ * @id:       RmNet virtual device node id
+ *
+ * Schedule the VND to be freed at a later time. We need to do this if the
+ * rtnl lock is already held as to prevent a deadlock.
+ */
+static void rmnet_free_vnd_later(int id)
+{
+	struct rmnet_free_vnd_work *work;
+	LOGL("(%d);", id);
+	work = (struct rmnet_free_vnd_work *)
+		kmalloc(sizeof(struct rmnet_free_vnd_work), GFP_KERNEL);
+	if (!work) {
+		LOGH("Failed to queue removal of VND:%d", id);
+		return;
+	}
+	INIT_WORK((struct work_struct *)work, _rmnet_free_vnd_later);
+	work->vnd_id = id;
+	schedule_work((struct work_struct *)work);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 }
 
 /**
@@ -1118,10 +1164,16 @@ static void _rmnet_free_vnd_later(struct work_struct *work)
  */
 static void rmnet_force_unassociate_device(struct net_device *dev)
 {
+<<<<<<< HEAD
 	int i, j;
 	struct net_device *vndev;
 	struct rmnet_logical_ep_conf_s *cfg;
 	struct rmnet_free_vnd_work *vnd_work;
+=======
+	int i;
+	struct net_device *vndev;
+	struct rmnet_logical_ep_conf_s *cfg;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	ASSERT_RTNL();
 
 	if (!dev)
@@ -1132,6 +1184,7 @@ static void rmnet_force_unassociate_device(struct net_device *dev)
 		return;
 	}
 
+<<<<<<< HEAD
 	trace_rmnet_unregister_cb_clear_vnds(dev);
 	vnd_work = (struct rmnet_free_vnd_work *)
 		kmalloc(sizeof(struct rmnet_free_vnd_work), GFP_KERNEL);
@@ -1145,6 +1198,10 @@ static void rmnet_force_unassociate_device(struct net_device *dev)
 	/* Check the VNDs for offending mappings */
 	for (i = 0, j = 0; i < RMNET_DATA_MAX_VND &&
 				j < RMNET_DATA_MAX_VND; i++) {
+=======
+	/* Check the VNDs for offending mappings */
+	for (i = 0; i < RMNET_DATA_MAX_VND; i++) {
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		vndev = rmnet_vnd_get_by_id(i);
 		if (!vndev) {
 			LOGL("VND %d not in use; skipping", i);
@@ -1159,6 +1216,7 @@ static void rmnet_force_unassociate_device(struct net_device *dev)
 		if (cfg->refcount && (cfg->egress_dev == dev)) {
 			rmnet_unset_logical_endpoint_config(vndev,
 						  RMNET_LOCAL_LOGICAL_ENDPOINT);
+<<<<<<< HEAD
 			vnd_work->vnd_id[j] = i;
 			j++;
 		}
@@ -1173,6 +1231,13 @@ static void rmnet_force_unassociate_device(struct net_device *dev)
 
 	/* Clear the mappings on the phys ep */
 	trace_rmnet_unregister_cb_clear_lepcs(dev);
+=======
+			rmnet_free_vnd_later(i);
+		}
+	}
+
+	/* Clear on the mappings on the phys ep */
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	rmnet_unset_logical_endpoint_config(dev, RMNET_LOCAL_LOGICAL_ENDPOINT);
 	for (i = 0; i < RMNET_DATA_MAX_LOGICAL_EP; i++)
 		rmnet_unset_logical_endpoint_config(dev, i);
@@ -1201,16 +1266,25 @@ int rmnet_config_notify_cb(struct notifier_block *nb,
 	switch (event) {
 	case NETDEV_UNREGISTER_FINAL:
 	case NETDEV_UNREGISTER:
+<<<<<<< HEAD
 		trace_rmnet_unregister_cb_entry(dev);
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		if (_rmnet_is_physical_endpoint_associated(dev)) {
 			LOGH("Kernel is trying to unregister %s", dev->name);
 			rmnet_force_unassociate_device(dev);
 		}
+<<<<<<< HEAD
 		trace_rmnet_unregister_cb_exit(dev);
 		break;
 
 	default:
 		trace_rmnet_unregister_cb_unhandled(dev);
+=======
+		break;
+
+	default:
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		LOGD("Unhandeled event [%lu]", event);
 		break;
 	}

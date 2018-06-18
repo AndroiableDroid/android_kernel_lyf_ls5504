@@ -8,6 +8,14 @@ obj-$(CONFIG_MSMB_CAMERA) += adp1660.o
 obj-$(CONFIG_MSMB_CAMERA) += bd7710.o
 obj-$(CONFIG_MSMB_CAMERA) += msm_led_torch.o
 obj-$(CONFIG_MSMB_CAMERA) += msm_flash.o
+<<<<<<< HEAD
 
 obj-$(CONFIG_MSMB_CAMERA) += zte_lm3642.o
 
+=======
+obj-$(CONFIG_MSMB_CAMERA) += msm_led_gpio_trigger.o
+ifeq ($(CONFIG_MACH_YULONG),y)
+obj-$(CONFIG_MSMB_CAMERA) += sgm3780.o
+endif
+obj-$(CONFIG_MSMB_CAMERA) += lm3642.o
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130

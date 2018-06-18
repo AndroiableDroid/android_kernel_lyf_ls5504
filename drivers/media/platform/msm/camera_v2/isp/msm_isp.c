@@ -348,6 +348,7 @@ void msm_isp_update_req_history(uint32_t client, uint64_t ab,
 }
 
 #ifdef CONFIG_COMPAT
+<<<<<<< HEAD
 struct msm_isp_event_data32 {
 	struct compat_timeval timestamp;
 	struct compat_timeval mono_timestamp;
@@ -358,6 +359,8 @@ struct msm_isp_event_data32 {
 		struct msm_isp_buf_event buf_done;
 	} u;
 };
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static long msm_isp_dqevent(struct file *file, struct v4l2_fh *vfh, void *arg)
 {
 	long rc;

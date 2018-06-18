@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2013-2015, The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2013-2014, The Linux Foundation. All rights reserved.
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -25,12 +29,16 @@
 #include <linux/regulator/consumer.h>
 #include <linux/of.h>
 #include <linux/clk/msm-clock-generic.h>
+<<<<<<< HEAD
 #include <linux/of_platform.h>
 #include <linux/pm_opp.h>
 #include <soc/qcom/clock-local2.h>
 #include <dt-bindings/clock/msm-clocks-a7.h>
 
 #include "clock.h"
+=======
+#include <soc/qcom/clock-local2.h>
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 DEFINE_VDD_REGS_INIT(vdd_cpu, 1);
 
@@ -55,6 +63,7 @@ static struct mux_div_clk a7ssmux = {
 };
 
 static struct clk_lookup clock_tbl_a7[] = {
+<<<<<<< HEAD
 	CLK_LIST(a7ssmux),
 	CLK_LOOKUP_OF("cpu0_clk",	a7ssmux, "fe805664.qcom,pm"),
 	CLK_LOOKUP_OF("cpu1_clk",	a7ssmux, "fe805664.qcom,pm"),
@@ -171,6 +180,22 @@ static void populate_opp_table(struct platform_device *pdev)
 	print_opp_table(a7_cpu);
 }
 
+=======
+	CLK_LOOKUP("cpu0_clk",	a7ssmux.c, "0.qcom,msm-cpufreq"),
+	CLK_LOOKUP("cpu1_clk",	a7ssmux.c, "0.qcom,msm-cpufreq"),
+	CLK_LOOKUP("cpu2_clk",	a7ssmux.c, "0.qcom,msm-cpufreq"),
+	CLK_LOOKUP("cpu3_clk",	a7ssmux.c, "0.qcom,msm-cpufreq"),
+	CLK_LOOKUP("cpu0_clk",	a7ssmux.c, "fe805664.qcom,pm"),
+	CLK_LOOKUP("cpu1_clk",	a7ssmux.c, "fe805664.qcom,pm"),
+	CLK_LOOKUP("cpu2_clk",	a7ssmux.c, "fe805664.qcom,pm"),
+	CLK_LOOKUP("cpu3_clk",	a7ssmux.c, "fe805664.qcom,pm"),
+	CLK_LOOKUP("cpu0_clk",   a7ssmux.c, "8600664.qcom,pm"),
+	CLK_LOOKUP("cpu1_clk",   a7ssmux.c, "8600664.qcom,pm"),
+	CLK_LOOKUP("cpu2_clk",   a7ssmux.c, "8600664.qcom,pm"),
+	CLK_LOOKUP("cpu3_clk",   a7ssmux.c, "8600664.qcom,pm"),
+};
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static int of_get_fmax_vdd_class(struct platform_device *pdev, struct clk *c,
 								char *prop_name)
 {
@@ -280,6 +305,7 @@ static void get_speed_bin_b(struct platform_device *pdev, int *bin,
 	*bin = 0;
 	*version = 0;
 
+<<<<<<< HEAD
 	res = platform_get_resource_byname(pdev, IORESOURCE_MEM, "efuse1");
 	if (res) {
 		base = devm_ioremap(&pdev->dev, res->start, resource_size(res));
@@ -307,6 +333,21 @@ static void get_speed_bin_b(struct platform_device *pdev, int *bin,
 				"No speed/PVS binning available. Defaulting to 0!\n");
 		return;
 	}
+=======
+	res = platform_get_resource_byname(pdev, IORESOURCE_MEM, "efuse");
+	if (!res) {
+		res = platform_get_resource_byname(pdev, IORESOURCE_MEM,
+								"efuse1");
+		if (!res) {
+			dev_info(&pdev->dev,
+				"No speed/PVS binning available. Defaulting to 0!\n");
+			return;
+		}
+		shift = 23;
+		mask  = 0x3;
+	}
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	base = devm_ioremap(&pdev->dev, res->start, resource_size(res));
 	if (!base) {
 		dev_warn(&pdev->dev,
@@ -357,8 +398,11 @@ static int of_get_clk_src(struct platform_device *pdev, struct clk_src *parents)
 	return num_parents;
 }
 
+<<<<<<< HEAD
 static struct platform_device *cpu_clock_a7_dev;
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static int clock_a7_probe(struct platform_device *pdev)
 {
 	struct resource *res;
@@ -368,7 +412,10 @@ static int clock_a7_probe(struct platform_device *pdev)
 	char prop_name[] = "qcom,speedX-bin-vX";
 	const void *prop;
 	bool compat_bin = false;
+<<<<<<< HEAD
 	bool opp_enable;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	compat_bin = of_device_is_compatible(pdev->dev.of_node,
 						"qcom,clock-a53-8916");
@@ -424,8 +471,12 @@ static int clock_a7_probe(struct platform_device *pdev)
 		dev_info(&pdev->dev, "Safe voltage plan loaded.\n");
 	}
 
+<<<<<<< HEAD
 	rc = of_msm_clock_register(pdev->dev.of_node,
 			clock_tbl_a7, ARRAY_SIZE(clock_tbl_a7));
+=======
+	rc = msm_clock_register(clock_tbl_a7, ARRAY_SIZE(clock_tbl_a7));
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	if (rc) {
 		dev_err(&pdev->dev, "msm_clock_register failed\n");
 		return rc;
@@ -453,12 +504,15 @@ static int clock_a7_probe(struct platform_device *pdev)
 		WARN(clk_prepare_enable(&a7ssmux.c),
 			"Unable to turn on CPU clock");
 	put_online_cpus();
+<<<<<<< HEAD
 
 	opp_enable = of_property_read_bool(pdev->dev.of_node,
 						"qcom,enable-opp");
 	if (opp_enable)
 		cpu_clock_a7_dev = pdev;
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	return 0;
 }
 
@@ -485,6 +539,7 @@ static int __init clock_a7_init(void)
 	return platform_driver_register(&clock_a7_driver);
 }
 arch_initcall(clock_a7_init);
+<<<<<<< HEAD
 
 /* CPU devices are not currently available in arch_initcall */
 static int __init cpu_clock_a7_init_opp(void)
@@ -494,3 +549,5 @@ static int __init cpu_clock_a7_init_opp(void)
 	return 0;
 }
 module_init(cpu_clock_a7_init_opp);
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130

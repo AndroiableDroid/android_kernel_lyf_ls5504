@@ -745,6 +745,19 @@ config SENSORS_AP3426
 	  To compile this driver as a module, choose M here: the
 	  module will be called ap3426.
 
+<<<<<<< HEAD
+=======
+config SENSORS_AP3426_CM
+	tristate "AP3426 3-in-1 digital ALPS+PS+IRLED sensor driver (CM variant)"
+	depends on I2C
+	help
+	  Say Y here if you want to enable the AP3426 ALPS sensor
+	  driver (CM variant).
+
+	  To compile this driver as a module, choose M here: the
+	  module will be called ap3426.
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 config SENSORS_LTR553
 	tristate "LTR553 light and proximity device driver"
 	depends on I2C
@@ -765,6 +778,15 @@ config SENSORS_MMC3416X
 	  To compile this driver as a module, choose M here: the
 	  module will be called mmc3416x.
 
+<<<<<<< HEAD
+=======
+config SENSORS_MMC3416X_ALLOW_OVERFLOW
+	tristate "MMC3416X sensor overflow check"
+	depends on SENSORS_MMC3416X
+	help
+	  Say Y here if you want to allow overflow in MMC3416X sensor.
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 config SENSORS_AKM09911
 	tristate "AKM09911 3-axis electronic compass sensor driver"
 	depends on I2C
@@ -775,6 +797,19 @@ config SENSORS_AKM09911
 	  To compile this driver as a module, choose M here: the
 	  module will be called akm09911.
 
+<<<<<<< HEAD
+=======
+config SENSORS_AKM09911_WT
+	tristate "AKM09911 3-axis electronic compass sensor driver (Wingtech)"
+	depends on I2C
+	help
+	  Say Y here if you want to enable the akm09911 ecompass sensor
+	  driver.
+
+	  To compile this driver as a module, choose M here: the
+	  module will be called akm09911_wt.
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 config SENSORS_AKM8963
 	tristate "AKM8963 3-axis electronic compass sensor driver"
 	depends on I2C
@@ -808,6 +843,18 @@ config SENSORS_CAPELLA_CM36283
 	  To compile this driver as a module, choose M here: the
 	  module will be called CM36283.
 
+<<<<<<< HEAD
+=======
+config INPUT_KIONIX_ACCEL
+	tristate "KIONIX_ACCEL"
+	depends on I2C=y
+	help
+	  If you say yes here you get support for the Kionix digital 3-axis
+	  accelerometer.
+	  This driver can also be built as a module. If so, the module will be
+	  called kionix_accel.
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 config SENSORS_BMA2X2
 	tristate "BMA2x2 acceleration sensor support"
 	depends on I2C
@@ -850,6 +897,7 @@ config SENSORS_BMI058
 	 If you say yes here, you get support for Bosch Sensortec's
 	 sensor driver of BMI058.
 
+<<<<<<< HEAD
 source "drivers/input/misc/lsm6ds3/Kconfig"
 
 config SENSORS_AF8133
@@ -858,5 +906,7 @@ config SENSORS_AF8133
 	help
 	  If you say yes here, you get support for magnetic sensors AF813
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 endif
 

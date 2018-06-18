@@ -53,6 +53,13 @@ struct msm_sensor_fn_t {
 	int (*sensor_power_down) (struct msm_sensor_ctrl_t *);
 	int (*sensor_power_up) (struct msm_sensor_ctrl_t *);
 	int (*sensor_match_id) (struct msm_sensor_ctrl_t *);
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_MACH_YULONG
+	int (*sensor_prepare_otp)(struct msm_sensor_ctrl_t *s_ctrl);
+	int (*sensor_update_otp) (struct msm_sensor_ctrl_t *);
+#endif
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 };
 
 struct msm_sensor_ctrl_t {
@@ -79,9 +86,21 @@ struct msm_sensor_ctrl_t {
 	struct device_node *of_node;
 	enum msm_camera_stream_type_t camera_stream_type;
 	uint32_t set_mclk_23880000;
+<<<<<<< HEAD
 };
 
 int msm_sensor_config(struct msm_sensor_ctrl_t *s_ctrl, void __user *argp);
+=======
+#ifdef CONFIG_MACH_YULONG
+	uint32_t module_id;
+#endif
+};
+
+int msm_sensor_config(struct msm_sensor_ctrl_t *s_ctrl, void __user *argp);
+#ifdef CONFIG_MACH_YULONG
+int msm_sensor_config32(struct msm_sensor_ctrl_t *s_ctrl, void __user *argp);
+#endif
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 int msm_sensor_power_up(struct msm_sensor_ctrl_t *s_ctrl);
 
@@ -118,4 +137,12 @@ long msm_sensor_subdev_fops_ioctl(struct file *file,
 	unsigned int cmd,
 	unsigned long arg);
 #endif
+<<<<<<< HEAD
+=======
+
+#ifdef CONFIG_MACH_YULONG
+bool msm_sensor_is_probed(int position);
+#endif
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #endif

@@ -223,6 +223,7 @@ config BUS_TOPOLOGY_ADHOC
 		directionality of connections by explicitly listing device connections
 		thus avoiding illegal routes.
 
+<<<<<<< HEAD
 config DEBUG_BUS_VOTER
 	bool "direct client to vote bus clocks for debugging purposes"
 	depends on BUS_TOPOLOGY_ADHOC
@@ -245,6 +246,8 @@ config I2C_MSM_PROF_DBG
 
 	  This module can also be dynamically linked as a shared kernel object.
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 config MSM_UIM_HSL
 	tristate "User Indentification Module (UIM) on UART High Speed"
 	help
@@ -259,9 +262,16 @@ config QPNP_HAPTIC
 	  on the Qualcomm Technologies' QPNP PMICs. It uses the android
 	  timed-output framework.
 
+<<<<<<< HEAD
 config SEEMP_CORE
 	tristate "SEEMP Core"
 	help
 		This option enables malware protection component
+=======
+config QMP_CORE
+	tristate "QMP Core"
+	help
+		This option enables Qualcomm Malware Protection Sphinx component
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		to log on-device software API activity.
 endmenu

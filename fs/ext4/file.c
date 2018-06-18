@@ -439,7 +439,11 @@ static loff_t ext4_seek_data(struct file *file, loff_t offset, loff_t maxsize)
 
 	mutex_lock(&inode->i_mutex);
 
+<<<<<<< HEAD
 	isize = i_size_read(inode);
+=======
+	isize = i_size_read_uncompressed(inode);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	if (offset >= isize) {
 		mutex_unlock(&inode->i_mutex);
 		return -ENXIO;
@@ -522,7 +526,11 @@ static loff_t ext4_seek_hole(struct file *file, loff_t offset, loff_t maxsize)
 
 	mutex_lock(&inode->i_mutex);
 
+<<<<<<< HEAD
 	isize = i_size_read(inode);
+=======
+	isize = i_size_read_uncompressed(inode);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	if (offset >= isize) {
 		mutex_unlock(&inode->i_mutex);
 		return -ENXIO;
@@ -613,7 +621,11 @@ loff_t ext4_llseek(struct file *file, loff_t offset, int whence)
 	case SEEK_CUR:
 	case SEEK_END:
 		return generic_file_llseek_size(file, offset, whence,
+<<<<<<< HEAD
 						maxbytes, i_size_read(inode));
+=======
+						maxbytes, i_size_read_uncompressed(inode));
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	case SEEK_DATA:
 		return ext4_seek_data(file, offset, maxbytes);
 	case SEEK_HOLE:

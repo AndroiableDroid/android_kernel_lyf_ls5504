@@ -11,6 +11,7 @@
  */
 
 &soc {
+<<<<<<< HEAD
 	/* To use BIMC based bus governor */
 	gpubw: qcom,gpubw {
 		compatible = "qcom,devbw";
@@ -34,6 +35,8 @@
 		qcom,target-dev = <&gpubw>;
 	};
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	msm_gpu: qcom,kgsl-3d0@01c00000 {
 		label = "kgsl-3d0";
 		compatible = "qcom,kgsl-3d0", "qcom,kgsl-3d";
@@ -67,7 +70,10 @@
 				"gtcu_iface_clk";
 
 		/* Bus Scale Settings */
+<<<<<<< HEAD
 		qcom,gpubw-dev = <&gpubw>;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		qcom,msm-bus,name = "grp3d";
 		qcom,msm-bus,num-cases = <4>;
 		qcom,msm-bus,num-paths = <1>;

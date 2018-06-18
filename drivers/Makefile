@@ -4,8 +4,12 @@
 # 15 Sep 2000, Christoph Hellwig <hch@infradead.org>
 # Rewritten to use lists instead of if-statements.
 #
+<<<<<<< HEAD
 #zhongzhu add for fingerprint=====
 obj-y				+= fingerprint/
+=======
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 obj-y				+= irqchip/
 obj-y				+= bus/
 

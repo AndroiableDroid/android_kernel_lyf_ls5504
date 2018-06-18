@@ -24,6 +24,7 @@
 };
 
 &cci {
+<<<<<<< HEAD
 	led_flash0: qcom,led-flash@66 {
 		cell-index = <0>;
 		reg = <0x66>;
@@ -50,6 +51,8 @@
 		qcom,cci-master = <0>;
 	};
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	qcom,camera@0 {
 		qcom,led-flash-src = <&led_flash0>;
 	};

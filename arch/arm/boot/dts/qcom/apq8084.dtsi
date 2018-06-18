@@ -4935,6 +4935,7 @@
 			<0xe0020 0x5555556>,
 			<0xe0024 0x5555556>,
 			<0x80124 0x3>;
+<<<<<<< HEAD
 		qcom,qdss-presets = <0xfc325000 0x1000>,
 			<0xfc326000 0x1000>,
 			<0xfc321000 0x1000>,
@@ -4943,6 +4944,8 @@
 			<0xfc302000 0x1000>,
 			<0xfa180000 0x1000>,
 			<0xfa181000 0x1000>;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		qcom,vidc-iommu-domains {
 			qcom,domain-ns {
 				qcom,vidc-domain-phandle = <&venus_domain_ns>;

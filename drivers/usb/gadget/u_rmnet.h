@@ -58,8 +58,12 @@ enum ctrl_client {
 	NR_CTRL_CLIENTS
 };
 
+<<<<<<< HEAD
 int gbam_setup(unsigned int no_bam_port);
 int gbam2bam_setup(unsigned int no_bam2bam_port);
+=======
+int gbam_setup(unsigned int no_bam_port, unsigned int no_bam2bam_port);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 void gbam_cleanup(void);
 int gbam_connect(struct grmnet *gr, u8 port_num,
 	enum transport_type trans, u8 src_connection_idx,

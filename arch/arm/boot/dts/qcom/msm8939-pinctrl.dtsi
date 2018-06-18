@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* Copyright (c) 2014-2015, The Linux Foundation. All rights reserved.
+=======
+/* Copyright (c) 2014, The Linux Foundation. All rights reserved.
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -30,6 +34,7 @@
 			};
 		};
 
+<<<<<<< HEAD
 		cdc-ext-spk-pa {
 			qcom,pins = <&gp 0>;
 			qcom,num-grp-pins = <1>;
@@ -46,6 +51,8 @@
 			};
 		};
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		pmx-uartconsole {
 			qcom,pins = <&gp 4>, <&gp 5>;
 			qcom,num-grp-pins = <2>;
@@ -75,6 +82,7 @@
 			};
 		};
 
+<<<<<<< HEAD
 		pmx_reg_pu_nfc{
 			qcom,pins = <&gp 17>;
 			qcom,pin-func = <0>;
@@ -92,6 +100,8 @@
 			};
 		};       
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		pmx_rd_nfc_int{
 			qcom,pins = <&gp 21>;
 			qcom,pin-func = <0>;
@@ -100,12 +110,20 @@
 
 			nfc_int_active: active {
 				drive-strength = <6>;
+<<<<<<< HEAD
 				bias-pull-down;
+=======
+				bias-pull-up;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			};
 
 			nfc_int_suspend: suspend {
 				drive-strength = <6>;
+<<<<<<< HEAD
 				bias-pull-down;
+=======
+				bias-pull-up;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			};
 		};
 
@@ -126,10 +144,16 @@
 			};
 		};
 
+<<<<<<< HEAD
 /*
 		blsp1_uart1_active {
 			qcom,pins = <&gp 0>, <&gp 1>, <&gp 3>;
 			qcom,num-grp-pins = <3>;
+=======
+		blsp1_uart1_active {
+			qcom,pins = <&gp 0>, <&gp 1>, <&gp 2>, <&gp 3>;
+			qcom,num-grp-pins = <4>;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			qcom,pin-func = <2>;
 			label = "blsp1_uart1_active";
 
@@ -140,8 +164,13 @@
 		};
 
 		blsp1_uart1_sleep {
+<<<<<<< HEAD
 			qcom,pins = <&gp 0>, <&gp 1>,  <&gp 3>;
 			qcom,num-grp-pins = <3>;
+=======
+			qcom,pins = <&gp 0>, <&gp 1>, <&gp 2>, <&gp 3>;
+			qcom,num-grp-pins = <4>;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			qcom,pin-func = <0>;
 			label = "blsp1_uart1_sleep";
 
@@ -150,7 +179,11 @@
 			        bias-disable;
 			};
 		};
+<<<<<<< HEAD
 */
+=======
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		sdhc2_cd_pin {
 			qcom,pins = <&gp 38>;
 			qcom,num-grp-pins = <1>;
@@ -158,12 +191,20 @@
 			label = "cd-gpio";
 			sdc2_cd_on: cd_on {
 				drive-strength = <2>;
+<<<<<<< HEAD
 				bias-pull-down;
 			};
 			sdc2_cd_off: cd_off {
 				drive-strength = <2>;
 				/*bias-disable;*/
 				bias-pull-up;
+=======
+				bias-pull-up;
+			};
+			sdc2_cd_off: cd_off {
+				drive-strength = <2>;
+				bias-disable;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			};
 		};
 
@@ -225,7 +266,11 @@
 			label = "sdc2-clk";
 			sdc2_clk_on: clk_on {
 				bias-disable; /* NO pull */
+<<<<<<< HEAD
 				drive-strength = <10>; /* 16 MA   bugzilla:72763*/
+=======
+				drive-strength = <16>; /* 16 MA */
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			};
 			sdc2_clk_off: clk_off {
 				bias-disable; /* NO pull */
@@ -322,6 +367,7 @@
 				bias-pull-up;		/* PULL UP*/
 			};
 		};
+<<<<<<< HEAD
 		
 		pcb_check_gpio {
 			qcom,pins = <&gp 108>;
@@ -333,6 +379,8 @@
 				bias-disable = <0>; /* No PULL */
 			};
 		};
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 		usb-id-pin {
 			qcom,pins = <&gp 110>;
@@ -352,7 +400,11 @@
                         qcom,pin-func = <1>;
                         label = "spi0-active";
                         /* active state */
+<<<<<<< HEAD
                         spi0_default: spi0_default {
+=======
+                        spi0_default: default {
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
                                 drive-strength = <12>; /* 12 MA */
                                 bias-disable = <0>; /* No PULL */
                         };
@@ -365,7 +417,11 @@
                         qcom,pin-func = <0>;
                         label = "spi0-suspend";
                         /* suspended state */
+<<<<<<< HEAD
                         spi0_sleep: spi0_sleep {
+=======
+                        spi0_sleep: sleep {
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
                                 drive-strength = <2>; /* 2 MA */
 			        bias-pull-down; /* PULL Down */
                         };
@@ -413,12 +469,19 @@
 			        bias-pull-down; /* PULL Down */
 			};
 		};
+<<<<<<< HEAD
 /*
 		spi5_active {
+=======
+
+		spi5_active {
+                        /* MOSI, MISO, CLK */
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
                         qcom,pins = <&gp 16>, <&gp 17>, <&gp 19>;
                         qcom,num-grp-pins = <3>;
                         qcom,pin-func = <1>;
                         label = "spi5-active";
+<<<<<<< HEAD
                         spi5_default: spi5_default {
                                 drive-strength = <16>;
                                 bias-disable = <0>;
@@ -427,17 +490,39 @@
 
 
                 spi5_suspend {
+=======
+                        /* active state */
+                        spi5_default: default {
+                                drive-strength = <16>; /* 16 MA */
+                                bias-disable = <0>; /* No PULL */
+                        };
+                };
+
+                spi5_suspend {
+                        /* MOSI, MISO, CLK */
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
                         qcom,pins = <&gp 16>, <&gp 17>, <&gp 19>;
                         qcom,num-grp-pins = <3>;
                         qcom,pin-func = <0>;
                         label = "spi5-suspend";
+<<<<<<< HEAD
                         spi5_sleep: spi5_sleep {
                                 drive-strength = <2>; 
                                 bias-disable = <0>;
+=======
+                        /* suspended state */
+                        spi5_sleep: sleep {
+                                drive-strength = <2>; /* 2 MA */
+                                bias-disable = <0>; /* No PULL */
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
                         };
                 };
 
                 spi5_cs0_active {
+<<<<<<< HEAD
+=======
+                        /* CS */
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
                         qcom,pins = <&gp 18>;
                         qcom,num-grp-pins = <1>;
                         qcom,pin-func = <1>;
@@ -449,6 +534,10 @@
                 };
 
                 spi5_cs0_suspend {
+<<<<<<< HEAD
+=======
+                        /* CS */
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
                         qcom,pins = <&gp 18>;
                         qcom,num-grp-pins = <1>;
                         qcom,pin-func = <0>;
@@ -458,7 +547,11 @@
                                 bias-disable = <0>;
                         };
                 };
+<<<<<<< HEAD
 */
+=======
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		wcnss_pmux_gpio: wcnss_pmux_gpio {
 			/* Uses general purpose pins */
 			qcom,pins = <&gp 40>, <&gp 41>,
@@ -475,9 +568,15 @@
 		};
 
 		tlmm_gpio_key {
+<<<<<<< HEAD
 			qcom,pins = <&gp 107>, <&gp 109>;
 			qcom,pin-func = <0>;
 			qcom,num-grp-pins = <2>;
+=======
+			qcom,pins = <&gp 107>, <&gp 108>, <&gp 109>;
+			qcom,pin-func = <0>;
+			qcom,num-grp-pins = <3>;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			label = "tlmm_gpio_key";
 			gpio_key_active: gpio_key_active {
 				drive-strength = <2>;
@@ -562,6 +661,7 @@
 			};
 		};
 
+<<<<<<< HEAD
 		mod_en_active {
 			qcom,pins = <&gp 97>;
 			qcom,pin-func = <0>;
@@ -586,6 +686,8 @@
 			};
 		};
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		disp_vsn_active {
 			qcom,pins = <&gp 77>;
 			qcom,pin-func = <0>;
@@ -610,6 +712,7 @@
 			};
 		};
 
+<<<<<<< HEAD
 		ddic_rst_active {
 			qcom,pins = <&gp 25>;
 			qcom,pin-func = <0>;
@@ -634,6 +737,8 @@
 			};
 		};
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		pmx_ts_release {
 			qcom,pins = <&gp 13>, <&gp 12>;
 			qcom,num-grp-pins = <2>;
@@ -669,7 +774,11 @@
 			label = "mpu6050-irq";
 			mpu6050_default: mpu6050_default {
 				drive-strength = <6>;
+<<<<<<< HEAD
 				bias-pull-up;
+=======
+				bias-pull-down;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			};
 			mpu6050_sleep: mpu6050_sleep {
 				drive-strength = <2>;
@@ -746,7 +855,11 @@
 			};
 			cdc_pdm_lines_sus: pdm_lines_off {
 				drive-strength = <2>;
+<<<<<<< HEAD
 				bias-pull-down;
+=======
+				bias-disable;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			};
 		};
 
@@ -1039,8 +1152,13 @@
 
 		cam_sensor_rear {
 			/* RESET, STANDBY */
+<<<<<<< HEAD
 			qcom,pins =  <&gp 35>, <&gp 34>, <&gp 2>;
 			qcom,num-grp-pins = <3>;
+=======
+			qcom,pins =  <&gp 35>, <&gp 34>;
+			qcom,num-grp-pins = <2>;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			qcom,pin-func = <0>;
 			label = "cam-sensor-rear";
 			/* active state */
@@ -1052,8 +1170,13 @@
 
 		cam_sensor_rear_sleep {
 			/* RESET, STANDBY */
+<<<<<<< HEAD
 			qcom,pins =  <&gp 35>, <&gp 34>, <&gp 2>;
 			qcom,num-grp-pins = <3>;
+=======
+			qcom,pins =  <&gp 35>, <&gp 34>;
+			qcom,num-grp-pins = <2>;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			qcom,pin-func = <0>;
 			label = "cam-sensor-rear-sleep";
 			/*suspend state */

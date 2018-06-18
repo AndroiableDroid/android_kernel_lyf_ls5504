@@ -230,7 +230,11 @@ static int adm_get_next_available_copp(int port_idx)
 }
 
 int adm_dts_eagle_set(int port_id, int copp_idx, int param_id,
+<<<<<<< HEAD
 		      void *data, uint32_t size)
+=======
+		      void *data, int size)
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 {
 	struct adm_cmd_set_pp_params_v5	admp;
 	int p_idx, ret = 0, *update_params_value;
@@ -303,11 +307,18 @@ fail_cmd:
 }
 
 int adm_dts_eagle_get(int port_id, int copp_idx, int param_id,
+<<<<<<< HEAD
 		      void *data, uint32_t size)
 {
 	struct adm_cmd_get_pp_params_v5	*admp = NULL;
 	int p_idx, sz, ret = 0;
 	uint32_t orig_size = size;
+=======
+		      void *data, int size)
+{
+	struct adm_cmd_get_pp_params_v5	*admp = NULL;
+	int p_idx, sz, ret = 0, orig_size = size;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	pr_debug("DTS_EAGLE_ADM - %s: port id %i, copp idx %i, param id 0x%X\n",
 		 __func__, port_id, copp_idx, param_id);
@@ -320,8 +331,13 @@ int adm_dts_eagle_get(int port_id, int copp_idx, int param_id,
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 	if ((size == 0) || !data) {
 		pr_err("DTS_EAGLE_ADM - %s: invalid size %u or pointer %p.\n",
+=======
+	if (size <= 0 || !data) {
+		pr_err("DTS_EAGLE_ADM - %s: invalid size %i or pointer %p.\n",
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			__func__, size, data);
 		return -EINVAL;
 	}
@@ -1952,14 +1968,24 @@ int adm_open(int port_id, int path, int rate, int channel_mode, int topology,
 		} else if (channel_mode == 4) {
 			open.dev_channel_mapping[0] = PCM_CHANNEL_FL;
 			open.dev_channel_mapping[1] = PCM_CHANNEL_FR;
+<<<<<<< HEAD
 			open.dev_channel_mapping[2] = PCM_CHANNEL_RB;
 			open.dev_channel_mapping[3] = PCM_CHANNEL_LB;
+=======
+			open.dev_channel_mapping[2] = PCM_CHANNEL_LS;
+			open.dev_channel_mapping[3] = PCM_CHANNEL_RS;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		} else if (channel_mode == 5) {
 			open.dev_channel_mapping[0] = PCM_CHANNEL_FL;
 			open.dev_channel_mapping[1] = PCM_CHANNEL_FR;
 			open.dev_channel_mapping[2] = PCM_CHANNEL_FC;
+<<<<<<< HEAD
 			open.dev_channel_mapping[3] = PCM_CHANNEL_LB;
 			open.dev_channel_mapping[4] = PCM_CHANNEL_RB;
+=======
+			open.dev_channel_mapping[3] = PCM_CHANNEL_LS;
+			open.dev_channel_mapping[4] = PCM_CHANNEL_RS;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		} else if (channel_mode == 6) {
 			open.dev_channel_mapping[0] = PCM_CHANNEL_FL;
 			open.dev_channel_mapping[1] = PCM_CHANNEL_FR;
@@ -1972,10 +1998,17 @@ int adm_open(int port_id, int path, int rate, int channel_mode, int topology,
 			open.dev_channel_mapping[1] = PCM_CHANNEL_FR;
 			open.dev_channel_mapping[2] = PCM_CHANNEL_LFE;
 			open.dev_channel_mapping[3] = PCM_CHANNEL_FC;
+<<<<<<< HEAD
 			open.dev_channel_mapping[4] = PCM_CHANNEL_LB;
 			open.dev_channel_mapping[5] = PCM_CHANNEL_RB;
 			open.dev_channel_mapping[6] = PCM_CHANNEL_FLC;
 			open.dev_channel_mapping[7] = PCM_CHANNEL_FRC;
+=======
+			open.dev_channel_mapping[4] = PCM_CHANNEL_LS;
+			open.dev_channel_mapping[5] = PCM_CHANNEL_RS;
+			open.dev_channel_mapping[6] = PCM_CHANNEL_LB;
+			open.dev_channel_mapping[7] = PCM_CHANNEL_RB;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		} else {
 			pr_err("%s: invalid num_chan %d\n", __func__,
 					channel_mode);
@@ -2126,7 +2159,13 @@ int adm_matrix_map(int path, struct route_payload payload_map, int perf_mode)
 					    atomic_read(&this_adm.copp.id
 							[port_idx][copp_idx]),
 					    get_cal_path(path),
+<<<<<<< HEAD
 					    payload_map.session_id);
+=======
+					    payload_map.session_id,
+					    payload_map.app_type,
+					    payload_map.acdb_dev_id);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			send_adm_cal(payload_map.port_id[i], copp_idx,
 				     get_cal_path(path), perf_mode,
 				     payload_map.app_type,

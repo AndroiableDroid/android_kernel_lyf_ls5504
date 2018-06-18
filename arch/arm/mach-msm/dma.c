@@ -1,9 +1,16 @@
+<<<<<<< HEAD
 /*
  * linux/arch/arm/mach-msm/dma.c
  *
  * Copyright (C) 2007 Google, Inc.
  * Copyright (c) 2008-2010, 2012, 2013, 2015 The Linux Foundation. All
  * rights reserved.
+=======
+/* linux/arch/arm/mach-msm/dma.c
+ *
+ * Copyright (C) 2007 Google, Inc.
+ * Copyright (c) 2008-2010, 2012, 2013 The Linux Foundation. All rights reserved.
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This software is licensed under the terms of the GNU General Public
  * License version 2, as published by the Free Software Foundation, and
@@ -364,7 +371,11 @@ static void msm_dmov_enqueue_cmd_ext_work(struct work_struct *work)
 				 * and still hold the list lock.
 				 * Thus, no need to check for cmd == NULL
 				 */
+<<<<<<< HEAD
 				if (cmd && cmd->toflush) {
+=======
+				if (cmd->toflush) {
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 					int flush = (cmd->toflush == GRACEFUL) ?
 							1 << 31 : 0;
 					writel_relaxed(flush,

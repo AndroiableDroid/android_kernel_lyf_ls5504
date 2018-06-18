@@ -283,6 +283,7 @@
 	msm_vidc: qcom,vidc@fdc00000 {
 		compatible = "qcom,msm-vidc";
 		reg = <0xfdc00000 0xff000>;
+<<<<<<< HEAD
 		qcom,qdss-presets = <0xfc307000 0x1000>,
 			<0xfc322000 0x1000>,
 			<0xfc319000 0x1000>,
@@ -291,6 +292,8 @@
 			<0xfc321000 0x1000>,
 			<0xfa180000 0x1000>,
 			<0xfa181000 0x1000>;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		interrupts = <0 44 0>;
 		venus-supply = <&gdsc_venus>;
 		qcom,hfi = "venus";

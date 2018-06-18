@@ -20,30 +20,50 @@
 
 TRACE_EVENT(bus_update_request,
 
+<<<<<<< HEAD
 	TP_PROTO(int sec, int nsec, const char *name, int src, int dest,
 		unsigned long long ab, unsigned long long ib, int active_only),
 
 	TP_ARGS(sec, nsec, name, src, dest, ab, ib, active_only),
+=======
+	TP_PROTO(int sec, int nsec, const char *name, unsigned int index,
+		int src, int dest, unsigned long long ab,
+		unsigned long long ib),
+
+	TP_ARGS(sec, nsec, name, index, src, dest, ab, ib),
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	TP_STRUCT__entry(
 		__field(int, sec)
 		__field(int, nsec)
 		__string(name, name)
+<<<<<<< HEAD
+=======
+		__field(u32, index)
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		__field(int, src)
 		__field(int, dest)
 		__field(u64, ab)
 		__field(u64, ib)
+<<<<<<< HEAD
 		__field(int, active_only)
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	),
 
 	TP_fast_assign(
 		__entry->sec = sec;
 		__entry->nsec = nsec;
 		__assign_str(name, name);
+<<<<<<< HEAD
+=======
+		__entry->index = index;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		__entry->src = src;
 		__entry->dest = dest;
 		__entry->ab = ab;
 		__entry->ib = ib;
+<<<<<<< HEAD
 		__entry->active_only = active_only;
 	),
 
@@ -73,6 +93,19 @@ TRACE_EVENT(bus_update_request_end,
 	),
 
 	TP_printk("client-name:%s", __get_str(name))
+=======
+	),
+
+	TP_printk("time= %d.%d name=%s index=%u src=%d dest=%d ab=%llu ib=%llu",
+		__entry->sec,
+		__entry->nsec,
+		__get_str(name),
+		(unsigned int)__entry->index,
+		__entry->src,
+		__entry->dest,
+		(unsigned long long)__entry->ab,
+		(unsigned long long)__entry->ib)
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 );
 
 TRACE_EVENT(bus_bimc_config_limiter,
@@ -91,7 +124,11 @@ TRACE_EVENT(bus_bimc_config_limiter,
 		__entry->cur_lim_bw = cur_lim_bw;
 	),
 
+<<<<<<< HEAD
 	TP_printk("Master:%d cur_lim_bw:%llu",
+=======
+	TP_printk("Master=%d cur_lim_bw=%llu",
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		__entry->mas_id,
 		(unsigned long long)__entry->cur_lim_bw)
 );
@@ -112,7 +149,11 @@ TRACE_EVENT(bus_avail_bw,
 		__entry->cur_mdp_bw = cur_mdp_bw;
 	),
 
+<<<<<<< HEAD
 	TP_printk("cur_bimc_bw:%llu cur_mdp_bw:%llu",
+=======
+	TP_printk("cur_bimc_bw = %llu cur_mdp_bw = %llu",
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		(unsigned long long)__entry->cur_bimc_bw,
 		(unsigned long long)__entry->cur_mdp_bw)
 );
@@ -140,7 +181,11 @@ TRACE_EVENT(bus_rules_matches,
 		__entry->node_clk = node_clk;
 	),
 
+<<<<<<< HEAD
 	TP_printk("node:%d rule:%d node-ab:%llu ib:%llu clk:%llu",
+=======
+	TP_printk("Rule match node%d rule%d node-ab%llu:ib%llu:clk%llu",
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		__entry->node_id, __entry->rule_id,
 		(unsigned long long)__entry->node_ab,
 		(unsigned long long)__entry->node_ib,
@@ -169,11 +214,16 @@ TRACE_EVENT(bus_bke_params,
 		__entry->thh = thh;
 	),
 
+<<<<<<< HEAD
 	TP_printk("GC:0x%x GP:0x%x THL:0x%x THM:0x%x THH:0x%x",
+=======
+	TP_printk("BKE Params GC=0x%x GP=0x%x THL=0x%x THM=0x%x THH=0x%x",
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		__entry->gc, __entry->gp, __entry->thl, __entry->thm,
 			__entry->thh)
 );
 
+<<<<<<< HEAD
 TRACE_EVENT(bus_noc_set_qos_mode,
 	TP_PROTO(long base, uint32_t qos_off,
 		uint32_t mport, uint32_t qos_delta, uint8_t mode,
@@ -284,6 +334,8 @@ TRACE_EVENT(bus_rules_apply,
 		(unsigned long long)__entry->limit_bw,
 		__entry->throttle_en)
 );
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #endif
 #define TRACE_INCLUDE_FILE trace_msm_bus
 #include <trace/define_trace.h>

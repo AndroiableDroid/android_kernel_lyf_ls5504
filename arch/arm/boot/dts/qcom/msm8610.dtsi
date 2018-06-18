@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* Copyright (c) 2012-2015, The Linux Foundation. All rights reserved.
+=======
+/* Copyright (c) 2012-2014, The Linux Foundation. All rights reserved.
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -11,7 +15,10 @@
  */
 
 #include "skeleton.dtsi"
+<<<<<<< HEAD
 #include <dt-bindings/clock/msm-clocks-a7.h>
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 / {
 	model = "Qualcomm Technologies, Inc. MSM 8610";
@@ -535,7 +542,11 @@
 		qcom,ipi-ping;
 	};
 
+<<<<<<< HEAD
 	clock_cpu: qcom,clock-a7@f9011050 {
+=======
+	qcom,clock-a7@f9011050 {
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		compatible = "qcom,clock-a7-8226";
 		reg = <0xf9011050 0x8>,
 		      <0xfc4b80b8 0x8>;
@@ -553,7 +564,10 @@
 			<1094400000 3>;
 
 		cpu-vdd-supply = <&apc_vreg_corner>;
+<<<<<<< HEAD
 		#clock-cells = <1>;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	};
 
 	cpubw: qcom,cpubw {
@@ -583,6 +597,7 @@
 		};
 	};
 
+<<<<<<< HEAD
 	qcom,msm-cpufreq {
 		reg = <0 4>;
 		compatible = "qcom,msm-cpufreq";
@@ -592,6 +607,11 @@
 			 <&clock_cpu  clk_a7ssmux>;
 		clock-names = "cpu0_clk", "cpu1_clk",
 				"cpu2_clk", "cpu3_clk";
+=======
+	qcom,msm-cpufreq@0 {
+		reg = <0 4>;
+		compatible = "qcom,msm-cpufreq";
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		qcom,cpufreq-table =
 			<  300000 >,
 			<  384000 >,

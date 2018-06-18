@@ -143,6 +143,7 @@
 		<0x80124 0x00000001>,
 		<0xE0020 0x5555556>,
 		<0xE0024 0x0>;
+<<<<<<< HEAD
 	qcom,qdss-presets = <0xfc307000 0x1000>,
 		<0xfc322000 0x1000>,
 		<0xfc319000 0x1000>,
@@ -151,6 +152,8 @@
 		<0xfc321000 0x1000>,
 		<0xfa180000 0x1000>,
 		<0xfa181000 0x1000>;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	qcom,iommu-groups = <&venus_domain_ns &venus_domain_cp>;
 	qcom,iommu-group-buffer-types = <0xfff 0x1ff>;
 	qcom,msm-bus-clients {

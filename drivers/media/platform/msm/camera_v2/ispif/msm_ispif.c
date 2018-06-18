@@ -1052,7 +1052,15 @@ static void ispif_process_irq(struct ispif_device *ispif,
 
 	if (out[vfe_id].ispifIrqStatus0 &
 			ISPIF_IRQ_STATUS_PIX_SOF_MASK) {
+<<<<<<< HEAD
 		ispif->sof_count[vfe_id].sof_cnt[PIX0]++;
+=======
+		if (ispif->ispif_sof_debug < 5)
+			pr_err("%s: PIX0 frame id: %u\n", __func__,
+				ispif->sof_count[vfe_id].sof_cnt[PIX0]);
+		ispif->sof_count[vfe_id].sof_cnt[PIX0]++;
+		ispif->ispif_sof_debug++;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	}
 	if (out[vfe_id].ispifIrqStatus0 &
 			ISPIF_IRQ_STATUS_RDI0_SOF_MASK) {
@@ -1160,7 +1168,12 @@ static int msm_ispif_set_vfe_info(struct ispif_device *ispif,
 	struct msm_ispif_vfe_info *vfe_info)
 {
 	memcpy(&ispif->vfe_info, vfe_info, sizeof(struct msm_ispif_vfe_info));
+<<<<<<< HEAD
 
+=======
+	if (ispif->vfe_info.num_vfe > ispif->hw_num_isps)
+		return -EINVAL;
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	return 0;
 }
 
@@ -1329,9 +1342,22 @@ static struct v4l2_file_operations msm_ispif_v4l2_subdev_fops;
 static long msm_ispif_subdev_ioctl(struct v4l2_subdev *sd,
 	unsigned int cmd, void *arg)
 {
+<<<<<<< HEAD
 	switch (cmd) {
 	case VIDIOC_MSM_ISPIF_CFG:
 		return msm_ispif_cmd(sd, arg);
+=======
+	struct ispif_device *ispif =
+		(struct ispif_device *)v4l2_get_subdevdata(sd);
+
+	switch (cmd) {
+	case VIDIOC_MSM_ISPIF_CFG:
+		return msm_ispif_cmd(sd, arg);
+	case MSM_SD_NOTIFY_FREEZE: {
+		ispif->ispif_sof_debug = 0;
+		return 0;
+	}
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	case MSM_SD_SHUTDOWN: {
 		struct ispif_device *ispif =
 			(struct ispif_device *)v4l2_get_subdevdata(sd);

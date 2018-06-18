@@ -47,12 +47,20 @@ struct _aarch64_ctx {
 
 #define FPSIMD_MAGIC	0x46508001
 
+<<<<<<< HEAD
+=======
+#if defined (__LP64__)
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 struct fpsimd_context {
 	struct _aarch64_ctx head;
 	__u32 fpsr;
 	__u32 fpcr;
 	__uint128_t vregs[32];
 };
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 /* ESR_EL1 context */
 #define ESR_MAGIC	0x45535201

@@ -594,6 +594,16 @@ static void cluster_unprepare(struct lpm_cluster *cluster,
 	level = &cluster->levels[cluster->last_level];
 	if (level->notify_rpm) {
 		msm_rpm_exit_sleep();
+<<<<<<< HEAD
+=======
+
+		/* If RPM bumps up CX to turbo, unvote CX turbo vote
+		 * during exit of rpm assisted power collapse to
+		 * reduce the power impact
+		 */
+
+		lpm_wa_cx_unvote_send();
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		msm_mpm_exit_sleep(from_idle);
 	}
 
@@ -824,8 +834,11 @@ static void register_cpu_lpm_stats(struct lpm_cpu *cpu,
 
 	lpm_stats_config_level("cpu", level_name, cpu->nlevels,
 			parent->stats, &parent->child_cpus);
+<<<<<<< HEAD
 
 	kfree(level_name);
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 }
 
 static void register_cluster_lpm_stats(struct lpm_cluster *cl,

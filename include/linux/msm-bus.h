@@ -66,6 +66,7 @@ struct msm_bus_scale_pdata {
 	unsigned int active_only;
 };
 
+<<<<<<< HEAD
 struct msm_bus_client_handle {
 	char *name;
 	int mas;
@@ -76,6 +77,8 @@ struct msm_bus_client_handle {
 	bool active_only;
 };
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 /* Scaling APIs */
 
 /*
@@ -89,19 +92,25 @@ int __init msm_bus_fabric_init_driver(void);
 uint32_t msm_bus_scale_register_client(struct msm_bus_scale_pdata *pdata);
 int msm_bus_scale_client_update_request(uint32_t cl, unsigned int index);
 void msm_bus_scale_unregister_client(uint32_t cl);
+<<<<<<< HEAD
 
 struct msm_bus_client_handle*
 msm_bus_scale_register(uint32_t mas, uint32_t slv, char *name,
 							bool active_only);
 void msm_bus_scale_unregister(struct msm_bus_client_handle *cl);
 int msm_bus_scale_update_bw(struct msm_bus_client_handle *cl, u64 ab, u64 ib);
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 /* AXI Port configuration APIs */
 int msm_bus_axi_porthalt(int master_port);
 int msm_bus_axi_portunhalt(int master_port);
 
 #else
 static inline int __init msm_bus_fabric_init_driver(void) { return 0; }
+<<<<<<< HEAD
 static struct msm_bus_client_handle dummy_cl;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 static inline uint32_t
 msm_bus_scale_register_client(struct msm_bus_scale_pdata *pdata)
@@ -129,6 +138,7 @@ static inline int msm_bus_axi_portunhalt(int master_port)
 {
 	return 0;
 }
+<<<<<<< HEAD
 
 static inline struct msm_bus_client_handle*
 msm_bus_scale_register(uint32_t mas, uint32_t slv, char *name,
@@ -147,6 +157,8 @@ msm_bus_scale_update_bw(uint32_t cl, u64 ab, u64 ib)
 	return 0;
 }
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #endif
 
 #if defined(CONFIG_OF) && defined(CONFIG_MSM_BUS_SCALING)

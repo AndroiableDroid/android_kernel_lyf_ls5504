@@ -206,7 +206,10 @@ struct ehci_hcd {			/* one per controller */
 	unsigned		resume_sof_bug:1;/*Chip Idea HC*/
 	unsigned		reset_sof_bug:1; /*Chip Idea HC*/
 	bool			disable_cerr;
+<<<<<<< HEAD
 	bool			no_testmode_suspend; /* MSM Chipidea HC */
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	u32			reset_delay;
 	unsigned		imx28_write_fix:1; /* For Freescale i.MX28 */
 

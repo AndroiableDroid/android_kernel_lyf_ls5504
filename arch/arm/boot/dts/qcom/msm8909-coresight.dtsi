@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* Copyright (c) 2014-2015, The Linux Foundation. All rights reserved.
+=======
+/* Copyright (c) 2014, The Linux Foundation. All rights reserved.
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -237,10 +241,13 @@
 		clocks = <&clock_rpm clk_qdss_clk>,
 			 <&clock_rpm clk_qdss_a_clk>;
 		clock-names = "core_clk", "core_a_clk";
+<<<<<<< HEAD
 
 		qcom,cti-gpio-trigout = <2>;
 		pinctrl-names = "cti-trigout-pctrl";
 		pinctrl-0 = <&trigout_a0>;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	};
 
 	cti7: cti@817000 {
@@ -519,9 +526,16 @@
 		reg = <0x86c000 0x108>,
 		      <0x86cfb0 0x4>,
 		      <0x78c5010 0x4>,
+<<<<<<< HEAD
 		      <0x7885010 0x4>;
 		reg-names = "wrapper-mux", "wrapper-lockaccess", "usbbam-mux",
 		            "blsp-mux";
+=======
+		      <0x7885010 0x4>,
+		      <0x801020 0x10>;
+		reg-names = "wrapper-mux", "wrapper-lockaccess", "usbbam-mux",
+		            "blsp-mux", "apb-mux";
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		coresight-id = <31>;
 		coresight-name = "coresight-hwevent";
 		coresight-nr-inports = <0>;
@@ -593,6 +607,7 @@
 		qcom,vdd-io-voltage-level = <1800000 2950000>;
 		qcom,vdd-io-current-level = <200 50000>;
 	};
+<<<<<<< HEAD
 
 	dbgui: dbgui@86d000 {
 		compatible = "qcom,coresight-dbgui";
@@ -614,5 +629,7 @@
 			 <&clock_rpm clk_qdss_a_clk>;
 		clock-names = "core_clk", "core_a_clk";
 	};
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 };
 

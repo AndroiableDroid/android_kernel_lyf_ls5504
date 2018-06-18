@@ -186,6 +186,7 @@ void mdss_check_dsi_ctrl_status(struct work_struct *work, uint32_t interval)
 	mutex_unlock(&ctl->offlock);
 
 	if ((pstatus_data->mfd->panel_power_state == MDSS_PANEL_POWER_ON)) {
+<<<<<<< HEAD
 		if (ret >= 0)
 		{
 			//pr_err("JackChen:MDSS_PANEL_POWER_ON check_status normal\n");
@@ -197,5 +198,12 @@ void mdss_check_dsi_ctrl_status(struct work_struct *work, uint32_t interval)
 			pr_err("JackChen:MDSS_PANEL_POWER_ON check_status lcd dead\n");
 			mdss_report_panel_dead(pstatus_data);
 		}
+=======
+		if (ret > 0)
+			schedule_delayed_work(&pstatus_data->check_status,
+				msecs_to_jiffies(interval));
+		else
+			mdss_report_panel_dead(pstatus_data);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	}
 }

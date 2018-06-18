@@ -27,8 +27,11 @@
 #ifndef _SELINUX_NETNODE_H
 #define _SELINUX_NETNODE_H
 
+<<<<<<< HEAD
 void sel_netnode_flush(void);
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 int sel_netnode_sid(void *addr, u16 family, u32 *sid);
 
 #endif

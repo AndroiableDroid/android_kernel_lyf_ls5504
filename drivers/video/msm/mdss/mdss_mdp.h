@@ -495,7 +495,10 @@ struct mdss_overlay_private {
 	struct mdss_mdp_data free_list[MAX_FREE_LIST_SIZE];
 	int free_list_size;
 	int ad_state;
+<<<<<<< HEAD
 	int dyn_pu_state;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	bool handoff;
 	u32 splash_mem_addr;
@@ -625,6 +628,7 @@ static inline int mdss_mdp_line_buffer_width(void)
 	return MAX_LINE_BUFFER_WIDTH;
 }
 
+<<<<<<< HEAD
 static inline bool mdss_mdp_req_init_restore_cfg(struct mdss_data_type *mdata)
 {
 	if ((mdata->mdp_rev == MDSS_MDP_HW_REV_106) ||
@@ -634,6 +638,8 @@ static inline bool mdss_mdp_req_init_restore_cfg(struct mdss_data_type *mdata)
 	return false;
 }
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static inline int mdss_mdp_panic_signal_support_mode(
 	struct mdss_data_type *mdata, struct mdss_mdp_pipe *pipe)
 {
@@ -963,4 +969,9 @@ int mdss_mdp_wb_set_secure(struct msm_fb_data_type *mfd, int enable);
 int mdss_mdp_wb_get_secure(struct msm_fb_data_type *mfd, uint8_t *enable);
 void mdss_mdp_ctl_restore(void);
 int  mdss_mdp_ctl_reset(struct mdss_mdp_ctl *ctl);
+<<<<<<< HEAD
+=======
+int mdss_mdp_user_pcc_config(struct mdp_pcc_cfg_data *config);
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #endif /* MDSS_MDP_H */

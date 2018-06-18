@@ -23,7 +23,10 @@ struct mmc_gpio {
 	char *ro_label;
 	bool status;
 	char cd_label[0]; /* Must be last entry */
+<<<<<<< HEAD
 	bool detection;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 };
 
 static int mmc_gpio_get_status(struct mmc_host *host)
@@ -78,6 +81,7 @@ out:
 	return IRQ_HANDLED;
 }
 
+<<<<<<< HEAD
 int mmc_gpio_detection(struct mmc_host *host)
 {
 	/* Schedule a card detection after a debounce timeout */
@@ -115,6 +119,8 @@ int mmc_gpio_detection(struct mmc_host *host)
 	return 0;
 }
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static int mmc_gpio_alloc(struct mmc_host *host)
 {
 	size_t len = strlen(dev_name(host->parent)) + 4;

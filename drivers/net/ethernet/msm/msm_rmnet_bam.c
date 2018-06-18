@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* Copyright (c) 2011-2015, The Linux Foundation. All rights reserved.
+=======
+/* Copyright (c) 2011-2014, The Linux Foundation. All rights reserved.
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -29,8 +33,11 @@
 #include <linux/if_arp.h>
 #include <linux/msm_rmnet.h>
 #include <linux/platform_device.h>
+<<<<<<< HEAD
 #include <linux/workqueue.h>
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #include <net/pkt_sched.h>
 
 #include <soc/qcom/bam_dmux.h>
@@ -90,11 +97,14 @@ struct rmnet_private {
 	uint8_t in_reset;
 };
 
+<<<<<<< HEAD
 struct rmnet_free_bam_work {
 	struct work_struct work;
 	uint32_t ch_id;
 };
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #ifdef CONFIG_MSM_RMNET_DEBUG
 static unsigned long timeout_us;
 
@@ -160,8 +170,11 @@ DEVICE_ATTR(timeout, 0664, timeout_show, timeout_store);
 static int rmnet_ioctl(struct net_device *dev, struct ifreq *ifr, int cmd);
 static struct platform_driver bam_rmnet_drivers[BAM_DMUX_NUM_CHANNELS];
 
+<<<<<<< HEAD
 static struct net_device *netdevs[BAM_DMUX_NUM_CHANNELS];
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static __be16 rmnet_ip_type_trans(struct sk_buff *skb, struct net_device *dev)
 {
 	__be16 protocol = 0;
@@ -226,7 +239,11 @@ static void bam_recv_notify(void *dev, struct sk_buff *skb)
 			p->stats.rx_packets, skb->len);
 
 		/* Deliver to network stack */
+<<<<<<< HEAD
 		netif_rx_ni(skb);
+=======
+		netif_rx(skb);
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	} else
 		pr_err("[%s] %s: No skb received",
 			((struct net_device *)dev)->name, __func__);
@@ -531,6 +548,7 @@ static const struct net_device_ops rmnet_ops_ip = {
 	.ndo_validate_addr = 0,
 };
 
+<<<<<<< HEAD
 static void _rmnet_free_bam_later(struct work_struct *work)
 {
 	struct rmnet_free_bam_work *fwork;
@@ -548,12 +566,18 @@ static void _rmnet_free_bam_later(struct work_struct *work)
 	kfree(work);
 }
 
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static int rmnet_ioctl_extended(struct net_device *dev, struct ifreq *ifr)
 {
 	struct rmnet_ioctl_extended_s ext_cmd;
 	int rc = 0;
 	struct rmnet_private *p = netdev_priv(dev);
+<<<<<<< HEAD
 	struct rmnet_free_bam_work *work;
+=======
+
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	rc = copy_from_user(&ext_cmd, ifr->ifr_ifru.ifru_data,
 			    sizeof(ext_cmd));
@@ -577,6 +601,7 @@ static int rmnet_ioctl_extended(struct net_device *dev, struct ifreq *ifr)
 		strlcpy(ext_cmd.u.if_name, RMNET_BAM_DRIVER_NAME,
 			sizeof(ext_cmd.u.if_name));
 		break;
+<<<<<<< HEAD
 	case RMNET_IOCTL_DEREGISTER_DEV:
 		work = kmalloc(sizeof(*work), GFP_KERNEL);
 		if (!work)
@@ -586,6 +611,8 @@ static int rmnet_ioctl_extended(struct net_device *dev, struct ifreq *ifr)
 		work->ch_id = p->ch_id;
 		schedule_work(&work->work);
 		break;
+=======
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	default:
 		rc = -EINVAL;
 		break;
@@ -756,6 +783,10 @@ static void rmnet_setup(struct net_device *dev)
 	dev->watchdog_timeo = 1000; /* 10 seconds? */
 }
 
+<<<<<<< HEAD
+=======
+static struct net_device *netdevs[BAM_DMUX_NUM_CHANNELS];
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 #ifdef CONFIG_MSM_RMNET_DEBUG
 static int rmnet_debug_init(struct net_device *dev)
@@ -894,7 +925,11 @@ static int __init rmnet_init(void)
 	rmnet_clear_timeout_us();
 
 	n = 0;
+<<<<<<< HEAD
 	while (n <= BAM_DMUX_DATA_REV_RMNET_8) {
+=======
+	while (n < BAM_DMUX_NUM_CHANNELS) {
+>>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		if ((n > BAM_DMUX_DATA_RMNET_7) &&
 		    (n < BAM_DMUX_DATA_REV_RMNET_0)) {
 			n++;
