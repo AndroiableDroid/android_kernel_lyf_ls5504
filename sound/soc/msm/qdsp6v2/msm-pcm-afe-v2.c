@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 /* Copyright (c) 2012-2015, The Linux Foundation. All rights reserved.
-=======
-/* Copyright (c) 2012-2014, The Linux Foundation. All rights reserved.
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License version 2 and
@@ -134,10 +130,7 @@ static enum hrtimer_restart afe_hrtimer_rec_callback(struct hrtimer *hrt)
 	struct snd_pcm_substream *substream = prtd->substream;
 	struct snd_pcm_runtime *runtime = substream->runtime;
 	u32 mem_map_handle = 0;
-<<<<<<< HEAD
 	int ret;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	mem_map_handle = afe_req_mmap_handle(prtd->audio_client);
 	if (!mem_map_handle)
@@ -147,7 +140,6 @@ static enum hrtimer_restart afe_hrtimer_rec_callback(struct hrtimer *hrt)
 		if (prtd->dsp_cnt == runtime->periods)
 			prtd->dsp_cnt = 0;
 		pr_debug("%s: mem_map_handle 0x%x\n", __func__, mem_map_handle);
-<<<<<<< HEAD
 		ret = afe_rt_proxy_port_read(
 		(prtd->dma_addr + (prtd->dsp_cnt
 		* snd_pcm_lib_period_bytes(prtd->substream))), mem_map_handle,
@@ -157,12 +149,6 @@ static enum hrtimer_restart afe_hrtimer_rec_callback(struct hrtimer *hrt)
 			prtd->start = 0;
 			return HRTIMER_NORESTART;
 		}
-=======
-		afe_rt_proxy_port_read(
-		(prtd->dma_addr + (prtd->dsp_cnt
-		* snd_pcm_lib_period_bytes(prtd->substream))), mem_map_handle,
-		snd_pcm_lib_period_bytes(prtd->substream));
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		prtd->dsp_cnt++;
 		pr_debug("sending frame rec to DSP: poll_time: %d\n",
 				prtd->poll_time);

@@ -15,10 +15,7 @@
 #include <linux/slab.h>
 #include <linux/io.h>
 #include <linux/msm-bus-board.h>
-<<<<<<< HEAD
 #include <trace/events/trace_msm_bus.h>
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #include "msm_bus_core.h"
 #include "msm_bus_noc.h"
 #include "msm_bus_adhoc.h"
@@ -31,11 +28,8 @@
 #define QOS_DEFAULT_DELTA		0x80
 #define MAX_BW_FIELD (NOC_QOS_BWn_BW_BMSK >> NOC_QOS_BWn_BW_SHFT)
 #define MAX_SAT_FIELD (NOC_QOS_SATn_SAT_BMSK >> NOC_QOS_SATn_SAT_SHFT)
-<<<<<<< HEAD
 #define MIN_SAT_FIELD	1
 #define MIN_BW_FIELD	1
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 #define NOC_QOS_REG_BASE(b, o)		((b) + (o))
 
@@ -102,19 +96,12 @@ enum noc_qos_id_saturationn {
 
 static int noc_div(uint64_t *a, uint32_t b)
 {
-<<<<<<< HEAD
 	if ((*a > 0) && (*a < b)) {
 		*a = 0;
 		return 1;
 	} else {
 		return do_div(*a, b);
 	}
-=======
-	if ((*a > 0) && (*a < b))
-		return 1;
-	else
-		return do_div(*a, b);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 }
 
 /**
@@ -133,18 +120,12 @@ static uint64_t noc_bw(uint32_t bw_field, uint32_t qos_freq)
 	return res * 1000000ULL;
 }
 
-<<<<<<< HEAD
 /**
  * Calculate the max BW in Bytes/s for a given time-base.
  */
 static uint32_t noc_bw_ceil(long int bw_field, uint32_t qos_freq_khz)
 {
 	uint64_t bw_temp = 2 * qos_freq_khz * bw_field;
-=======
-static uint32_t noc_bw_ceil(long int bw_field, uint32_t qos_freq)
-{
-	uint64_t bw_temp = 2 * qos_freq * bw_field;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	uint32_t scale = 1000 * BW_SCALE;
 	noc_div(&bw_temp, scale);
 	return bw_temp * 1000000;
@@ -171,7 +152,6 @@ static uint32_t noc_ws(uint64_t bw, uint32_t sat, uint32_t qos_freq)
 #define MAX_WS(bw, timebase) noc_ws((bw), MAX_SAT_FIELD, (timebase))
 
 /* Calculate bandwidth field value for requested bandwidth  */
-<<<<<<< HEAD
 static uint32_t noc_bw_field(uint64_t bw_bps, uint32_t qos_freq_khz)
 {
 	uint32_t bw_field = 0;
@@ -187,20 +167,6 @@ static uint32_t noc_bw_field(uint64_t bw_bps, uint32_t qos_freq_khz)
 		bw_field = (uint32_t)max_t(unsigned long, bwc, MIN_BW_FIELD);
 		bw_field = (uint32_t)min_t(unsigned long, bw_field,
 								MAX_BW_FIELD);
-=======
-static uint32_t noc_bw_field(uint64_t bw, uint32_t qos_freq)
-{
-	uint32_t bw_field = 0;
-
-	if (bw) {
-		uint32_t rem;
-		uint64_t bw_capped = min_t(uint64_t, bw, MAX_BW(qos_freq));
-		uint64_t bwc = bw_capped * BW_SCALE;
-		uint64_t qf = 2 * qos_freq * 1000;
-
-		rem = noc_div(&bwc, qf);
-		bw_field = (uint32_t)min_t(uint64_t, bwc, MAX_BW_FIELD);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	}
 
 	MSM_BUS_DBG("NOC: bw_field: %u\n", bw_field);
@@ -209,11 +175,7 @@ static uint32_t noc_bw_field(uint64_t bw, uint32_t qos_freq)
 
 static uint32_t noc_sat_field(uint64_t bw, uint32_t ws, uint32_t qos_freq)
 {
-<<<<<<< HEAD
 	uint32_t sat_field = 0;
-=======
-	uint32_t sat_field = 0, win;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	if (bw) {
 		/* Limit to max bw and scale bw to 100 KB increments */
@@ -222,7 +184,6 @@ static uint32_t noc_sat_field(uint64_t bw, uint32_t ws, uint32_t qos_freq)
 		uint32_t rem = noc_div(&bw_scaled, 100000);
 
 		/**
-<<<<<<< HEAD
 			SATURATION =
 			(BW [MBps] * integration window [us] *
 				time base frequency [MHz]) / (256 * 16)
@@ -233,21 +194,6 @@ static uint32_t noc_sat_field(uint64_t bw, uint32_t ws, uint32_t qos_freq)
 		sat_field = (uint32_t)max_t(unsigned long, tbw, MIN_SAT_FIELD);
 		sat_field = (uint32_t)min_t(unsigned long, sat_field,
 							MAX_SAT_FIELD);
-=======
-		 * Calculate saturation from windows size.
-		 * WS must be at least one arb period.
-		 * Saturation must not exceed max field size
-		 *
-		 * Bandwidth is in 100KB increments
-		 * Window size is in ns
-		 * qos_freq is in KHz
-		 */
-		win = max(ws, 1000000 / qos_freq);
-		tbw = bw_scaled * win * qos_freq;
-		tscale = 10000000ULL * BW_SCALE * SAT_SCALE;
-		rem = noc_div(&tbw, tscale);
-		sat_field = (uint32_t)min_t(uint64_t, tbw, MAX_SAT_FIELD);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	}
 
 	MSM_BUS_DBG("NOC: sat_field: %d\n", sat_field);
@@ -258,11 +204,8 @@ static void noc_set_qos_mode(void __iomem *base, uint32_t qos_off,
 		uint32_t mport, uint32_t qos_delta, uint8_t mode,
 		uint8_t perm_mode)
 {
-<<<<<<< HEAD
 	trace_bus_noc_set_qos_mode((long)base, qos_off, mport, qos_delta, mode,
 			perm_mode);
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	if (mode < NOC_QOS_MODE_MAX &&
 		((1 << mode) & perm_mode)) {
 		uint32_t reg_val;
@@ -311,10 +254,6 @@ static void msm_bus_noc_set_qos_bw(void __iomem *base, uint32_t qos_off,
 		return;
 	}
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	/* If Limiter or Regulator modes are not supported, bw not available*/
 	if (perm_mode & (NOC_QOS_PERM_MODE_LIMITER |
 		NOC_QOS_PERM_MODE_REGULATOR)) {
@@ -603,7 +542,6 @@ static void free_commit_data(void *cdata)
 	kfree(cd);
 }
 
-<<<<<<< HEAD
 static bool msm_bus_noc_update_bw_reg(int mode)
 {
 	bool ret = false;
@@ -615,8 +553,6 @@ static bool msm_bus_noc_update_bw_reg(int mode)
 	return ret;
 }
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static void msm_bus_noc_update_bw(struct msm_bus_inode_info *hop,
 	struct msm_bus_inode_info *info,
 	struct msm_bus_fabric_registration *fab_pdata,
@@ -665,7 +601,6 @@ static void msm_bus_noc_update_bw(struct msm_bus_inode_info *hop,
 				MSM_BUS_DBG("No qos ports to update!\n");
 				break;
 			}
-<<<<<<< HEAD
 
 			if (!(info->node_info->mode == NOC_QOS_MODE_REGULATOR)
 					|| (info->node_info->mode ==
@@ -673,8 +608,6 @@ static void msm_bus_noc_update_bw(struct msm_bus_inode_info *hop,
 				MSM_BUS_DBG("Skip QoS reg programming\n");
 				break;
 			}
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			qos_bw.bw = sel_cd->mas[info->node_info->masterp[i]].
 				bw;
 			qos_bw.ws = info->node_info->ws;
@@ -802,18 +735,13 @@ static int msm_bus_noc_set_bw(struct msm_bus_node_device_type *dev,
 			qos_bw.ws = info->qos_params.ws;
 			msm_bus_noc_set_qos_bw(qos_base, qos_off, qos_freq,
 				info->qport[i], qos_delta,
-<<<<<<< HEAD
 				(1 << info->qos_params.mode), &qos_bw);
-=======
-				info->qos_params.mode, &qos_bw);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			MSM_BUS_DBG("NOC: QoS: Update mas_bw: ws: %u\n",
 				qos_bw.ws);
 		}
 	}
 	return ret;
 }
-<<<<<<< HEAD
 
 static int msm_bus_noc_set_lim_mode(struct msm_bus_node_device_type *info,
 				void __iomem *qos_base, uint32_t qos_off,
@@ -964,8 +892,6 @@ exit_limit_mport:
 	return ret;
 }
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 int msm_bus_noc_hw_init(struct msm_bus_fabric_registration *pdata,
 	struct msm_bus_hw_algorithm *hw_algo)
 {
@@ -979,10 +905,7 @@ int msm_bus_noc_hw_init(struct msm_bus_fabric_registration *pdata,
 	hw_algo->commit = msm_bus_noc_commit;
 	hw_algo->port_halt = msm_bus_noc_port_halt;
 	hw_algo->port_unhalt = msm_bus_noc_port_unhalt;
-<<<<<<< HEAD
 	hw_algo->update_bw_reg = msm_bus_noc_update_bw_reg;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	hw_algo->config_master = NULL;
 	hw_algo->config_limiter = NULL;
 
@@ -996,13 +919,9 @@ int msm_bus_noc_set_ops(struct msm_bus_node_device_type *bus_dev)
 	else {
 		bus_dev->fabdev->noc_ops.qos_init = msm_bus_noc_qos_init;
 		bus_dev->fabdev->noc_ops.set_bw = msm_bus_noc_set_bw;
-<<<<<<< HEAD
 		bus_dev->fabdev->noc_ops.limit_mport = msm_bus_noc_limit_mport;
 		bus_dev->fabdev->noc_ops.update_bw_reg =
 						msm_bus_noc_update_bw_reg;
-=======
-		bus_dev->fabdev->noc_ops.limit_mport = NULL;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	}
 	return 0;
 }

@@ -11,10 +11,7 @@
  */
 
 #include "msm8909.dtsi"
-<<<<<<< HEAD
 #include "msm8909-pm8909.dtsi"
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 / {
 	model = "Qualcomm Technologies, Inc. MDMFERRUM";

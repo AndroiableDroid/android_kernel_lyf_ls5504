@@ -125,13 +125,10 @@ struct usb_phy {
 
 	/* reset the PHY clocks */
 	int	(*reset)(struct usb_phy *x);
-<<<<<<< HEAD
 
 	/* for notification of usb_phy_dbg_events */
 	void	(*dbg_event)(struct usb_phy *x,
 			char *event, int msg1, int msg2);
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 };
 
 /**
@@ -325,7 +322,6 @@ usb_phy_notify_disconnect(struct usb_phy *x, enum usb_device_speed speed)
 		return 0;
 }
 
-<<<<<<< HEAD
 static inline void
 usb_phy_dbg_events(struct usb_phy *x,
 		char *event, int msg1, int msg2)
@@ -334,8 +330,6 @@ usb_phy_dbg_events(struct usb_phy *x,
 		x->dbg_event(x, event, msg1, msg2);
 }
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 /* notifiers */
 static inline int
 usb_register_notifier(struct usb_phy *x, struct notifier_block *nb)

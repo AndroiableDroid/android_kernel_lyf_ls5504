@@ -25,11 +25,7 @@
 #include "mdss_fb.h"
 #include "mdss_mdp.h"
 #include "mdss_debug.h"
-<<<<<<< HEAD
 #include "mdss_mdp_trace.h"
-=======
-#include <trace/mdss_mdp_trace.h>
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #include "mdss_debug.h"
 
 static void mdss_mdp_xlog_mixer_reg(struct mdss_mdp_ctl *ctl);

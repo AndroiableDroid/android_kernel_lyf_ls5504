@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
 *Copyright (c) 2014-2015, The Linux Foundation. All rights reserved.
-=======
-*Copyright (c) 2014, The Linux Foundation. All rights reserved.
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 *
 *This program is free software; you can redistribute it and/or modify
 *it under the terms of the GNU General Public License version 2 and
@@ -18,10 +14,7 @@
 #include <linux/device.h>
 #include <linux/devfreq.h>
 #include <linux/init.h>
-<<<<<<< HEAD
 #include <linux/ipc_logging.h>
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #include <linux/gfp.h>
 #include <linux/list.h>
 #include <linux/module.h>
@@ -29,15 +22,10 @@
 #include <linux/msm-bus.h>
 #include <linux/of.h>
 #include <linux/platform_device.h>
-<<<<<<< HEAD
-=======
-#include <soc/qcom/hvc.h>
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 #include "governor.h"
 #include "devfreq_spdm.h"
 
-<<<<<<< HEAD
 static void *spdm_ipc_log_ctxt;
 #define DEVFREQ_SPDM_DEFAULT_WINDOW_MS 100
 #define SPDM_IPC_LOG_PAGES	5
@@ -49,9 +37,6 @@ static void *spdm_ipc_log_ctxt;
 } while (0)
 
 #define COPY_SIZE(x, y) ((x) <= (y) ? (x) : (y))
-=======
-#define DEVFREQ_SPDM_DEFAULT_WINDOW_MS 100
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 static int change_bw(struct device *dev, unsigned long *freq, u32 flags)
 {
@@ -59,13 +44,8 @@ static int change_bw(struct device *dev, unsigned long *freq, u32 flags)
 	int i;
 	int next_idx;
 	int ret = 0;
-<<<<<<< HEAD
 	struct spdm_args desc = { { 0 } };
 	int ext_status = 0;
-=======
-	struct hvc_desc desc = { { 0 } };
-	int hvc_status = 0;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	if (!dev || !freq)
 		return -EINVAL;
@@ -91,17 +71,10 @@ update_thresholds:
 	desc.arg[0] = SPDM_CMD_ENABLE;
 	desc.arg[1] = data->spdm_client;
 	desc.arg[2] = clk_get_rate(data->cci_clk);
-<<<<<<< HEAD
 	ext_status = spdm_ext_call(&desc, 3);
 	if (ext_status)
 		pr_err("External command %u failed with error %u",
 			(int)desc.arg[0], ext_status);
-=======
-	hvc_status = hvc(HVC_FN_SIP(SPDM_HYP_FNID), &desc);
-	if (hvc_status)
-		pr_err("HVC command %u failed with error %u", (int)desc.arg[0],
-			hvc_status);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	return ret;
 }
 
@@ -230,10 +203,7 @@ static int populate_config_data(struct spdm_data *data,
 					 data->config_data.num_ports);
 	if (ret) {
 		devm_kfree(&pdev->dev, data->config_data.ports);
-<<<<<<< HEAD
 		data->config_data.ports = NULL;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		return ret;
 	}
 
@@ -270,7 +240,6 @@ static int populate_spdm_data(struct spdm_data *data,
 no_client:
 no_pdata:
 	devm_kfree(&pdev->dev, data->config_data.ports);
-<<<<<<< HEAD
 	data->config_data.ports = NULL;
 	return ret;
 }
@@ -325,11 +294,6 @@ int __spdm_scm_call(struct spdm_args *args, int num_args)
 	return status;
 }
 
-=======
-	return ret;
-}
-
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static int probe(struct platform_device *pdev)
 {
 	struct spdm_data *data = 0;
@@ -374,7 +338,6 @@ static int probe(struct platform_device *pdev)
 	    devfreq_add_device(&pdev->dev, data->profile, "spdm_bw_hyp", data);
 	if (IS_ERR(data->devfreq)) {
 		ret = PTR_ERR(data->devfreq);
-<<<<<<< HEAD
 		goto no_spdm_device;
 	}
 
@@ -392,15 +355,6 @@ static int probe(struct platform_device *pdev)
 
 no_spdm_device:
 	devm_kfree(&pdev->dev, data->profile);
-=======
-		goto no_profile;
-	}
-
-	spdm_init_debugfs(&pdev->dev);
-
-	return 0;
-
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 no_profile:
 no_clock:
 	msm_bus_scale_unregister_client(data->bus_scale_client_id);
@@ -408,10 +362,7 @@ no_bus_scaling:
 	devm_kfree(&pdev->dev, data->config_data.ports);
 bad_of:
 	devm_kfree(&pdev->dev, data);
-<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	return ret;
 }
 
@@ -436,13 +387,10 @@ static int remove(struct platform_device *pdev)
 		devm_kfree(&pdev->dev, data->config_data.ports);
 
 	devm_kfree(&pdev->dev, data);
-<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
 	if (spdm_ipc_log_ctxt)
 		ipc_log_context_destroy(spdm_ipc_log_ctxt);
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	return 0;
 }

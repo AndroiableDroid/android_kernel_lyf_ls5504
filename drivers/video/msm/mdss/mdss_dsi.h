@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 /* Copyright (c) 2012-2015, The Linux Foundation. All rights reserved.
-=======
-/* Copyright (c) 2012-2014, The Linux Foundation. All rights reserved.
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -102,12 +98,6 @@ enum dsi_panel_status_mode {
 	ESD_REG,
 	ESD_REG_NT35596,
 	ESD_TE,
-<<<<<<< HEAD
-=======
-#ifdef CONFIG_MACH_YULONG
-	ESD_REG_YL,
-#endif
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	ESD_MAX,
 };
 
@@ -161,10 +151,7 @@ enum dsi_pm_type {
 #define DSI_CMD_DST_FORMAT_RGB666	7
 #define DSI_CMD_DST_FORMAT_RGB888	8
 
-<<<<<<< HEAD
 #define DSI_INTR_DESJEW_MASK			BIT(31)
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #define DSI_INTR_DYNAMIC_REFRESH_MASK		BIT(29)
 #define DSI_INTR_DYNAMIC_REFRESH_DONE		BIT(28)
 #define DSI_INTR_ERROR_MASK		BIT(25)
@@ -180,7 +167,6 @@ enum dsi_pm_type {
 /* Update this if more interrupt masks are added in future chipsets */
 #define DSI_INTR_TOTAL_MASK		0x2222AA02
 
-<<<<<<< HEAD
 #define DSI_INTR_MASK_ALL	\
 		(DSI_INTR_DESJEW_MASK | \
 		DSI_INTR_DYNAMIC_REFRESH_MASK | \
@@ -190,8 +176,6 @@ enum dsi_pm_type {
 		DSI_INTR_CMD_MDP_DONE_MASK | \
 		DSI_INTR_CMD_DMA_DONE_MASK)
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #define DSI_CMD_TRIGGER_NONE		0x0	/* mdp trigger */
 #define DSI_CMD_TRIGGER_TE		0x02
 #define DSI_CMD_TRIGGER_SW		0x04
@@ -268,22 +252,6 @@ struct dsi_panel_cmds {
 	int link_state;
 };
 
-<<<<<<< HEAD
-=======
-#ifdef CONFIG_MACH_YULONG
-struct status_reg {
-	u8 reg;
-	u8 num_vals;
-	u8 *vals;
-};
-
-struct dsi_panel_status_regs {
-	size_t num_regs;
-	struct status_reg *regs;
-};
-#endif
-
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 struct dsi_kickoff_action {
 	struct list_head act_entry;
 	void (*action) (void *);
@@ -386,10 +354,7 @@ struct mdss_dsi_ctrl_pdata {
 	bool dsi_irq_line;
 	atomic_t te_irq_ready;
 
-<<<<<<< HEAD
 	bool cmd_clk_ln_recovery_en;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	bool cmd_sync_wait_broadcast;
 	bool cmd_sync_wait_trigger;
 
@@ -398,10 +363,7 @@ struct mdss_dsi_ctrl_pdata {
 	struct dsi_drv_cm_data shared_pdata;
 	u32 pclk_rate;
 	u32 byte_clk_rate;
-<<<<<<< HEAD
 	bool refresh_clk_rate; /* flag to recalculate clk_rate */
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	struct dss_module_power power_data[DSI_MAX_PM];
 	u32 dsi_irq_mask;
 	struct mdss_hw *dsi_hw;
@@ -409,24 +371,6 @@ struct mdss_dsi_ctrl_pdata {
 
 	struct dsi_panel_cmds on_cmds;
 	struct dsi_panel_cmds off_cmds;
-<<<<<<< HEAD
-=======
-
-#ifdef CONFIG_MACH_YULONG
-	struct dsi_panel_cmds ce_cmds;
-	struct dsi_panel_cmds ce_off_cmds;
-	struct dsi_panel_cmds ce_level1_cmds;
-	struct dsi_panel_cmds ce_level2_cmds;
-	struct dsi_panel_cmds ce_level3_cmds;
-	struct dsi_panel_cmds ce_level4_cmds;
-	struct dsi_panel_cmds cabc_ui_cmds;
-	struct dsi_panel_cmds cabc_still_cmds;
-	struct dsi_panel_cmds cabc_moving_cmds;
-	struct dsi_panel_cmds cabc_off_cmds;
-	struct dsi_panel_status_regs status_regs;
-#endif
-
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	struct dsi_panel_cmds status_cmds;
 	u32 status_cmds_rlen;
 	u32 status_value;
@@ -459,10 +403,7 @@ struct mdss_dsi_ctrl_pdata {
 	struct dsi_buf rx_buf;
 	struct dsi_buf status_buf;
 	int status_mode;
-<<<<<<< HEAD
 	int rx_len;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	struct dsi_pinctrl_res pin_res;
 
@@ -534,11 +475,7 @@ void mdss_dsi_phy_sw_reset(struct mdss_dsi_ctrl_pdata *ctrl);
 void mdss_dsi_phy_init(struct mdss_dsi_ctrl_pdata *ctrl);
 void mdss_dsi_ctrl_init(struct device *ctrl_dev,
 			struct mdss_dsi_ctrl_pdata *ctrl);
-<<<<<<< HEAD
 int mdss_dsi_cmd_mdp_busy(struct mdss_dsi_ctrl_pdata *ctrl);
-=======
-void mdss_dsi_cmd_mdp_busy(struct mdss_dsi_ctrl_pdata *ctrl);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 void mdss_dsi_wait4video_done(struct mdss_dsi_ctrl_pdata *ctrl);
 void mdss_dsi_en_wait4dynamic_done(struct mdss_dsi_ctrl_pdata *ctrl);
 int mdss_dsi_cmdlist_commit(struct mdss_dsi_ctrl_pdata *ctrl, int from_mdp);
@@ -549,11 +486,8 @@ bool __mdss_dsi_clk_enabled(struct mdss_dsi_ctrl_pdata *ctrl, u8 clk_type);
 void mdss_dsi_ctrl_setup(struct mdss_dsi_ctrl_pdata *ctrl);
 void mdss_dsi_dln0_phy_err(struct mdss_dsi_ctrl_pdata *ctrl);
 void mdss_dsi_lp_cd_rx(struct mdss_dsi_ctrl_pdata *ctrl);
-<<<<<<< HEAD
 u32 mdss_dsi_panel_cmd_read(struct mdss_dsi_ctrl_pdata *ctrl, char cmd0,
 		char cmd1, void (*fxn)(int), char *rbuf, int len);
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 void mdss_dsi_get_hw_revision(struct mdss_dsi_ctrl_pdata *ctrl);
 
 int mdss_dsi_panel_init(struct device_node *node,

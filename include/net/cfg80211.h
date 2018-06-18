@@ -2624,11 +2624,7 @@ struct wiphy_vendor_command {
 	struct nl80211_vendor_cmd_info info;
 	u32 flags;
 	int (*doit)(struct wiphy *wiphy, struct wireless_dev *wdev,
-<<<<<<< HEAD
 		    const void *data, int data_len);
-=======
-		    void *data, int data_len);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 };
 
 /**

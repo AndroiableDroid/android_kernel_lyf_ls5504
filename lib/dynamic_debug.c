@@ -8,10 +8,6 @@
  * By Greg Banks <gnb@melbourne.sgi.com>
  * Copyright (c) 2008 Silicon Graphics Inc.  All Rights Reserved.
  * Copyright (C) 2011 Bart Van Assche.  All Rights Reserved.
-<<<<<<< HEAD
-=======
- * Copyright (C) 2013 Du, Changbin <changbin.du@gmail.com>
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  */
 
 #define pr_fmt(fmt) KBUILD_MODNAME ":%s: " fmt, __func__
@@ -28,10 +24,6 @@
 #include <linux/sysctl.h>
 #include <linux/ctype.h>
 #include <linux/string.h>
-<<<<<<< HEAD
-=======
-#include <linux/parser.h>
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #include <linux/string_helpers.h>
 #include <linux/uaccess.h>
 #include <linux/dynamic_debug.h>
@@ -155,12 +147,7 @@ static int ddebug_change(const struct ddebug_query *query,
 	list_for_each_entry(dt, &ddebug_tables, link) {
 
 		/* match against the module name */
-<<<<<<< HEAD
 		if (query->module && strcmp(query->module, dt->mod_name))
-=======
-		if (query->module &&
-		    !match_wildcard(query->module, dt->mod_name))
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			continue;
 
 		for (i = 0; i < dt->num_ddebugs; i++) {
@@ -168,26 +155,14 @@ static int ddebug_change(const struct ddebug_query *query,
 
 			/* match against the source filename */
 			if (query->filename &&
-<<<<<<< HEAD
 			    strcmp(query->filename, dp->filename) &&
 			    strcmp(query->filename, kbasename(dp->filename)) &&
 			    strcmp(query->filename, trim_prefix(dp->filename)))
-=======
-			    !match_wildcard(query->filename, dp->filename) &&
-			    !match_wildcard(query->filename,
-					   kbasename(dp->filename)) &&
-			    !match_wildcard(query->filename,
-					   trim_prefix(dp->filename)))
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 				continue;
 
 			/* match against the function */
 			if (query->function &&
-<<<<<<< HEAD
 			    strcmp(query->function, dp->function))
-=======
-			    !match_wildcard(query->function, dp->function))
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 				continue;
 
 			/* match against the format */

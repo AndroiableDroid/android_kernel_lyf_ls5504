@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 /* Copyright (c) 2011-2015, The Linux Foundation. All rights reserved.
-=======
-/* Copyright (c) 2011-2014, The Linux Foundation. All rights reserved.
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -953,7 +949,6 @@ init_msgq:
 	if (ret && bam_handle)
 		dev->use_tx_msgqs = MSM_MSGQ_DISABLED;
 
-<<<<<<< HEAD
 	/*
 	 * If command interface for BAM fails, register interface is used for
 	 * commands.
@@ -963,26 +958,13 @@ init_msgq:
 	 */
 
 	return 0;
-=======
-	if (dev->use_tx_msgqs == MSM_MSGQ_DISABLED &&
-		dev->use_rx_msgqs == MSM_MSGQ_DISABLED && bam_handle) {
-		sps_deregister_bam_device(bam_handle);
-		dev->bam.hdl = 0L;
-	}
-
-	return ret;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 }
 
 void msm_slim_disconnect_endp(struct msm_slim_ctrl *dev,
 					struct msm_slim_endp *endpoint,
 					enum msm_slim_msgq *msgq_flag)
 {
-<<<<<<< HEAD
 	if (*msgq_flag >= MSM_MSGQ_ENABLED) {
-=======
-	if (*msgq_flag == MSM_MSGQ_ENABLED) {
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		sps_disconnect(endpoint->sps);
 		*msgq_flag = MSM_MSGQ_RESET;
 	}

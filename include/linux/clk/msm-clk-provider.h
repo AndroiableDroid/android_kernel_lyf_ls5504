@@ -185,10 +185,7 @@ struct clk {
 	struct list_head list;
 
 	unsigned count;
-<<<<<<< HEAD
 	unsigned notifier_count;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	spinlock_t lock;
 	unsigned prepare_count;
 	struct mutex prepare_lock;

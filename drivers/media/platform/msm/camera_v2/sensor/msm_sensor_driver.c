@@ -18,7 +18,6 @@
 #include "msm_cci.h"
 #include "msm_camera_dt_util.h"
 
-<<<<<<< HEAD
 #include "t4k37_otp.h"
 
 #ifdef CONFIG_CAMERA_INFO_SHOW
@@ -31,8 +30,6 @@
 char *main_sensor_name=NULL;
 char *sub_sensor_name=NULL;
 #endif
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 /* Logging macro */
 #undef CDBG
 #define CDBG(fmt, args...) pr_debug(fmt, ##args)
@@ -650,14 +647,10 @@ int32_t msm_sensor_driver_probe(void *setting,
 	struct msm_camera_slave_info        *camera_info = NULL;
 
 	unsigned long                        mount_pos = 0;
-<<<<<<< HEAD
 	
 #if (defined(CONFIG_N958ST_CAMERA)|| defined(CONFIG_N918ST_CAMERA))
     uint16_t  chipid = 0;
 #endif
-=======
-
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	/* Validate input parameters */
 	if (!setting) {
 		pr_err("failed: slave_info %p", setting);
@@ -893,7 +886,6 @@ int32_t msm_sensor_driver_probe(void *setting,
 		pr_err("%s power up failed", slave_info->sensor_name);
 		goto free_camera_info;
 	}
-<<<<<<< HEAD
 #ifdef CONFIG_CAMERA_INFO_SHOW	
        else{
 	   	if(slave_info->camera_id==0)
@@ -925,8 +917,6 @@ int32_t msm_sensor_driver_probe(void *setting,
 		  pr_err("tanyijun read_eeprom_memory() chip id doesnot match\n");
 	  }
 #endif
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	pr_err("%s probe succeeded", slave_info->sensor_name);
 
@@ -1360,7 +1350,6 @@ static struct i2c_driver msm_sensor_driver_i2c = {
 	},
 };
 
-<<<<<<< HEAD
 #ifdef CONFIG_CAMERA_INFO_SHOW
 static ssize_t back_camera_arg_show(struct kobject *kobj, struct kobj_attribute *attr,
    char *buf)
@@ -1414,13 +1403,6 @@ static int __init msm_sensor_driver_init(void)
 	}
 #endif
 
-=======
-static int __init msm_sensor_driver_init(void)
-{
-	int32_t rc = 0;
-
-	CDBG("Enter");
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	rc = platform_driver_probe(&msm_sensor_platform_driver,
 		msm_sensor_driver_platform_probe);
 	if (!rc) {
@@ -1440,12 +1422,9 @@ static void __exit msm_sensor_driver_exit(void)
 	CDBG("Enter");
 	platform_driver_unregister(&msm_sensor_platform_driver);
 	i2c_del_driver(&msm_sensor_driver_i2c);
-<<<<<<< HEAD
 #ifdef CONFIG_CAMERA_INFO_SHOW	
 	kobject_put(camera_info_kobj);
 #endif
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	return;
 }
 

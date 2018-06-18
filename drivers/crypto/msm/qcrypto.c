@@ -560,11 +560,7 @@ static void qcrypto_bw_reaper_work(struct work_struct *work)
 		/* check if engine is stuck */
 		if (pengine->req) {
 			if (pengine->check_flag)
-<<<<<<< HEAD
 				dev_warn(&pengine->pdev->dev,
-=======
-				pr_debug(
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 				"The engine appears to be stuck seq %d req %p.\n",
 				active_seq, pengine->req);
 			pengine->check_flag = false;

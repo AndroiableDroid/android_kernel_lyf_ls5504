@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 /* Copyright (c) 2014-2015, The Linux Foundation. All rights reserved.
-=======
-/* Copyright (c) 2014, The Linux Foundation. All rights reserved.
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -60,10 +56,7 @@ static void __iomem *virt_bases[N_BASES];
 #define GPLL1_USER_CTL					0x20010
 #define GPLL1_CONFIG_CTL				0x20014
 #define GPLL1_STATUS					0x2001C
-<<<<<<< HEAD
 #define SNOC_QOSGEN					0x2601C
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #define GPLL2_MODE					0x4A000
 #define GPLL2_L_VAL					0x4A004
 #define GPLL2_M_VAL					0x4A008
@@ -353,10 +346,7 @@ static struct pll_freq_tbl apcs_pll_freq[] = {
 	F_APCS_PLL(1190400000, 62, 0x0, 0x1, 0x0, 0x0, 0x0),
 	F_APCS_PLL(1209600000, 63, 0x0, 0x1, 0x0, 0x0, 0x0),
 	F_APCS_PLL(1248000000, 65, 0x0, 0x1, 0x0, 0x0, 0x0),
-<<<<<<< HEAD
 	F_APCS_PLL(1363200000, 71, 0x0, 0x1, 0x0, 0x0, 0x0),
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	F_APCS_PLL(1401600000, 73, 0x0, 0x1, 0x0, 0x0, 0x0),
 	PLL_F_END
 };
@@ -580,7 +570,6 @@ static struct rcg_clk vfe0_clk_src = {
 	},
 };
 
-<<<<<<< HEAD
 static struct clk_freq_tbl ftbl_gcc_oxili_gfx3d_465_clk[] = {
 	F(  19200000,	      xo,   1,	  0,	0),
 	F(  50000000,  gpll0_aux,  16,	  0,	0),
@@ -597,8 +586,6 @@ static struct clk_freq_tbl ftbl_gcc_oxili_gfx3d_465_clk[] = {
 	F_END
 };
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static struct clk_freq_tbl ftbl_gcc_oxili_gfx3d_clk[] = {
 	F(  19200000,	      xo,   1,	  0,	0),
 	F(  50000000,  gpll0_aux,  16,	  0,	0),
@@ -1247,10 +1234,7 @@ static struct rcg_clk sdcc2_apps_clk_src = {
 
 static struct clk_freq_tbl ftbl_gcc_usb_hs_system_clk[] = {
 	F(  80000000,	   gpll0,  10,	  0,	0),
-<<<<<<< HEAD
 	F( 100000000,	   gpll0,   8,	  0,	0),
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	F_END
 };
 
@@ -1263,11 +1247,7 @@ static struct rcg_clk usb_hs_system_clk_src = {
 	.c = {
 		.dbg_name = "usb_hs_system_clk_src",
 		.ops = &clk_ops_rcg,
-<<<<<<< HEAD
 		VDD_DIG_FMAX_MAP2(LOW, 57140000, NOMINAL, 100000000),
-=======
-		VDD_DIG_FMAX_MAP2(LOW, 57140000, NOMINAL, 80000000),
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		CLK_INIT(usb_hs_system_clk_src.c),
 	},
 };
@@ -2373,7 +2353,6 @@ static struct branch_clk gcc_venus0_vcodec0_clk = {
 	},
 };
 
-<<<<<<< HEAD
 static struct gate_clk gcc_snoc_qosgen_clk = {
 	.en_mask = BIT(0),
 	.en_reg = SNOC_QOSGEN,
@@ -2386,8 +2365,6 @@ static struct gate_clk gcc_snoc_qosgen_clk = {
 	},
 };
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static struct mux_clk gcc_debug_mux;
 static struct clk_ops clk_ops_debug_mux;
 
@@ -2776,7 +2753,6 @@ static struct clk_lookup msm_clocks_lookup[] = {
 	CLK_LIST(gcc_crypto_ahb_clk),
 	CLK_LIST(gcc_crypto_axi_clk),
 	CLK_LIST(crypto_clk_src),
-<<<<<<< HEAD
 
 	/* QoS Reference clock */
 	CLK_LIST(gcc_snoc_qosgen_clk),
@@ -2822,10 +2798,6 @@ static void gcc_gfx3d_fmax(struct platform_device *pdev)
 	gfx3d_clk_src.freq_tbl = ftbl_gcc_oxili_gfx3d_465_clk;
 }
 
-=======
-};
-
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static int msm_gcc_probe(struct platform_device *pdev)
 {
 	struct resource *res;
@@ -2904,11 +2876,8 @@ static int msm_gcc_probe(struct platform_device *pdev)
 		return PTR_ERR(xo_a_clk_src.c.parent);
 	}
 
-<<<<<<< HEAD
 	gcc_gfx3d_fmax(pdev);
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	ret = of_msm_clock_register(pdev->dev.of_node,
 				msm_clocks_lookup,
 				ARRAY_SIZE(msm_clocks_lookup));

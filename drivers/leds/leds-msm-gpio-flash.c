@@ -22,10 +22,7 @@
 #include <linux/printk.h>
 #include <linux/list.h>
 #include <linux/pinctrl/consumer.h>
-<<<<<<< HEAD
 #include <linux/delay.h>
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 /* #define CONFIG_GPIO_FLASH_DEBUG */
 #undef CDBG
@@ -68,7 +65,6 @@ static struct of_device_id led_gpio_flash_of_match[] = {
 	{},
 };
 
-<<<<<<< HEAD
 static void led_ktd262_brightness_set(struct led_classdev *led_cdev,int count)
 {
 	int i = 0;
@@ -92,8 +88,6 @@ static void led_ktd262_brightness_set(struct led_classdev *led_cdev,int count)
 	
 }
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static void led_gpio_brightness_set(struct led_classdev *led_cdev,
 				    enum led_brightness value)
 {
@@ -105,20 +99,12 @@ static void led_gpio_brightness_set(struct led_classdev *led_cdev,
 	int flash_en = 0, flash_now = 0;
 
 	if (brightness > LED_HALF) {
-<<<<<<< HEAD
 		led_ktd262_brightness_set(led_cdev,16);
-=======
-		flash_en =
-			flash_led->ctrl_seq[FLASH_EN].flash_on_val;
-		flash_now =
-			flash_led->ctrl_seq[FLASH_NOW].flash_on_val;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	} else if (brightness > LED_OFF) {
 		flash_en =
 			flash_led->ctrl_seq[FLASH_EN].torch_on_val;
 		flash_now =
 			flash_led->ctrl_seq[FLASH_NOW].torch_on_val;
-<<<<<<< HEAD
 		
 		rc = gpio_direction_output(flash_led->flash_en, flash_en);
 		if (rc) {
@@ -151,26 +137,6 @@ static void led_gpio_brightness_set(struct led_classdev *led_cdev,
 			udelay(650);
 	}
 
-=======
-	} else {
-		flash_en = 0;
-		flash_now = 0;
-	}
-	CDBG("%s:flash_en=%d, flash_now=%d\n", __func__, flash_en, flash_now);
-
-	rc = gpio_direction_output(flash_led->flash_en, flash_en);
-	if (rc) {
-		pr_err("%s: Failed to set gpio %d\n", __func__,
-		       flash_led->flash_en);
-		goto err;
-	}
-	rc = gpio_direction_output(flash_led->flash_now, flash_now);
-	if (rc) {
-		pr_err("%s: Failed to set gpio %d\n", __func__,
-		       flash_led->flash_now);
-		goto err;
-	}
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	flash_led->brightness = brightness;
 err:
 	return;
@@ -214,11 +180,7 @@ int led_gpio_flash_probe(struct platform_device *pdev)
 	}
 
 	flash_led->gpio_state_default = pinctrl_lookup_state(flash_led->pinctrl,
-<<<<<<< HEAD
 		"camera_flash_ktd262_default");
-=======
-		"flash_default");
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	if (IS_ERR(flash_led->gpio_state_default)) {
 		pr_err("%s:can not get active pinstate\n", __func__);
 		return -EINVAL;

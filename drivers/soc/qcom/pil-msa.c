@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 /* Copyright (c) 2012-2015, The Linux Foundation. All rights reserved.
-=======
-/* Copyright (c) 2012-2014, The Linux Foundation. All rights reserved.
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -54,11 +50,8 @@
 #define RMB_PMI_META_DATA		0x10
 #define RMB_PMI_CODE_START		0x14
 #define RMB_PMI_CODE_LENGTH		0x18
-<<<<<<< HEAD
 #define RMB_PROTOCOL_VERSION		0x1C
 #define RMB_MBA_DEBUG_INFORMATION	0x20
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 #define POLL_INTERVAL_US		50
 
@@ -76,24 +69,18 @@
 #define MSS_RESTART_PARAM_ID		0x2
 #define MSS_RESTART_ID			0xA
 
-<<<<<<< HEAD
 #define MSS_MAGIC			0XAABADEAD
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static int pbl_mba_boot_timeout_ms = 1000;
 module_param(pbl_mba_boot_timeout_ms, int, S_IRUGO | S_IWUSR);
 
 static int modem_auth_timeout_ms = 10000;
 module_param(modem_auth_timeout_ms, int, S_IRUGO | S_IWUSR);
 
-<<<<<<< HEAD
 /* If set to 0xAABADEAD, MBA failures trigger a kernel panic */
 static uint modem_trigger_panic;
 module_param(modem_trigger_panic, uint, S_IRUGO | S_IWUSR);
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static void modem_log_rmb_regs(void __iomem *base)
 {
 	pr_err("RMB_MBA_IMAGE: %08x\n", readl_relaxed(base + RMB_MBA_IMAGE));
@@ -107,7 +94,6 @@ static void modem_log_rmb_regs(void __iomem *base)
 				readl_relaxed(base + RMB_PMI_CODE_START));
 	pr_err("RMB_PMI_CODE_LENGTH: %08x\n",
 				readl_relaxed(base + RMB_PMI_CODE_LENGTH));
-<<<<<<< HEAD
 	pr_err("RMB_PROTOCOL_VERSION: %08x\n",
 				readl_relaxed(base + RMB_PROTOCOL_VERSION));
 	pr_err("RMB_MBA_DEBUG_INFORMATION: %08x\n",
@@ -115,9 +101,6 @@ static void modem_log_rmb_regs(void __iomem *base)
 
 	if (modem_trigger_panic == MSS_MAGIC)
 		panic("%s: System ramdump is needed!!!\n", __func__);
-=======
-
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 }
 
 static int pil_mss_power_up(struct q6v5_data *drv)
@@ -447,7 +430,6 @@ int pil_mss_reset_load_mba(struct pil_desc *pil)
 	}
 
 	drv->mba_size = SZ_1M;
-<<<<<<< HEAD
 
 	if (md->mba_mem_dev_fixed)
 		md->mba_mem_dev = *md->mba_mem_dev_fixed;
@@ -455,10 +437,6 @@ int pil_mss_reset_load_mba(struct pil_desc *pil)
 		md->mba_mem_dev.coherent_dma_mask =
 			DMA_BIT_MASK(sizeof(dma_addr_t) * 8);
 
-=======
-	md->mba_mem_dev.coherent_dma_mask =
-		DMA_BIT_MASK(sizeof(dma_addr_t) * 8);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	init_dma_attrs(&md->attrs_dma);
 	dma_set_attr(DMA_ATTR_STRONGLY_ORDERED, &md->attrs_dma);
 	mba_virt = dma_alloc_attrs(&md->mba_mem_dev, drv->mba_size,
@@ -514,17 +492,12 @@ static int pil_msa_auth_modem_mdt(struct pil_desc *pil, const u8 *metadata,
 	int ret;
 	DEFINE_DMA_ATTRS(attrs);
 
-<<<<<<< HEAD
 	if (drv->mba_mem_dev_fixed)
 		drv->mba_mem_dev = *drv->mba_mem_dev_fixed;
 	else
 		drv->mba_mem_dev.coherent_dma_mask =
 			DMA_BIT_MASK(sizeof(dma_addr_t) * 8);
 
-=======
-	drv->mba_mem_dev.coherent_dma_mask =
-		DMA_BIT_MASK(sizeof(dma_addr_t) * 8);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	dma_set_attr(DMA_ATTR_STRONGLY_ORDERED, &attrs);
 	/* Make metadata physically contiguous and 4K aligned. */
 	mdata_virt = dma_alloc_attrs(&drv->mba_mem_dev, size, &mdata_phys,

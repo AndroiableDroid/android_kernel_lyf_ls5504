@@ -81,7 +81,6 @@ void msm_bus_scale_unregister_client(uint32_t cl)
 	}
 }
 EXPORT_SYMBOL(msm_bus_scale_unregister_client);
-<<<<<<< HEAD
 
 /**
  * msm_bus_scale_register() - Register the clients with the msm bus
@@ -141,5 +140,3 @@ void msm_bus_scale_unregister(struct msm_bus_client_handle *cl)
 				__func__);
 }
 EXPORT_SYMBOL(msm_bus_scale_unregister);
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130

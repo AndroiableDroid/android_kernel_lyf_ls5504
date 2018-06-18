@@ -16,10 +16,7 @@
 #include "mdp3.h"
 #include "mdp3_dma.h"
 #include "mdp3_hwio.h"
-<<<<<<< HEAD
 #include "mdss_debug.h"
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 #define DMA_STOP_POLL_SLEEP_US 1000
 #define DMA_STOP_POLL_TIMEOUT_US 200000
@@ -349,13 +346,6 @@ static int mdp3_dmap_config(struct mdp3_dma *dma,
 
 	dma->source_config = *source_config;
 	dma->output_config = *output_config;
-<<<<<<< HEAD
-=======
-	dma->roi.w = dma->source_config.width;
-	dma->roi.h = dma->source_config.height;
-	dma->roi.x = dma->source_config.x;
-	dma->roi.y = dma->source_config.y;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	mdp3_irq_enable(MDP3_INTR_LCDC_UNDERFLOW);
 	mdp3_dma_callback_setup(dma);
 	return 0;
@@ -459,50 +449,7 @@ static int mdp3_dmap_cursor_config(struct mdp3_dma *dma,
 	return 0;
 }
 
-<<<<<<< HEAD
 static int mdp3_dmap_ccs_config_internal(struct mdp3_dma *dma,
-=======
-static void mdp3_ccs_update(struct mdp3_dma *dma)
-{
-	u32 cc_config;
-	int updated = 0;
-
-	cc_config = MDP3_REG_READ(MDP3_REG_DMA_P_COLOR_CORRECT_CONFIG);
-
-	if (dma->ccs_config.ccs_dirty) {
-		cc_config &= DMA_CCS_CONFIG_MASK;
-		if (dma->ccs_config.ccs_enable)
-			cc_config |= BIT(3);
-		else
-			cc_config &= ~BIT(3);
-		cc_config |= dma->ccs_config.ccs_sel << 5;
-		cc_config |= dma->ccs_config.pre_bias_sel << 6;
-		cc_config |= dma->ccs_config.post_bias_sel << 7;
-		cc_config |= dma->ccs_config.pre_limit_sel << 8;
-		cc_config |= dma->ccs_config.post_limit_sel << 9;
-		dma->ccs_config.ccs_dirty = false;
-		updated = 1;
-	}
-
-	if (dma->lut_config.lut_dirty) {
-		cc_config &= DMA_LUT_CONFIG_MASK;
-		cc_config |= dma->lut_config.lut_enable;
-		cc_config |= dma->lut_config.lut_position << 4;
-		cc_config |= dma->lut_config.lut_sel << 10;
-		dma->lut_config.lut_dirty = false;
-		updated = 1;
-	}
-	if (updated) {
-		MDP3_REG_WRITE(MDP3_REG_DMA_P_COLOR_CORRECT_CONFIG, cc_config);
-
-		/* Make sure ccs configuration update is done before continuing
-		with the DMA transfer */
-		wmb();
-	}
-}
-
-static int mdp3_dmap_ccs_config(struct mdp3_dma *dma,
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			struct mdp3_dma_color_correct_config *config,
 			struct mdp3_dma_ccs *ccs)
 {
@@ -553,7 +500,6 @@ static int mdp3_dmap_ccs_config(struct mdp3_dma *dma,
 			addr += 4;
 		}
 	}
-<<<<<<< HEAD
 	return 0;
 }
 
@@ -625,12 +571,6 @@ static int mdp3_dmap_ccs_config(struct mdp3_dma *dma,
 
 	if (dma->output_config.out_sel != MDP3_DMA_OUTPUT_SEL_DSI_CMD)
 		mdp3_ccs_update(dma, false);
-=======
-	dma->ccs_config = *config;
-
-	if (dma->output_config.out_sel != MDP3_DMA_OUTPUT_SEL_DSI_CMD)
-		mdp3_ccs_update(dma);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	return 0;
 }
@@ -659,11 +599,7 @@ static int mdp3_dmap_lut_config(struct mdp3_dma *dma,
 	dma->lut_config = *config;
 
 	if (dma->output_config.out_sel != MDP3_DMA_OUTPUT_SEL_DSI_CMD)
-<<<<<<< HEAD
 		mdp3_ccs_update(dma, false);
-=======
-		mdp3_ccs_update(dma);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	return 0;
 }
@@ -723,29 +659,20 @@ static int mdp3_dmap_update(struct mdp3_dma *dma, void *buf,
 	struct mdss_panel_data *panel;
 	int rc = 0;
 
-<<<<<<< HEAD
 	ATRACE_BEGIN(__func__);
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	pr_debug("mdp3_dmap_update\n");
 
 	if (dma->output_config.out_sel == MDP3_DMA_OUTPUT_SEL_DSI_CMD) {
 		cb_type = MDP3_DMA_CALLBACK_TYPE_DMA_DONE;
 		if (intf->active) {
-<<<<<<< HEAD
 			ATRACE_BEGIN("mdp3_wait_for_dma_comp");
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			rc = wait_for_completion_timeout(&dma->dma_comp,
 				KOFF_TIMEOUT);
 			if (rc <= 0) {
 				WARN(1, "cmd kickoff timed out (%d)\n", rc);
 				rc = -1;
 			}
-<<<<<<< HEAD
 			ATRACE_END("mdp3_wait_for_dma_comp");
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		}
 	}
 	if (dma->update_src_cfg) {
@@ -755,18 +682,12 @@ static int mdp3_dmap_update(struct mdp3_dma *dma, void *buf,
 		dma->dma_config_source(dma);
 		if (data) {
 			panel = (struct mdss_panel_data *)data;
-<<<<<<< HEAD
 			if (panel->event_handler) {
 				panel->event_handler(panel,
 					MDSS_EVENT_ENABLE_PARTIAL_ROI, NULL);
 				panel->event_handler(panel,
 					MDSS_EVENT_DSI_STREAM_SIZE, NULL);
 			}
-=======
-			if (panel->event_handler)
-				panel->event_handler(panel,
-					MDSS_EVENT_ENABLE_PARTIAL_ROI, NULL);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		}
 		dma->update_src_cfg = false;
 	}
@@ -775,13 +696,8 @@ static int mdp3_dmap_update(struct mdp3_dma *dma, void *buf,
 			dma->roi.y * dma->source_config.stride +
 			dma->roi.x * dma_bpp(dma->source_config.format)));
 	dma->source_config.buf = (int)buf;
-<<<<<<< HEAD
 	mdp3_ccs_update(dma, true);
 	if (dma->output_config.out_sel == MDP3_DMA_OUTPUT_SEL_DSI_CMD) {
-=======
-	if (dma->output_config.out_sel == MDP3_DMA_OUTPUT_SEL_DSI_CMD) {
-		mdp3_ccs_update(dma);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		MDP3_REG_WRITE(MDP3_REG_DMA_P_START, 1);
 	}
 
@@ -799,23 +715,15 @@ static int mdp3_dmap_update(struct mdp3_dma *dma, void *buf,
 	mdp3_dma_callback_enable(dma, cb_type);
 	pr_debug("mdp3_dmap_update wait for vsync_comp in\n");
 	if (dma->output_config.out_sel == MDP3_DMA_OUTPUT_SEL_DSI_VIDEO) {
-<<<<<<< HEAD
 		ATRACE_BEGIN("mdp3_wait_for_vsync_comp");
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		rc = wait_for_completion_timeout(&dma->vsync_comp,
 			KOFF_TIMEOUT);
 		if (rc <= 0)
 			rc = -1;
-<<<<<<< HEAD
 		ATRACE_END("mdp3_wait_for_vsync_comp");
 	}
 	pr_debug("mdp3_dmap_update wait for vsync_comp out\n");
 	ATRACE_END(__func__);
-=======
-	}
-	pr_debug("mdp3_dmap_update wait for vsync_comp out\n");
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	return rc;
 }
 

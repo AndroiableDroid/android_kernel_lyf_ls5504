@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
 *Copyright (c) 2014-2015, The Linux Foundation. All rights reserved.
-=======
-*Copyright (c) 2014, The Linux Foundation. All rights reserved.
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 *
 *This program is free software; you can redistribute it and/or modify
 *it under the terms of the GNU General Public License version 2 and
@@ -19,11 +15,8 @@
 #define DEVFREQ_SPDM_H
 
 #include <linux/list.h>
-<<<<<<< HEAD
 #include <soc/qcom/hvc.h>
 #include <soc/qcom/scm.h>
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 enum pl_levels { SPDM_PL1, SPDM_PL2, SPDM_PL3, SPDM_PL_COUNT };
 enum actions { SPDM_UP, SPDM_DOWN };
@@ -86,24 +79,17 @@ struct spdm_data {
 	struct list_head list;
 
 	struct dentry *debugfs_dir;
-<<<<<<< HEAD
 
 	bool enabled;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 };
 
 extern void spdm_init_debugfs(struct device *dev);
 extern void spdm_remove_debugfs(struct spdm_data *data);
 
 #define SPDM_HYP_FNID 5
-<<<<<<< HEAD
 #define SPDM_SCM_SVC_ID 0x9
 #define SPDM_SCM_CMD_ID 0x4
 /* SPDM CMD ID's for hypervisor/SCM */
-=======
-/* CMD ID's for hypervisor */
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #define SPDM_CMD_GET_BW_ALL 1
 #define SPDM_CMD_GET_BW_SPECIFIC 2
 #define SPDM_CMD_ENABLE 3
@@ -123,7 +109,6 @@ extern void spdm_remove_debugfs(struct spdm_data *data);
 #define SPDM_CMD_CFG_MAXCCI 17
 #define SPDM_CMD_CFG_VOTES 18
 
-<<<<<<< HEAD
 #define SPDM_MAX_ARGS 6
 #define SPDM_MAX_RETS 3
 
@@ -140,6 +125,4 @@ extern int __spdm_scm_call(struct spdm_args *args, int num_args);
 #else
 #define spdm_ext_call __spdm_hyp_call
 #endif
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #endif

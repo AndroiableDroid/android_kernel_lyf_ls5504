@@ -34,7 +34,6 @@ struct fw_upgrade_info {
 	u16 delay_erase_flash;
 };
 
-<<<<<<< HEAD
 struct ft5x06_psensor_platform_data {
 	struct input_dev *input_psensor_dev;
 	struct sensors_classdev ps_cdev;
@@ -51,8 +50,6 @@ struct ft5x06_gesture_platform_data {
 	struct ft5x06_ts_data *data;
 };
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 struct ft5x06_ts_platform_data {
 	struct fw_upgrade_info info;
 	const char *name;
@@ -79,11 +76,8 @@ struct ft5x06_ts_platform_data {
 	bool no_force_update;
 	bool i2c_pull_up;
 	bool ignore_id_check;
-<<<<<<< HEAD
 	bool psensor_support;
 	bool gesture_support;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	int (*power_init) (bool);
 	int (*power_on) (bool);
 };

@@ -215,11 +215,7 @@ struct msm_slim_qmi {
 	struct work_struct		ssr_up;
 };
 
-<<<<<<< HEAD
 struct msm_slim_ss {
-=======
-struct msm_slim_mdm {
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	struct notifier_block nb;
 	void *ssr;
 	enum msm_ctrl_state state;
@@ -274,12 +270,8 @@ struct msm_slim_ctrl {
 	u32			ver;
 	struct msm_slim_qmi	qmi;
 	struct msm_slim_pdata	pdata;
-<<<<<<< HEAD
 	struct msm_slim_ss	ext_mdm;
 	struct msm_slim_ss	dsp;
-=======
-	struct msm_slim_mdm	mdm;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	int			default_ipc_log_mask;
 	int			ipc_log_mask;
 	bool			sysfs_created;

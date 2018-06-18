@@ -811,7 +811,6 @@ static int subsys_ramdump(int enable, const struct subsys_desc *subsys)
 	return pil_do_ramdump(&d->desc, d->ramdump_dev);
 }
 
-<<<<<<< HEAD
 static void subsys_free_memory(const struct subsys_desc *subsys)
 {
 	struct pil_tz_data *d = subsys_to_data(subsys);
@@ -819,8 +818,6 @@ static void subsys_free_memory(const struct subsys_desc *subsys)
 	pil_free_memory(&d->desc);
 }
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static void subsys_crash_shutdown(const struct subsys_desc *subsys)
 {
 	struct pil_tz_data *d = subsys_to_data(subsys);
@@ -948,10 +945,7 @@ static int pil_tz_driver_probe(struct platform_device *pdev)
 	d->subsys_desc.shutdown = subsys_shutdown;
 	d->subsys_desc.powerup = subsys_powerup;
 	d->subsys_desc.ramdump = subsys_ramdump;
-<<<<<<< HEAD
 	d->subsys_desc.free_memory = subsys_free_memory;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	d->subsys_desc.crash_shutdown = subsys_crash_shutdown;
 	d->subsys_desc.err_fatal_handler = subsys_err_fatal_intr_handler;
 	d->subsys_desc.wdog_bite_handler = subsys_wdog_bite_irq_handler;

@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 /* Copyright (c) 2012-2015, The Linux Foundation. All rights reserved.
-=======
-/* Copyright (c) 2012-2014, The Linux Foundation. All rights reserved.
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -34,10 +30,7 @@
 #include <linux/hwmon-sysfs.h>
 #include <linux/qpnp/qpnp-adc.h>
 #include <linux/platform_device.h>
-<<<<<<< HEAD
 #include <linux/thermal.h>
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 /* QPNP VADC register definition */
 #define QPNP_VADC_REVISION1				0x0
@@ -131,7 +124,6 @@ struct qpnp_vadc_mode_state {
 	struct qpnp_adc_amux		vadc_meas_amux;
 };
 
-<<<<<<< HEAD
 struct qpnp_vadc_thermal_data {
 	bool thermal_node;
 	int thermal_chan;
@@ -140,8 +132,6 @@ struct qpnp_vadc_thermal_data {
 	struct qpnp_vadc_chip *vadc_dev;
 };
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 struct qpnp_vadc_chip {
 	struct device			*dev;
 	struct qpnp_adc_drv		*adc;
@@ -162,10 +152,7 @@ struct qpnp_vadc_chip {
 	struct work_struct		trigger_high_thr_work;
 	struct work_struct		trigger_low_thr_work;
 	struct qpnp_vadc_mode_state	*state_copy;
-<<<<<<< HEAD
 	struct qpnp_vadc_thermal_data	*vadc_therm_chan;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	struct sensor_device_attribute	sens_attr[0];
 };
 
@@ -184,12 +171,9 @@ static struct qpnp_vadc_scale_fn vadc_scale_fn[] = {
 	[SCALE_QRD_SKUG_BATT_THERM] = {qpnp_adc_scale_qrd_skug_batt_therm},
 	[SCALE_QRD_SKUH_BATT_THERM] = {qpnp_adc_scale_qrd_skuh_batt_therm},
 	[SCALE_NCP_03WF683_THERM] = {qpnp_adc_scale_therm_ncp03},
-<<<<<<< HEAD
 	[SCALE_QRD_SKUC_BATT_THERM] = {qpnp_adc_scale_qrd_skuc_batt_therm},
 	[SCALE_QRD_SKUE_BATT_THERM] = {qpnp_adc_scale_qrd_skue_batt_therm},
 	[SCALE_QRD_SKUL_BATT_THERM] = {qpnp_adc_scale_qrd_skul_batt_therm},
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 };
 
 static struct qpnp_vadc_rscale_fn adc_vadc_rscale_fn[] = {
@@ -725,13 +709,10 @@ static int32_t qpnp_vadc_version_check(struct qpnp_vadc_chip *dev)
 #define QPNP_VBAT_COEFF_46	2120
 #define QPNP_VBAT_COEFF_47	3560
 #define QPNP_VBAT_COEFF_48	2190
-<<<<<<< HEAD
 #define QPNP_VBAT_COEFF_49	4180
 #define QPNP_VBAT_COEFF_50	27800000
 #define QPNP_VBAT_COEFF_51	5110
 #define QPNP_VBAT_COEFF_52	34444000
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 static int32_t qpnp_ocv_comp(int64_t *result,
 			struct qpnp_vadc_chip *vadc, int64_t die_temp)
@@ -897,7 +878,6 @@ static int32_t qpnp_ocv_comp(int64_t *result,
 			break;
 		}
 		break;
-<<<<<<< HEAD
 	case QPNP_REV_ID_8909_1_0:
 		switch (vadc->id) {
 		case COMP_ID_SMIC:
@@ -912,8 +892,6 @@ static int32_t qpnp_ocv_comp(int64_t *result,
 			break;
 		}
 		break;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	default:
 		temp_var = 0;
 		break;
@@ -1085,7 +1063,6 @@ static int32_t qpnp_vbat_sns_comp(int64_t *result,
 			break;
 		}
 		break;
-<<<<<<< HEAD
 	case QPNP_REV_ID_8909_1_0:
 		switch (vadc->id) {
 		case COMP_ID_SMIC:
@@ -1110,8 +1087,6 @@ static int32_t qpnp_vbat_sns_comp(int64_t *result,
 			break;
 		}
 		break;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	default:
 		temp_var = 0;
 		break;
@@ -2160,7 +2135,6 @@ hwmon_err_sens:
 	return rc;
 }
 
-<<<<<<< HEAD
 static int qpnp_vadc_get_temp(struct thermal_zone_device *thermal,
 			     unsigned long *temp)
 {
@@ -2227,16 +2201,11 @@ thermal_err_sens:
 	return rc;
 }
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static int qpnp_vadc_probe(struct spmi_device *spmi)
 {
 	struct qpnp_vadc_chip *vadc;
 	struct qpnp_adc_drv *adc_qpnp;
-<<<<<<< HEAD
 	struct qpnp_vadc_thermal_data *adc_thermal;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	struct device_node *node = spmi->dev.of_node;
 	struct device_node *child;
 	int rc, count_adc_channel_list = 0, i = 0;
@@ -2274,7 +2243,6 @@ static int qpnp_vadc_probe(struct spmi_device *spmi)
 	}
 
 	vadc->adc = adc_qpnp;
-<<<<<<< HEAD
 	adc_thermal = devm_kzalloc(&spmi->dev,
 			(sizeof(struct qpnp_vadc_thermal_data) *
 				count_adc_channel_list), GFP_KERNEL);
@@ -2284,8 +2252,6 @@ static int qpnp_vadc_probe(struct spmi_device *spmi)
 	}
 
 	vadc->vadc_therm_chan = adc_thermal;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	rc = qpnp_adc_get_devicetree_data(spmi, vadc->adc);
 	if (rc) {
 		dev_err(&spmi->dev, "failed to read device tree\n");
@@ -2299,14 +2265,11 @@ static int qpnp_vadc_probe(struct spmi_device *spmi)
 		return rc;
 	}
 	vadc->vadc_hwmon = hwmon_device_register(&vadc->adc->spmi->dev);
-<<<<<<< HEAD
 	rc = qpnp_vadc_init_thermal(vadc, spmi);
 	if (rc) {
 		dev_err(&spmi->dev, "failed to initialize qpnp thermal adc\n");
 		return rc;
 	}
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	vadc->vadc_init_calib = false;
 	vadc->max_channels_available = count_adc_channel_list;
 	rc = qpnp_vadc_read_reg(vadc, QPNP_INT_TEST_VAL, &fab_id);
@@ -2411,12 +2374,9 @@ err_setup:
 	for_each_child_of_node(node, child) {
 		device_remove_file(&spmi->dev,
 			&vadc->sens_attr[i].dev_attr);
-<<<<<<< HEAD
 		if (vadc->vadc_therm_chan[i].thermal_node)
 			thermal_zone_device_unregister(
 					vadc->vadc_therm_chan[i].tz_dev);
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		i++;
 	}
 	hwmon_device_unregister(vadc->vadc_hwmon);
@@ -2434,12 +2394,9 @@ static int qpnp_vadc_remove(struct spmi_device *spmi)
 	for_each_child_of_node(node, child) {
 		device_remove_file(&spmi->dev,
 			&vadc->sens_attr[i].dev_attr);
-<<<<<<< HEAD
 		if (vadc->vadc_therm_chan[i].thermal_node)
 			thermal_zone_device_unregister(
 					vadc->vadc_therm_chan[i].tz_dev);
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		i++;
 	}
 	hwmon_device_unregister(vadc->vadc_hwmon);

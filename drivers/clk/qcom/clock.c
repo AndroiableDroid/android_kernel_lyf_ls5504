@@ -43,10 +43,7 @@ static LIST_HEAD(handoff_vdd_list);
 
 static DEFINE_MUTEX(msm_clock_init_lock);
 LIST_HEAD(orphan_clk_list);
-<<<<<<< HEAD
 static LIST_HEAD(clk_notifier_list);
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 /* Find the voltage level required for a given rate. */
 int find_vdd_level(struct clk *clk, unsigned long rate)
@@ -478,7 +475,6 @@ int clk_reset(struct clk *clk, enum clk_reset_action action)
 }
 EXPORT_SYMBOL(clk_reset);
 
-<<<<<<< HEAD
 /**
  * __clk_notify - call clk notifier chain
  * @clk: struct clk * that is changing rate
@@ -636,8 +632,6 @@ int msm_clk_notif_unregister(struct clk *clk, struct notifier_block *nb)
 	return ret;
 }
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 unsigned long clk_get_rate(struct clk *clk)
 {
 	if (IS_ERR_OR_NULL(clk))
@@ -678,7 +672,6 @@ int clk_set_rate(struct clk *clk, unsigned long rate)
 
 	start_rate = clk->rate;
 
-<<<<<<< HEAD
 	if (clk->notifier_count)
 		__clk_notify(clk, PRE_RATE_CHANGE, clk->rate, rate);
 
@@ -687,12 +680,6 @@ int clk_set_rate(struct clk *clk, unsigned long rate)
 		if (rc)
 			goto abort_set_rate;
 	}
-=======
-	if (clk->ops->pre_set_rate)
-		rc = clk->ops->pre_set_rate(clk, rate);
-	if (rc)
-		goto out;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	/* Enforce vdd requirements for target frequency. */
 	if (clk->prepare_count) {
@@ -713,21 +700,15 @@ int clk_set_rate(struct clk *clk, unsigned long rate)
 	if (clk->ops->post_set_rate)
 		clk->ops->post_set_rate(clk, start_rate);
 
-<<<<<<< HEAD
 	if (clk->notifier_count)
 		__clk_notify(clk, POST_RATE_CHANGE, start_rate, clk->rate);
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 out:
 	mutex_unlock(&clk->prepare_lock);
 	return rc;
 
-<<<<<<< HEAD
 abort_set_rate:
 	__clk_notify(clk, ABORT_RATE_CHANGE, clk->rate, rate);
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 err_set_rate:
 	if (clk->prepare_count)
 		unvote_rate_vdd(clk, rate);

@@ -39,8 +39,5 @@
 				"AMIC3", "MIC BIAS External";
 	};
 };
-<<<<<<< HEAD
 
 /delete-node/ &mba_mss;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130

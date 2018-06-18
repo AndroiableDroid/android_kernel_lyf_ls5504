@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 /* Copyright (c) 2010-2015, The Linux Foundation. All rights reserved.
-=======
-/* Copyright (c) 2010-2014, The Linux Foundation. All rights reserved.
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -113,11 +109,8 @@ extern s32 scm_call_atomic2(u32 svc, u32 cmd, u32 arg1, u32 arg2);
 extern s32 scm_call_atomic3(u32 svc, u32 cmd, u32 arg1, u32 arg2, u32 arg3);
 extern s32 scm_call_atomic4_3(u32 svc, u32 cmd, u32 arg1, u32 arg2, u32 arg3,
 		u32 arg4, u32 *ret1, u32 *ret2);
-<<<<<<< HEAD
 extern s32 scm_call_atomic5_3(u32 svc, u32 cmd, u32 arg1, u32 arg2, u32 arg3,
 		u32 arg4, u32 arg5, u32 *ret1, u32 *ret2, u32 *ret3);
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 #define SCM_VERSION(major, minor) (((major) << 16) | ((minor) & 0xFF))
 
@@ -188,15 +181,12 @@ static inline s32 scm_call_atomic4_3(u32 svc, u32 cmd, u32 arg1, u32 arg2,
 	return 0;
 }
 
-<<<<<<< HEAD
 static inline s32 scm_call_atomic5_3(u32 svc, u32 cmd, u32 arg1, u32 arg2,
 	u32 arg3, u32 arg4, u32 arg5, u32 *ret1, u32 *ret2, u32 *ret3)
 {
 	return 0;
 }
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static inline u32 scm_get_version(void)
 {
 	return 0;

@@ -60,11 +60,6 @@ static int mmc_queue_thread(void *d)
 	struct mmc_card *card = mq->card;
 
 	current->flags |= PF_MEMALLOC;
-<<<<<<< HEAD
-=======
-	if (card->host->wakeup_on_idle)
-		set_wake_up_idle(true);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	down(&mq->thread_sem);
 	do {

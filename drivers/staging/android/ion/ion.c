@@ -118,11 +118,8 @@ struct ion_handle {
 	int id;
 };
 
-<<<<<<< HEAD
 static struct ion_device *ion_dev;
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 bool ion_buffer_fault_user_mappings(struct ion_buffer *buffer)
 {
 	return (buffer->flags & ION_FLAG_CACHED) &&
@@ -746,7 +743,6 @@ EXPORT_SYMBOL(ion_unmap_kernel);
 static int ion_debug_client_show(struct seq_file *s, void *unused)
 {
 	struct ion_client *client = s->private;
-<<<<<<< HEAD
 	struct rb_node *n, *cnode;
 	bool found = false;
 
@@ -771,9 +767,6 @@ static int ion_debug_client_show(struct seq_file *s, void *unused)
 		up_write(&ion_dev->lock);
 		return -EINVAL;
 	}
-=======
-	struct rb_node *n;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	seq_printf(s, "%16.16s: %16.16s : %16.16s : %12.12s\n",
 			"heap_name", "size_in_bytes", "handle refcount",
@@ -793,10 +786,7 @@ static int ion_debug_client_show(struct seq_file *s, void *unused)
 		seq_printf(s, "\n");
 	}
 	mutex_unlock(&client->lock);
-<<<<<<< HEAD
 	up_write(&ion_dev->lock);
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	return 0;
 }
 
@@ -1763,11 +1753,7 @@ void show_ion_usage(struct ion_device *dev)
 			heap->debug_show(heap, NULL, 0);
 
 	}
-<<<<<<< HEAD
 	up_read(&dev->lock);
-=======
-	up_write(&dev->lock);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 }
 
 #ifdef DEBUG_HEAP_SHRINKER
@@ -1926,10 +1912,7 @@ debugfs_done:
 	init_rwsem(&idev->lock);
 	plist_head_init(&idev->heaps);
 	idev->clients = RB_ROOT;
-<<<<<<< HEAD
 	ion_dev = idev;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	return idev;
 }
 

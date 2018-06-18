@@ -84,15 +84,12 @@ static inline void msm_vidc_free_reg_table(
 	res->reg_set.reg_tbl = NULL;
 }
 
-<<<<<<< HEAD
 static inline void msm_vidc_free_qdss_addr_table(
 			struct msm_vidc_platform_resources *res)
 {
 	res->qdss_addr_set.addr_tbl = NULL;
 }
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static inline void msm_vidc_free_bus_vectors(
 			struct msm_vidc_platform_resources *res)
 {
@@ -138,10 +135,7 @@ void msm_vidc_free_platform_resources(
 	msm_vidc_free_regulator_table(res);
 	msm_vidc_free_freq_table(res);
 	msm_vidc_free_reg_table(res);
-<<<<<<< HEAD
 	msm_vidc_free_qdss_addr_table(res);
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	msm_vidc_free_bus_vectors(res);
 	msm_vidc_free_iommu_groups(res);
 }
@@ -192,7 +186,6 @@ static int msm_vidc_load_reg_table(struct msm_vidc_platform_resources *res)
 	}
 	return rc;
 }
-<<<<<<< HEAD
 static int msm_vidc_load_qdss_table(struct msm_vidc_platform_resources *res)
 {
 	struct addr_set *qdss_addr_set;
@@ -245,8 +238,6 @@ err_qdss_addr_tbl:
 	return rc;
 }
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static int msm_vidc_load_freq_table(struct msm_vidc_platform_resources *res)
 {
 	int rc = 0;
@@ -701,23 +692,17 @@ int read_platform_resources_from_dt(
 		dprintk(VIDC_ERR, "Failed to load freq table: %d\n", rc);
 		goto err_load_freq_table;
 	}
-<<<<<<< HEAD
 
 	rc = msm_vidc_load_qdss_table(res);
 	if (rc)
 		dprintk(VIDC_WARN, "Failed to load qdss reg table: %d\n", rc);
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	rc = msm_vidc_load_reg_table(res);
 	if (rc) {
 		dprintk(VIDC_ERR, "Failed to load reg table: %d\n", rc);
 		goto err_load_reg_table;
 	}
-<<<<<<< HEAD
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	rc = msm_vidc_load_bus_vectors(res);
 	if (rc) {
 		dprintk(VIDC_ERR, "Failed to load bus vectors: %d\n", rc);

@@ -29,10 +29,7 @@ Required properties:
   NOTE: For all qos*, vbif*, ds* parameters, same SoC can have different
   hardware versions with different entries/registers/settings. They can be
   specified by adding version to the string e.g. qos-v2-settings.
-<<<<<<< HEAD
 - bus-util-factor: bus utilization factor in Q10 format (optional)
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 Example:
 
@@ -83,8 +80,5 @@ Example:
                 0x44441111 0x44441111 0x44441111
                 0x44441111 0x44441111 0x44441111
                 0x44441111 0x00000103>;
-<<<<<<< HEAD
        bus-util-factor = <1024>;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
    };

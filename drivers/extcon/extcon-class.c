@@ -470,12 +470,7 @@ int extcon_register_interest(struct extcon_specific_cable_nb *obj,
 		if (!obj->edev)
 			return -ENODEV;
 
-<<<<<<< HEAD
 		obj->cable_index = extcon_find_cable_index(obj->edev, cable_name);
-=======
-		obj->cable_index = extcon_find_cable_index(obj->edev,
-							  cable_name);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		if (obj->cable_index < 0)
 			return obj->cable_index;
 
@@ -483,12 +478,7 @@ int extcon_register_interest(struct extcon_specific_cable_nb *obj,
 
 		obj->internal_nb.notifier_call = _call_per_cable;
 
-<<<<<<< HEAD
 		return raw_notifier_chain_register(&obj->edev->nh, &obj->internal_nb);
-=======
-		return raw_notifier_chain_register(&obj->edev->nh,
-						  &obj->internal_nb);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	} else {
 		struct class_dev_iter iter;
 		struct extcon_dev *extd;

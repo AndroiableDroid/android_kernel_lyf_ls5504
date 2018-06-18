@@ -889,7 +889,6 @@ static int __init msm_pm_drv_init(void)
 
 	rc = platform_driver_register(&msm_cpu_pm_snoc_client_driver);
 
-<<<<<<< HEAD
 	if (rc)
 		pr_err("%s(): failed to register driver %s\n", __func__,
 				msm_cpu_pm_snoc_client_driver.driver.name);
@@ -909,17 +908,6 @@ static int __init msm_pm_debug_counters_init(void)
 	return rc;
 }
 fs_initcall(msm_pm_debug_counters_init);
-=======
-	if (rc) {
-		pr_err("%s(): failed to register driver %s\n", __func__,
-				msm_cpu_pm_snoc_client_driver.driver.name);
-		return rc;
-	}
-
-	return platform_driver_register(&msm_cpu_pm_driver);
-}
-late_initcall(msm_pm_drv_init);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 int __init msm_pm_sleep_status_init(void)
 {

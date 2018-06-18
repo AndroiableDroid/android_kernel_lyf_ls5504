@@ -1501,10 +1501,6 @@ int32_t mt9m114_sensor_config32(struct msm_sensor_ctrl_t *s_ctrl,
 		conf_array.delay = conf_array32.delay;
 		conf_array.size = conf_array32.size;
 		conf_array.reg_setting = compat_ptr(conf_array32.reg_setting);
-<<<<<<< HEAD
-=======
-		conf_array.qup_i2c_batch = conf_array32.qup_i2c_batch;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 		reg_setting = kzalloc(conf_array.size *
 			(sizeof(struct msm_camera_i2c_reg_array)), GFP_KERNEL);

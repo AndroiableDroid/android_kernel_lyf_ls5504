@@ -68,11 +68,7 @@
 &i2c_5 {  /* BLSP1 QUP5 */
 	status = "disabled";
 };
-<<<<<<< HEAD
 /*
-=======
-
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 &spi_5 {
 	status = "okay";
 	bu21150-ts-spi@0 {
@@ -99,11 +95,7 @@
 		jdi,afe-vendor = "rohm";
 	};
 };
-<<<<<<< HEAD
 */
-=======
-
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #include "dsi-panel-jdi-fhd-video.dtsi"
 
 &dsi_jdi_fhd_video {
@@ -135,7 +127,6 @@
 };
 
 &cci {
-<<<<<<< HEAD
 	led_flash0: qcom,led-flash@66 {
 		cell-index = <0>;
 		reg = <0x66>;
@@ -162,8 +153,6 @@
 		qcom,cci-master = <0>;
 	};
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	qcom,camera@78 {
 		qcom,cam-vreg-min-voltage = <2100000 0 3000000>;
 		qcom,cam-vreg-max-voltage = <2100000 0 3000000>;

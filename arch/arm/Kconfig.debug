@@ -98,7 +98,6 @@ config FREE_PAGES_RDONLY
 
           If unsure, say N.
 
-<<<<<<< HEAD
 config KERNEL_TEXT_RDONLY
 	bool "Set kernel text section pages as read only"
 	depends on FREE_PAGES_RDONLY
@@ -112,8 +111,6 @@ config KERNEL_TEXT_RDONLY
 
 	  If unsure, say N.
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 # These options are only for real kernel hackers who want to get their hands dirty.
 config DEBUG_LL
 	bool "Kernel low-level debugging functions (read help!)"

@@ -193,7 +193,6 @@ config INPUT_KEYCOMBO
 	  To compile this driver as a module, choose M here: the
 	  module will be called keycombo.
 
-<<<<<<< HEAD
 config SENSORS_HALL
 	bool "Hall sensor"
 	depends on INPUT
@@ -201,8 +200,6 @@ config SENSORS_HALL
 	 Say y here if you want to use this hall sensor driver, it
 	 is like a switch. For example, lid.
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 comment "Input Device Drivers"
 
 source "drivers/input/keyboard/Kconfig"

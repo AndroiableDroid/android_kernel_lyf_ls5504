@@ -220,7 +220,6 @@ TRACE_EVENT(rmnet_map_checksum_downlink_packet,
 		__get_str(name), __entry->res)
 )
 
-<<<<<<< HEAD
 TRACE_EVENT(rmnet_map_checksum_uplink_packet,
 
 	TP_PROTO(struct net_device *dev, int ckresult),
@@ -306,8 +305,6 @@ DEFINE_EVENT(rmnet_physdev_action_template, rmnet_unassociate,
 
 	TP_ARGS(dev)
 );
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #endif /* _RMNET_DATA_TRACE_H_ */
 
 /* This part must be outside protection */

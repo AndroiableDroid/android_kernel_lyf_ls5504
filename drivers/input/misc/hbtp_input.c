@@ -1,9 +1,5 @@
 
-<<<<<<< HEAD
 /* Copyright (c) 2014-2015, The Linux Foundation. All rights reserved.
-=======
-/* Copyright (c) 2014, The Linux Foundation. All rights reserved.
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -61,28 +57,17 @@ static int fb_notifier_callback(struct notifier_block *self,
 	struct fb_event *evdata = data;
 	struct hbtp_data *hbtp_data =
 		container_of(self, struct hbtp_data, fb_notif);
-<<<<<<< HEAD
 	char *envp[] = {HBTP_EVENT_TYPE_DISPLAY, NULL};
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	if (evdata && evdata->data && event == FB_EVENT_BLANK &&
 		hbtp_data && hbtp_data->input_dev) {
 		blank = *(int *)(evdata->data);
 		if (blank == FB_BLANK_UNBLANK)
-<<<<<<< HEAD
 			kobject_uevent_env(&hbtp_data->input_dev->dev.kobj,
 					KOBJ_ONLINE, envp);
 		else if (blank == FB_BLANK_POWERDOWN)
 			kobject_uevent_env(&hbtp_data->input_dev->dev.kobj,
 					KOBJ_OFFLINE, envp);
-=======
-			kobject_uevent(&hbtp_data->input_dev->dev.kobj,
-					KOBJ_ONLINE);
-		else if (blank == FB_BLANK_POWERDOWN)
-			kobject_uevent(&hbtp_data->input_dev->dev.kobj,
-					KOBJ_OFFLINE);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	}
 
 	return 0;
@@ -259,11 +244,7 @@ reg_off:
 static long hbtp_input_ioctl_handler(struct file *file, unsigned int cmd,
 				 unsigned long arg, void __user *p)
 {
-<<<<<<< HEAD
 	int error;
-=======
-	int error = 0;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	struct hbtp_input_mt mt_data;
 	struct hbtp_input_absinfo absinfo[ABS_MT_LAST - ABS_MT_FIRST + 1];
 	struct hbtp_input_key key_data;

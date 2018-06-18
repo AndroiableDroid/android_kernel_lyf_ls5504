@@ -11,7 +11,6 @@
  */
 
 #include "msm8939-qrd.dtsi"
-<<<<<<< HEAD
 #include "msm8939-camera-sensor-qrd.dtsi"
 
 /* zhangwei add for backlight gpio3 */
@@ -74,28 +73,12 @@
 
 	i2c@78b9000 { /* BLSP1 QUP5 */
 		/*focaltech@38 {
-=======
-#include "dsi-panel-nt35596-1080p-skuk-video.dtsi"
-#include "msm8939-camera-sensor-qrd.dtsi"
-/ {
-	model = "Qualcomm Technologies, Inc. MSM8939 QRD SKUK";
-	compatible = "qcom,msm8939-qrd-skuk", "qcom,msm8939-qrd", "qcom,msm8939", "qcom,qrd";
-};
-
-&soc {
-	i2c@78b9000 { /* BLSP1 QUP5 */
-		focaltech@38 {
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			compatible = "focaltech,5x06";
 			reg = <0x38>;
 			interrupt-parent = <&msm_gpio>;
 			interrupts = <13 0x2008>;
 			vdd-supply = <&pm8916_l17>;
 			vcc_i2c-supply = <&pm8916_l6>;
-<<<<<<< HEAD
-=======
-			/* pins used by touchscreen */
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			pinctrl-names = "pmx_ts_active","pmx_ts_suspend","pmx_ts_release";
 			pinctrl-0 = <&ts_int_active &ts_reset_active>;
 			pinctrl-1 = <&ts_int_suspend &ts_reset_suspend>;
@@ -121,7 +104,6 @@
 			focaltech,fw-delay-era-flsh-ms = <2000>;
 			focaltech,fw-auto-cal;
 			focaltech,ignore-id-check;
-<<<<<<< HEAD
 		};*/
 /*added by zougaoxiang@hipad.com for sq9007 2014/10/28/20:08 start*/
 	synaptics_dsx@20 {
@@ -225,11 +207,6 @@
 /*added by zougaoxiang@hipad.com for sq9007 2014/10/28/20:08 end*/
 	};
 /*
-=======
-		};
-	};
-
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	gen-vkeys {
 		compatible = "qcom,gen-vkeys";
 		label = "ft5x06_ts";
@@ -240,7 +217,6 @@
 		qcom,key-codes = <139 172 158>;
 		qcom,y-offset = <0>;
 	};
-<<<<<<< HEAD
 */
 /*xiesu add for one-line-mode-backlight 20150317*/
 	backlight {
@@ -249,9 +225,6 @@
 		default-brightness-level = <16>;
 		qcom,bl-gpio = <&pm8916_gpios 3 0>;
 	}; 
-=======
-
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	sound {
 		compatible = "qcom,msm8x16-audio-codec";
 		qcom,model = "msm8939-snd-card-skuk";
@@ -276,10 +249,7 @@
 				"cdc_lines_sus";
 		pinctrl-0 = <&cdc_pdm_lines_act>;
 		pinctrl-1 = <&cdc_pdm_lines_sus>;
-<<<<<<< HEAD
 		qcom,ext-spk-amp-gpio = <&msm_gpio 0 0>;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		asoc-platform = <&pcm0>, <&pcm1>, <&voip>, <&voice>,
 				<&loopback>, <&compress>, <&hostless>,
 				<&afe>, <&lsm>, <&routing>, <&lpa>;
@@ -311,7 +281,6 @@
 		asoc-codec = <&stub_codec>, <&pm8916_tombak_dig>;
 		asoc-codec-names = "msm-stub-codec.1", "tombak_codec";
 	};
-<<<<<<< HEAD
 	
 	/*lijinpei add for hall sensor*/
     hall {
@@ -326,16 +295,11 @@
         linux,min-uv = <1650000>;
         linux,max-uv = <3300000>;
     };
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 };
 
 
 &tlmm_pinmux {
-<<<<<<< HEAD
 /*
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	bma2x2_int1_pin {
 		qcom,pins = <&gp 112>;
 		qcom,num-grp-pins = <1>;
@@ -363,7 +327,6 @@
 			  bias-pull-down;
 		};
 	};
-<<<<<<< HEAD
 */
 
 	ap3426_int_pin {
@@ -430,24 +393,11 @@
 		hall_sensor_int_default: hall_sensor_int_default {
 			drive-strength = <6>;
 			bias-disable;
-=======
-
-	tps65132-en-pin {
-		qcom,pins = <&gp 97>, <&gp 98>;
-		qcom,num-grp-pins = <2>;
-		label = "tps65132_en_pins";
-		qcom,pin-func = <0>;
-
-		tps65132_en_default: en-default {
-			drive-strength = <2>;
-			bias-pull-down;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		};
 	};
 };
 
 &i2c_0 { /* BLSP1 QUP2 */
-<<<<<<< HEAD
 
 	di@1e {
     compatible = "di,ap3426";
@@ -497,101 +447,6 @@
 };
 
 /*chenjian
-=======
-	avago@39 { /* Ambient light and proximity sensor */
-		compatible = "avago,apds9930";
-		reg = <0x39>;
-		pinctrl-names = "default","sleep";
-		pinctrl-0 = <&apds99xx_default>;
-		pinctrl-1 = <&apds99xx_sleep>;
-		interrupt-parent = <&msm_gpio>;
-		interrupts = <113 0x2002>;
-		vdd-supply = <&pm8916_l17>;
-		vio-supply = <&pm8916_l6>;
-		avago,irq-gpio = <&msm_gpio 113 0x2002>;
-		avago,ps-threshold = <600>;
-		avago,ps-hysteresis-threshold = <500>;
-		avago,ps-pulse = <8>;
-		avago,ps-pgain = <0>;
-		avago,als-B = <186>;
-		avago,als-C = <75>;
-		avago,als-D = <129>;
-		avago,ga-value = <560>;
-	};
-
-	bosch@18 { /* Accelerometer sensor */
-		compatible = "bosch,bma2x2";
-		reg = <0x18>;
-		pinctrl-names = "bma_default","bma_sleep";
-		pinctrl-0 = <&bma2x2_int1_default &bma2x2_int2_default>;
-		pinctrl-1 = <&bma2x2_int1_sleep &bma2x2_int2_sleep>;
-		interrupt-parent = <&msm_gpio>;
-		interrupts = <112 0x2002>;
-		vdd-supply = <&pm8916_l17>;
-		vio-supply = <&pm8916_l6>;
-		bosch,init-interval = <200>;
-		bosch,place = <2>;
-		bosch,gpio-int1 = <&msm_gpio 112 0x2002>;
-		bosch,gpio-int2 = <&msm_gpio 114 0x2002>;
-	};
-
-	memsic@30 { /* Magnetic field sensor */
-		compatible = "memsic,mmc3416x";
-		reg = <0x30>;
-		vdd-supply = <&pm8916_l17>;
-		vio-supply = <&pm8916_l6>;
-		memsic,dir = "obverse-x-axis-forward";
-		memsic,auto-report;
-	};
-
-	mpu6050@68 { /* Gyroscope and accelerometer sensor combo */
-		compatible = "invn,mpu6050";
-		reg = <0x68>;
-		pinctrl-names = "mpu_default","mpu_sleep";
-		pinctrl-0 = <&mpu6050_default>;
-		pinctrl-1 = <&mpu6050_sleep>;
-		interrupt-parent = <&msm_gpio>;
-		interrupts = <115 0x2002>;
-		vdd-supply = <&pm8916_l17>;
-		vlogic-supply = <&pm8916_l16>;
-		vi2c-supply = <&pm8916_l6>;
-		invn,gpio-int = <&msm_gpio 115 0x2002>;
-		invn,place = "Portrait Down Back Side";
-	};
-
-	tps65132@3e {
-		compatible = "ti,tps65132";
-		reg = <0x3e>;
-		i2c-pwr-supply = <&pm8916_l6>;
-		ti,en-gpio-lpm;
-		pinctrl-names = "default";
-		pinctrl-0 = <&tps65132_en_default>;
-
-		regulators {
-			tps65132_pos: pos-boost {
-				regulator-name = "tps65132-pos";
-				regulator-min-microvolt = <5800000>;
-				regulator-max-microvolt = <5800000>;
-				ti,discharge-enable;
-				ti,enable-time = <800>;
-				ti,current-limit = <200000>;
-				ti,en-gpio = <&msm_gpio 97 0>;
-			};
-
-			tps65132_neg: neg-boost {
-				regulator-name = "tps65132-neg";
-				regulator-min-microvolt = <5800000>;
-				regulator-max-microvolt = <5800000>;
-				ti,discharge-enable;
-				ti,enable-time = <800>;
-				ti,current-limit = <40000>;
-				ti,en-gpio = <&msm_gpio 98 0>;
-			};
-		};
-	};
-};
-
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 &sdc2_cd_on {
 	/delete-property/ bias-pull-up;
 	bias-pull-down;
@@ -610,18 +465,7 @@
 	interrupt-names = "hc_irq", "pwr_irq";
 	/delete-property/ cd-gpios;
 };
-<<<<<<< HEAD
 */
-=======
-
-&usb_otg {
-       qcom,hsusb-otg-mode = <3>;
-       qcom,usbid-gpio = <&msm_gpio 110 0>;
-       pinctrl-names = "default";
-       pinctrl-0 = <&usbid_default>;
-       vbus_otg-supply = <&smb1360_otg_supply>;
-};
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 &mdss_mdp {
 	qcom,mdss-pref-prim-intf = "dsi";
@@ -633,17 +477,12 @@
 };
 
 &mdss_dsi0 {
-<<<<<<< HEAD
-=======
-	qcom,dsi-pref-prim-pan = <&dsi_nt35596_1080p_skuk_video>;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	pinctrl-names = "mdss_default", "mdss_sleep";
 	pinctrl-0 = <&mdss_dsi_active>;
 	pinctrl-1 = <&mdss_dsi_suspend>;
 
 	qcom,platform-reset-gpio = <&msm_gpio 25 0>;
 	qcom,platform-bklight-en-gpio = <&msm_gpio 1 0>;
-<<<<<<< HEAD
 };
 
 /*zhongzhu add for fringerprint*/
@@ -656,43 +495,4 @@
 			egis,reset-gpio = <&msm_gpio 116 0>;
 			egis,int-gpio = <&msm_gpio 118 0>;
 		};
-=======
-
-	vsp-supply = <&tps65132_pos>;
-	vsn-supply = <&tps65132_neg>;
-
-	qcom,ctrl-supply-entries {
-		/delete-node/ qcom,ctrl-supply-entry@0;
-	};
-
-	qcom,panel-supply-entries {
-		/delete-node/qcom,panel-supply-entry@0;
-
-		qcom,panel-supply-entry@2 {
-			reg = <2>;
-			qcom,supply-name = "vsp";
-			qcom,supply-min-voltage = <5800000>;
-			qcom,supply-max-voltage = <5800000>;
-			qcom,supply-enable-load = <200>;
-			qcom,supply-disable-load = <0>;
-		};
-
-		qcom,panel-supply-entry@3 {
-			reg = <3>;
-			qcom,supply-name = "vsn";
-			qcom,supply-min-voltage = <5800000>;
-			qcom,supply-max-voltage = <5800000>;
-			qcom,supply-enable-load = <40>;
-			qcom,supply-disable-load = <0>;
-		};
-	};
-
-};
-
-&dsi_nt35596_1080p_skuk_video {
-	qcom,cont-splash-enabled;
-	qcom,esd-check-enabled;
-	qcom,mdss-dsi-pan-enable-dynamic-fps;
-	qcom,mdss-dsi-pan-fps-update = "dfps_immediate_porch_mode";
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 };

@@ -149,14 +149,11 @@ struct hfi_extradata_header {
 	(HFI_PROPERTY_PARAM_OX_START + 0x00A)
 #define  HFI_PROPERTY_PARAM_BUFFER_ALLOC_MODE_SUPPORTED	\
 	(HFI_PROPERTY_PARAM_OX_START + 0x00B)
-<<<<<<< HEAD
 #define  HFI_PROPERTY_PARAM_BUFFER_SIZE_ACTUAL			\
 	(HFI_PROPERTY_PARAM_OX_START + 0x00C)
 #define  HFI_PROPERTY_PARAM_BUFFER_DISPLAY_HOLD_COUNT_ACTUAL	\
 	(HFI_PROPERTY_PARAM_OX_START + 0x00D)
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 #define HFI_PROPERTY_CONFIG_OX_START					\
 	(HFI_DOMAIN_BASE_COMMON + HFI_ARCH_OX_OFFSET + 0x02000)
@@ -264,7 +261,6 @@ struct hfi_buffer_count_actual {
 	u32 buffer_count_actual;
 };
 
-<<<<<<< HEAD
 struct hfi_buffer_size_actual {
 	u32 buffer_type;
 	u32 buffer_size;
@@ -275,8 +271,6 @@ struct hfi_buffer_display_hold_count_actual {
 	u32 hold_count;
 };
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 struct hfi_buffer_requirements {
 	u32 buffer_type;
 	u32 buffer_size;

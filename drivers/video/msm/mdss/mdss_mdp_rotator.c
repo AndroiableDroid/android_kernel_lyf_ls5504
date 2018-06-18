@@ -287,13 +287,10 @@ static int mdss_mdp_rotator_queue_sub(struct mdss_mdp_rotator_session *rot,
 	ATRACE_BEGIN("rotator_kickoff");
 	ret = mdss_mdp_rotator_kickoff(rot_ctl, rot, dst_data);
 	ATRACE_END("rotator_kickoff");
-<<<<<<< HEAD
 	if (ret) {
 		pr_err("mdss_mdp_rotator_kickoff error : %d\n", ret);
 		goto error;
 	}
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	return ret;
 error:

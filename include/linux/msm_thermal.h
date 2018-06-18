@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
  * Copyright (c) 2012-2015, The Linux Foundation. All rights reserved.
-=======
- * Copyright (c) 2012-2014, The Linux Foundation. All rights reserved.
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -18,7 +14,6 @@
 #ifndef __MSM_THERMAL_H
 #define __MSM_THERMAL_H
 
-<<<<<<< HEAD
 #include <linux/thermal.h>
 
 #define MAX_THRESHOLD  2
@@ -37,8 +32,6 @@
 #define CPUFREQ_MIN_NO_MITIGATION     0
 #define HOTPLUG_NO_MITIGATION(_mask)  cpumask_clear(_mask)
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 struct msm_thermal_data {
 	struct platform_device *pdev;
 	uint32_t sensor_id;
@@ -80,7 +73,6 @@ struct msm_thermal_data {
 	int32_t therm_reset_temp_degC;
 };
 
-<<<<<<< HEAD
 enum sensor_id_type {
 	THERM_ZONE_ID,
 	THERM_TSENS_ID,
@@ -154,8 +146,6 @@ struct device_clnt_data {
 	void                         *usr_data;
 };
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #ifdef CONFIG_THERMAL_MONITOR
 extern int msm_thermal_init(struct msm_thermal_data *pdata);
 extern int msm_thermal_device_init(void);
@@ -167,7 +157,6 @@ extern int msm_thermal_get_freq_plan_size(uint32_t cluster,
 	unsigned int *table_len);
 extern int msm_thermal_get_cluster_freq_plan(uint32_t cluster,
 	unsigned int *table_ptr);
-<<<<<<< HEAD
 /**
  * sensor_mgr_init_threshold - Initialize thresholds data structure for
  *                             sensor(s) with high and low thresholds and
@@ -260,8 +249,6 @@ extern int devmgr_client_request_mitigation(struct device_clnt_data *clnt,
 extern void devmgr_unregister_mitigation_client(
 					struct device *dev,
 					struct device_clnt_data *clnt);
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #else
 static inline int msm_thermal_init(struct msm_thermal_data *pdata)
 {
@@ -291,7 +278,6 @@ static inline int msm_thermal_get_cluster_freq_plan(uint32_t cluster,
 {
 	return -ENOSYS;
 }
-<<<<<<< HEAD
 static inline int sensor_mgr_init_threshold(struct device *dev,
 				struct threshold_info *thresh_inp,
 				int sensor_id, int32_t high_temp,
@@ -334,8 +320,6 @@ static inline void devmgr_unregister_mitigation_client(
 					struct device_clnt_data *clnt)
 {
 }
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #endif
 
 #endif /*__MSM_THERMAL_H*/

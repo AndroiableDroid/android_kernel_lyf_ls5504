@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 /* Copyright (c) 2014-2015, The Linux Foundation. All rights reserved.
-=======
-/* Copyright (c) 2014, The Linux Foundation. All rights reserved.
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -176,11 +172,7 @@
 			};
 			cdc_pdm_lines_sus: pdm_lines_off {
 				drive-strength = <2>;
-<<<<<<< HEAD
 				bias-pull-down;
-=======
-				bias-disable;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			};
 		};
 
@@ -205,7 +197,6 @@
 			qcom,num-grp-pins = <1>;
 			qcom,pin-func = <0>;
 			label = "vdd_spkdrv";
-<<<<<<< HEAD
 			vdd_spkdrv_act: vdd_spkdrv_on {
 				drive-strength = <8>;
 				bias-pull-up;
@@ -214,12 +205,6 @@
 				drive-strength = <2>;
 				bias-disable;
 			};
-=======
-			vdd_spkdrv_default: vdd_spkdrv_default {
-				drive-strength = <8>;
-				bias-pull-up;
-			};
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		};
 
 		cdc-ext-pa-lines {
@@ -865,7 +850,6 @@
 			};
 		};
 
-<<<<<<< HEAD
 		cti_trigout_a0 {
 			qcom,pins = <&gp 23>;
 			qcom,num-grp-pins = <1>;
@@ -877,8 +861,6 @@
 			};
 		};
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		/* SDC pin type */
 		sdc: sdc {
 			/* 0-2 for sdc1 4-6 for sdc2 */
@@ -979,11 +961,7 @@
                         qcom,pin-func = <1>;
                         label = "spi0-active";
                         /* active state */
-<<<<<<< HEAD
                         spi0_default: spi0_default {
-=======
-                        spi0_default: default {
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
                                 drive-strength = <12>; /* 12 MA */
                                 bias-disable = <0>; /* No PULL */
                         };
@@ -996,11 +974,7 @@
                         qcom,pin-func = <0>;
                         label = "spi0-suspend";
                         /* suspended state */
-<<<<<<< HEAD
                         spi0_sleep: spi0_sleep {
-=======
-                        spi0_sleep: sleep {
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
                                 drive-strength = <2>; /* 2 MA */
                                 bias-pull-down; /* pull down */
                         };
@@ -1091,11 +1065,7 @@
 
                         i2c_5_sleep: i2c_5_sleep {
                                 drive-strength = <2>; /* 2 MA */
-<<<<<<< HEAD
                                 bias-pull-down; /* PULL DOWN */
-=======
-                                bias-disable = <0>; /* No PULL */
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
                         };
                 };
 
@@ -1113,11 +1083,7 @@
 
 			i2c_3_sleep: i2c_3_sleep {
 				drive-strength = <2>; /* 2 MA */
-<<<<<<< HEAD
 				bias-pull-down; /* PULL DOWN */
-=======
-				bias-disable = <0>; /* No PULL */
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			};
 		};
 
@@ -1135,11 +1101,7 @@
 
 			i2c_1_sleep: i2c_1_sleep {
 				drive-strength = <2>; /* 2 MA */
-<<<<<<< HEAD
 				bias-pull-down; /* PULL DOWN */
-=======
-				bias-disable = <0>; /* No PULL */
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			};
 		};
 

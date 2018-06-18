@@ -252,10 +252,6 @@ void ext4_evict_inode(struct inode *inode)
 
 	if (IS_SYNC(inode))
 		ext4_handle_sync(handle);
-<<<<<<< HEAD
-=======
-
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	inode->i_size = 0;
 	err = ext4_mark_inode_dirty(handle, inode);
 	if (err) {
@@ -2192,12 +2188,6 @@ static int ext4_writepage(struct page *page,
 	struct inode *inode = page->mapping->host;
 	struct ext4_io_submit io_submit;
 
-<<<<<<< HEAD
-=======
-	if (ext4_inode_is_compressed(inode))
-		return -EROFS;
-
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	trace_ext4_writepage(page);
 	size = i_size_read(inode);
 	if (page->index == size >> PAGE_CACHE_SHIFT)
@@ -2452,12 +2442,6 @@ static int ext4_da_writepages(struct address_space *mapping,
 	pgoff_t end;
 	struct blk_plug plug;
 
-<<<<<<< HEAD
-=======
-	if (ext4_inode_is_compressed(inode))
-		return -EROFS;
-
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	trace_ext4_da_writepages(inode, wbc);
 
 	/*
@@ -2673,12 +2657,6 @@ static int ext4_da_write_begin(struct file *file, struct address_space *mapping,
 	struct inode *inode = mapping->host;
 	handle_t *handle;
 
-<<<<<<< HEAD
-=======
-	if (ext4_inode_is_compressed(inode))
-		return -EROFS;
-
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	index = pos >> PAGE_CACHE_SHIFT;
 
 	if (ext4_nonda_switch(inode->i_sb)) {
@@ -2974,11 +2952,7 @@ static sector_t ext4_bmap(struct address_space *mapping, sector_t block)
 	return generic_block_bmap(mapping, block, ext4_get_block);
 }
 
-<<<<<<< HEAD
 static int ext4_readpage(struct file *file, struct page *page)
-=======
-static int __ext4_readpage(struct page *page)
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 {
 	int ret = -EAGAIN;
 	struct inode *inode = page->mapping->host;
@@ -2994,21 +2968,8 @@ static int __ext4_readpage(struct page *page)
 	return ret;
 }
 
-<<<<<<< HEAD
 static int
 ext4_readpages(struct file *file, struct address_space *mapping,
-=======
-static int ext4_readpage(struct file *file, struct page *page)
-{
-	if (ext4_inode_is_compressed(page->mapping->host))
-		return xcomp_readpage(ext4_inode_xcomp_info(page->mapping->host), page);
-
-	return __ext4_readpage(page);
-}
-
-static int
-__ext4_readpages(struct address_space *mapping,
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		struct list_head *pages, unsigned nr_pages)
 {
 	struct inode *inode = mapping->host;
@@ -3020,20 +2981,6 @@ __ext4_readpages(struct address_space *mapping,
 	return mpage_readpages(mapping, pages, nr_pages, ext4_get_block);
 }
 
-<<<<<<< HEAD
-=======
-static int
-ext4_readpages(struct file *file, struct address_space *mapping,
-		struct list_head *pages, unsigned nr_pages)
-{
-	if (ext4_inode_is_compressed(mapping->host))
-		return xcomp_readpages(ext4_inode_xcomp_info(mapping->host),
-				       mapping, pages, nr_pages);
-
-	return __ext4_readpages(mapping, pages, nr_pages);
-}
-
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static void ext4_invalidatepage(struct page *page, unsigned long offset)
 {
 	trace_ext4_invalidatepage(page, offset);
@@ -4275,12 +4222,6 @@ struct inode *ext4_iget(struct super_block *sb, unsigned long ino)
 		ei->i_file_acl |=
 			((__u64)le16_to_cpu(raw_inode->i_file_acl_high)) << 32;
 	inode->i_size = ext4_isize(raw_inode);
-<<<<<<< HEAD
-=======
-#ifdef CONFIG_FS_TRANSPARENT_COMPRESSION
-	inode->i_compressed_size = inode->i_size;
-#endif
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	ei->i_disksize = inode->i_size;
 #ifdef CONFIG_QUOTA
 	ei->i_reserved_quota = 0;
@@ -4401,17 +4342,7 @@ struct inode *ext4_iget(struct super_block *sb, unsigned long ino)
 	}
 	brelse(iloc.bh);
 	ext4_set_inode_flags(inode);
-<<<<<<< HEAD
 	unlock_new_inode(inode);
-=======
-
-	if (ext4_inode_is_compressed(inode))
-		xcomp_inode_info_init(inode, ext4_inode_xcomp_info(inode),
-				      __ext4_readpage);
-
-	unlock_new_inode(inode);
-
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	return inode;
 
 bad_inode:

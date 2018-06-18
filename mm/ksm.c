@@ -240,11 +240,7 @@ static int ksm_nr_node_ids = 1;
 #define KSM_RUN_MERGE	1
 #define KSM_RUN_UNMERGE	2
 #define KSM_RUN_OFFLINE	4
-<<<<<<< HEAD
 static unsigned long ksm_run = KSM_RUN_MERGE;
-=======
-static unsigned long ksm_run = KSM_RUN_STOP;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static void wait_while_offlining(void);
 
 static DECLARE_WAIT_QUEUE_HEAD(ksm_thread_wait);
@@ -2007,12 +2003,8 @@ out:
 	return referenced;
 }
 
-<<<<<<< HEAD
 int try_to_unmap_ksm(struct page *page, enum ttu_flags flags,
 			struct vm_area_struct *target_vma)
-=======
-int try_to_unmap_ksm(struct page *page, enum ttu_flags flags)
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 {
 	struct stable_node *stable_node;
 	struct rmap_item *rmap_item;
@@ -2025,15 +2017,12 @@ int try_to_unmap_ksm(struct page *page, enum ttu_flags flags)
 	stable_node = page_stable_node(page);
 	if (!stable_node)
 		return SWAP_FAIL;
-<<<<<<< HEAD
 
 	if (target_vma) {
 		unsigned long address = vma_address(page, target_vma);
 		ret = try_to_unmap_one(page, target_vma, address, flags);
 		goto out;
 	}
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 again:
 	hlist_for_each_entry(rmap_item, &stable_node->hlist, hlist) {
 		struct anon_vma *anon_vma = rmap_item->anon_vma;

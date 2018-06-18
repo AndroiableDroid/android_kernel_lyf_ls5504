@@ -152,14 +152,9 @@ enum {
 	SWP_CONTINUED	= (1 << 5),	/* swap_map has count continuation */
 	SWP_BLKDEV	= (1 << 6),	/* its a block device */
 	SWP_FILE	= (1 << 7),	/* set after swap_activate success */
-<<<<<<< HEAD
 	SWP_FAST	= (1 << 8),	/* blkdev access is fast and cheap */
 					/* add others here before... */
 	SWP_SCANNING	= (1 << 9),	/* refcount in scan_swap_map */
-=======
-					/* add others here before... */
-	SWP_SCANNING	= (1 << 8),	/* refcount in scan_swap_map */
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 };
 
 #define SWAP_CLUSTER_MAX 32UL
@@ -368,7 +363,6 @@ extern struct page *swapin_readahead(swp_entry_t, gfp_t,
 /* linux/mm/swapfile.c */
 extern atomic_long_t nr_swap_pages;
 extern long total_swap_pages;
-<<<<<<< HEAD
 extern bool is_swap_fast(swp_entry_t entry);
 
 /* Swap 50% full? Release swapcache more aggressively.. */
@@ -381,12 +375,6 @@ static inline bool vm_swap_full(struct swap_info_struct *si)
 	if (si->flags & SWP_FAST)
 		return true;
 
-=======
-
-/* Swap 50% full? Release swapcache more aggressively.. */
-static inline bool vm_swap_full(void)
-{
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	return atomic_long_read(&nr_swap_pages) * 2 < total_swap_pages;
 }
 
@@ -430,11 +418,7 @@ mem_cgroup_uncharge_swapcache(struct page *page, swp_entry_t ent, bool swapout)
 #define get_nr_swap_pages()			0L
 #define total_swap_pages			0L
 #define total_swapcache_pages()			0UL
-<<<<<<< HEAD
 #define vm_swap_full(si)			0
-=======
-#define vm_swap_full()				0
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 #define si_swapinfo(val) \
 	do { (val)->freeswap = (val)->totalswap = 0; } while (0)

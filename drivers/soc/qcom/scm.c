@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 /* Copyright (c) 2010-2015, The Linux Foundation. All rights reserved.
-=======
-/* Copyright (c) 2010-2014, The Linux Foundation. All rights reserved.
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -949,7 +945,6 @@ s32 scm_call_atomic4_3(u32 svc, u32 cmd, u32 arg1, u32 arg2,
 }
 EXPORT_SYMBOL(scm_call_atomic4_3);
 
-<<<<<<< HEAD
 /**
  * scm_call_atomic5_3() - SCM command with five argument and three return value
  * @svc_id: service identifier
@@ -1007,8 +1002,6 @@ s32 scm_call_atomic5_3(u32 svc, u32 cmd, u32 arg1, u32 arg2,
 }
 EXPORT_SYMBOL(scm_call_atomic5_3);
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 u32 scm_get_version(void)
 {
 	int context_id;

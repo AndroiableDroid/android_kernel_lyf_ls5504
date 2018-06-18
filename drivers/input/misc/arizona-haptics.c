@@ -37,11 +37,7 @@ static void arizona_haptics_work(struct work_struct *work)
 						       struct arizona_haptics,
 						       work);
 	struct arizona *arizona = haptics->arizona;
-<<<<<<< HEAD
 	struct mutex *dapm_mutex = &arizona->dapm->card->dapm_mutex;
-=======
-	struct mutex *dapm_mutex;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	int ret;
 
 	if (!haptics->arizona->dapm) {
@@ -49,11 +45,6 @@ static void arizona_haptics_work(struct work_struct *work)
 		return;
 	}
 
-<<<<<<< HEAD
-=======
-	dapm_mutex = &arizona->dapm->card->dapm_mutex;
-
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	if (haptics->intensity) {
 		ret = regmap_update_bits(arizona->regmap,
 					 ARIZONA_HAPTICS_PHASE_2_INTENSITY,
@@ -161,7 +152,6 @@ static int arizona_haptics_play(struct input_dev *input, void *data,
 static void arizona_haptics_close(struct input_dev *input)
 {
 	struct arizona_haptics *haptics = input_get_drvdata(input);
-<<<<<<< HEAD
 	struct mutex *dapm_mutex = &haptics->arizona->dapm->card->dapm_mutex;
 
 	cancel_work_sync(&haptics->work);
@@ -172,18 +162,6 @@ static void arizona_haptics_close(struct input_dev *input)
 		snd_soc_dapm_disable_pin(haptics->arizona->dapm, "HAPTICS");
 
 	mutex_unlock(dapm_mutex);
-=======
-	struct mutex *dapm_mutex;
-
-	cancel_work_sync(&haptics->work);
-
-	if (haptics->arizona->dapm) {
-		dapm_mutex = &haptics->arizona->dapm->card->dapm_mutex;
-		mutex_lock_nested(dapm_mutex, SND_SOC_DAPM_CLASS_RUNTIME);
-		snd_soc_dapm_disable_pin(haptics->arizona->dapm, "HAPTICS");
-		mutex_unlock(dapm_mutex);
-	}
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 }
 
 static int arizona_haptics_probe(struct platform_device *pdev)

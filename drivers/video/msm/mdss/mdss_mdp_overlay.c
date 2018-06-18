@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 /* Copyright (c) 2012-2015, The Linux Foundation. All rights reserved.
-=======
-/* Copyright (c) 2012-2014, The Linux Foundation. All rights reserved.
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -2312,7 +2308,6 @@ static ssize_t mdss_mdp_ad_store(struct device *dev,
 	return count;
 }
 
-<<<<<<< HEAD
 static ssize_t mdss_mdp_dyn_pu_show(struct device *dev,
 		struct device_attribute *attr, char *buf)
 {
@@ -2347,25 +2342,17 @@ static ssize_t mdss_mdp_dyn_pu_store(struct device *dev,
 
 	return count;
 }
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 static DEVICE_ATTR(vsync_event, S_IRUGO, mdss_mdp_vsync_show_event, NULL);
 static DEVICE_ATTR(ad, S_IRUGO | S_IWUSR | S_IWGRP, mdss_mdp_ad_show,
 	mdss_mdp_ad_store);
-<<<<<<< HEAD
 static DEVICE_ATTR(dyn_pu, S_IRUGO | S_IWUSR | S_IWGRP, mdss_mdp_dyn_pu_show,
 	mdss_mdp_dyn_pu_store);
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 static struct attribute *mdp_overlay_sysfs_attrs[] = {
 	&dev_attr_vsync_event.attr,
 	&dev_attr_ad.attr,
-<<<<<<< HEAD
 	&dev_attr_dyn_pu.attr,
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	NULL,
 };
 
@@ -2884,18 +2871,6 @@ static int mdss_mdp_pp_ioctl(struct msm_fb_data_type *mfd,
 	if (ret)
 		return ret;
 
-<<<<<<< HEAD
-=======
-	/* Support only PP init cfg op if partial update is enabled for allowing
-	 * overriding of partial update
-	*/
-	if (mdata->pp_enable == MDP_PP_DISABLE &&
-				mdp_pp.op != mdp_op_pp_init_cfg) {
-		pr_err("Partial update feature is enabled\n");
-		return -EPERM;
-	}
-
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	/* Supprt only MDP register read/write and
 	exit_dcm in DCM state*/
 	if (mfd->dcm_state == DCM_ENTER &&
@@ -3012,14 +2987,6 @@ static int mdss_mdp_histo_ioctl(struct msm_fb_data_type *mfd, u32 cmd,
 	if (!mdata)
 		return -EPERM;
 
-<<<<<<< HEAD
-=======
-	if (mdata->pp_enable == MDP_PP_DISABLE) {
-		pr_err("Partial update feature is enabled\n");
-		return -EPERM;
-	}
-
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	switch (cmd) {
 	case MSMFB_HISTOGRAM_START:
 		if (mdss_fb_is_power_off(mfd))
@@ -3743,7 +3710,6 @@ static int mdss_mdp_overlay_off(struct msm_fb_data_type *mfd)
 		return -ENODEV;
 	}
 
-<<<<<<< HEAD
 	if (!mdss_mdp_ctl_is_power_on(mdp5_data->ctl)) {
 		if (mfd->panel_reconfig) {
 			mdp5_data->borderfill_enable = false;
@@ -3752,10 +3718,6 @@ static int mdss_mdp_overlay_off(struct msm_fb_data_type *mfd)
 		}
 		return 0;
 	}
-=======
-	if (!mdss_mdp_ctl_is_power_on(mdp5_data->ctl))
-		return 0;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	/*
 	 * Keep a reference to the runtime pm until the overlay is turned
@@ -4265,10 +4227,7 @@ int mdss_mdp_overlay_init(struct msm_fb_data_type *mfd)
 			rc = 0;
 		}
 	}
-<<<<<<< HEAD
 	mdp5_data->dyn_pu_state = mfd->panel_info->partial_update_enabled;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	if (mdss_mdp_pp_overlay_init(mfd))
 		pr_warn("Failed to initialize pp overlay data.\n");

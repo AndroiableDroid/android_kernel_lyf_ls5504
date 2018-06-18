@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
 *Copyright (c) 2014-2015, The Linux Foundation. All rights reserved.
-=======
-*Copyright (c) 2014, The Linux Foundation. All rights reserved.
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 *
 *This program is free software; you can redistribute it and/or modify
 *it under the terms of the GNU General Public License version 2 and
@@ -25,10 +21,6 @@
 #include <linux/of.h>
 #include <linux/platform_device.h>
 #include <soc/qcom/rpm-smd.h>
-<<<<<<< HEAD
-=======
-#include <soc/qcom/hvc.h>
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #include "governor.h"
 #include "devfreq_spdm.h"
 
@@ -81,7 +73,6 @@ static int disable_clocks(void)
 static irqreturn_t threaded_isr(int irq, void *dev_id)
 {
 	struct spdm_data *data;
-<<<<<<< HEAD
 	struct spdm_args desc = { { 0 } };
 	int ext_status = 0;
 
@@ -91,17 +82,6 @@ static irqreturn_t threaded_isr(int irq, void *dev_id)
 	if (ext_status)
 		pr_err("External command %u failed with error %u",
 			(int)desc.arg[0], ext_status);
-=======
-	struct hvc_desc desc = { { 0 } };
-	int hvc_status = 0;
-
-	/* call hyp to get bw_vote */
-	desc.arg[0] = SPDM_CMD_GET_BW_ALL;
-	hvc_status = hvc(HVC_FN_SIP(SPDM_HYP_FNID), &desc);
-	if (hvc_status)
-		pr_err("HVC command %u failed with error %u", (int)desc.arg[0],
-			hvc_status);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	mutex_lock(&devfreqs_lock);
 	list_for_each_entry(data, &devfreqs, list) {
 		if (data->spdm_client == desc.ret[0]) {
@@ -131,13 +111,8 @@ static int gov_spdm_hyp_target_bw(struct devfreq *devfreq, unsigned long *freq,
 	struct devfreq_dev_status status;
 	int ret = -EINVAL;
 	int usage;
-<<<<<<< HEAD
 	struct spdm_args desc = { { 0 } };
 	int ext_status = 0;
-=======
-	struct hvc_desc desc = { { 0 } };
-	int hvc_status = 0;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	if (!devfreq || !devfreq->profile || !devfreq->profile->get_dev_status)
 		return ret;
@@ -155,17 +130,10 @@ static int gov_spdm_hyp_target_bw(struct devfreq *devfreq, unsigned long *freq,
 	} else {
 		desc.arg[0] = SPDM_CMD_GET_BW_SPECIFIC;
 		desc.arg[1] = ((struct spdm_data *)devfreq->data)->spdm_client;
-<<<<<<< HEAD
 		ext_status = spdm_ext_call(&desc, 2);
 		if (ext_status)
 			pr_err("External command %u failed with error %u",
 				(int)desc.arg[0], ext_status);
-=======
-		hvc_status = hvc(HVC_FN_SIP(SPDM_HYP_FNID), &desc);
-		if (hvc_status)
-			pr_err("HVC command %u failed with error %u",
-				(int)desc.arg[0], hvc_status);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		*freq = desc.ret[0] >> 6;
 	}
 
@@ -175,13 +143,8 @@ static int gov_spdm_hyp_target_bw(struct devfreq *devfreq, unsigned long *freq,
 static int gov_spdm_hyp_eh(struct devfreq *devfreq, unsigned int event,
 			   void *data)
 {
-<<<<<<< HEAD
 	struct spdm_args desc = { { 0 } };
 	int ext_status = 0;
-=======
-	struct hvc_desc desc = { { 0 } };
-	int hvc_status = 0;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	struct spdm_data *spdm_data = (struct spdm_data *)devfreq->data;
 	int i;
 
@@ -196,204 +159,113 @@ static int gov_spdm_hyp_eh(struct devfreq *devfreq, unsigned int event,
 		desc.arg[2] = spdm_data->config_data.num_ports;
 		for (i = 0; i < spdm_data->config_data.num_ports; i++)
 			desc.arg[i+3] = spdm_data->config_data.ports[i];
-<<<<<<< HEAD
 		ext_status = spdm_ext_call(&desc,
 				spdm_data->config_data.num_ports + 3);
 		if (ext_status)
 			pr_err("External command %u failed with error %u",
 				(int)desc.arg[0], ext_status);
-=======
-		hvc_status = hvc(HVC_FN_SIP(SPDM_HYP_FNID), &desc);
-		if (hvc_status)
-			pr_err("HVC command %u failed with error %u",
-				(int)desc.arg[0], hvc_status);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 		desc.arg[0] = SPDM_CMD_CFG_FLTR;
 		desc.arg[1] = spdm_data->spdm_client;
 		desc.arg[2] = spdm_data->config_data.aup;
 		desc.arg[3] = spdm_data->config_data.adown;
 		desc.arg[4] = spdm_data->config_data.bucket_size;
-<<<<<<< HEAD
 		ext_status = spdm_ext_call(&desc, 5);
 		if (ext_status)
 			pr_err("External command %u failed with error %u",
 				(int)desc.arg[0], ext_status);
-=======
-		hvc_status = hvc(HVC_FN_SIP(SPDM_HYP_FNID), &desc);
-		if (hvc_status)
-			pr_err("HVC command %u failed with error %u",
-				(int)desc.arg[0], hvc_status);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 		desc.arg[0] = SPDM_CMD_CFG_PL;
 		desc.arg[1] = spdm_data->spdm_client;
 		for (i = 0; i < SPDM_PL_COUNT - 1; i++)
 			desc.arg[i+2] = spdm_data->config_data.pl_freqs[i];
-<<<<<<< HEAD
 		ext_status = spdm_ext_call(&desc, SPDM_PL_COUNT + 1);
 		if (ext_status)
 			pr_err("External command %u failed with error %u",
 				(int)desc.arg[0], ext_status);
-=======
-		hvc_status = hvc(HVC_FN_SIP(SPDM_HYP_FNID), &desc);
-		if (hvc_status)
-			pr_err("HVC command %u failed with error %u",
-				(int)desc.arg[0], hvc_status);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 		desc.arg[0] = SPDM_CMD_CFG_REJRATE_LOW;
 		desc.arg[1] = spdm_data->spdm_client;
 		desc.arg[2] = spdm_data->config_data.reject_rate[0];
 		desc.arg[3] = spdm_data->config_data.reject_rate[1];
-<<<<<<< HEAD
 		ext_status = spdm_ext_call(&desc, 4);
 		if (ext_status)
 			pr_err("External command %u failed with error %u",
 				(int)desc.arg[0], ext_status);
-=======
-		hvc_status = hvc(HVC_FN_SIP(SPDM_HYP_FNID), &desc);
-		if (hvc_status)
-			pr_err("HVC command %u failed with error %u",
-				(int)desc.arg[0], hvc_status);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		desc.arg[0] = SPDM_CMD_CFG_REJRATE_MED;
 		desc.arg[1] = spdm_data->spdm_client;
 		desc.arg[2] = spdm_data->config_data.reject_rate[2];
 		desc.arg[3] = spdm_data->config_data.reject_rate[3];
-<<<<<<< HEAD
 		ext_status = spdm_ext_call(&desc, 4);
 		if (ext_status)
 			pr_err("External command %u failed with error %u",
 				(int)desc.arg[0], ext_status);
-=======
-		hvc_status = hvc(HVC_FN_SIP(SPDM_HYP_FNID), &desc);
-		if (hvc_status)
-			pr_err("HVC command %u failed with error %u",
-				(int)desc.arg[0], hvc_status);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		desc.arg[0] = SPDM_CMD_CFG_REJRATE_HIGH;
 		desc.arg[1] = spdm_data->spdm_client;
 		desc.arg[2] = spdm_data->config_data.reject_rate[4];
 		desc.arg[3] = spdm_data->config_data.reject_rate[5];
-<<<<<<< HEAD
 		ext_status = spdm_ext_call(&desc, 4);
 		if (ext_status)
 			pr_err("External command %u failed with error %u",
 				(int)desc.arg[0], ext_status);
-=======
-		hvc_status = hvc(HVC_FN_SIP(SPDM_HYP_FNID), &desc);
-		if (hvc_status)
-			pr_err("HVC command %u failed with error %u",
-				(int)desc.arg[0], hvc_status);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 		desc.arg[0] = SPDM_CMD_CFG_RESPTIME_LOW;
 		desc.arg[1] = spdm_data->spdm_client;
 		desc.arg[2] = spdm_data->config_data.response_time_us[0];
 		desc.arg[3] = spdm_data->config_data.response_time_us[1];
-<<<<<<< HEAD
 		ext_status = spdm_ext_call(&desc, 4);
 		if (ext_status)
 			pr_err("External command %u failed with error %u",
 				(int)desc.arg[0], ext_status);
-=======
-		hvc_status = hvc(HVC_FN_SIP(SPDM_HYP_FNID), &desc);
-		if (hvc_status)
-			pr_err("HVC command %u failed with error %u",
-				(int)desc.arg[0], hvc_status);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		desc.arg[0] = SPDM_CMD_CFG_RESPTIME_MED;
 		desc.arg[1] = spdm_data->spdm_client;
 		desc.arg[2] = spdm_data->config_data.response_time_us[2];
 		desc.arg[3] = spdm_data->config_data.response_time_us[3];
-<<<<<<< HEAD
 		ext_status = spdm_ext_call(&desc, 4);
 		if (ext_status)
 			pr_err("External command %u failed with error %u",
 				(int)desc.arg[0], ext_status);
-=======
-		hvc_status = hvc(HVC_FN_SIP(SPDM_HYP_FNID), &desc);
-		if (hvc_status)
-			pr_err("HVC command %u failed with error %u",
-				(int)desc.arg[0], hvc_status);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		desc.arg[0] = SPDM_CMD_CFG_RESPTIME_HIGH;
 		desc.arg[1] = spdm_data->spdm_client;
 		desc.arg[2] = spdm_data->config_data.response_time_us[4];
 		desc.arg[3] = spdm_data->config_data.response_time_us[5];
-<<<<<<< HEAD
 		ext_status = spdm_ext_call(&desc, 4);
 		if (ext_status)
 			pr_err("External command %u failed with error %u",
 				(int)desc.arg[0], ext_status);
-=======
-		hvc_status = hvc(HVC_FN_SIP(SPDM_HYP_FNID), &desc);
-		if (hvc_status)
-			pr_err("HVC command %u failed with error %u",
-				(int)desc.arg[0], hvc_status);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 		desc.arg[0] = SPDM_CMD_CFG_CCIRESPTIME_LOW;
 		desc.arg[1] = spdm_data->spdm_client;
 		desc.arg[2] = spdm_data->config_data.cci_response_time_us[0];
 		desc.arg[3] = spdm_data->config_data.cci_response_time_us[1];
-<<<<<<< HEAD
 		ext_status = spdm_ext_call(&desc, 4);
 		if (ext_status)
 			pr_err("External command %u failed with error %u",
 				(int)desc.arg[0], ext_status);
-=======
-		hvc_status = hvc(HVC_FN_SIP(SPDM_HYP_FNID), &desc);
-		if (hvc_status)
-			pr_err("HVC command %u failed with error %u",
-				(int)desc.arg[0], hvc_status);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		desc.arg[0] = SPDM_CMD_CFG_CCIRESPTIME_MED;
 		desc.arg[1] = spdm_data->spdm_client;
 		desc.arg[2] = spdm_data->config_data.cci_response_time_us[2];
 		desc.arg[3] = spdm_data->config_data.cci_response_time_us[3];
-<<<<<<< HEAD
 		ext_status = spdm_ext_call(&desc, 4);
 		if (ext_status)
 			pr_err("External command %u failed with error %u",
 				(int)desc.arg[0], ext_status);
-=======
-		hvc_status = hvc(HVC_FN_SIP(SPDM_HYP_FNID), &desc);
-		if (hvc_status)
-			pr_err("HVC command %u failed with error %u",
-				(int)desc.arg[0], hvc_status);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		desc.arg[0] = SPDM_CMD_CFG_CCIRESPTIME_HIGH;
 		desc.arg[1] = spdm_data->spdm_client;
 		desc.arg[2] = spdm_data->config_data.cci_response_time_us[4];
 		desc.arg[3] = spdm_data->config_data.cci_response_time_us[5];
-<<<<<<< HEAD
 		ext_status = spdm_ext_call(&desc, 4);
 		if (ext_status)
 			pr_err("External command %u failed with error %u",
 				(int)desc.arg[0], ext_status);
-=======
-		hvc_status = hvc(HVC_FN_SIP(SPDM_HYP_FNID), &desc);
-		if (hvc_status)
-			pr_err("HVC command %u failed with error %u",
-				(int)desc.arg[0], hvc_status);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 		desc.arg[0] = SPDM_CMD_CFG_MAXCCI;
 		desc.arg[1] = spdm_data->spdm_client;
 		desc.arg[2] = spdm_data->config_data.max_cci_freq;
-<<<<<<< HEAD
 		ext_status = spdm_ext_call(&desc, 3);
 		if (ext_status)
 			pr_err("External command %u failed with error %u",
 				(int)desc.arg[0], ext_status);
-=======
-		hvc_status = hvc(HVC_FN_SIP(SPDM_HYP_FNID), &desc);
-		if (hvc_status)
-			pr_err("HVC command %u failed with error %u",
-				(int)desc.arg[0], hvc_status);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 		desc.arg[0] = SPDM_CMD_CFG_VOTES;
 		desc.arg[1] = spdm_data->spdm_client;
@@ -401,23 +273,15 @@ static int gov_spdm_hyp_eh(struct devfreq *devfreq, unsigned int event,
 		desc.arg[3] = spdm_data->config_data.downstep;
 		desc.arg[4] = spdm_data->config_data.max_vote;
 		desc.arg[5] = spdm_data->config_data.up_step_multp;
-<<<<<<< HEAD
 		ext_status = spdm_ext_call(&desc, 6);
 		if (ext_status)
 			pr_err("External command %u failed with error %u",
 				(int)desc.arg[0], ext_status);
-=======
-		hvc_status = hvc(HVC_FN_SIP(SPDM_HYP_FNID), &desc);
-		if (hvc_status)
-			pr_err("HVC command %u failed with error %u",
-				(int)desc.arg[0], hvc_status);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 		/* call hyp enable/commit */
 		desc.arg[0] = SPDM_CMD_ENABLE;
 		desc.arg[1] = spdm_data->spdm_client;
 		desc.arg[2] = 0;
-<<<<<<< HEAD
 		ext_status = spdm_ext_call(&desc, 3);
 		if (ext_status) {
 			pr_err("External command %u failed with error %u",
@@ -433,14 +297,6 @@ static int gov_spdm_hyp_eh(struct devfreq *devfreq, unsigned int event,
 			return -EINVAL;
 		}
 		spdm_data->enabled = true;
-=======
-		hvc_status = hvc(HVC_FN_SIP(SPDM_HYP_FNID), &desc);
-		if (hvc_status) {
-			pr_err("HVC command %u failed with error %u",
-				(int)desc.arg[0], hvc_status);
-			return -EINVAL;
-		}
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		devfreq_monitor_start(devfreq);
 		break;
 
@@ -454,18 +310,11 @@ static int gov_spdm_hyp_eh(struct devfreq *devfreq, unsigned int event,
 		/* call hypvervisor to disable */
 		desc.arg[0] = SPDM_CMD_DISABLE;
 		desc.arg[1] = spdm_data->spdm_client;
-<<<<<<< HEAD
 		ext_status = spdm_ext_call(&desc, 2);
 		if (ext_status)
 			pr_err("External command %u failed with error %u",
 				(int)desc.arg[0], ext_status);
 		spdm_data->enabled = false;
-=======
-		hvc_status = hvc(HVC_FN_SIP(SPDM_HYP_FNID), &desc);
-		if (hvc_status)
-			pr_err("HVC command %u failed with error %u",
-				(int)desc.arg[0], hvc_status);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		break;
 
 	case DEVFREQ_GOV_INTERVAL:

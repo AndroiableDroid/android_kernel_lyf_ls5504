@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 /* Copyright (c) 2013-2015, The Linux Foundation. All rights reserved.
-=======
-/* Copyright (c) 2013-2014, The Linux Foundation. All rights reserved.
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -368,11 +364,7 @@ static void msm_dt_free_map(struct pinctrl_dev *pctldev,
 	for (idx = 0; idx < num_maps; idx++) {
 		if (map[idx].type == PIN_MAP_TYPE_CONFIGS_GROUP)
 			kfree(map[idx].data.configs.configs);
-<<<<<<< HEAD
 		else if (map[idx].type == PIN_MAP_TYPE_MUX_GROUP)
-=======
-		else if (map->type == PIN_MAP_TYPE_MUX_GROUP)
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			kfree(map[idx].data.mux.function);
 	};
 

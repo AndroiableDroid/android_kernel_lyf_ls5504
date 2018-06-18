@@ -81,10 +81,6 @@ struct ramoops_platform_data {
 	unsigned long	record_size;
 	unsigned long	console_size;
 	unsigned long	ftrace_size;
-<<<<<<< HEAD
-=======
-	unsigned long	pmsg_size;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	int		dump_oops;
 	struct persistent_ram_ecc_info ecc_info;
 };

@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 /* Copyright (c) 2014-2015 The Linux Foundation. All rights reserved.
-=======
-/* Copyright (c) 2014 The Linux Foundation. All rights reserved.
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -21,16 +17,12 @@
 /**
  * msm_spi_platform_data: msm spi-controller's configuration data
  *
-<<<<<<< HEAD
  * @max_clock_speed max spi clock speed
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  * @active_only when set, votes when system active and removes the vote when
  *       system goes idle (optimises for performance). When unset, voting using
  *       runtime pm (optimizes for power).
  * @master_id master id number of the controller's wrapper (BLSP or GSBI).
  *       When zero, clock path voting is disabled.
-<<<<<<< HEAD
  * @gpio_config pointer to function for configuring gpio
  * @gpio_release pointer to function for releasing gpio pins
  * @dma_config function poniter for configuring dma engine
@@ -43,11 +35,6 @@
  * @rt_priority true if RT thread
  * @use_pinctrl true if pinctrl library is used
  * @is_shared true when qup is shared between ee's
-=======
- * @rt when set, spi will pump transaction messages with high (realtime)
- *	priority to reduce the transfer latency on the bus by minimising
- *	the delay between a transfer request.
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  */
 struct msm_spi_platform_data {
 	u32 max_clock_speed;
@@ -65,8 +52,5 @@ struct msm_spi_platform_data {
 	u32  bam_producer_pipe_index;
 	bool rt_priority;
 	bool use_pinctrl;
-<<<<<<< HEAD
 	bool is_shared;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 };

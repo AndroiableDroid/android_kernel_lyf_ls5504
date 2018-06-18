@@ -26,12 +26,9 @@
 	static struct mutex mutexname = __MUTEX_INITIALIZER(mutexname)
 
 #define	MSM_ACTUATOT_MAX_VREGS (10)
-<<<<<<< HEAD
 //ZTEMT: li.bin223 20150421 add for avoid kernel crash ----start
 #define	MSM_ACTUATOT_MAX_NAME (32)
 //ZTEMT: li.bin223 20150421 add for avoid kernel crash ----end
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 struct msm_actuator_ctrl_t;
 
@@ -108,12 +105,9 @@ struct msm_actuator_ctrl_t {
 	struct msm_actuator_vreg vreg_cfg;
 	struct park_lens_data_t park_lens;
 	uint32_t max_code_size;
-<<<<<<< HEAD
 	// ZTEMT: fuyipeng add for manual AF -----start
 	char act_name[MSM_ACTUATOT_MAX_NAME];
 	// ZTEMT: fuyipeng add for manual AF -----end
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 };
 
 #endif

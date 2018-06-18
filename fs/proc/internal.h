@@ -204,10 +204,7 @@ struct pde_opener {
 };
 
 extern const struct inode_operations proc_pid_link_inode_operations;
-<<<<<<< HEAD
 extern const struct file_operations proc_reclaim_operations;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 extern void proc_init_inodecache(void);
 extern struct inode *proc_get_inode(struct super_block *, struct proc_dir_entry *);

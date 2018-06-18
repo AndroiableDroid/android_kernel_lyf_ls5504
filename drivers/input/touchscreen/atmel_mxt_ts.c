@@ -330,7 +330,6 @@ enum mxt_device_state { INIT, APPMODE, BOOTLOADER };
 #define MXT_DEBUGFS_DIR	"ts_debug"
 #define MXT_DEBUGFS_FILE_OBJ	"object"
 #define MXT_DEBUGFS_FILE_SUSPEND	"suspend"
-<<<<<<< HEAD
 #define DISP_PROP "atmel,display-coords"
 #define PANEL_PROP "atmel,panel-coords"
 
@@ -343,8 +342,6 @@ enum mxt_device_state { INIT, APPMODE, BOOTLOADER };
 /* numerator and denomenator for border equations */
 #define BORDER_ADJUST_NUM 3
 #define BORDER_ADJUST_DENOM 4
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 struct mxt_info {
 	u8 family_id;
@@ -412,11 +409,8 @@ struct mxt_data {
 	u32 keyarray_new;
 	u8 t9_max_reportid;
 	u8 t9_min_reportid;
-<<<<<<< HEAD
 	u16 t9_ymax_reso;
 	u16 t9_xmax_reso;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	u8 t15_max_reportid;
 	u8 t15_min_reportid;
 	u8 t42_max_reportid;
@@ -438,7 +432,6 @@ struct mxt_data {
 };
 
 static struct dentry *debug_base;
-<<<<<<< HEAD
 static struct kobject *vkey_kobj;
 static char *vkey_buf;
 
@@ -514,8 +507,6 @@ static int mxt_virtual_keys_init(struct device *dev,
 
 	return rc;
 }
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 static bool mxt_object_readable(unsigned int type)
 {
@@ -1595,10 +1586,7 @@ static int mxt_save_objects(struct mxt_data *data)
 	struct mxt_object *t15_object;
 	struct mxt_object *t42_object;
 	int error;
-<<<<<<< HEAD
 	u8 val[4];
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	/* Store T7 and T9 locally, used in suspend/resume operations */
 	t7_object = mxt_get_object(data, MXT_GEN_POWER_T7);
@@ -1627,7 +1615,6 @@ static int mxt_save_objects(struct mxt_data *data)
 					(t9_object->num_report_ids *
 					(t9_object->instances + 1)) + 1;
 
-<<<<<<< HEAD
 	error = __mxt_read_reg(client,
 		t9_object->start_address + MXT_TOUCH_XRANGE_LSB, 4, val);
 	if (error) {
@@ -1640,8 +1627,6 @@ static int mxt_save_objects(struct mxt_data *data)
 	/* X resolution */
 	data->t9_xmax_reso = (val[3]<<8) + val[2];
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	if (data->pdata->key_codes) {
 		t15_object = mxt_get_object(data, MXT_TOUCH_KEYARRAY_T15);
 		if (!t15_object)
@@ -1779,14 +1764,9 @@ static int mxt_initialize(struct mxt_data *data)
 	info->matrix_ysize = val;
 
 	dev_info(&client->dev,
-<<<<<<< HEAD
 		"Matrix X Size: %d Matrix Y Size: %d Panel X Resolution: %d Panel Y Resolution: %d\n",
 		info->matrix_xsize, info->matrix_ysize,
 		data->t9_xmax_reso, data->t9_ymax_reso);
-=======
-			"Matrix X Size: %d Matrix Y Size: %d\n",
-			info->matrix_xsize, info->matrix_ysize);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	return 0;
 
@@ -3089,19 +3069,11 @@ static void mxt_debugfs_init(struct mxt_data *data)
 
 #ifdef CONFIG_OF
 static int mxt_get_dt_coords(struct device *dev, char *name,
-<<<<<<< HEAD
 		struct device_node *node, struct mxt_platform_data *pdata)
 {
 	u32 coords[MXT_COORDS_ARR_SIZE];
 	struct property *prop;
 	struct device_node *np = (node == NULL) ? (dev->of_node) : (node);
-=======
-				struct mxt_platform_data *pdata)
-{
-	u32 coords[MXT_COORDS_ARR_SIZE];
-	struct property *prop;
-	struct device_node *np = dev->of_node;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	int coords_size, rc;
 
 	prop = of_find_property(np, name, NULL);
@@ -3179,21 +3151,12 @@ static int mxt_parse_dt(struct device *dev, struct mxt_platform_data *pdata)
 	struct property *prop;
 	u32 temp_val;
 
-<<<<<<< HEAD
 	rc = mxt_get_dt_coords(dev, "atmel,panel-coords", NULL, pdata);
 	if (rc && (rc != -EINVAL))
 		return rc;
 
 	rc = mxt_get_dt_coords(dev, "atmel,display-coords", NULL, pdata);
 	if (rc && (rc != -EINVAL))
-=======
-	rc = mxt_get_dt_coords(dev, "atmel,panel-coords", pdata);
-	if (rc)
-		return rc;
-
-	rc = mxt_get_dt_coords(dev, "atmel,display-coords", pdata);
-	if (rc)
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		return rc;
 
 	/* regulator info */
@@ -3214,11 +3177,8 @@ static int mxt_parse_dt(struct device *dev, struct mxt_platform_data *pdata)
 	pdata->irq_gpio = of_get_named_gpio_flags(np, "atmel,irq-gpio",
 				0, &pdata->irq_gpio_flags);
 
-<<<<<<< HEAD
 	pdata->create_vkeys = of_property_read_bool(np, "atmel,create-vkeys");
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	/* keycodes for keyarray object*/
 	prop = of_find_property(np, "atmel,key-codes", NULL);
 	if (prop) {
@@ -3430,7 +3390,6 @@ err_pinctrl_get:
 	return retval;
 }
 
-<<<<<<< HEAD
 static int mxt_check_child_node_and_create_vkeys(struct mxt_data *data,
 		struct mxt_platform_data *pdata, struct device_node *np)
 {
@@ -3510,8 +3469,6 @@ static int mxt_check_child_node_and_create_vkeys(struct mxt_data *data,
 	return 0;
 }
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static int mxt_probe(struct i2c_client *client,
 		const struct i2c_device_id *id)
 {
@@ -3519,10 +3476,7 @@ static int mxt_probe(struct i2c_client *client,
 	struct mxt_data *data;
 	struct input_dev *input_dev;
 	int error, i;
-<<<<<<< HEAD
 	struct device_node *child, *np;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	if (client->dev.of_node) {
 		pdata = devm_kzalloc(&client->dev,
@@ -3568,28 +3522,6 @@ static int mxt_probe(struct i2c_client *client,
 	__set_bit(BTN_TOUCH, input_dev->keybit);
 	__set_bit(INPUT_PROP_DIRECT, input_dev->propbit);
 
-<<<<<<< HEAD
-=======
-	/* For single touch */
-	input_set_abs_params(input_dev, ABS_X,
-			pdata->disp_minx, pdata->disp_maxx, 0, 0);
-	input_set_abs_params(input_dev, ABS_Y,
-			pdata->disp_miny, pdata->disp_maxy, 0, 0);
-	input_set_abs_params(input_dev, ABS_PRESSURE,
-			     0, 255, 0, 0);
-
-	/* For multi touch */
-	input_mt_init_slots(input_dev, MXT_MAX_FINGER, 0);
-	input_set_abs_params(input_dev, ABS_MT_TOUCH_MAJOR,
-			     0, MXT_MAX_AREA, 0, 0);
-	input_set_abs_params(input_dev, ABS_MT_POSITION_X,
-			pdata->disp_minx, pdata->disp_maxx, 0, 0);
-	input_set_abs_params(input_dev, ABS_MT_POSITION_Y,
-			pdata->disp_miny, pdata->disp_maxy, 0, 0);
-	input_set_abs_params(input_dev, ABS_MT_PRESSURE,
-			     0, 255, 0, 0);
-
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	/* set key array supported keys */
 	if (pdata->key_codes) {
 		for (i = 0; i < MXT_KEYARRAY_MAX_KEYS; i++) {
@@ -3655,7 +3587,6 @@ static int mxt_probe(struct i2c_client *client,
 	if (error)
 		goto err_configure_gpio;
 
-<<<<<<< HEAD
 	if (pdata->create_vkeys) {
 		np = client->dev.of_node;
 		for_each_child_of_node(np, child) {
@@ -3689,11 +3620,6 @@ static int mxt_probe(struct i2c_client *client,
 	error = irq_of_parse_and_map(client->dev.of_node, 0);
 	if (!error)
 		goto err_parse_irq;
-=======
-	error = irq_of_parse_and_map(client->dev.of_node, 0);
-	if (!error)
-		goto err_configure_gpio;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	error = request_threaded_irq(client->irq, NULL, mxt_interrupt,
 			pdata->irqflags | IRQF_ONESHOT,
@@ -3748,14 +3674,11 @@ err_free_irq:
 	free_irq(client->irq, data);
 err_free_object:
 	kfree(data->object_table);
-<<<<<<< HEAD
 err_parse_irq:
 	if (data->pdata->create_vkeys) {
 		sysfs_remove_group(vkey_kobj, &vkey_grp);
 		kobject_put(vkey_kobj);
 	}
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 err_configure_gpio:
 	if (gpio_is_valid(pdata->irq_gpio))
 		gpio_free(pdata->irq_gpio);
@@ -3794,13 +3717,10 @@ static int mxt_remove(struct i2c_client *client)
 	struct mxt_data *data = i2c_get_clientdata(client);
 
 	sysfs_remove_group(&client->dev.kobj, &mxt_attr_group);
-<<<<<<< HEAD
 	if (data->pdata->create_vkeys) {
 		sysfs_remove_group(vkey_kobj, &vkey_grp);
 		kobject_put(vkey_kobj);
 	}
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	free_irq(data->irq, data);
 	input_unregister_device(data->input_dev);
 #if defined(CONFIG_FB)

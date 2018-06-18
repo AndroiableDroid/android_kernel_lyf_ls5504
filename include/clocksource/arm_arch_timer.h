@@ -39,11 +39,8 @@
 #define ARCH_TIMER_USR_VT_ACCESS_EN	(1 << 8) /* virtual timer registers */
 #define ARCH_TIMER_USR_PT_ACCESS_EN	(1 << 9) /* physical timer registers */
 
-<<<<<<< HEAD
 #define ARCH_TIMER_EVT_STREAM_FREQ	10000	/* 100us */
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #ifdef CONFIG_ARM_ARCH_TIMER
 
 extern u32 arch_timer_get_rate(void);

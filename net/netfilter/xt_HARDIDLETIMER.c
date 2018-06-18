@@ -4,11 +4,7 @@
  * Netfilter module to trigger a timer when packet matches.
  * After timer expires a kevent will be sent.
  *
-<<<<<<< HEAD
  * Copyright (c) 2014-2015, The Linux Foundation. All rights reserved.
-=======
- * Copyright (c) 2014, The Linux Foundation. All rights reserved.
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * Copyright (C) 2004, 2010 Nokia Corporation
  *
@@ -303,10 +299,7 @@ static void hardidletimer_tg_destroy(const struct xt_tgdtor_param *par)
 
 		list_del(&info->timer->entry);
 		alarm_cancel(&info->timer->alarm);
-<<<<<<< HEAD
 		cancel_work_sync(&info->timer->work);
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		sysfs_remove_file(hardidletimer_tg_kobj,
 				&info->timer->attr.attr);
 		kfree(info->timer->attr.attr.name);

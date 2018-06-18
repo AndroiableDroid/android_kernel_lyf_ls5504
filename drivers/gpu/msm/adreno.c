@@ -548,7 +548,6 @@ static struct device_node *adreno_of_find_subnode(struct device_node *parent,
 	return NULL;
 }
 
-<<<<<<< HEAD
 /*
  * Get bus data based on the GPU speed configuration. If GPU speed config is
  * not valid it will get normal bus data, otherwise it will get speed config
@@ -620,8 +619,6 @@ use_parent:
 	return ret;
 }
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static int adreno_of_get_pwrlevels(struct device_node *parent,
 	struct kgsl_device_platform_data *pdata)
 {
@@ -792,7 +789,6 @@ err:
 	return result;
 }
 
-<<<<<<< HEAD
 /*
  * Read the Speed bin data and return device node.
  */
@@ -838,11 +834,6 @@ static int adreno_of_get_pdata(struct platform_device *pdev)
 {
 	struct kgsl_device_platform_data *pdata = NULL;
 	struct device_node *node;
-=======
-static int adreno_of_get_pdata(struct platform_device *pdev)
-{
-	struct kgsl_device_platform_data *pdata = NULL;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	int ret = -EINVAL;
 
 	if (of_property_read_string(pdev->dev.of_node, "label", &pdev->name)) {
@@ -859,7 +850,6 @@ static int adreno_of_get_pdata(struct platform_device *pdev)
 		goto err;
 	}
 
-<<<<<<< HEAD
 	/* Get Speed Bin Data */
 	node = get_gpu_speed_config_data(pdev);
 	if (node == NULL)
@@ -867,10 +857,6 @@ static int adreno_of_get_pdata(struct platform_device *pdev)
 
 	/* pwrlevel Data */
 	ret = adreno_of_get_pwrlevels(node, pdata);
-=======
-	/* pwrlevel Data */
-	ret = adreno_of_get_pwrlevels(pdev->dev.of_node, pdata);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	if (ret)
 		goto err;
 
@@ -901,20 +887,9 @@ static int adreno_of_get_pdata(struct platform_device *pdev)
 		goto err;
 
 	/* Bus Scale Data */
-<<<<<<< HEAD
 	ret = adreno_of_get_bus_data(pdev, node, pdata);
 	if (ret)
 		goto err;
-=======
-
-	pdata->bus_scale_table = msm_bus_cl_get_pdata(pdev);
-	if (IS_ERR_OR_NULL(pdata->bus_scale_table)) {
-		ret = PTR_ERR(pdata->bus_scale_table);
-		if (!ret)
-			ret = -EINVAL;
-		goto err;
-	}
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	ret = adreno_of_get_iommu(pdev, pdata);
 	if (ret)

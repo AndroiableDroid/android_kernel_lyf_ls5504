@@ -105,8 +105,5 @@
 	pinctrl-0 = <&usbid_default>;
 	vbus_otg-supply = <&smb1360_otg_supply>;
 };
-<<<<<<< HEAD
 
 /delete-node/ &mba_mss;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130

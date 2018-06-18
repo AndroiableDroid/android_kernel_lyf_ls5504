@@ -154,10 +154,6 @@ static int tps65132_regulator_enable(struct regulator_dev *rdev)
 static int tps65132_regulator_get_voltage(struct regulator_dev *rdev)
 {
 	struct tps65132_regulator *vreg = rdev_get_drvdata(rdev);
-<<<<<<< HEAD
-=======
-#ifndef CONFIG_MACH_T86519A1
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	int rc, val;
 
 	if (!rdev->regmap) {
@@ -181,11 +177,7 @@ static int tps65132_regulator_get_voltage(struct regulator_dev *rdev)
 		vreg->curr_uV = (val & TPS65132_VOLTAGE_MASK) *
 			TPS65132_VOLTAGE_STEP + TPS65132_VOLTAGE_MIN;
 	}
-<<<<<<< HEAD
 
-=======
-#endif
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	return vreg->curr_uV;
 }
 
@@ -194,10 +186,7 @@ static int tps65132_regulator_set_voltage(struct regulator_dev *rdev,
 {
 	struct tps65132_regulator *vreg = rdev_get_drvdata(rdev);
 	int val, new_uV, rc;
-<<<<<<< HEAD
 	int i = 0;///zhangwei add
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	if (!rdev->regmap) {
 		pr_err("regmap not found\n");
@@ -213,22 +202,15 @@ static int tps65132_regulator_set_voltage(struct regulator_dev *rdev,
 		return -EINVAL;
 	}
 	if (!vreg->is_enabled) {
-<<<<<<< HEAD
 		printk(KERN_ERR "%s:JackChen111 verg->is_enabled = %d\n",__func__,vreg->is_enabled);
 		vreg->vol_set_val = val;
 		vreg->vol_set_postpone = true;
 	} else {
 		printk(KERN_ERR "%s:JackChen222 verg->is_enabled = %d vreg->vol_reg = %d val= %d\n", __func__, vreg->is_enabled, vreg->vol_reg, val);
-=======
-		vreg->vol_set_val = val;
-		vreg->vol_set_postpone = true;
-	} else {
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		rc = regmap_write(rdev->regmap, vreg->vol_reg, val);
 		if (rc) {
 			pr_err("failed to write reg %d, rc = %d\n",
 						vreg->vol_reg, rc);
-<<<<<<< HEAD
 #if 1 //xiesu add
 
 
@@ -249,9 +231,6 @@ static int tps65132_regulator_set_voltage(struct regulator_dev *rdev,
 #else
 return rc;
 #endif
-=======
-			return rc;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		}
 	}
 	vreg->curr_uV = new_uV;
@@ -298,10 +277,7 @@ static int tps65132_regulator_gpio_init(struct tps65132_chip *chip)
 		vreg = &chip->vreg[i];
 		gpio = vreg->en_gpio;
 		flags = vreg->gpio_flags;
-<<<<<<< HEAD
 		printk(KERN_ERR "JackChen:%s gpio[%d] = %d\n", __func__, i, gpio);
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		if (gpio_is_valid(gpio)) {
 			rc = devm_gpio_request(chip->dev, gpio, vreg->name);
 			if (rc < 0) {
@@ -533,10 +509,7 @@ static int tps65132_regulator_probe(struct i2c_client *client,
 	struct regulator_desc *rdesc;
 	int i, j, rc;
 
-<<<<<<< HEAD
 	printk(KERN_ERR "JackChen:%s\n", __func__);
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	chip = devm_kzalloc(&client->dev, sizeof(struct tps65132_chip),
 							GFP_KERNEL);
 	if (!chip) {

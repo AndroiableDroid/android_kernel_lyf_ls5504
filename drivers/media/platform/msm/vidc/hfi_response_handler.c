@@ -1334,10 +1334,6 @@ static void hfi_process_sys_get_prop_image_version(
 }
 
 static void hfi_process_sys_property_info(
-<<<<<<< HEAD
-=======
-		msm_vidc_callback callback, u32 device_id,
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		struct hfi_msg_sys_property_info_packet *pkt)
 {
 	if (!pkt) {

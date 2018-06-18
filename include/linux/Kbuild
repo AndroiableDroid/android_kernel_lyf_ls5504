@@ -1,6 +1,2 @@
 header-y += if_pppolac.h
 header-y += if_pppopns.h
-<<<<<<< HEAD
-=======
-header-y += color_enhancement.h
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130

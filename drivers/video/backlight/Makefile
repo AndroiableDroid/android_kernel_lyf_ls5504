@@ -45,12 +45,8 @@ obj-$(CONFIG_BACKLIGHT_OMAP1)		+= omap1_bl.o
 obj-$(CONFIG_BACKLIGHT_OT200)		+= ot200_bl.o
 obj-$(CONFIG_BACKLIGHT_PANDORA)		+= pandora_bl.o
 obj-$(CONFIG_BACKLIGHT_PCF50633)	+= pcf50633-backlight.o
-<<<<<<< HEAD
 #obj-$(CONFIG_BACKLIGHT_PWM)		+= pwm_bl.o
 obj-y += pwm_bl.o
-=======
-obj-$(CONFIG_BACKLIGHT_PWM)		+= pwm_bl.o
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 obj-$(CONFIG_BACKLIGHT_SAHARA)		+= kb3886_bl.o
 obj-$(CONFIG_BACKLIGHT_TOSA)		+= tosa_bl.o
 obj-$(CONFIG_BACKLIGHT_TPS65217)	+= tps65217_bl.o

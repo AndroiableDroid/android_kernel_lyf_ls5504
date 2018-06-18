@@ -33,7 +33,6 @@
 #include <linux/atomic.h>
 #include <media/radio-iris-commands.h>
 
-<<<<<<< HEAD
 const unsigned char MIN_TX_TONE_VAL = 0x00;
 const unsigned char MAX_TX_TONE_VAL = 0x07;
 const unsigned char MIN_HARD_MUTE_VAL = 0x00;
@@ -81,52 +80,6 @@ const unsigned char MAX_SINR_SAMPLES = 0xFF;
 const signed char MIN_BLEND_HI = -128;
 const signed char MAX_BLEND_HI = 127;
 
-=======
-#define MIN_TX_TONE_VAL 0x00
-#define MAX_TX_TONE_VAL 0x07
-#define MIN_HARD_MUTE_VAL 0x00
-#define MAX_HARD_MUTE_VAL 0x03
-#define MIN_SRCH_MODE 0x00
-#define MAX_SRCH_MODE 0x09
-#define MIN_SCAN_DWELL 0x00
-#define MAX_SCAN_DWELL 0x0F
-#define MIN_SIG_TH 0x00
-#define MAX_SIG_TH 0x03
-#define MIN_PTY 0X00
-#define MAX_PTY 0x1F
-#define MIN_PI 0x0000
-#define MAX_PI 0xFFFF
-#define MIN_SRCH_STATIONS_CNT 0x00
-#define MAX_SRCH_STATIONS_CNT 0x14
-#define MIN_CHAN_SPACING 0x00
-#define MAX_CHAN_SPACING 0x02
-#define MIN_EMPHASIS 0x00
-#define MAX_EMPHASIS 0x01
-#define MIN_RDS_STD 0x00
-#define MAX_RDS_STD 0x02
-#define MIN_ANTENNA_VAL 0x00
-#define MAX_ANTENNA_VAL 0x01
-#define MIN_TX_PS_REPEAT_CNT 0x01
-#define MAX_TX_PS_REPEAT_CNT 0x0F
-#define MIN_SOFT_MUTE 0x00
-#define MAX_SOFT_MUTE 0x01
-#define MIN_PEEK_ACCESS_LEN 0x01
-#define MAX_PEEK_ACCESS_LEN 0xF9
-#define MIN_RESET_CNTR 0x00
-#define MAX_RESET_CNTR 0x01
-#define MIN_HLSI 0x00
-#define MAX_HLSI 0x02
-#define MIN_NOTCH_FILTER 0x00
-#define MAX_NOTCH_FILTER 0x02
-#define MIN_INTF_DET_OUT_LW_TH 0x00
-#define MAX_INTF_DET_OUT_LW_TH 0xFF
-#define MIN_INTF_DET_OUT_HG_TH 0x00
-#define MAX_INTF_DET_OUT_HG_TH 0xFF
-#define MIN_SINR_TH -128
-#define MAX_SINR_TH 127
-#define MIN_SINR_SAMPLES 0x01
-#define MAX_SINR_SAMPLES 0xFF
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 /* ---- HCI Packet structures ---- */
 #define RADIO_HCI_COMMAND_HDR_SIZE sizeof(struct radio_hci_command_hdr)
@@ -178,10 +131,7 @@ const signed char MAX_BLEND_HI = 127;
 #define FM_AF_LIST_MAX_SIZE   200
 #define AF_LIST_MAX     (FM_AF_LIST_MAX_SIZE / 4) /* Each AF frequency consist
 							of sizeof(int) bytes */
-<<<<<<< HEAD
 #define MAX_BLEND_INDEX 49
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 /* HCI timeouts */
 #define RADIO_HCI_TIMEOUT	(10000)	/* 10 seconds */
 
@@ -268,11 +218,8 @@ void radio_hci_event_packet(struct radio_hci_dev *hdev, struct sk_buff *skb);
 #define HCI_OCF_FM_SET_EVENT_MASK           0x0016
 #define HCI_OCF_FM_SET_CH_DET_THRESHOLD     0x0017
 #define HCI_OCF_FM_GET_CH_DET_THRESHOLD     0x0018
-<<<<<<< HEAD
 #define HCI_OCF_FM_SET_BLND_TBL             0x001B
 #define HCI_OCF_FM_GET_BLND_TBL             0x001C
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 /* HCI trans control commans opcode*/
 #define HCI_OCF_FM_ENABLE_TRANS_REQ         0x0001
 #define HCI_OCF_FM_DISABLE_TRANS_REQ        0x0002
@@ -345,10 +292,7 @@ void radio_hci_event_packet(struct radio_hci_dev *hdev, struct sk_buff *skb);
 #define HCI_FM_DISABLE_TRANS_CMD 14
 #define HCI_FM_GET_TX_CONFIG 15
 #define HCI_FM_GET_DET_CH_TH_CMD 16
-<<<<<<< HEAD
 #define HCI_FM_GET_BLND_TBL_CMD 17
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 /* Defines for FM TX*/
 #define TX_PS_DATA_LENGTH 108
@@ -477,7 +421,6 @@ struct hci_fm_ch_det_threshold {
 
 } __packed;
 
-<<<<<<< HEAD
 struct hci_fm_blend_table {
 	__u8 ucBlendType;
 	__u8 ucBlendRampRateUp;
@@ -490,8 +433,6 @@ struct hci_fm_blend_table {
 	__u8 ucBlendIndex[MAX_BLEND_INDEX];
 } __packed;
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 /*HCI events*/
 #define HCI_EV_TUNE_STATUS              0x01
 #define HCI_EV_RDS_LOCK_STATUS          0x02
@@ -1169,7 +1110,6 @@ static inline int is_valid_fm_state(int state)
 		return 0;
 }
 
-<<<<<<< HEAD
 static inline int is_valid_blend_value(int val)
 {
 	if ((val >= MIN_BLEND_HI) && (val <= MAX_BLEND_HI))
@@ -1178,6 +1118,4 @@ static inline int is_valid_blend_value(int val)
 		return 0;
 }
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #endif /* __UAPI_RADIO_HCI_CORE_H */

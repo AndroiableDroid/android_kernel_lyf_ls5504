@@ -212,11 +212,7 @@ static int modem_notifier_cb(struct notifier_block *this, unsigned long code,
 
 	switch (code) {
 
-<<<<<<< HEAD
 	case SUBSYS_AFTER_POWERUP:
-=======
-	case SUBSYS_AFTER_SHUTDOWN:
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		pr_err("memshare: Modem Restart has happened\n");
 		free_mem_clients(DHMS_MEM_PROC_MPSS_V01);
 		break;
@@ -734,11 +730,7 @@ static struct of_device_id memshare_match_table[] = {
 
 static struct of_device_id memshare_match_table1[] = {
 	{
-<<<<<<< HEAD
 		.compatible = "qcom,memshare-peripheral",
-=======
-		.compatible = "memshare,peripheral",
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	},
 	{}
 };

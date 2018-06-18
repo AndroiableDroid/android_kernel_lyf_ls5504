@@ -697,7 +697,6 @@ static void handle_event_change(enum command_response cmd, void *data)
 				__func__, inst, &event_notify->packet_buffer,
 				&event_notify->extra_data_buffer);
 
-<<<<<<< HEAD
 			/*
 			* If buffer release event is received with inst->state
 			* greater than STOP means client called STOP directly
@@ -717,14 +716,6 @@ static void handle_event_change(enum command_response cmd, void *data)
 			}
 			mutex_unlock(&inst->lock);
 			// end 
-=======
-			if (inst->state == MSM_VIDC_CORE_INVALID ||
-				inst->core->state == VIDC_CORE_INVALID) {
-				dprintk(VIDC_DBG,
-					"Event release buf ref received in invalid state - discard\n");
-				return;
-			}
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 			/*
 			* Get the buffer_info entry for the
@@ -749,11 +740,6 @@ static void handle_event_change(enum command_response cmd, void *data)
 				"RELEASE REFERENCE EVENT FROM F/W - fd = %d offset = %d\n",
 				ptr[0], ptr[1]);
 
-<<<<<<< HEAD
-=======
-			mutex_lock(&inst->sync_lock);
-
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			/* Decrement buffer reference count*/
 			mutex_lock(&inst->registeredbufs.lock);
 			list_for_each_entry(temp, &inst->registeredbufs.list,
@@ -763,10 +749,6 @@ static void handle_event_change(enum command_response cmd, void *data)
 					break;
 				}
 			}
-<<<<<<< HEAD
-=======
-			mutex_unlock(&inst->registeredbufs.lock);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 			/*
 			* Release buffer and remove from list
@@ -775,11 +757,7 @@ static void handle_event_change(enum command_response cmd, void *data)
 			if (unmap_and_deregister_buf(inst, binfo))
 				dprintk(VIDC_ERR,
 				"%s: buffer unmap failed\n", __func__);
-<<<<<<< HEAD
 			mutex_unlock(&inst->registeredbufs.lock);
-=======
-			mutex_unlock(&inst->sync_lock);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 			/*send event to client*/
 			v4l2_event_queue_fh(&inst->event_handler, &buf_event);
@@ -2191,11 +2169,7 @@ static int msm_comm_session_abort(struct msm_vidc_inst *inst)
 	} else {
 		rc = 0;
 	}
-<<<<<<< HEAD
 	msm_comm_session_clean(inst);
-=======
-
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	return rc;
 }
 
@@ -2218,11 +2192,8 @@ static void handle_thermal_event(struct msm_vidc_core *core)
 			inst->state < MSM_VIDC_CLOSE_DONE) {
 			dprintk(VIDC_WARN, "%s: abort inst %p\n",
 				__func__, inst);
-<<<<<<< HEAD
 
 			change_inst_state(inst, MSM_VIDC_CORE_INVALID);
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			rc = msm_comm_session_abort(inst);
 			if (rc) {
 				dprintk(VIDC_ERR,
@@ -2230,10 +2201,6 @@ static void handle_thermal_event(struct msm_vidc_core *core)
 					__func__, rc);
 				goto err_sess_abort;
 			}
-<<<<<<< HEAD
-=======
-			change_inst_state(inst, MSM_VIDC_CORE_INVALID);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			dprintk(VIDC_WARN,
 				"%s Send sys error for inst %p\n",
 				__func__, inst);
@@ -2577,15 +2544,12 @@ static int msm_vidc_load_resources(int flipped_state,
 		return -EBUSY;
 	}
 
-<<<<<<< HEAD
 	if (!is_thermal_permissible(core)) {
 		dprintk(VIDC_WARN,
 			"Thermal level critical, stop the session!\n");
 		return -ENOTSUPP;
 	}
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	hdev = core->device;
 	if (IS_ALREADY_IN_STATE(flipped_state, MSM_VIDC_LOAD_RESOURCES)) {
 		dprintk(VIDC_INFO, "inst: %p is already in state: %d\n",
@@ -4563,15 +4527,6 @@ int msm_vidc_check_session_supported(struct msm_vidc_inst *inst)
 		return rc;
 	}
 
-<<<<<<< HEAD
-=======
-	if (!is_thermal_permissible(core)) {
-		dprintk(VIDC_WARN,
-			"Thermal level critical, stop all active sessions!\n");
-		return -ENOTSUPP;
-	}
-
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	if (!rc && inst->capability.capability_set) {
 		if (inst->prop.width[CAPTURE_PORT] < capability->width.min ||
 			inst->prop.height[CAPTURE_PORT] <

@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 /* Copyright (c) 2014-15, The Linux Foundation. All rights reserved.
-=======
-/* Copyright (c) 2014, The Linux Foundation. All rights reserved.
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -19,23 +15,15 @@
 		label = "kgsl-3d0";
 		compatible = "qcom,kgsl-3d0", "qcom,kgsl-3d";
 		reg = <0x01c00000 0x10000
-<<<<<<< HEAD
 		       0x01c10000 0x10000
 		       0x0005c00c 0x8>;
 		reg-names = "kgsl_3d0_reg_memory" , "kgsl_3d0_shader_memory" , "efuse_memory";
-=======
-		       0x01c10000 0x10000>;
-		reg-names = "kgsl_3d0_reg_memory" , "kgsl_3d0_shader_memory";
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		interrupts = <0 33 0>;
 		interrupt-names = "kgsl_3d0_irq";
 		qcom,id = <0>;
 
-<<<<<<< HEAD
 		qcom,gpu-speed-config = <2>;
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		qcom,chipid = <0x03000600>;
 
 		qcom,initial-pwrlevel = <1>;
@@ -118,7 +106,6 @@
 				qcom,bus-freq = <0>;
 			};
 		};
-<<<<<<< HEAD
 		/* Speed levels */
 		qcom,gpu-speed-config@2 {
 			compatible = "gpu-speed-config@2";
@@ -164,9 +151,6 @@
 				};
 			};
 		};
-=======
-
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	};
 };
 

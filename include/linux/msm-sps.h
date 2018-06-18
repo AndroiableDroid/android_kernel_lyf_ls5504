@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 /* Copyright (c) 2011-2015, The Linux Foundation. All rights reserved.
-=======
-/* Copyright (c) 2011-2014, The Linux Foundation. All rights reserved.
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -28,11 +24,7 @@
 
 /* Returns 36bits physical address from 32bit address &
  * flags word */
-<<<<<<< HEAD
 #define DESC_FULL_ADDR(flags, addr) ((((phys_addr_t)flags & 0xF) << 32) | addr)
-=======
-#define DESC_FULL_ADDR(flags, addr) (((flags & 0xF) << 32) | addr)
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 /* Returns flags word with flags and 4bit upper address
  * from flags and 36bit physical address */
@@ -119,11 +111,8 @@
 #define SPS_BAM_CANCEL_WB           (1UL << 6)
 /* Confirm resource status before access BAM*/
 #define SPS_BAM_RES_CONFIRM         (1UL << 7)
-<<<<<<< HEAD
 /* Verify Low Memory status */
 #define SPS_BAM_ATMC_MEM            (1UL << 8)
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 /* BAM device management flags */
 

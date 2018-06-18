@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 /* Copyright (c) 2013-2015, The Linux Foundation. All rights reserved.
-=======
-/* Copyright (c) 2013-2014, The Linux Foundation. All rights reserved.
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License version 2 and
 * only version 2 as published by the Free Software Foundation.
@@ -48,11 +44,7 @@ enum {
 /* DOLBY device definitions end */
 enum {
 	DOLBY_OFF_CACHE = 0,
-<<<<<<< HEAD
 	DOLBY_SPEKAER_CACHE,
-=======
-	DOLBY_SPEAKER_CACHE,
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	DOLBY_HEADPHONE_CACHE,
 	DOLBY_HDMI_CACHE,
 	DOLBY_WFD_CACHE,
@@ -747,11 +739,7 @@ static int msm_ds2_dap_map_device_to_dolby_cache_devices(int32_t device_id)
 		break;
 	case EARPIECE:
 	case SPEAKER:
-<<<<<<< HEAD
 		cache_dev = DOLBY_SPEKAER_CACHE;
-=======
-		cache_dev = DOLBY_SPEAKER_CACHE;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		break;
 	case WIRED_HEADSET:
 	case WIRED_HEADPHONE:
@@ -1947,11 +1935,6 @@ int msm_ds2_dap_init(int port_id, int copp_idx, int channels,
 				(dev_map[i].device_id &
 				ds2_dap_params_states.device)) {
 				idx = i;
-<<<<<<< HEAD
-=======
-				/* Give priority to headset in case of
-				   combo device */
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 				if (dev_map[i].device_id == SPEAKER)
 					continue;
 				else
@@ -1965,11 +1948,7 @@ int msm_ds2_dap_init(int port_id, int copp_idx, int channels,
 			goto end;
 		}
 		pr_debug("%s:index %d, dev[0x%x,0x%x]\n", __func__, idx,
-<<<<<<< HEAD
 			 dev_map[idx].device_id, ds2_dap_params_states.device);
-=======
-			 dev_map[i].device_id, ds2_dap_params_states.device);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		dev_map[idx].active = true;
 		dev_map[idx].copp_idx = copp_idx;
 		dolby_data.param_id = DOLBY_COMMIT_ALL_TO_DSP;

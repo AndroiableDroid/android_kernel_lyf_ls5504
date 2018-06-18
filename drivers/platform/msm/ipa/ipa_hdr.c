@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 /* Copyright (c) 2012-2015, The Linux Foundation. All rights reserved.
-=======
-/* Copyright (c) 2012-2014, The Linux Foundation. All rights reserved.
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -581,11 +577,7 @@ static int __ipa_add_hdr(struct ipa_hdr_add *hdr)
 	int id;
 	int mem_size;
 
-<<<<<<< HEAD
 	if (hdr->hdr_len == 0 || hdr->hdr_len > IPA_HDR_MAX_SIZE) {
-=======
-	if (hdr->hdr_len == 0) {
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		IPAERR("bad parm\n");
 		goto error;
 	}

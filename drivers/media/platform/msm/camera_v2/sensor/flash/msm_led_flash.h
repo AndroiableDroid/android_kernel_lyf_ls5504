@@ -40,10 +40,7 @@ struct msm_led_flash_reg_t {
 	struct msm_camera_i2c_reg_setting *release_setting;
 	struct msm_camera_i2c_reg_setting *low_setting;
 	struct msm_camera_i2c_reg_setting *high_setting;
-<<<<<<< HEAD
 	struct msm_camera_i2c_reg_array *flag_array;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 };
 
 struct msm_led_flash_ctrl_t {
@@ -95,21 +92,4 @@ int msm_flash_led_release(struct msm_led_flash_ctrl_t *fctrl);
 int msm_flash_led_off(struct msm_led_flash_ctrl_t *fctrl);
 int msm_flash_led_low(struct msm_led_flash_ctrl_t *fctrl);
 int msm_flash_led_high(struct msm_led_flash_ctrl_t *fctrl);
-<<<<<<< HEAD
-=======
-
-#ifdef CONFIG_MACH_YULONG
-int msm_flash_gpio_probe(struct platform_device *pdev, const void *data);
-int32_t msm_led_gpio_trigger_get_subdev_id(struct msm_led_flash_ctrl_t *fctrl,
-	void *arg);
-int32_t msm_led_gpio_trigger_config(struct msm_led_flash_ctrl_t *fctrl,
-	void *data);
-int msm_flash_led_gpio_init(struct msm_led_flash_ctrl_t *fctrl);
-int msm_flash_led_gpio_release(struct msm_led_flash_ctrl_t *fctrl);
-int msm_flash_led_gpio_off(struct msm_led_flash_ctrl_t *fctrl);
-int msm_flash_led_gpio_low(struct msm_led_flash_ctrl_t *fctrl);
-int msm_flash_led_gpio_high(struct msm_led_flash_ctrl_t *fctrl);
-#endif
-
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #endif

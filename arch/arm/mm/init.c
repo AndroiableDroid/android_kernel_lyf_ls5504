@@ -635,18 +635,14 @@ static void print_vmalloc_lowmem_info(void)
 {
 	struct memblock_region *reg, *prev_reg = NULL;
 
-<<<<<<< HEAD
 	pr_notice(
 		"	   vmalloc : 0x%08lx - 0x%08lx   (%4ld MB)\n",
 		MLM((unsigned long)high_memory, VMALLOC_END));
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	for_each_memblock_rev(memory, reg) {
 		phys_addr_t start_phys = reg->base;
 		phys_addr_t end_phys = reg->base + reg->size;
 
-<<<<<<< HEAD
 		if (start_phys > arm_lowmem_limit)
 			continue;
 
@@ -660,42 +656,10 @@ static void print_vmalloc_lowmem_info(void)
 			"	   lowmem  : 0x%08lx - 0x%08lx   (%4ld MB)\n",
 			MLM((unsigned long)__va(start_phys),
 			(unsigned long)__va(end_phys)));
-=======
-		if (prev_reg == NULL) {
-			prev_reg = reg;
-			if (end_phys > arm_lowmem_limit) {
-
-				if (start_phys < arm_lowmem_limit) {
-					pr_notice(
-					"	   vmalloc : 0x%08lx - 0x%08lx   (%4ld MB)\n",
-					MLM(
-					(unsigned long)__va(arm_lowmem_limit),
-					VMALLOC_END));
-
-					pr_notice(
-					"	   lowmem  : 0x%08lx - 0x%08lx   (%4ld MB)\n",
-					MLM((unsigned long)__va(start_phys),
-					(unsigned long)__va(arm_lowmem_limit)));
-				} else {
-					pr_notice(
-					"	   vmalloc : 0x%08lx - 0x%08lx   (%4ld MB)\n",
-					MLM((unsigned long)__va(start_phys),
-					(unsigned long)__va(end_phys)));
-
-				}
-			} else {
-
-				pr_notice(
-				"	   lowmem  : 0x%08lx - 0x%08lx   (%4ld MB)\n",
-				MLM((unsigned long)__va(start_phys),
-				(unsigned long)__va(end_phys)));
-			}
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 			continue;
 		}
 
-<<<<<<< HEAD
 		pr_notice(
 		"	   vmalloc : 0x%08lx - 0x%08lx   (%4ld MB)\n",
 		MLM((unsigned long)__va(end_phys),
@@ -707,47 +671,6 @@ static void print_vmalloc_lowmem_info(void)
 		MLM((unsigned long)__va(start_phys),
 		(unsigned long)__va(end_phys)));
 	}
-=======
-		start_phys = reg->base + reg->size;
-		end_phys = prev_reg->base;
-
-		pr_notice(
-		"	   vmalloc : 0x%08lx - 0x%08lx   (%4ld MB)\n",
-		MLM((unsigned long)__va(start_phys),
-		(unsigned long)__va(end_phys)));
-
-
-		if (end_phys > arm_lowmem_limit) {
-
-			if (start_phys < arm_lowmem_limit) {
-				pr_notice(
-				"	   vmalloc : 0x%08lx - 0x%08lx   (%4ld MB)\n",
-				MLM((unsigned long)__va(arm_lowmem_limit),
-				VMALLOC_END));
-
-				pr_notice(
-				"	   lowmem  : 0x%08lx - 0x%08lx   (%4ld MB)\n",
-				MLM((unsigned long)__va(start_phys),
-				(unsigned long)__va(arm_lowmem_limit)));
-			} else {
-				pr_notice(
-				"	   vmalloc : 0x%08lx - 0x%08lx   (%4ld MB)\n",
-				MLM((unsigned long)__va(start_phys),
-				(unsigned long)__va(end_phys)));
-
-			}
-		} else {
-				start_phys = reg->base;
-				end_phys = reg->base + reg->size;
-				pr_notice(
-				"	   lowmem  : 0x%08lx - 0x%08lx   (%4ld MB)\n",
-				MLM((unsigned long)__va(start_phys),
-				(unsigned long)__va(end_phys)));
-		}
-				prev_reg = reg;
-	}
-
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 }
 #endif
 
@@ -920,7 +843,6 @@ static int __init msm_krait_wfe_init(void)
 }
 pure_initcall(msm_krait_wfe_init);
 #endif
-<<<<<<< HEAD
 
 #ifdef CONFIG_KERNEL_TEXT_RDONLY
 void set_kernel_text_ro(void)
@@ -932,5 +854,3 @@ void set_kernel_text_ro(void)
 	set_memory_ro(start, (end - start) >> PAGE_SHIFT);
 }
 #endif
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130

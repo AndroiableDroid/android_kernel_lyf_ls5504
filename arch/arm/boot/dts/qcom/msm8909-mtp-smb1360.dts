@@ -13,19 +13,12 @@
 /dts-v1/;
 
 #include "msm8909-mtp.dtsi"
-<<<<<<< HEAD
 #include "msm8909-camera-sensor-mtp.dtsi"
 #include "msm8909-pm8909.dtsi"
 #include "msm8909-pm8909-mtp.dtsi"
 
 / {
 	model = "Qualcomm Technologies, Inc. MSM8909-PM8909 SMB1360 1GB MTP";
-=======
-#include "msm8909-camera-sensor-cdp.dtsi"
-
-/ {
-	model = "Qualcomm Technologies, Inc. MSM8909 SMB1360 MTP";
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	compatible = "qcom,msm8909-mtp", "qcom,msm8909", "qcom,mtp";
 	qcom,board-id= <8 0x3>;
 };
@@ -58,7 +51,6 @@
 	status = "ok";
 	qcom,disable-bms;
 };
-<<<<<<< HEAD
 
 &usb_otg {
 	interrupts = <0 134 0>,<0 140 0>,<0 136 0>;
@@ -67,5 +59,3 @@
 	qcom,hsusb-otg-mode = <3>;
 	vbus_otg-supply = <&smb1360_otg_supply>;
 };
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130

@@ -144,15 +144,12 @@ struct mmc_blk_data {
 	int	area_type;
 };
 
-<<<<<<< HEAD
 //chenjian add for mmc info start
 unsigned int	emmc_manfid=0;
 char		emmc_prod_name[8];
 int             start_flag=1;
 //chenjian add for mmc info end
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static DEFINE_MUTEX(open_lock);
 
 enum {
@@ -3289,7 +3286,6 @@ static const struct mmc_fixup blk_fixups[] =
 	END_FIXUP
 };
 
-<<<<<<< HEAD
 /* chenjian add for mmc info start */
 static ssize_t name_show(struct kobject *kobj, struct kobj_attribute *attr, char *buf) {
 //FixMe: add device info here
@@ -3380,11 +3376,6 @@ static void device_info_show(void)
 }  
 /*chenjian add for mmc info end*/ 
 
-=======
-#ifdef CONFIG_MMC_YL_PARAMS
-extern int yl_params_init(struct mmc_card *card);
-#endif
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static int mmc_blk_probe(struct mmc_card *card)
 {
 	struct mmc_blk_data *md, *part_md;
@@ -3415,15 +3406,6 @@ static int mmc_blk_probe(struct mmc_card *card)
 #ifdef CONFIG_MMC_BLOCK_DEFERRED_RESUME
 	mmc_set_bus_resume_policy(card->host, 1);
 #endif
-<<<<<<< HEAD
-=======
-#ifdef CONFIG_MMC_YL_PARAMS
-	if (!strcmp(md->disk->disk_name, "mmcblk0")) {
-		if (yl_params_init(card))
-			pr_err("%s: call yl_params_init failed!\n", __func__);
-	}
-#endif
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	if (mmc_add_disk(md))
 		goto out;
 
@@ -3431,7 +3413,6 @@ static int mmc_blk_probe(struct mmc_card *card)
 		if (mmc_add_disk(part_md))
 			goto out;
 	}
-<<<<<<< HEAD
 
 	/* chenjian add for mmc info start */
 	if(start_flag){
@@ -3444,8 +3425,6 @@ static int mmc_blk_probe(struct mmc_card *card)
 	}
 	/* chenjian add for mmc info end */
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	return 0;
 
  out:
@@ -3547,10 +3526,6 @@ static int mmc_blk_resume(struct mmc_card *card)
 			mmc_queue_resume(&part_md->queue);
 		}
 	}
-<<<<<<< HEAD
-=======
-
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	return 0;
 }
 #else

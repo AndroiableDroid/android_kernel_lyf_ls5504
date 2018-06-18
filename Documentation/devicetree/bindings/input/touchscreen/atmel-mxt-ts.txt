@@ -7,13 +7,6 @@ Required properties:
  - interrupt-parent	: parent of interrupt
  - interrupts		: touch sample interrupt to indicate presense or release
 				of fingers on the panel.
-<<<<<<< HEAD
-=======
- - atmel,panel-coords	: touch panel minimum x, minimum y, maximum x and
-				maximum y resolution
- - atmel,display-coords : LCD display minimum x, minimum y, maximum x and
-				maximum y resolution
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  - vdd_ana-supply	: Analog power supply needed to power device
  - atmel,irq-gpio	: irq gpio
  - atmel,reset-gpio	: reset gpio
@@ -53,7 +46,6 @@ Optional property:
  - atmel,i2cmode-gpio		: specify gpio number for i2cmode, which provides
 					internal pull-ups to i2c bus in case there
 					is no hardware pull-up support
-<<<<<<< HEAD
  - atmel,panel-coords	: touch panel minimum x, minimum y, maximum x and
 				maximum y resolution. Used to configure the input
 				device.
@@ -82,8 +74,6 @@ Optional property:
 				- atmel,panel-coords
 				- atmel,display-coords
 				- atmel,vkey-codes
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 Example:
 	i2c@f9966000 {
@@ -105,11 +95,6 @@ Example:
 			interrupts = <48 0x0>;
 			vdd_ana-supply = <&pm8941_l18>;
 			vcc_i2c-supply = <&pm8941_lvs1>;
-<<<<<<< HEAD
-=======
-			atmel,panel-coords = <0 0 479 799>;
-			atmel,display-coords = <0 0 479 799>;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			/* pins used by touchscreen */
 			pinctrl-names = "pmx_ts_active","pmx_ts_suspend", "pmx_ts_release";
 			pinctrl-0 = <&ts_int_active &ts_reset_active>;
@@ -125,21 +110,15 @@ Example:
 				0 0 0 0 0 0 0 0 >;
 			atmel,irq-gpio = <&msmgpio 48 0>;
 			atmel,reset-gpio = <&msmgpio 26 0>;
-<<<<<<< HEAD
 			atmel,create-vkeys;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			atmel,cfg_1 {
 				atmel,family-id = <0x81>;
 				atmel,variant-id = <0x01>;
 				atmel,version = <0x10>;
 				atmel,build = <0xaa>;
-<<<<<<< HEAD
 				atmel,panel-coords = <0 0 479 799>;
 				atmel,display-coords = <0 0 479 799>;
 				atmel,vkey-codes = <139 172 158 217>;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 				atmel,config = [
 					/* Object 6, Instance = 0 */
 					00 00 00 00 00 00

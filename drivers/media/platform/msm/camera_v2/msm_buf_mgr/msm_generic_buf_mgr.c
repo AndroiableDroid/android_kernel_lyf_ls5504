@@ -181,11 +181,6 @@ static long msm_buf_mngr_subdev_ioctl(struct v4l2_subdev *sd,
 	case VIDIOC_MSM_BUF_MNGR_DEINIT:
 		rc = msm_generic_buf_mngr_close(sd, NULL);
 		break;
-<<<<<<< HEAD
-=======
-	case MSM_SD_NOTIFY_FREEZE:
-		break;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	case MSM_SD_SHUTDOWN:
 		msm_buf_mngr_sd_shutdown(buf_mngr_dev, argp);
 		break;

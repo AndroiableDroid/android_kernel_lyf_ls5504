@@ -20,10 +20,7 @@
 #define CSI_DECODE_DPCM_10_8_10 5
 #define MAX_CID                 16
 #define I2C_SEQ_REG_DATA_MAX    256
-<<<<<<< HEAD
 #define I2C_REG_DATA_MAX       (8*1024)
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #define MSM_V4L2_PIX_FMT_META v4l2_fourcc('M', 'E', 'T', 'A') /* META */
 
 #define MAX_ACTUATOR_REG_TBL_SIZE 8
@@ -32,11 +29,7 @@
 #define MAX_ACTUATOR_SCENARIO     8
 #define MAX_ACT_MOD_NAME_SIZE     32
 #define MAX_ACT_NAME_SIZE         32
-<<<<<<< HEAD
 #define MAX_ACTUATOR_INIT_SET     32
-=======
-#define MAX_ACTUATOR_INIT_SET     12
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #define MAX_I2C_REG_SET           12
 
 #define MAX_NAME_SIZE             32
@@ -71,23 +64,6 @@ enum msm_sensor_power_seq_type_t {
 	SENSOR_I2C,
 };
 
-<<<<<<< HEAD
-=======
-enum msm_camera_qup_i2c_write_batch_size_t {
-	MSM_CAMERA_I2C_BATCH_SIZE_1 = 1,
-	MSM_CAMERA_I2C_BATCH_SIZE_2,
-	MSM_CAMERA_I2C_BATCH_SIZE_3,
-	MSM_CAMERA_I2C_BATCH_SIZE_4,
-	MSM_CAMERA_I2C_BATCH_SIZE_5,
-	MSM_CAMERA_I2C_BATCH_SIZE_MAX,
-};
-
-enum msm_camera_qup_i2c_write_batch_t {
-	MSM_CAMREA_I2C_BATCH_DISABLE = 0,
-	MSM_CAMERA_I2C_BATCH_ENABLE,
-};
-
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 enum msm_camera_i2c_reg_addr_type {
 	MSM_CAMERA_I2C_BYTE_ADDR = 1,
 	MSM_CAMERA_I2C_WORD_ADDR,
@@ -191,10 +167,7 @@ enum msm_flash_cfg_type_t {
 	CFG_FLASH_HIGH,
 };
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 struct msm_sensor_power_setting {
 	enum msm_sensor_power_seq_type_t seq_type;
 	uint16_t seq_val;
@@ -219,12 +192,6 @@ struct msm_sensor_init_params {
 	enum camb_position_t position;
 	/* sensor mount angle */
 	uint32_t            sensor_mount_angle;
-<<<<<<< HEAD
-=======
-#ifdef CONFIG_MACH_YULONG
-	uint32_t module_id;
-#endif
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 };
 
 struct msm_sensor_id_info_t {
@@ -261,10 +228,6 @@ struct msm_camera_i2c_reg_setting {
 	enum msm_camera_i2c_reg_addr_type addr_type;
 	enum msm_camera_i2c_data_type data_type;
 	uint16_t delay;
-<<<<<<< HEAD
-=======
-	enum msm_camera_qup_i2c_write_batch_t qup_i2c_batch;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 };
 
 struct msm_camera_csid_vc_cfg {

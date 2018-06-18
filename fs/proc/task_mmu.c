@@ -11,11 +11,8 @@
 #include <linux/rmap.h>
 #include <linux/swap.h>
 #include <linux/swapops.h>
-<<<<<<< HEAD
 #include <linux/mm_inline.h>
 #include <linux/ctype.h>
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 #include <asm/elf.h>
 #include <asm/uaccess.h>
@@ -1175,7 +1172,6 @@ const struct file_operations proc_pagemap_operations = {
 };
 #endif /* CONFIG_PROC_PAGE_MONITOR */
 
-<<<<<<< HEAD
 #ifdef CONFIG_PROCESS_RECLAIM
 static int reclaim_pte_range(pmd_t *pmd, unsigned long addr,
 				unsigned long end, struct mm_walk *walk)
@@ -1408,8 +1404,6 @@ const struct file_operations proc_reclaim_operations = {
 };
 #endif
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #ifdef CONFIG_NUMA
 
 struct numa_maps {

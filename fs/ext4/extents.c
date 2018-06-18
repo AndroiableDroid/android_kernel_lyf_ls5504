@@ -4457,11 +4457,7 @@ static void ext4_falloc_update_inode(struct inode *inode,
 	 * the file size.
 	 */
 	if (!(mode & FALLOC_FL_KEEP_SIZE)) {
-<<<<<<< HEAD
 		if (new_size > i_size_read(inode))
-=======
-		if (new_size > i_size_read_uncompressed(inode))
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			i_size_write(inode, new_size);
 		if (new_size > EXT4_I(inode)->i_disksize)
 			ext4_update_i_disksize(inode, new_size);
@@ -4470,11 +4466,7 @@ static void ext4_falloc_update_inode(struct inode *inode,
 		 * Mark that we allocate beyond EOF so the subsequent truncate
 		 * can proceed even if the new size is the same as i_size.
 		 */
-<<<<<<< HEAD
 		if (new_size > i_size_read(inode))
-=======
-		if (new_size > i_size_read_uncompressed(inode))
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			ext4_set_inode_flag(inode, EXT4_INODE_EOFBLOCKS);
 	}
 

@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 /* Copyright (c) 2012-2015, The Linux Foundation. All rights reserved.
-=======
-/* Copyright (c) 2012-2014, The Linux Foundation. All rights reserved.
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -24,10 +20,7 @@
 
 #define MSM_VDEC_DVC_NAME "msm_vdec_8974"
 #define MIN_NUM_OUTPUT_BUFFERS 4
-<<<<<<< HEAD
 #define MIN_NUM_CAPTURE_BUFFERS 6
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #define MAX_NUM_OUTPUT_BUFFERS VB2_MAX_FRAME
 #define DEFAULT_VIDEO_CONCEAL_COLOR_BLACK 0x8010
 #define MB_SIZE_IN_PIXEL (16 * 16)
@@ -1153,7 +1146,6 @@ exit:
 	return rc;
 }
 
-<<<<<<< HEAD
 static int set_buffer_size_actual(struct msm_vidc_inst *inst,
 				u32 buffer_size, enum hal_buffer buffer_type)
 {
@@ -1337,23 +1329,13 @@ static int set_default_properties(struct msm_vidc_inst *inst)
 	return rc;
 }
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 int msm_vdec_s_fmt(struct msm_vidc_inst *inst, struct v4l2_format *f)
 {
 	struct msm_vidc_format *fmt = NULL;
 	struct hal_frame_size frame_sz;
-<<<<<<< HEAD
 	int rc = 0;
 	int ret = 0;
 	int i;
-=======
-	int extra_idx = 0;
-	int rc = 0;
-	int ret = 0;
-	int i;
-	struct hal_buffer_requirements *bufreq;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	int max_input_size = 0;
 
 	if (!inst || !f) {
@@ -1402,26 +1384,12 @@ int msm_vdec_s_fmt(struct msm_vidc_inst *inst, struct v4l2_format *f)
 					get_frame_size(inst, fmt, f->type, i);
 			}
 		} else {
-<<<<<<< HEAD
 			rc = update_output_buffer_size(inst, f, fmt);
 			if (rc) {
 				dprintk(VIDC_ERR,
 					"%s - failed to update buffer size: %d\n",
 					__func__, rc);
 				goto err_invalid_fmt;
-=======
-			bufreq = get_buff_req_buffer(inst,
-					msm_comm_get_hal_output_buffer(inst));
-			f->fmt.pix_mp.plane_fmt[0].sizeimage =
-				bufreq ? bufreq->buffer_size : 0;
-
-			extra_idx = EXTRADATA_IDX(fmt->num_planes);
-			if (extra_idx && (extra_idx < VIDEO_MAX_PLANES)) {
-				bufreq = get_buff_req_buffer(inst,
-					HAL_BUFFER_EXTRADATA_OUTPUT);
-				f->fmt.pix_mp.plane_fmt[1].sizeimage =
-					bufreq ? bufreq->buffer_size : 0;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			}
 		}
 
@@ -1501,11 +1469,8 @@ int msm_vdec_s_fmt(struct msm_vidc_inst *inst, struct v4l2_format *f)
 			inst->bufq[OUTPUT_PORT].vb2_bufq.plane_sizes[i] =
 				f->fmt.pix_mp.plane_fmt[i].sizeimage;
 		}
-<<<<<<< HEAD
 
 		set_default_properties(inst);
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	}
 err_invalid_fmt:
 	return rc;
@@ -1572,11 +1537,8 @@ static int msm_vdec_queue_setup(struct vb2_queue *q,
 	struct hfi_device *hdev;
 	struct hal_buffer_count_actual new_buf_count;
 	enum hal_property property_id;
-<<<<<<< HEAD
 	u32 hold_count = 0;
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	if (!q || !num_buffers || !num_planes
 		|| !sizes || !q->drv_priv) {
 		dprintk(VIDC_ERR, "Invalid input, q = %p, %p, %p\n",
@@ -1637,7 +1599,6 @@ static int msm_vdec_queue_setup(struct vb2_queue *q,
 			rc = -EINVAL;
 			break;
 		}
-<<<<<<< HEAD
 
 		*num_buffers = max(*num_buffers, bufreq->buffer_count_min);
 
@@ -1654,9 +1615,6 @@ static int msm_vdec_queue_setup(struct vb2_queue *q,
 				temp, *num_buffers);
 		}
 
-=======
-		*num_buffers = max(*num_buffers, bufreq->buffer_count_min);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		if (*num_buffers != bufreq->buffer_count_actual) {
 			property_id = HAL_PARAM_BUFFER_COUNT_ACTUAL;
 			new_buf_count.buffer_type =
@@ -1664,7 +1622,6 @@ static int msm_vdec_queue_setup(struct vb2_queue *q,
 			new_buf_count.buffer_count_actual = *num_buffers;
 			rc = call_hfi_op(hdev, session_set_property,
 				inst->session, property_id, &new_buf_count);
-<<<<<<< HEAD
 
 			hold_count = *num_buffers - bufreq->buffer_count_actual;
 
@@ -1673,9 +1630,6 @@ static int msm_vdec_queue_setup(struct vb2_queue *q,
 					hold_count,
 					msm_comm_get_hal_output_buffer(inst));
 			}
-=======
-		}
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 		if (*num_buffers != bufreq->buffer_count_actual) {
 			rc = msm_comm_try_get_bufreqs(inst);

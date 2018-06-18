@@ -500,10 +500,6 @@ struct snd_soc_dapm_path {
 
 	struct list_head list_source;
 	struct list_head list_sink;
-<<<<<<< HEAD
-=======
-	struct list_head list_kcontrol;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	struct list_head list;
 };
 

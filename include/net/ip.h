@@ -37,20 +37,11 @@ struct inet_skb_parm {
 	struct ip_options	opt;		/* Compiled IP options		*/
 	unsigned char		flags;
 
-<<<<<<< HEAD
 #define IPSKB_FORWARDED		1
 #define IPSKB_XFRM_TUNNEL_SIZE	2
 #define IPSKB_XFRM_TRANSFORMED	4
 #define IPSKB_FRAG_COMPLETE	8
 #define IPSKB_REROUTED		16
-=======
-#define IPSKB_FORWARDED		BIT(0)
-#define IPSKB_XFRM_TUNNEL_SIZE	BIT(1)
-#define IPSKB_XFRM_TRANSFORMED	BIT(2)
-#define IPSKB_FRAG_COMPLETE	BIT(3)
-#define IPSKB_REROUTED		BIT(4)
-#define IPSKB_DOREDIRECT	BIT(5)
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	u16			frag_max_size;
 };

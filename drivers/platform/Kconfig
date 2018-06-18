@@ -7,10 +7,4 @@ endif
 
 if ARCH_MSM
 source "drivers/platform/msm/Kconfig"
-<<<<<<< HEAD
-=======
-source "drivers/platform/haier/Kconfig"
-source "drivers/platform/wingtech/Kconfig"
-source "drivers/platform/yulong/Kconfig"
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 endif

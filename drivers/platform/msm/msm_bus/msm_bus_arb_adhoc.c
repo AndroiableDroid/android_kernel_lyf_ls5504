@@ -19,17 +19,11 @@
 #include <linux/msm-bus.h>
 #include "msm_bus_core.h"
 #include "msm_bus_adhoc.h"
-<<<<<<< HEAD
 #include <trace/events/trace_msm_bus.h>
 
 #define NUM_CL_HANDLES	50
 #define NUM_LNODES	3
 #define MAX_STR_CL	50
-=======
-
-#define NUM_CL_HANDLES	50
-#define NUM_LNODES	3
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 struct bus_search_type {
 	struct list_head link;
@@ -471,10 +465,6 @@ static int msm_bus_apply_rules(struct list_head *list, bool after_clk_commit)
 	struct device *dev = NULL;
 	struct msm_bus_node_device_type *dev_info = NULL;
 	int ret = 0;
-<<<<<<< HEAD
-=======
-	bool throttle_en = false;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	list_for_each_entry(rule, list, link) {
 		if (!rule)
@@ -493,19 +483,11 @@ static int msm_bus_apply_rules(struct list_head *list, bool after_clk_commit)
 		}
 		dev_info = dev->platform_data;
 
-<<<<<<< HEAD
 		ret = msm_bus_enable_limiter(dev_info, rule->throttle,
 							rule->lim_bw);
 		if (ret)
 			MSM_BUS_ERR("Failed to set limiter for %d", rule->id);
 		trace_bus_rules_apply(rule->id, rule->lim_bw, rule->throttle);
-=======
-		throttle_en = ((rule->throttle == THROTTLE_ON) ? true : false);
-		ret = msm_bus_enable_limiter(dev_info, throttle_en,
-							rule->lim_bw);
-		if (ret)
-			MSM_BUS_ERR("Failed to set limiter for %d", rule->id);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	}
 
 	return ret;
@@ -962,10 +944,7 @@ static int update_request_adhoc(uint32_t cl, unsigned int index)
 	MSM_BUS_DBG("%s: cl: %u index: %d curr: %d num_paths: %d\n", __func__,
 		cl, index, client->curr, client->pdata->usecase->num_paths);
 
-<<<<<<< HEAD
 	msm_bus_dbg_client_data(client->pdata, index , cl);
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	for (i = 0; i < pdata->usecase->num_paths; i++) {
 		src = client->pdata->usecase[index].vectors[i].src;
 		dest = client->pdata->usecase[index].vectors[i].dst;
@@ -995,17 +974,12 @@ static int update_request_adhoc(uint32_t cl, unsigned int index)
 		if (log_transaction)
 			getpath_debug(src, lnode, pdata->active_only);
 	}
-<<<<<<< HEAD
 	trace_bus_update_request_end(pdata->name);
-=======
-	msm_bus_dbg_client_data(client->pdata, index , cl);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 exit_update_request:
 	mutex_unlock(&msm_bus_adhoc_lock);
 	return ret;
 }
 
-<<<<<<< HEAD
 static void free_cl_mem(struct msm_bus_client_handle *cl)
 {
 	if (cl) {
@@ -1129,8 +1103,6 @@ exit_register:
 	mutex_unlock(&msm_bus_adhoc_lock);
 	return client;
 }
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 /**
  *  msm_bus_arb_setops_adhoc() : Setup the bus arbitration ops
  *  @ arb_ops: pointer to the arb ops.
@@ -1140,11 +1112,8 @@ void msm_bus_arb_setops_adhoc(struct msm_bus_arb_ops *arb_ops)
 	arb_ops->register_client = register_client_adhoc;
 	arb_ops->update_request = update_request_adhoc;
 	arb_ops->unregister_client = unregister_client_adhoc;
-<<<<<<< HEAD
 
 	arb_ops->register_cl = register_adhoc;
 	arb_ops->unregister = unregister_adhoc;
 	arb_ops->update_bw = update_bw_adhoc;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 }

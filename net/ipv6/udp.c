@@ -494,15 +494,10 @@ csum_copy_err:
 	}
 	unlock_sock_fast(sk, slow);
 
-<<<<<<< HEAD
 	if (noblock)
 		return -EAGAIN;
 
 	/* starting over for a new packet */
-=======
-	/* starting over for a new packet, but check if we need to yield */
-	cond_resched();
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	msg->msg_flags &= ~MSG_TRUNC;
 	goto try_again;
 }

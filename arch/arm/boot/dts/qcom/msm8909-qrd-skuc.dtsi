@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 /* Copyright (c) 2014-2015, The Linux Foundation. All rights reserved.
-=======
-/* Copyright (c) 2014, The Linux Foundation. All rights reserved.
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -15,17 +11,13 @@
  */
 
 #include "msm8909-qrd.dtsi"
-<<<<<<< HEAD
 #include "msm8909-camera-sensor-skuc.dtsi"
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 / {
 	model = "Qualcomm Technologies, Inc. MSM8909 QRD SKUC";
 	compatible = "qcom,msm8909-qrd", "qcom,msm8909", "qcom,qrd";
 };
 
-<<<<<<< HEAD
 &tlmm_pinmux {
 	ap3426_int_pin {
 		qcom,pins = <&gp 94>;
@@ -63,19 +55,13 @@
 	};
 };
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 &soc {
 	i2c@78b9000 { /* BLSP1 QUP5 */
 		focaltech@38 {
 			compatible = "focaltech,5x06";
 			reg = <0x38>;
 			interrupt-parent = <&msm_gpio>;
-<<<<<<< HEAD
 			interrupts = <13 0x2>;
-=======
-			interrupts = <13 0x2008>;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			vdd-supply = <&pm8909_l17>;
 			vcc_i2c-supply = <&pm8909_l6>;
 			/* pins used by touchscreen */
@@ -86,26 +72,15 @@
 			focaltech,name = "ft6436";
 			focaltech,family-id = <0x36>;
 			focaltech,reset-gpio = <&msm_gpio 12 0x0>;
-<<<<<<< HEAD
 			focaltech,irq-gpio = <&msm_gpio 13 0x0>;
 			focaltech,display-coords = <0 0 480 854>;
 			focaltech,panel-coords = <0 0 480 950>;
-=======
-			focaltech,irq-gpio = <&msm_gpio 13 0x2008>;
-			focaltech,display-coords = <0 0 480 854>;
-			focaltech,panel-coords = <0 0 480 950>;
-			focaltech,button-map= <158 102 139>;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			focaltech,no-force-update;
 			focaltech,i2c-pull-up;
 			focaltech,group-id = <1>;
 			focaltech,hard-reset-delay-ms = <20>;
 			focaltech,soft-reset-delay-ms = <200>;
-<<<<<<< HEAD
 			focaltech,num-max-touches = <2>;
-=======
-			focaltech,num-max-touches = <5>;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			focaltech,fw-delay-aa-ms = <30>;
 			focaltech,fw-delay-55-ms = <30>;
 			focaltech,fw-upgrade-id1 = <0x79>;
@@ -114,7 +89,6 @@
 			focaltech,fw-delay-era-flsh-ms = <2000>;
 			focaltech,fw-auto-cal;
 			focaltech,ignore-id-check;
-<<<<<<< HEAD
 			focaltech,gesture-support;
 		};
 
@@ -158,8 +132,6 @@
 			bosch,place = <5>;
 			bosch,gpio-int1 = <&msm_gpio 96 0x2002>;
 			bosch,gpio-int2 = <&msm_gpio 65 0x2002>;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		};
 	};
 
@@ -170,7 +142,6 @@
 		qcom,disp-maxy = <854>;
 		qcom,panel-maxx = <480>;
 		qcom,panel-maxy = <946>;
-<<<<<<< HEAD
 		qcom,key-codes = <139 172 158>;
 		qcom,y-offset = <0>;
 	};
@@ -234,11 +205,6 @@
 		asoc-codec = <&stub_codec>, <&pm8909_conga_dig>;
 		asoc-codec-names = "msm-stub-codec.1", "tombak_codec";
 	};
-=======
-		qcom,key-codes = <158 172 139>;
-		qcom,y-offset = <0>;
-	};
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 };
 
 &pm8909_chg {
@@ -261,11 +227,8 @@
 
 &pm8909_bms {
 	status = "okay";
-<<<<<<< HEAD
 	qcom,resume-soc = <95>;
 	qcom,use-reported-soc;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	qcom,force-bms-active-on-charger;
 	qcom,battery-data = <&qrd_batterydata>;
 };
@@ -276,10 +239,7 @@
 };
 
 &sdhc_2 {
-<<<<<<< HEAD
 	qcom,no-1p8v;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	qcom,vdd-always-on;
 	qcom,vdd-lpm-sup;
 
@@ -287,7 +247,6 @@
 
 	cd-gpios = <&msm_gpio 38 0x0>;
 };
-<<<<<<< HEAD
 
 &pm8909_mpps {
 	mpp@a000 { /* MPP 1 */
@@ -365,5 +324,3 @@
 		qcom,vadc-thermal-node;
 	};
 };
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130

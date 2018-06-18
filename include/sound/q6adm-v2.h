@@ -57,17 +57,10 @@ int srs_trumedia_open(int port_id, int copp_idx, __s32 srs_tech_id,
 		      void *srs_params);
 
 int adm_dts_eagle_set(int port_id, int copp_idx, int param_id,
-<<<<<<< HEAD
 		      void *data, uint32_t size);
 
 int adm_dts_eagle_get(int port_id, int copp_idx, int param_id,
 		      void *data, uint32_t size);
-=======
-		      void *data, int size);
-
-int adm_dts_eagle_get(int port_id, int copp_idx, int param_id,
-		      void *data, int size);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 int adm_get_params(int port_id, int copp_idx, uint32_t module_id,
 		   uint32_t param_id, uint32_t params_length, char *params);

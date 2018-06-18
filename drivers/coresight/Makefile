@@ -12,10 +12,7 @@ obj-$(CONFIG_CORESIGHT_FUNNEL) += coresight-funnel.o
 obj-$(CONFIG_CORESIGHT_REPLICATOR) += coresight-replicator.o
 obj-$(CONFIG_CORESIGHT_TPDA) += coresight-tpda.o
 obj-$(CONFIG_CORESIGHT_TPDM) += coresight-tpdm.o
-<<<<<<< HEAD
 obj-$(CONFIG_CORESIGHT_DBGUI) += coresight-dbgui.o
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 obj-$(CONFIG_CORESIGHT_STM) += coresight-stm.o
 obj-$(CONFIG_CORESIGHT_HWEVENT) += coresight-hwevent.o
 obj-$(CONFIG_CORESIGHT_ETM) += coresight-etm.o coresight-etm-cp14.o

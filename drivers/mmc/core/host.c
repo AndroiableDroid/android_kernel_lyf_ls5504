@@ -774,7 +774,6 @@ static ssize_t store_polling(struct device *dev,
 	return count;
 }
 
-<<<<<<< HEAD
 static ssize_t show_detection(struct device *dev,
         struct device_attribute *attr, char *buf)
 {
@@ -818,8 +817,6 @@ static struct attribute_group mmc_gpio_attr_grp = {
 };
 
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 DEVICE_ATTR(enable, S_IRUGO | S_IWUSR,
 		show_enable, store_enable);
 DEVICE_ATTR(polling_interval, S_IRUGO | S_IWUSR,
@@ -951,14 +948,11 @@ int mmc_add_host(struct mmc_host *host)
 		pr_err("%s: failed to create sysfs group with err %d\n",
 							 __func__, err);
 
-<<<<<<< HEAD
 	err = sysfs_create_group(&host->class_dev.kobj, &mmc_gpio_attr_grp);
     if (err)
         pr_err("%s: failed to detection sysfs group with err %d\n",
                 __func__, err);	
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	mmc_start_host(host);
 	if (!(host->pm_flags & MMC_PM_IGNORE_PM_NOTIFY))
 		register_pm_notifier(&host->pm_notify);

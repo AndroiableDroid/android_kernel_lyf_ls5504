@@ -22,11 +22,7 @@
 #include "mdss_mdp.h"
 #include "mdss_panel.h"
 #include "mdss_debug.h"
-<<<<<<< HEAD
 #include "mdss_mdp_trace.h"
-=======
-#include <trace/mdss_mdp_trace.h>
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 /* wait for at least 2 vsyncs for lowest refresh rate (24hz) */
 #define VSYNC_TIMEOUT_US 100000

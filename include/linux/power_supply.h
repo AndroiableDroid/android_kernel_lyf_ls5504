@@ -160,10 +160,7 @@ enum power_supply_property {
 	POWER_SUPPLY_PROP_RESISTANCE_CAPACITIVE,
 	/* unit is in ohms due to ID being typically in kohm range */
 	POWER_SUPPLY_PROP_RESISTANCE_ID,
-<<<<<<< HEAD
 	POWER_SUPPLY_PROP_RESISTANCE_NOW,
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	/* Local extensions */
 	POWER_SUPPLY_PROP_USB_HC,
 	POWER_SUPPLY_PROP_USB_OTG,
@@ -176,12 +173,6 @@ enum power_supply_property {
 	POWER_SUPPLY_PROP_MANUFACTURER,
 	POWER_SUPPLY_PROP_SERIAL_NUMBER,
 	POWER_SUPPLY_PROP_BATTERY_TYPE,
-<<<<<<< HEAD
-=======
-#ifdef CONFIG_MACH_YULONG
-	POWER_SUPPLY_PROP_YL_CRTL_CHG_INTERFACE,
-#endif
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 };
 
 enum power_supply_type {
@@ -195,12 +186,6 @@ enum power_supply_type {
 	POWER_SUPPLY_TYPE_USB_ACA,	/* Accessory Charger Adapters */
 	POWER_SUPPLY_TYPE_WIRELESS,	/* Accessory Charger Adapters */
 	POWER_SUPPLY_TYPE_BMS,		/* Battery Monitor System */
-<<<<<<< HEAD
-=======
-#ifdef CONFIG_MACH_YULONG
-	POWER_SUPPLY_TYPE_YL_BATTERY,	/* yulong add for yl_adc_battery */
-#endif
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	POWER_SUPPLY_TYPE_USB_PARALLEL,		/* USB Parallel Path */
 };
 

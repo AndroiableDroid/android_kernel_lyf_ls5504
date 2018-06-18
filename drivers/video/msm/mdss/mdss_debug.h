@@ -20,11 +20,7 @@
 #include <linux/mdss_io_util.h>
 
 #include "mdss.h"
-<<<<<<< HEAD
 #include "mdss_mdp_trace.h"
-=======
-#include <trace/mdss_mdp_trace.h>
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 #define MISR_POLL_SLEEP		2000
 #define MISR_POLL_TIMEOUT	32000
@@ -90,11 +86,8 @@ int mdss_debugfs_init(struct mdss_data_type *mdata);
 int mdss_debugfs_remove(struct mdss_data_type *mdata);
 int mdss_debug_register_base(const char *name, void __iomem *base,
 				    size_t max_offset);
-<<<<<<< HEAD
 int panel_debug_register_base(const char *name, void __iomem *base,
 				    size_t max_offset);
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 int mdss_misr_set(struct mdss_data_type *mdata, struct mdp_misr *req,
 			struct mdss_mdp_ctl *ctl);
 int mdss_misr_get(struct mdss_data_type *mdata, struct mdp_misr *resp,
@@ -114,13 +107,10 @@ static inline int mdss_debugfs_remove(struct mdss_data_type *mdata)
 }
 static inline int mdss_debug_register_base(const char *name, void __iomem *base,
 					size_t max_offset) { return 0; }
-<<<<<<< HEAD
 static inline int panel_debug_register_base(const char *name,
 					void __iomem *base,
 					size_t max_offset)
 { return 0; }
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static inline int mdss_misr_set(struct mdss_data_type *mdata,
 					struct mdp_misr *req,
 					struct mdss_mdp_ctl *ctl)

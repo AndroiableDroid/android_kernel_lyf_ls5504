@@ -609,7 +609,6 @@ hrtimer_force_reprogram(struct hrtimer_cpu_base *cpu_base, int skip_equal)
 	if (cpu_base->hang_detected)
 		return;
 
-<<<<<<< HEAD
 	/*
 	 * If a hang was detected in the last timer interrupt then we
 	 * leave the hang delay active in the hardware. We want the
@@ -627,8 +626,6 @@ hrtimer_force_reprogram(struct hrtimer_cpu_base *cpu_base, int skip_equal)
 	if (cpu_base->hang_detected)
 		return;
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	if (cpu_base->expires_next.tv64 != KTIME_MAX)
 		tick_program_event(cpu_base->expires_next, 1);
 }

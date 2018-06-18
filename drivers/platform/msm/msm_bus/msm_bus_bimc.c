@@ -1649,7 +1649,6 @@ static void msm_bus_bimc_update_bw(struct msm_bus_inode_info *hop,
 				MSM_BUS_DBG("No qos ports to update!\n");
 				break;
 			}
-<<<<<<< HEAD
 			if (!(info->node_info->mode == BIMC_QOS_MODE_REGULATOR)
 					|| (info->node_info->mode ==
 						BIMC_QOS_MODE_LIMITER)) {
@@ -1657,8 +1656,6 @@ static void msm_bus_bimc_update_bw(struct msm_bus_inode_info *hop,
 				break;
 			}
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			MSM_BUS_DBG("qport: %d\n", info->node_info->qport[i]);
 			qbw.bw = sel_cd->mas[info->node_info->masterp[i]].bw;
 			qbw.ws = info->node_info->ws;
@@ -1909,11 +1906,7 @@ static int msm_bus_bimc_port_unhalt(uint32_t haltid, uint8_t mport)
 static int msm_bus_bimc_limit_mport(struct msm_bus_node_device_type *info,
 				void __iomem *qos_base, uint32_t qos_off,
 				uint32_t qos_delta, uint32_t qos_freq,
-<<<<<<< HEAD
 				int enable_lim, u64 lim_bw)
-=======
-				bool enable_lim, u64 lim_bw)
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 {
 	int mode;
 	int i;
@@ -1923,11 +1916,7 @@ static int msm_bus_bimc_limit_mport(struct msm_bus_node_device_type *info,
 		return 0;
 	}
 
-<<<<<<< HEAD
 	if ((enable_lim == THROTTLE_ON) && lim_bw) {
-=======
-	if (enable_lim && lim_bw) {
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		mode =  BIMC_QOS_MODE_LIMITER;
 
 		if (!info->node_info->lim_bw) {
@@ -1972,7 +1961,6 @@ static int msm_bus_bimc_limit_mport(struct msm_bus_node_device_type *info,
 	return 0;
 }
 
-<<<<<<< HEAD
 static bool msm_bus_bimc_update_bw_reg(int mode)
 {
 	bool ret = false;
@@ -1984,8 +1972,6 @@ static bool msm_bus_bimc_update_bw_reg(int mode)
 	return ret;
 }
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static int msm_bus_bimc_qos_init(struct msm_bus_node_device_type *info,
 				void __iomem *qos_base,
 				uint32_t qos_off, uint32_t qos_delta,
@@ -2103,10 +2089,7 @@ int msm_bus_bimc_hw_init(struct msm_bus_fabric_registration *pdata,
 	hw_algo->port_unhalt = msm_bus_bimc_port_unhalt;
 	hw_algo->config_master = msm_bus_bimc_config_master;
 	hw_algo->config_limiter = msm_bus_bimc_config_limiter;
-<<<<<<< HEAD
 	hw_algo->update_bw_reg = msm_bus_bimc_update_bw_reg;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	/* BIMC slaves are shared. Slave registers are set through RPM */
 	if (!pdata->ahb)
 		pdata->rpm_enabled = 1;
@@ -2121,11 +2104,8 @@ int msm_bus_bimc_set_ops(struct msm_bus_node_device_type *bus_dev)
 		bus_dev->fabdev->noc_ops.qos_init = msm_bus_bimc_qos_init;
 		bus_dev->fabdev->noc_ops.set_bw = msm_bus_bimc_set_bw;
 		bus_dev->fabdev->noc_ops.limit_mport = msm_bus_bimc_limit_mport;
-<<<<<<< HEAD
 		bus_dev->fabdev->noc_ops.update_bw_reg =
 						msm_bus_bimc_update_bw_reg;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	}
 	return 0;
 }

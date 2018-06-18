@@ -12,10 +12,7 @@
 
 #include "skeleton.dtsi"
 #include <dt-bindings/clock/msm-clocks-zirc.h>
-<<<<<<< HEAD
 #include <dt-bindings/clock/msm-clocks-a7.h>
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 / {
 	model = "Qualcomm Technologies, Inc. MSM ZIRC";
@@ -301,11 +298,7 @@
 		compatible = "qcom,rmnet-ipa";
 	};
 
-<<<<<<< HEAD
 	clock_cpu: qcom,clock-a7@0b010008 {
-=======
-	qcom,clock-a7@0b010008 {
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		compatible = "qcom,clock-a7-zirc";
 		reg = <0x0B010008 0x8>;
 		reg-names = "rcg-base";
@@ -321,7 +314,6 @@
 			<1190400000 7>;
 
 		cpu-vdd-supply = <&pmd9635_s5_corner_ao>;
-<<<<<<< HEAD
 		#clock-cells = <1>;
 	};
 
@@ -355,13 +347,6 @@
 			 <&clock_cpu  clk_a7ssmux>;
 		clock-names = "cpu0_clk", "cpu1_clk",
 				"cpu2_clk", "cpu3_clk";
-=======
-	};
-
-        qcom,msm-cpufreq@0 {
-                reg = <0 4>;
-                compatible = "qcom,msm-cpufreq";
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
                 qcom,cpufreq-table =
                         <  300000 >,
                         <  600000 >,
@@ -380,11 +365,7 @@
 		interrupt-names = "spi_irq", "spi_bam_irq";
 		interrupts = <0 95 0>, <0 238 0>;
 		spi-max-frequency = <50000000>;
-<<<<<<< HEAD
 		pinctrl-names = "spi_default", "spi_sleep";
-=======
-		pinctrl-names = "default", "sleep";
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		pinctrl-0 = <&spi0_default &spi0_cs0_active>;
 		pinctrl-1 = <&spi0_sleep &spi0_cs0_sleep>;
 		clocks = <&clock_gcc clk_gcc_blsp1_ahb_clk>,
@@ -407,11 +388,7 @@
 		interrupt-names = "spi_irq", "spi_bam_irq";
 		interrupts = <0 96 0>, <0 238 0>;
 		spi-max-frequency = <50000000>;
-<<<<<<< HEAD
 		pinctrl-names = "spi_default", "spi_sleep";
-=======
-		pinctrl-names = "default", "sleep";
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		pinctrl-0 = <&spi1_default &spi1_cs0_active>;
 		pinctrl-1 = <&spi1_sleep &spi1_cs0_sleep>;
 		clocks = <&clock_gcc clk_gcc_blsp1_ahb_clk>,

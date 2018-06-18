@@ -29,10 +29,6 @@
 #include <linux/wait.h>
 #include <linux/blockgroup_lock.h>
 #include <linux/percpu_counter.h>
-<<<<<<< HEAD
-=======
-#include <linux/fs-xcomp.h>
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #include <crypto/hash.h>
 #ifdef __KERNEL__
 #include <linux/compat.h>
@@ -937,13 +933,6 @@ struct ext4_inode_info {
 
 	/* Precomputed uuid+inum+igen checksum for seeding inode checksums */
 	__u32 i_csum_seed;
-<<<<<<< HEAD
-=======
-
-#ifdef CONFIG_FS_TRANSPARENT_COMPRESSION
-	struct xcomp_inode_info i_xcomp_info;
-#endif
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 };
 
 /*
@@ -1380,25 +1369,6 @@ static inline void ext4_inode_aio_set(struct inode *inode, ext4_io_end_t *io)
 	inode->i_private = io;
 }
 
-<<<<<<< HEAD
-=======
-static inline struct xcomp_inode_info *ext4_inode_xcomp_info(struct inode *inode)
-{
-#ifdef CONFIG_FS_TRANSPARENT_COMPRESSION
-	return &EXT4_I(inode)->i_xcomp_info;
-#else
-	return NULL;
-#endif
-}
-
-static inline int ext4_inode_is_compressed(struct inode *inode)
-{
-	if (!xcomp_enabled())
-		return 0;
-	return (S_ISREG(inode->i_mode) && (EXT4_I(inode)->i_flags & EXT4_COMPR_FL));
-}
-
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 /*
  * Inode dynamic state flags
  */

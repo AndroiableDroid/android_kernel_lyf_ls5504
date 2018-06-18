@@ -64,10 +64,7 @@ Required properties:
     - "ovti,ov5645"
     - "ovti,ov7695"
     - "qcom,mt9m114"
-<<<<<<< HEAD
     - "shinetech,gc0310"
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 - reg : should contain i2c slave address of the device
 - qcom,csiphy-sd-index : should contain csiphy instance that will used to
     receive sensor data
@@ -170,11 +167,8 @@ Optional properties:
    property should contain phandle of respective eeprom nodes
 - qcom,ois-src : if optical image stabilization is supported by this sensor,
    this property should contain phandle of respective ois node
-<<<<<<< HEAD
 - qcom,special-support-sensors: if only some special sensors are supported
    on this board, add sensor name in this property.
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 * Qualcomm MSM ACTUATOR
 

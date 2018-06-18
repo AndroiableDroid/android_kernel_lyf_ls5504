@@ -2999,17 +2999,9 @@ int msm_venc_enum_fmt(struct msm_vidc_inst *inst, struct v4l2_fmtdesc *f)
 
 int msm_venc_s_parm(struct msm_vidc_inst *inst, struct v4l2_streamparm *a)
 {
-<<<<<<< HEAD
 	u32 property_id = 0, us_per_frame = 0;
 	void *pdata;
 	int rc = 0, fps = 0;
-=======
-	u32 property_id = 0;
-	u64 us_per_frame = 0;
-	void *pdata;
-	int rc = 0, fps = 0;
-	u64 base_fps = 0;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	struct hal_frame_rate frame_rate;
 	struct hfi_device *hdev;
 
@@ -3045,15 +3037,8 @@ int msm_venc_s_parm(struct msm_vidc_inst *inst, struct v4l2_streamparm *a)
 		goto exit;
 	}
 
-<<<<<<< HEAD
 	fps = USEC_PER_SEC;
 	do_div(fps, us_per_frame);
-=======
-	base_fps = USEC_PER_SEC;
-	do_div(base_fps, us_per_frame);
-
-	fps = (int)base_fps;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	if ((fps % 15 == 14) || (fps % 24 == 23))
 		fps = fps + 1;

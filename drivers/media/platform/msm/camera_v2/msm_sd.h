@@ -35,11 +35,6 @@ struct msm_sd_close_ioctl {
 #define MSM_SD_SHUTDOWN \
 	_IOWR('V', BASE_VIDIOC_PRIVATE + 29, struct msm_sd_close_ioctl)
 
-<<<<<<< HEAD
-=======
-#define MSM_SD_NOTIFY_FREEZE \
-	_IOWR('V', BASE_VIDIOC_PRIVATE + 30, struct msm_sd_close_ioctl)
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 /*
  * This is used to install Sequence in msm_sd_register.
  * During msm_close, proper close sequence will be triggered.

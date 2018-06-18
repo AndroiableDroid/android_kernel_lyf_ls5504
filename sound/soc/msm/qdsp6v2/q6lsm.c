@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
  * Copyright (c) 2013-2015, Linux Foundation. All rights reserved.
-=======
- * Copyright (c) 2013-2014, Linux Foundation. All rights reserved.
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -922,17 +918,12 @@ int q6lsm_snd_model_buf_free(struct lsm_client *client)
 			__func__, rc);
 
 	if (client->sound_model.data) {
-<<<<<<< HEAD
 		if (!rc)
 			msm_audio_ion_free(client->sound_model.client,
 				 client->sound_model.handle);
 		else
 			pr_err("%s: unmap failed not freeing memory\n",
 			__func__);
-=======
-		msm_audio_ion_free(client->sound_model.client,
-				 client->sound_model.handle);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		client->sound_model.client = NULL;
 		client->sound_model.handle = NULL;
 		client->sound_model.data = NULL;
@@ -1068,7 +1059,6 @@ int q6lsm_snd_model_buf_alloc(struct lsm_client *client, size_t len)
 		client->sound_model.size = len;
 		pad_zero = (LSM_ALIGN_BOUNDARY -
 			    (len % LSM_ALIGN_BOUNDARY));
-<<<<<<< HEAD
 		if ((len > SIZE_MAX - pad_zero) ||
 		    (len + pad_zero >
 		     SIZE_MAX - cal_block->cal_data.size)) {
@@ -1078,8 +1068,6 @@ int q6lsm_snd_model_buf_alloc(struct lsm_client *client, size_t len)
 			rc = -EINVAL;
 			goto fail;
 		}
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 		total_mem = PAGE_ALIGN(pad_zero + len +
 			cal_block->cal_data.size);
@@ -1208,20 +1196,12 @@ int q6lsm_lab_control(struct lsm_client *client, u32 enable)
 	/* lab session is being enabled set the config values */
 	q6lsm_add_hdr(client, &lab_config.hdr, sizeof(lab_config), true);
 	lab_config.hdr.opcode = LSM_SESSION_CMD_SET_PARAMS;
-<<<<<<< HEAD
 	lab_config.data_payload_size = sizeof(struct lsm_lab_config);
-=======
-	lab_config.data_payload_size = sizeof(struct lsm_lab_enable);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	lab_config.data_payload_addr_lsw = 0;
 	lab_config.data_payload_addr_msw = 0;
 	lab_config.mem_map_handle = 0;
 	lab_config.lab_config.common.module_id = LSM_MODULE_ID_LAB;
-<<<<<<< HEAD
 	lab_config.lab_config.common.param_id = LSM_PARAM_ID_LAB_CONFIG;
-=======
-	lab_config.lab_config.common.param_id = LSM_PARAM_ID_LAB_ENABLE;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	lab_config.lab_config.common.param_size = sizeof(struct lsm_lab_config)
 	- sizeof(struct lsm_param_payload_common);
 	lab_config.lab_config.minor_version = 1;

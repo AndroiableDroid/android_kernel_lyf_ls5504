@@ -259,11 +259,7 @@ int create_pkt_cmd_sys_coverage_config(
 	return 0;
 }
 
-<<<<<<< HEAD
 int create_pkt_cmd_sys_set_resource(
-=======
-int create_pkt_set_cmd_sys_resource(
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		struct hfi_cmd_sys_set_resource_packet *pkt,
 		struct vidc_resource_hdr *resource_hdr,
 		void *resource_value)
@@ -980,7 +976,6 @@ int create_pkt_cmd_session_set_property(
 
 		break;
 	}
-<<<<<<< HEAD
 	case HAL_PARAM_BUFFER_SIZE_ACTUAL:
 	{
 		struct hfi_buffer_size_actual *hfi;
@@ -1029,8 +1024,6 @@ int create_pkt_cmd_session_set_property(
 				hfi_buffer_count_actual);
 		break;
 	}
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	case HAL_PARAM_NAL_STREAM_FORMAT_SELECT:
 	{
 		struct hfi_nal_stream_format_select *hfi;
@@ -1982,7 +1975,6 @@ int create_pkt_cmd_sys_image_version(
 	pkt->rg_property_data[0] = HFI_PROPERTY_SYS_IMAGE_VERSION;
 	return 0;
 }
-<<<<<<< HEAD
 
 static struct hfi_packetization_ops hfi_default = {
 	.sys_init = create_pkt_cmd_sys_init,
@@ -2039,5 +2031,3 @@ struct hfi_packetization_ops *hfi_get_pkt_ops_handle(
 
 	return NULL;
 }
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130

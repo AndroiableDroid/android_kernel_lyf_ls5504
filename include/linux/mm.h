@@ -1889,7 +1889,6 @@ void __init setup_nr_node_ids(void);
 static inline void setup_nr_node_ids(void) {}
 #endif
 
-<<<<<<< HEAD
 #ifdef CONFIG_PROCESS_RECLAIM
 struct reclaim_param {
 	struct vm_area_struct *vma;
@@ -1904,7 +1903,5 @@ extern struct reclaim_param reclaim_task_anon(struct task_struct *task,
 		int nr_to_reclaim);
 #endif
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #endif /* __KERNEL__ */
 #endif /* _LINUX_MM_H */

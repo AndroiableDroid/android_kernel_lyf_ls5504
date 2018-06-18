@@ -17,10 +17,7 @@
 #include <linux/platform_device.h>
 #include <linux/stringify.h>
 #include <linux/types.h>
-<<<<<<< HEAD
 #include <linux/debugfs.h>
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 /* panel id type */
 struct panel_id {
@@ -182,12 +179,9 @@ struct mdss_intf_recovery {
  *				- 1: update to command mode
  * @MDSS_EVENT_REGISTER_RECOVERY_HANDLER: Event to recover the interface in
  *					case there was any errors detected.
-<<<<<<< HEAD
  * @ MDSS_EVENT_DSI_PANEL_STATUS:Event to check the panel status
  *				<= 0: panel check fail
  *				>  0: panel check success
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  */
 enum mdss_intf_events {
 	MDSS_EVENT_RESET = 1,
@@ -210,10 +204,7 @@ enum mdss_intf_events {
 	MDSS_EVENT_DSI_STREAM_SIZE,
 	MDSS_EVENT_DSI_DYNAMIC_SWITCH,
 	MDSS_EVENT_REGISTER_RECOVERY_HANDLER,
-<<<<<<< HEAD
 	MDSS_EVENT_DSI_PANEL_STATUS,
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 };
 
 struct lcd_panel_info {
@@ -292,26 +283,16 @@ struct mipi_panel_info {
 	/* The packet-size should not bet changed */
 	char no_max_pkt_size;
 	/* Clock required during LP commands */
-<<<<<<< HEAD
 	bool force_clk_lane_hs;
 
 	bool always_on;
-=======
-	char force_clk_lane_hs;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	char vsync_enable;
 	char hw_vsync_mode;
 
 	char lp11_init;
 	u32  init_delay;
-<<<<<<< HEAD
 	u32  post_init_delay;
-=======
-#ifdef CONFIG_MACH_YULONG
-	char has_tps65132;
-#endif
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 };
 
 struct edp_panel_info {
@@ -371,11 +352,6 @@ struct mdss_mdp_pp_tear_check {
 	u32 refx100;
 };
 
-<<<<<<< HEAD
-=======
-struct mdss_livedisplay_ctx;
-
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 struct mdss_panel_info {
 	u32 xres;
 	u32 yres;
@@ -447,12 +423,8 @@ struct mdss_panel_info {
 	struct lvds_panel_info lvds;
 	struct edp_panel_info edp;
 
-<<<<<<< HEAD
 	/* debugfs structure for the panel */
 	struct mdss_panel_debugfs_info *debugfs_info;
-=======
-	struct mdss_livedisplay_ctx *livedisplay;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 };
 
 struct mdss_panel_data {
@@ -477,7 +449,6 @@ struct mdss_panel_data {
 	struct mdss_panel_data *next;
 };
 
-<<<<<<< HEAD
 struct mdss_panel_debugfs_info {
 	struct dentry *root;
 	u32 xres;
@@ -488,8 +459,6 @@ struct mdss_panel_debugfs_info {
 	struct mdss_panel_debugfs_info *next;
 };
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 /**
  * mdss_get_panel_framerate() - get panel frame rate based on panel information
  * @panel_info:	Pointer to panel info containing all panel information
@@ -667,7 +636,6 @@ int mdss_panel_get_boot_cfg(void);
  * returns true if mdss is ready, else returns false.
  */
 bool mdss_is_ready(void);
-<<<<<<< HEAD
 #ifdef CONFIG_FB_MSM_MDSS
 int mdss_panel_debugfs_init(struct mdss_panel_info *panel_info);
 void mdss_panel_debugfs_cleanup(struct mdss_panel_info *panel_info);
@@ -680,6 +648,4 @@ static inline void mdss_panel_debugfs_cleanup(
 static inline void mdss_panel_debugfsinfo_to_panelinfo(
 			struct mdss_panel_info *panel_info) { };
 #endif
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #endif /* MDSS_PANEL_H */

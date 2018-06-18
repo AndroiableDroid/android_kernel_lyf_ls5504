@@ -13,10 +13,7 @@
 
 struct mmc_host;
 
-<<<<<<< HEAD
 int mmc_gpio_detection(struct mmc_host *host);
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 int mmc_gpio_get_ro(struct mmc_host *host);
 int mmc_gpio_request_ro(struct mmc_host *host, unsigned int gpio);
 void mmc_gpio_free_ro(struct mmc_host *host);

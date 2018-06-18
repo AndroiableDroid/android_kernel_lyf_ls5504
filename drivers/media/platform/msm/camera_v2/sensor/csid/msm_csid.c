@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 /* Copyright (c) 2011-2014, The Linux Foundation. All rights reserved.
-=======
-/* Copyright (c) 2011-2015, The Linux Foundation. All rights reserved.
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -82,10 +78,6 @@ static int msm_csid_cid_lut(
 				 __func__, csid_lut_params->vc_cfg[i]->cid);
 			return -EINVAL;
 		}
-<<<<<<< HEAD
-=======
-
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		CDBG("%s lut params num_cid = %d, cid = %d\n",
 			__func__,
 			csid_lut_params->num_cid,
@@ -164,10 +156,6 @@ static int msm_csid_config(struct csid_device *csid_dev,
 	CDBG("%s csid_params phy_sel = %d\n", __func__,
 		csid_params->phy_sel);
 
-<<<<<<< HEAD
-=======
-	csid_dev->csid_lane_cnt = csid_params->lane_cnt;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	msm_csid_reset(csid_dev);
 
 	csid_clk_ptr = csid_dev->csid_clk;
@@ -219,10 +207,6 @@ static int msm_csid_config(struct csid_device *csid_dev,
 static irqreturn_t msm_csid_irq(int irq_num, void *data)
 {
 	uint32_t irq;
-<<<<<<< HEAD
-=======
-	uint32_t short_dt = 0;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	struct csid_device *csid_dev = data;
 
 	if (!csid_dev) {
@@ -231,35 +215,11 @@ static irqreturn_t msm_csid_irq(int irq_num, void *data)
 	}
 	irq = msm_camera_io_r(csid_dev->base +
 		csid_dev->ctrl_reg->csid_reg.csid_irq_status_addr);
-<<<<<<< HEAD
 	CDBG("%s CSID%d_IRQ_STATUS_ADDR = 0x%x\n",
 		 __func__, csid_dev->pdev->id, irq);
 	if (irq & (0x1 <<
 		csid_dev->ctrl_reg->csid_reg.csid_rst_done_irq_bitshift))
 		complete(&csid_dev->reset_complete);
-=======
-	if (csid_dev->csid_sof_debug == 1)
-		pr_err("%s CSID%d_IRQ_STATUS_ADDR = 0x%x\n",
-			 __func__, csid_dev->pdev->id, irq);
-	else
-		CDBG("%s CSID%d_IRQ_STATUS_ADDR = 0x%x\n",
-			 __func__, csid_dev->pdev->id, irq);
-	if (irq & (0x1 <<
-		csid_dev->ctrl_reg->csid_reg.csid_rst_done_irq_bitshift))
-		complete(&csid_dev->reset_complete);
-	if (irq & (0x1 << 9)) {
-		if (csid_dev->csid_sof_debug == 1) {
-			short_dt = msm_camera_io_r(csid_dev->base +
-				csid_dev->ctrl_reg->csid_reg.
-				csid_captured_short_pkt_addr);
-			short_dt = short_dt >> 24;
-			pr_err("%s: core %d short dt %x\n", __func__,
-				csid_dev->pdev->id, short_dt);
-		}
-		msm_camera_io_w(0x101, csid_dev->base +
-			csid_dev->ctrl_reg->csid_reg.csid_rst_cmd_addr);
-	}
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	msm_camera_io_w(irq, csid_dev->base +
 		csid_dev->ctrl_reg->csid_reg.csid_irq_clear_cmd_addr);
 	return IRQ_HANDLED;
@@ -377,10 +337,6 @@ static int msm_csid_init(struct csid_device *csid_dev, uint32_t *csid_version)
 	CDBG("%s:%d called csid_dev->hw_version %x\n", __func__, __LINE__,
 		csid_dev->hw_version);
 	*csid_version = csid_dev->hw_version;
-<<<<<<< HEAD
-=======
-	csid_dev->csid_sof_debug = 0;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	init_completion(&csid_dev->reset_complete);
 
@@ -570,10 +526,6 @@ static int32_t msm_csid_cmd(struct csid_device *csid_dev, void __user *arg)
 			}
 			csid_params.lut_params.vc_cfg[i] = vc_cfg;
 		}
-<<<<<<< HEAD
-=======
-		csid_dev->csid_sof_debug = 0;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		rc = msm_csid_config(csid_dev, &csid_params);
 		for (i--; i >= 0; i--)
 			kfree(csid_params.lut_params.vc_cfg[i]);
@@ -616,15 +568,6 @@ static long msm_csid_subdev_ioctl(struct v4l2_subdev *sd,
 	case VIDIOC_MSM_CSID_IO_CFG:
 		rc = msm_csid_cmd(csid_dev, arg);
 		break;
-<<<<<<< HEAD
-=======
-	case MSM_SD_NOTIFY_FREEZE: {
-		if (csid_dev->csid_state != CSID_POWER_UP)
-			break;
-		csid_dev->csid_sof_debug = 1;
-		break;
-	   }
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	case VIDIOC_MSM_CSID_RELEASE:
 	case MSM_SD_SHUTDOWN:
 		rc = msm_csid_release(csid_dev);
@@ -712,17 +655,8 @@ static int32_t msm_csid_cmd32(struct csid_device *csid_dev, void __user *arg)
 				(void *)compat_ptr(lut_par32.vc_cfg[i]),
 				sizeof(vc_cfg32))) {
 				pr_err("%s: %d failed\n", __func__, __LINE__);
-<<<<<<< HEAD
 				for (; i >= 0; i--)
 					kfree(csid_params.lut_params.vc_cfg[i]);
-=======
-				for (i--; i >= 0; i--) {
-					kfree(csid_params.lut_params.vc_cfg[i]);
-					csid_params.lut_params.vc_cfg[i] = NULL;
-				}
-				kfree(vc_cfg);
-				vc_cfg = NULL;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 				rc = -EFAULT;
 				break;
 			}
@@ -765,15 +699,6 @@ static long msm_csid_subdev_ioctl32(struct v4l2_subdev *sd,
 	case VIDIOC_MSM_CSID_IO_CFG32:
 		rc = msm_csid_cmd32(csid_dev, arg);
 		break;
-<<<<<<< HEAD
-=======
-	case MSM_SD_NOTIFY_FREEZE: {
-		if (csid_dev->csid_state != CSID_POWER_UP)
-			break;
-		csid_dev->csid_sof_debug = 1;
-		break;
-	   }
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	case VIDIOC_MSM_CSID_RELEASE:
 	case MSM_SD_SHUTDOWN:
 		rc = msm_csid_release(csid_dev);

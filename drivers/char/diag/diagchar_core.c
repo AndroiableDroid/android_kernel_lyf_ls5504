@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 /* Copyright (c) 2008-2015, The Linux Foundation. All rights reserved.
-=======
-/* Copyright (c) 2008-2014, The Linux Foundation. All rights reserved.
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -352,11 +348,7 @@ static int diagchar_close(struct inode *inode, struct file *file)
 	* This will specially help in case of ungraceful exit of any DCI client
 	* This call will remove any pending registrations of such client
 	*/
-<<<<<<< HEAD
 	dci_entry = dci_lookup_client_entry_pid(current->tgid);
-=======
-	dci_entry = dci_lookup_client_entry_pid(current->pid);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	if (dci_entry)
 		diag_dci_deinit_client(dci_entry);
 	/* If the exiting process is the socket process */
@@ -904,22 +896,6 @@ static int diag_switch_logging(int requested_mode)
 					driver->logging_mode);
 		return 0;
 	}
-<<<<<<< HEAD
-=======
-
-	if (requested_mode != MEMORY_DEVICE_MODE)
-		diag_update_real_time_vote(DIAG_PROC_MEMORY_DEVICE,
-					   MODE_REALTIME, ALL_PROC);
-	else
-		diag_update_proc_vote(DIAG_PROC_MEMORY_DEVICE, VOTE_UP,
-				      ALL_PROC);
-
-	if (!(requested_mode == MEMORY_DEVICE_MODE &&
-					driver->logging_mode == USB_MODE))
-		queue_work(driver->diag_real_time_wq,
-						&driver->diag_real_time_work);
-
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	mutex_lock(&driver->diagchar_mutex);
 	temp = driver->logging_mode;
 	driver->logging_mode = requested_mode;
@@ -941,10 +917,7 @@ static int diag_switch_logging(int requested_mode)
 				pr_err("socket process, status: %d\n",
 					status);
 			}
-<<<<<<< HEAD
 			driver->socket_process = NULL;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		}
 	} else if (driver->logging_mode == SOCKET_MODE) {
 		driver->socket_process = current;
@@ -963,7 +936,6 @@ static int diag_switch_logging(int requested_mode)
 	}
 
 	driver->logging_process_id = current->tgid;
-<<<<<<< HEAD
 	if (driver->logging_mode != MEMORY_DEVICE_MODE) {
 		diag_update_real_time_vote(DIAG_PROC_MEMORY_DEVICE,
 						MODE_REALTIME, ALL_PROC);
@@ -977,8 +949,6 @@ static int diag_switch_logging(int requested_mode)
 		queue_work(driver->diag_real_time_wq,
 						&driver->diag_real_time_work);
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	status = diag_mux_switch_logging(new_mode);
 	if (status) {
 		if (requested_mode == MEMORY_DEVICE_MODE)

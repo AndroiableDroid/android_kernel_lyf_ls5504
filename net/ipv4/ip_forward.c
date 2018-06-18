@@ -175,12 +175,7 @@ int ip_forward(struct sk_buff *skb)
 	 *	We now generate an ICMP HOST REDIRECT giving the route
 	 *	we calculated.
 	 */
-<<<<<<< HEAD
 	if (rt->rt_flags&RTCF_DOREDIRECT && !opt->srr && !skb_sec_path(skb))
-=======
-	if (IPCB(skb)->flags & IPSKB_DOREDIRECT && !opt->srr &&
-	    !skb_sec_path(skb))
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		ip_rt_send_redirect(skb);
 
 	skb->priority = rt_tos2priority(iph->tos);

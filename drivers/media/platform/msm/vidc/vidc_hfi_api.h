@@ -126,11 +126,8 @@ enum hal_property {
 	HAL_PARAM_FRAME_SIZE,
 	HAL_CONFIG_REALTIME,
 	HAL_PARAM_BUFFER_COUNT_ACTUAL,
-<<<<<<< HEAD
 	HAL_PARAM_BUFFER_SIZE_ACTUAL,
 	HAL_PARAM_BUFFER_DISPLAY_HOLD_COUNT_ACTUAL,
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	HAL_PARAM_NAL_STREAM_FORMAT_SELECT,
 	HAL_PARAM_VDEC_OUTPUT_ORDER,
 	HAL_PARAM_VDEC_PICTURE_TYPE_DECODE,
@@ -244,7 +241,6 @@ enum hal_core_capabilities {
 	HAL_VIDEO_UNUSED_CAPABILITY      = 0x10000000,
 };
 
-<<<<<<< HEAD
 enum hal_default_properties {
 	HAL_VIDEO_DYNAMIC_BUF_MODE = 0x00000001,
 	HAL_VIDEO_CONTINUE_DATA_TRANSFER = 0x00000002,
@@ -255,8 +251,6 @@ enum hal_hfi_version {
 	HAL_VIDEO_3X,
 };
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 enum hal_video_codec {
 	HAL_VIDEO_CODEC_UNKNOWN  = 0x00000000,
 	HAL_VIDEO_CODEC_MVC      = 0x00000001,
@@ -585,7 +579,6 @@ struct hal_buffer_count_actual {
 	u32 buffer_count_actual;
 };
 
-<<<<<<< HEAD
 struct hal_buffer_size_actual {
 	enum hal_buffer buffer_type;
 	u32 buffer_size;
@@ -596,8 +589,6 @@ struct hal_buffer_display_hold_count_actual {
 	u32 hold_count;
 };
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 enum hal_nal_stream_format {
 	HAL_NAL_FORMAT_STARTCODES         = 0x00000001,
 	HAL_NAL_FORMAT_ONE_NAL_PER_BUFFER = 0x00000002,
@@ -1016,17 +1007,6 @@ struct vidc_seq_hdr {
 	u32 seq_hdr_len;
 };
 
-<<<<<<< HEAD
-=======
-struct hal_fw_info {
-	char version[128];
-	int base_addr;
-	int register_base;
-	int register_size;
-	int irq;
-};
-
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 enum hal_flush {
 	HAL_FLUSH_INPUT,
 	HAL_FLUSH_OUTPUT,
@@ -1301,7 +1281,6 @@ enum msm_vidc_hfi_type {
 	VIDC_HFI_Q6,
 };
 
-<<<<<<< HEAD
 enum fw_info {
 	FW_BASE_ADDRESS,
 	FW_REGISTER_BASE,
@@ -1310,8 +1289,6 @@ enum fw_info {
 	FW_INFO_MAX,
 };
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 enum msm_vidc_thermal_level {
 	VIDC_THERMAL_NORMAL = 0,
 	VIDC_THERMAL_LOW,
@@ -1393,11 +1370,7 @@ struct hfi_device {
 	int (*load_fw)(void *dev);
 	void (*unload_fw)(void *dev);
 	int (*resurrect_fw)(void *dev);
-<<<<<<< HEAD
 	int (*get_fw_info)(void *dev, enum fw_info info);
-=======
-	int (*get_fw_info)(void *dev, struct hal_fw_info *fw_info);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	int (*get_stride_scanline)(int color_fmt, int width,
 		int height,	int *stride, int *scanlines);
 	int (*session_clean)(void *sess);
@@ -1405,11 +1378,8 @@ struct hfi_device {
 	int (*power_enable)(void *dev);
 	int (*suspend)(void *dev);
 	unsigned long (*get_core_clock_rate)(void *dev);
-<<<<<<< HEAD
 	enum hal_default_properties (*get_default_properties)(void *dev);
 	enum hal_hfi_version (*get_version)(void *dev);
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 };
 
 typedef void (*hfi_cmd_response_callback) (enum command_response cmd,

@@ -14,10 +14,7 @@
 ifneq ($(MACHINE),)
 include $(srctree)/$(MACHINE)/Makefile.boot
 endif
-<<<<<<< HEAD
 include $(srctree)/arch/arm/boot/dts/Makefile
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 include $(srctree)/arch/arm/boot/dts/Makefile
 ifneq ($(DTSSUBDIR),)

@@ -88,15 +88,11 @@ struct mxt_platform_data {
 	bool need_calibration;
 	bool no_force_update;
 	bool no_lpm_support;
-<<<<<<< HEAD
 	bool create_vkeys;
 	u8 bl_addr;
 	/* Points to the virtual key array */
 	unsigned int *vkey_codes;
 	unsigned char nvkeys;
-=======
-	u8 bl_addr;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	u8(*read_chg) (void);
 	int (*init_hw) (bool);

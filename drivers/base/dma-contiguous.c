@@ -39,13 +39,8 @@
 #include <linux/mm_types.h>
 #include <linux/dma-contiguous.h>
 #include <linux/dma-removed.h>
-<<<<<<< HEAD
 #include <linux/delay.h>
 #include <trace/events/kmem.h>
-=======
-#include <trace/events/kmem.h>
-#include <linux/delay.h>
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 struct cma {
 	unsigned long	base_pfn;

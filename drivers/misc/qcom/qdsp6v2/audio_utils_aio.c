@@ -1939,11 +1939,7 @@ static long audio_aio_compat_ioctl(struct file *file, unsigned int cmd,
 		struct msm_audio_buf_cfg cfg;
 		struct msm_audio_buf_cfg32 cfg_32;
 		mutex_lock(&audio->lock);
-<<<<<<< HEAD
 		if (copy_from_user(&cfg_32, (void *)arg, sizeof(cfg_32))) {
-=======
-		if (copy_from_user(&cfg, (void *)arg, sizeof(cfg))) {
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			pr_err("%s: copy_from_user for AUDIO_SET_CONFIG_32 failed\n",
 				__func__);
 			rc = -EFAULT;

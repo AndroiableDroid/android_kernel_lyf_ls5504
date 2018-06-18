@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 /* Copyright (c) 2013-2015, The Linux Foundation. All rights reserved.
-=======
-/* Copyright (c) 2013-2014, The Linux Foundation. All rights reserved.
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  * Copyright (C) 2007 Google Incorporated
  *
  * This program is free software; you can redistribute it and/or modify
@@ -30,12 +26,8 @@
 #include "mdss.h"
 
 #define MDP_VSYNC_CLK_RATE	19200000
-<<<<<<< HEAD
 #define MDP_CORE_CLK_RATE_SVS	160000000
 #define MDP_CORE_CLK_RATE_SUPER_SVS	200000000
-=======
-#define MDP_CORE_CLK_RATE_SVS	150000000
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #define MDP_CORE_CLK_RATE_MAX	307200000
 
 /* PPP cant work at SVS for panel res above qHD */
@@ -76,7 +68,6 @@ enum {
 	MDP3_CLIENT_DMA_P,
 	MDP3_CLIENT_DSI = 1,
 	MDP3_CLIENT_PPP,
-<<<<<<< HEAD
 	MDP3_CLIENT_IOMMU,
 	MDP3_CLIENT_MAX,
 };
@@ -87,11 +78,6 @@ enum {
 	DI_MAX,
 };
 
-=======
-	MDP3_CLIENT_MAX,
-};
-
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 struct mdp3_bus_handle_map {
 	struct msm_bus_vectors *bus_vector;
 	struct msm_bus_paths *usecases;
@@ -122,7 +108,6 @@ struct mdp3_iommu_ctx_map {
 	int attached;
 };
 
-<<<<<<< HEAD
 struct mdp3_iommu_meta {
 	struct rb_node node;
 	struct ion_handle *handle;
@@ -136,8 +121,6 @@ struct mdp3_iommu_meta {
 	unsigned long flags;
 };
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 #define MDP3_MAX_INTR 28
 
 struct mdp3_intr_cb {
@@ -145,12 +128,9 @@ struct mdp3_intr_cb {
 	void *data;
 };
 
-<<<<<<< HEAD
 #define SMART_BLIT_RGB_EN	1
 #define SMART_BLIT_YUV_EN	2
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 struct mdp3_hw_resource {
 	struct platform_device *pdev;
 	u32 mdp_rev;
@@ -175,11 +155,7 @@ struct mdp3_hw_resource {
 	struct ion_client *ion_client;
 	struct mdp3_iommu_domain_map *domains;
 	struct mdp3_iommu_ctx_map *iommu_contexts;
-<<<<<<< HEAD
 	unsigned int iommu_ref_cnt[MDP3_CLIENT_MAX];
-=======
-	unsigned int iommu_ref_cnt;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	bool allow_iommu_update;
 	struct ion_handle *ion_handle;
 	struct mutex iommu_lock;
@@ -187,10 +163,7 @@ struct mdp3_hw_resource {
 	struct mdp3_dma dma[MDP3_DMA_MAX];
 	struct mdp3_intf intf[MDP3_DMA_OUTPUT_SEL_MAX];
 
-<<<<<<< HEAD
 	struct rb_root iommu_root;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	spinlock_t irq_lock;
 	u32 irq_ref_count[MDP3_MAX_INTR];
 	u32 irq_mask;
@@ -212,20 +185,14 @@ struct mdp3_hw_resource {
 	struct regulator *vdd_cx;
 	struct regulator *fs;
 	bool fs_ena;
-<<<<<<< HEAD
 	u8 smart_blit_en;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 };
 
 struct mdp3_img_data {
 	dma_addr_t addr;
 	u32 len;
 	u32 flags;
-<<<<<<< HEAD
 	u32 padding;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	int p_need;
 	struct file *srcp_file;
 	struct ion_handle *srcp_ihdl;
@@ -245,17 +212,10 @@ int mdp3_clk_set_rate(int clk_type, unsigned long clk_rate, int client);
 int mdp3_clk_enable(int enable, int dsi_clk);
 int mdp3_res_update(int enable, int dsi_clk, int client);
 int mdp3_bus_scale_set_quota(int client, u64 ab_quota, u64 ib_quota);
-<<<<<<< HEAD
 int mdp3_put_img(struct mdp3_img_data *data, int client);
 int mdp3_get_img(struct msmfb_data *img, struct mdp3_img_data *data, int client);
 int mdp3_iommu_enable(int client);
 int mdp3_iommu_disable(int client);
-=======
-int mdp3_put_img(struct mdp3_img_data *data);
-int mdp3_get_img(struct msmfb_data *img, struct mdp3_img_data *data);
-int mdp3_iommu_enable(void);
-int mdp3_iommu_disable(void);
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 int mdp3_iommu_is_attached(void);
 void mdp3_free(struct msm_fb_data_type *mfd);
 int mdp3_parse_dt_splash(struct msm_fb_data_type *mfd);
@@ -272,11 +232,8 @@ void mdp3_check_dsi_ctrl_status(struct work_struct *work,
 				uint32_t interval);
 int mdp3_dynamic_clock_gating_ctrl(int enable);
 int mdp3_footswitch_ctrl(int enable);
-<<<<<<< HEAD
 int mdp3_qos_remapper_setup(struct mdss_panel_data *panel);
 int mdp3_splash_done(struct mdss_panel_info *panel_info);
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 #define MDP3_REG_WRITE(addr, val) writel_relaxed(val, mdp3_res->mdp_base + addr)
 #define MDP3_REG_READ(addr) readl_relaxed(mdp3_res->mdp_base + addr)

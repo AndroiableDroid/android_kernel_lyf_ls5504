@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 /* Copyright (c) 2014-2015, The Linux Foundation. All rights reserved.
-=======
-/* Copyright (c) 2014, The Linux Foundation. All rights reserved.
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -15,10 +11,7 @@
  */
 
 #include "msm8909-qrd.dtsi"
-<<<<<<< HEAD
 #include "msm8909-camera-sensor-skua.dtsi"
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 / {
 	model = "Qualcomm Technologies, Inc. MSM8909 QRD SKUA";
@@ -31,11 +24,7 @@
 			compatible = "focaltech,5x06";
 			reg = <0x38>;
 			interrupt-parent = <&msm_gpio>;
-<<<<<<< HEAD
 			interrupts = <13 0x2>;
-=======
-			interrupts = <13 0x2008>;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			vdd-supply = <&pm8909_l17>;
 			vcc_i2c-supply = <&pm8909_l6>;
 			/* pins used by touchscreen */
@@ -46,11 +35,7 @@
 			focaltech,name = "ft6336";
 			focaltech,family-id = <0x36>;
 			focaltech,reset-gpio = <&msm_gpio 12 0x0>;
-<<<<<<< HEAD
 			focaltech,irq-gpio = <&msm_gpio 13 0x0>;
-=======
-			focaltech,irq-gpio = <&msm_gpio 13 0x2008>;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			focaltech,display-coords = <0 0 480 854>;
 			focaltech,panel-coords = <0 0 480 950>;
 			focaltech,button-map= <139 102 158>;
@@ -59,11 +44,7 @@
 			focaltech,group-id = <1>;
 			focaltech,hard-reset-delay-ms = <20>;
 			focaltech,soft-reset-delay-ms = <200>;
-<<<<<<< HEAD
 			focaltech,num-max-touches = <2>;
-=======
-			focaltech,num-max-touches = <5>;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 			focaltech,fw-delay-aa-ms = <30>;
 			focaltech,fw-delay-55-ms = <30>;
 			focaltech,fw-upgrade-id1 = <0x79>;
@@ -192,10 +173,7 @@
 	qcom,batt-cold-percentage = <70>;
 	qcom,tchg-mins = <360>;
 	qcom,chgr-led-support;
-<<<<<<< HEAD
 	qcom,disable-vbatdet-based-recharge;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	status = "okay";
 };
 
@@ -210,10 +188,7 @@
 
 &pm8909_bms {
 	status = "okay";
-<<<<<<< HEAD
 	qcom,force-bms-active-on-charger;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	qcom,battery-data = <&qrd_batterydata>;
 };
 
@@ -268,13 +243,10 @@
 	qcom,mdss-pref-prim-intf = "dsi";
 };
 
-<<<<<<< HEAD
 &dsi_hx8379a_fwvga_skua_vid {
 	qcom,cont-splash-enabled;
 };
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 &pmx_mdss {
 	qcom,num-grp-pins = <1>;
 	qcom,pins = <&gp 25>;

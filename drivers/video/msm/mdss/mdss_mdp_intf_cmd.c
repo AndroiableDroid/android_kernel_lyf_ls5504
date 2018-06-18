@@ -17,11 +17,7 @@
 #include "mdss_mdp.h"
 #include "mdss_panel.h"
 #include "mdss_debug.h"
-<<<<<<< HEAD
 #include "mdss_mdp_trace.h"
-=======
-#include <trace/mdss_mdp_trace.h>
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 #define VSYNC_EXPIRE_TICK 6
 

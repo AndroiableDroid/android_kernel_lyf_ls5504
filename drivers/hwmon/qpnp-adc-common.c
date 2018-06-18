@@ -44,111 +44,7 @@
    and provided to the battery driver in the units desired for
    their framework which is 0.1DegC. True resolution of 0.1DegC
    will result in the below table size to increase by 10 times */
-<<<<<<< HEAD
 static const struct qpnp_vadc_map_pt adcmap_btm_threshold[] = {
-=======
-#ifdef CONFIG_NTC_12K_249K
-static const struct qpnp_vadc_map_pt adcmap_btm_threshold[] = {
-	{-200,	1545},
-	{-180,	1523},
-	{-160,	1501},
-	{-140,	1477},
-	{-120,	1452},
-	{-100,	1427},
-	{-80,	1400},
-	{-60,	1373},
-	{-40,	1345},
-	{-20,	1316},
-	{0,	1287},
-	{20,	1257},
-	{40,	1227},
-	{60,	1197},
-	{80,	1166},
-	{100,	1136},
-	{120,	1106},
-	{140,	1076},
-	{160,	1046},
-	{180,	1016},
-	{200,	987},
-	{220,	959},
-	{240,	931},
-	{260,	904},
-	{280,	878},
-	{300,	852},
-	{320,	827},
-	{340,	803},
-	{360,	780},
-	{380,	758},
-	{400,	736},
-	{420,	716},
-	{440,	696},
-	{460,	677},
-	{480,	659},
-	{500,	642},
-	{520,	625},
-	{540,	609},
-	{560,	594},
-	{580,	580},
-	{600,	566},
-	{620,	553},
-	{640,	541},
-	{660,	530},
-	{680,	518},
-	{700,	508},
-	{720,	498},
-	{740,	489},
-	{760,	480},
-	{780,	471},
-	{800,	463},
-};
-#else
-static const struct qpnp_vadc_map_pt adcmap_btm_threshold[] = {
-#ifdef CONFIG_MACH_RENDANG
-	{-100,	1262},
-	{-80,	1232},
-	{-60,	1203},
-	{-40,	1173},
-	{-20,	1144},
-	{0,	1115},
-	{20,	1086},
-	{40,	1059},
-	{60,	1032},
-	{80,	1005},
-	{100,	979},
-	{120,	954},
-	{140,	931},
-	{160,	907},
-	{180,	885},
-	{200,	864},
-	{220,	843},
-	{240,	824},
-	{260,	806},
-	{280,	788},
-	{300,	771},
-	{320,	756},
-	{340,	741},
-	{360,	727},
-	{380,	713},
-	{400,	701},
-	{420,	689},
-	{440,	677},
-	{460,	667},
-	{480,	657},
-	{500,	647},
-	{520,	649},
-	{540,	630},
-	{560,	622},
-	{580,	615},
-	{600,	608},
-	{620,	602},
-	{640,	595},
-	{660,	589},
-	{680,	584},
-	{700,	579},
-	{720,	574},
-	{740,	571},
-#else
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	{-300,	1642},
 	{-200,	1544},
 	{-100,	1414},
@@ -232,13 +128,7 @@ static const struct qpnp_vadc_map_pt adcmap_btm_threshold[] = {
 	{770,	213},
 	{780,	208},
 	{790,	203}
-<<<<<<< HEAD
 };
-=======
-#endif /* CONFIG_MACH_RENDANG */
-};
-#endif
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 static const struct qpnp_vadc_map_pt adcmap_qrd_btm_threshold[] = {
 	{-200,	1540},
@@ -403,54 +293,6 @@ static const struct qpnp_vadc_map_pt adcmap_qrd_skug_btm_threshold[] = {
 };
 
 static const struct qpnp_vadc_map_pt adcmap_qrd_skuh_btm_threshold[] = {
-<<<<<<< HEAD
-=======
-#ifdef CONFIG_MACH_RENDANG
-	{-100,	1262},
-	{-80,	1232},
-	{-60,	1203},
-	{-40,	1173},
-	{-20,	1144},
-	{0,	1115},
-	{20,	1086},
-	{40,	1059},
-	{60,	1032},
-	{80,	1005},
-	{100,	979},
-	{120,	954},
-	{140,	931},
-	{160,	907},
-	{180,	885},
-	{200,	864},
-	{220,	843},
-	{240,	824},
-	{260,	806},
-	{280,	788},
-	{300,	771},
-	{320,	756},
-	{340,	741},
-	{360,	727},
-	{380,	713},
-	{400,	701},
-	{420,	689},
-	{440,	677},
-	{460,	667},
-	{480,	657},
-	{500,	647},
-	{520,	649},
-	{540,	630},
-	{560,	622},
-	{580,	615},
-	{600,	608},
-	{620,	602},
-	{640,	595},
-	{660,	589},
-	{680,	584},
-	{700,	579},
-	{720,	574},
-	{740,	571},
-#else
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	{-200,	1531},
 	{-180,	1508},
 	{-160,	1483},
@@ -506,7 +348,6 @@ static const struct qpnp_vadc_map_pt adcmap_qrd_skuh_btm_threshold[] = {
 	{840,	530},
 	{860,	524},
 	{880,	520},
-<<<<<<< HEAD
 };
 
 static const struct qpnp_vadc_map_pt adcmap_qrd_skuc_btm_threshold[] = {
@@ -669,9 +510,6 @@ static const struct qpnp_vadc_map_pt adcmap_qrd_skul_btm_threshold[] = {
 	{760,	326},
 	{780,	311},
 	{800,	307},
-=======
-#endif /* CONFIG_MACH_RENDANG */
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 };
 
 /* Voltage to temperature */
@@ -1219,7 +1057,6 @@ int32_t qpnp_adc_scale_qrd_skuh_batt_therm(struct qpnp_vadc_chip *chip,
 }
 EXPORT_SYMBOL(qpnp_adc_scale_qrd_skuh_batt_therm);
 
-<<<<<<< HEAD
 int32_t qpnp_adc_scale_qrd_skuc_batt_therm(struct qpnp_vadc_chip *chip,
 			int32_t adc_code,
 			const struct qpnp_adc_properties *adc_properties,
@@ -1277,8 +1114,6 @@ int32_t qpnp_adc_scale_qrd_skul_batt_therm(struct qpnp_vadc_chip *chip,
 }
 EXPORT_SYMBOL(qpnp_adc_scale_qrd_skul_batt_therm);
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 int32_t qpnp_adc_scale_smb_batt_therm(struct qpnp_vadc_chip *chip,
 		int32_t adc_code,
 		const struct qpnp_adc_properties *adc_properties,
@@ -1756,7 +1591,6 @@ int32_t qpnp_adc_qrd_skuh_btm_scaler(struct qpnp_vadc_chip *chip,
 }
 EXPORT_SYMBOL(qpnp_adc_qrd_skuh_btm_scaler);
 
-<<<<<<< HEAD
 int32_t qpnp_adc_qrd_skue_btm_scaler(struct qpnp_vadc_chip *chip,
 		struct qpnp_adc_tm_btm_param *param,
 		uint32_t *low_threshold, uint32_t *high_threshold)
@@ -1810,8 +1644,6 @@ int32_t qpnp_adc_qrd_skue_btm_scaler(struct qpnp_vadc_chip *chip,
 }
 EXPORT_SYMBOL(qpnp_adc_qrd_skue_btm_scaler);
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 int32_t qpnp_adc_smb_btm_rscaler(struct qpnp_vadc_chip *chip,
 		struct qpnp_adc_tm_btm_param *param,
 		uint32_t *low_threshold, uint32_t *high_threshold)
@@ -1981,7 +1813,6 @@ int qpnp_adc_get_revid_version(struct device *dev)
 		(revid_data->pmic_type == PM8916_V2P0_TYPE) &&
 		(revid_data->pmic_subtype == PM8916_V2P0_SUBTYPE))
 			return QPNP_REV_ID_8916_2_0;
-<<<<<<< HEAD
 	else if ((revid_data->rev1 == PM8909_V1P0_REV1) &&
 		(revid_data->rev2 == PM8909_V1P0_REV2) &&
 		(revid_data->rev3 == PM8909_V1P0_REV3) &&
@@ -1996,8 +1827,6 @@ int qpnp_adc_get_revid_version(struct device *dev)
 		(revid_data->pmic_type == PM8909_V1P1_TYPE) &&
 		(revid_data->pmic_subtype == PM8909_V1P1_SUBTYPE))
 			return QPNP_REV_ID_8909_1_1;
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	else
 		return -EINVAL;
 }

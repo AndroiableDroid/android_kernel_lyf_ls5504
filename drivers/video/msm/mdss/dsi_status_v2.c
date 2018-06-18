@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 /* Copyright (c) 2013-2015, The Linux Foundation. All rights reserved.
-=======
-/* Copyright (c) 2013-2014, The Linux Foundation. All rights reserved.
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -70,7 +66,6 @@ void mdp3_check_dsi_ctrl_status(struct work_struct *work,
 		return;
 	}
 
-<<<<<<< HEAD
 	if (mdp3_session->in_splash_screen) {
 		schedule_delayed_work(&pdsi_status->check_status,
 			msecs_to_jiffies(interval));
@@ -78,8 +73,6 @@ void mdp3_check_dsi_ctrl_status(struct work_struct *work,
 		return;
 	}
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	mutex_lock(&mdp3_session->lock);
 	if (!mdp3_session->status) {
 		pr_debug("%s: display off already\n", __func__);

@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 /* Copyright (c) 2011-2014, The Linux Foundation. All rights reserved.
-=======
-/* Copyright (c) 2011-2015, The Linux Foundation. All rights reserved.
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -21,21 +17,15 @@
 #include "msm_actuator.h"
 #include "msm_cci.h"
 
-<<<<<<< HEAD
 #include  "../t4k37_otp.h"
 #include  "../t4k35_otp.h"
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 DEFINE_MSM_MUTEX(msm_actuator_mutex);
 
 #undef CDBG
 #define CDBG(fmt, args...) pr_debug(fmt, ##args)
-<<<<<<< HEAD
 // ZTEMT: fuyipeng add manual AF for imx234  -----start
 #define ZTE_ACTUATOR_MAF_OFFSET 100
 // ZTEMT: fuyipeng add manual AF for imx234  -----end
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 static struct v4l2_file_operations msm_actuator_v4l2_subdev_fops;
 static int32_t msm_actuator_power_up(struct msm_actuator_ctrl_t *a_ctrl);
@@ -139,7 +129,6 @@ static void msm_actuator_parse_i2c_params(struct msm_actuator_ctrl_t *a_ctrl,
 		i2c_tbl[a_ctrl->i2c_tbl_index].delay = delay;
 		a_ctrl->i2c_tbl_index++;
 	}
-<<<<<<< HEAD
 
 	//ZTE-MT wangqiaoming modify AF problem, begin
 	if (size==2 && i2c_tbl[0].reg_addr==0x4 && i2c_tbl[1].reg_addr==0x3)
@@ -161,8 +150,6 @@ static void msm_actuator_parse_i2c_params(struct msm_actuator_ctrl_t *a_ctrl,
 		i2c_tbl[1].delay=delay;
 	}
 	//ZTE-MT wangqiaoming modify AF problem, end
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	CDBG("Exit\n");
 }
 
@@ -281,16 +268,8 @@ static int32_t msm_actuator_piezo_move_focus(
 		return -EFAULT;
 	}
 
-<<<<<<< HEAD
 	if (num_steps == 0)
 		return rc;
-=======
-	if (num_steps <= 0 || num_steps > MAX_NUMBER_OF_STEPS) {
-		pr_err("num_steps out of range = %d\n",
-			num_steps);
-		return -EFAULT;
-	}
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	a_ctrl->i2c_tbl_index = 0;
 	a_ctrl->func_tbl->actuator_parse_i2c_params(a_ctrl,
@@ -561,33 +540,6 @@ static int32_t msm_actuator_vreg_control(struct msm_actuator_ctrl_t *a_ctrl,
 	return rc;
 }
 
-<<<<<<< HEAD
-=======
-#ifdef CONFIG_MACH_T86519A1
-static int msm_actuator_software_pwdn(struct msm_actuator_ctrl_t *a_ctrl)
-{
-	int rc = 0;
-	struct msm_camera_i2c_reg_setting reg_setting;
-	struct msm_camera_i2c_reg_array *i2c_reg_tbl=NULL;
-	struct msm_camera_i2c_reg_array i2c_reg_tbll={0x80,0x00,10};
-
-	a_ctrl->i2c_tbl_index = 1;
-	i2c_reg_tbl = &i2c_reg_tbll;
-	reg_setting.reg_setting = i2c_reg_tbl;
-	reg_setting.size = 1;
-	reg_setting.data_type = MSM_CAMERA_I2C_BYTE_DATA;
-	reg_setting.addr_type = MSM_CAMERA_I2C_BYTE_ADDR;
-	reg_setting.delay = 10;
-	rc = a_ctrl->i2c_client.i2c_func_tbl->i2c_write_table_w_microdelay(
-		&a_ctrl->i2c_client, &reg_setting);
-	if (rc < 0)
-		pr_err("msm_actuator_software_pwdn failed\n");
-
-	return rc;
-}
-#endif
-
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static int32_t msm_actuator_power_down(struct msm_actuator_ctrl_t *a_ctrl)
 {
 	int32_t rc = 0;
@@ -601,13 +553,6 @@ static int32_t msm_actuator_power_down(struct msm_actuator_ctrl_t *a_ctrl)
 					__func__, __LINE__);
 		}
 
-<<<<<<< HEAD
-=======
-#ifdef CONFIG_MACH_T86519A1
-		msm_actuator_software_pwdn(a_ctrl);
-#endif
-
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		rc = msm_actuator_vreg_control(a_ctrl, 0);
 		if (rc < 0) {
 			pr_err("%s failed %d\n", __func__, __LINE__);
@@ -633,7 +578,6 @@ static int32_t msm_actuator_set_position(
 	int32_t index;
 	uint16_t next_lens_position;
 	uint16_t delay;
-<<<<<<< HEAD
 	
 	uint32_t hw_params = 0;
 
@@ -653,23 +597,11 @@ static int32_t msm_actuator_set_position(
   	  hw_params = 0xF400;
     }
 
-=======
-	uint32_t hw_params = 0;
-	struct msm_camera_i2c_reg_setting reg_setting;
-	CDBG("%s Enter %d\n", __func__, __LINE__);
-	if (set_pos->number_of_steps <= 0 ||
-		set_pos->number_of_steps > MAX_NUMBER_OF_STEPS) {
-		pr_err("num_steps out of range = %d\n",
-			set_pos->number_of_steps);
-		return -EFAULT;
-	}
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	a_ctrl->i2c_tbl_index = 0;
 	for (index = 0; index < set_pos->number_of_steps; index++) {
 		next_lens_position = set_pos->pos[index];
 		delay = set_pos->delay[index];
-<<<<<<< HEAD
 
 		if ((!strncmp(a_ctrl->act_name, "rohm_bu64297gwz", 32)) || (!strncmp(a_ctrl->act_name, "imx214_sunny_c1507", 32)) \
 			|| (!strncmp(a_ctrl->act_name, "alps_bu64297gwz", 32))) {
@@ -699,8 +631,6 @@ static int32_t msm_actuator_set_position(
 		}
 
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		a_ctrl->func_tbl->actuator_parse_i2c_params(a_ctrl,
 		next_lens_position, hw_params, delay);
 
@@ -898,7 +828,6 @@ static int32_t msm_actuator_config(struct msm_actuator_ctrl_t *a_ctrl,
 		if (rc < 0)
 			pr_err("init table failed %d\n", rc);
 		break;
-<<<<<<< HEAD
 	// ZTEMT: fuyipeng add for manual AF -----start
 	case CFG_SET_ACTUATOR_NAME:
 		if (NULL != cdata->cfg.act_name) {
@@ -909,8 +838,6 @@ static int32_t msm_actuator_config(struct msm_actuator_ctrl_t *a_ctrl,
 		}
 		break;
 	// ZTEMT: fuyipeng add for manual AF -----end
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 	case CFG_SET_DEFAULT_FOCUS:
 		rc = a_ctrl->func_tbl->actuator_set_default_focus(a_ctrl,
@@ -1032,11 +959,6 @@ static long msm_actuator_subdev_ioctl(struct v4l2_subdev *sd,
 		return msm_actuator_get_subdev_id(a_ctrl, argp);
 	case VIDIOC_MSM_ACTUATOR_CFG:
 		return msm_actuator_config(a_ctrl, argp);
-<<<<<<< HEAD
-=======
-	case MSM_SD_NOTIFY_FREEZE:
-		return 0;
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 	case MSM_SD_SHUTDOWN:
 		msm_actuator_close(sd, NULL);
 		return 0;
@@ -1127,7 +1049,6 @@ static long msm_actuator_subdev_do_ioctl(
 
 			parg = &actuator_data;
 			break;
-<<<<<<< HEAD
 		// ZTEMT: fuyipeng add for manual AF -----start
         case CFG_SET_ACTUATOR_NAME:
            actuator_data.cfgtype = u32->cfgtype;
@@ -1135,8 +1056,6 @@ static long msm_actuator_subdev_do_ioctl(
            parg = &actuator_data;
 		break;
             // ZTEMT: fuyipeng add for manual AF -----end
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 		case CFG_SET_DEFAULT_FOCUS:
 		case CFG_MOVE_FOCUS:
 			actuator_data.cfgtype = u32->cfgtype;

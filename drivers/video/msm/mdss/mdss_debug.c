@@ -25,17 +25,13 @@
 #include "mdss_mdp.h"
 #include "mdss_mdp_hwio.h"
 #include "mdss_debug.h"
-<<<<<<< HEAD
 #include "mdss_dsi.h"
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 
 #define DEFAULT_BASE_REG_CNT 0x100
 #define GROUP_BYTES 4
 #define ROW_BYTES 16
 #define MAX_VSYNC_COUNT 0xFFFFFFF
 
-<<<<<<< HEAD
 #define DEFAULT_READ_PANEL_POWER_MODE_REG 0x0A
 #define PANEL_RX_MAX_BUF 128
 #define PANEL_TX_MAX_BUF 64
@@ -313,8 +309,6 @@ off_fail:
 	return -ENODEV;
 }
 
-=======
->>>>>>> 87066d33ef6e4347ea24108260bbbe3b944ef130
 static int mdss_debug_base_open(struct inode *inode, struct file *file)
 {
 	/* non-seekable */
