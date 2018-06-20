@@ -171,7 +171,13 @@ struct arizona_pdata {
 	/** MICBIAS configurations */
 	struct arizona_micbias micbias[ARIZONA_MAX_MICBIAS];
 
-	/** Mode of input structures */
+	/**
+	 * Mode of input structures
+	 * One of the ARIZONA_INMODE_xxx values
+	 * For most codecs the entries are [0]=IN1 [1]=IN2 [2]=IN3 [3]=IN4
+	 * wm8998: [0]=IN1A [1]=IN2A [2]=IN1B [3]=IN2B
+	 * cs47l85, wm8285: [0]=IN1L [1]=IN1R [2]=IN2L [3]=IN2R [4]=IN3L [5]=IN3R
+	 */
 	int inmode[ARIZONA_MAX_INPUT];
 
 	/** Mode for outputs */
@@ -188,6 +194,33 @@ struct arizona_pdata {
 
 	/** GPIO for primary IRQ (used for edge triggered emulation) */
 	int irq_gpio;
+
+	/** General purpose switch control */
+	unsigned int gpsw;
+
+	/** Callback which is called when the trigger phrase is detected */
+	void (*ez2ctrl_trigger)(void);
+
+	/** wm5102t output power */
+	unsigned int wm5102t_output_pwr;
+
+	/** Override the normal jack detection */
+	const struct arizona_jd_state *custom_jd;
+
+	struct wm_adsp_fw_defs *fw_defs[ARIZONA_MAX_DSP];
+	int num_fw_defs[ARIZONA_MAX_DSP];
+
+	/** Some platforms add a series resistor for hpdet to suppress pops */
+	int hpdet_ext_res;
+
+	/** Load firmwares for specific chip revisions */
+	bool rev_specific_fw;
+
+	/**
+	 * Specify an input to mute during headset button presses and jack
+	 * removal: 1 - IN1L, 2 - IN1R, ..., n - IN[n]R
+	 */
+	unsigned int hs_mic;
 };
 
 #endif

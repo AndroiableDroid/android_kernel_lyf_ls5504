@@ -1424,6 +1424,7 @@ static int ap3426_cdev_als_flush(struct sensors_classdev *sensors_cdev)
 	return 0;
 }
 
+
 /* This function should be called when sensor is disabled */
 static int ap3426_cdev_ps_calibrate(struct sensors_classdev *sensors_cdev,
 		int axis, int apply_now)

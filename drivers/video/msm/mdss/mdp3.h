@@ -34,6 +34,7 @@
 #define SVS_MAX_PIXEL		(540 * 960)
 
 #define KOFF_TIMEOUT msecs_to_jiffies(84)
+#define WAIT_DMA_TIMEOUT msecs_to_jiffies(84)
 
 enum  {
 	MDP3_CLK_AHB,
@@ -234,6 +235,7 @@ int mdp3_dynamic_clock_gating_ctrl(int enable);
 int mdp3_footswitch_ctrl(int enable);
 int mdp3_qos_remapper_setup(struct mdss_panel_data *panel);
 int mdp3_splash_done(struct mdss_panel_info *panel_info);
+
 
 #define MDP3_REG_WRITE(addr, val) writel_relaxed(val, mdp3_res->mdp_base + addr)
 #define MDP3_REG_READ(addr) readl_relaxed(mdp3_res->mdp_base + addr)

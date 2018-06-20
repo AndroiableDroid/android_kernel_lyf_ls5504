@@ -66,6 +66,7 @@
 #define arizona_aif_dbg(_dai, fmt, ...) \
 	dev_dbg(_dai->dev, "AIF%d: " fmt, _dai->id, ##__VA_ARGS__)
 
+
 static int arizona_spk_ev(struct snd_soc_dapm_widget *w,
 			  struct snd_kcontrol *kcontrol,
 			  int event)
@@ -182,12 +183,14 @@ static irqreturn_t arizona_thermal_shutdown(int irq, void *data)
 static const struct snd_soc_dapm_widget arizona_spkl =
 	SND_SOC_DAPM_PGA_E("OUT4L", SND_SOC_NOPM,
 			   ARIZONA_OUT4L_ENA_SHIFT, 0, NULL, 0, arizona_spk_ev,
-			   SND_SOC_DAPM_PRE_PMD | SND_SOC_DAPM_POST_PMU);
+			   SND_SOC_DAPM_PRE_PMD | SND_SOC_DAPM_POST_PMD |
+			   SND_SOC_DAPM_PRE_PMU | SND_SOC_DAPM_POST_PMU);
 
 static const struct snd_soc_dapm_widget arizona_spkr =
 	SND_SOC_DAPM_PGA_E("OUT4R", SND_SOC_NOPM,
 			   ARIZONA_OUT4R_ENA_SHIFT, 0, NULL, 0, arizona_spk_ev,
-			   SND_SOC_DAPM_PRE_PMD | SND_SOC_DAPM_POST_PMU);
+			   SND_SOC_DAPM_PRE_PMD | SND_SOC_DAPM_POST_PMD |
+			   SND_SOC_DAPM_PRE_PMU | SND_SOC_DAPM_POST_PMU);
 
 int arizona_init_spk(struct snd_soc_codec *codec)
 {
@@ -580,21 +583,23 @@ int arizona_out_ev(struct snd_soc_dapm_widget *w,
 		   int event)
 {
 	switch (event) {
-	case SND_SOC_DAPM_POST_PMU:
+	case SND_SOC_DAPM_PRE_PMU:
 		switch (w->shift) {
 		case ARIZONA_OUT1L_ENA_SHIFT:
 		case ARIZONA_OUT1R_ENA_SHIFT:
+
 		case ARIZONA_OUT2L_ENA_SHIFT:
 		case ARIZONA_OUT2R_ENA_SHIFT:
 		case ARIZONA_OUT3L_ENA_SHIFT:
 		case ARIZONA_OUT3R_ENA_SHIFT:
-			msleep(17);
+			priv->out_down_pending++;
+			priv->out_down_delay++;
 			break;
-
 		default:
 			break;
 		}
 		break;
+
 	}
 
 	return 0;
@@ -609,6 +614,7 @@ int arizona_hp_ev(struct snd_soc_dapm_widget *w,
 	unsigned int mask = 1 << w->shift;
 	unsigned int val;
 
+
 	switch (event) {
 	case SND_SOC_DAPM_POST_PMU:
 		val = mask;
@@ -616,6 +622,7 @@ int arizona_hp_ev(struct snd_soc_dapm_widget *w,
 	case SND_SOC_DAPM_PRE_PMD:
 		val = 0;
 		break;
+
 	default:
 		return -EINVAL;
 	}
@@ -633,6 +640,7 @@ int arizona_hp_ev(struct snd_soc_dapm_widget *w,
 	return arizona_out_ev(w, kcontrol, event);
 }
 EXPORT_SYMBOL_GPL(arizona_hp_ev);
+
 
 static unsigned int arizona_sysclk_48k_rates[] = {
 	6144000,
@@ -990,6 +998,19 @@ static int arizona_startup(struct snd_pcm_substream *substream,
 		constraint = &arizona_44k1_constraint;
 	else
 		constraint = &arizona_48k_constraint;
+
+#ifdef CONFIG_MACH_T86519A1
+	/*
+	 * This works around a crash when enabling mp3/aac offload on Lettuce
+	 *
+	 * In the case that substream->runtime is not set, we assume that we
+	 * shouldn't setup constraints and just return.
+	 */
+	if (!substream->runtime) {
+		dev_info(codec->dev, "runtime null, assuming dsp offload\n");
+		return 0;
+	}
+#endif
 
 	return snd_pcm_hw_constraint_list(substream->runtime, 0,
 					  SNDRV_PCM_HW_PARAM_RATE,
@@ -1475,6 +1496,7 @@ static void arizona_disable_fll(struct arizona_fll *fll)
 	struct arizona *arizona = fll->arizona;
 	bool change;
 
+
 	regmap_update_bits(arizona->regmap, fll->base + 1,
 			   ARIZONA_FLL1_FREERUN, ARIZONA_FLL1_FREERUN);
 	regmap_update_bits_check(arizona->regmap, fll->base + 1,
@@ -1632,6 +1654,7 @@ int arizona_set_output_mode(struct snd_soc_codec *codec, int output, bool diff)
 	return snd_soc_update_bits(codec, reg, ARIZONA_OUT1_MONO, val);
 }
 EXPORT_SYMBOL_GPL(arizona_set_output_mode);
+
 
 MODULE_DESCRIPTION("ASoC Wolfson Arizona class device support");
 MODULE_AUTHOR("Mark Brown <broonie@opensource.wolfsonmicro.com>");

@@ -622,6 +622,7 @@ static int ltr553_init_device(struct ltr553_data *ltr)
 		return rc;
 	}
 
+
 	rc = regmap_write(ltr->regmap, LTR553_REG_PS_N_PULSES, ltr->ps_pulses);
 	if (rc) {
 		dev_err(&ltr->i2c->dev, "write %d register failed\n",
@@ -1042,11 +1043,13 @@ static void ltr553_report_work(struct work_struct *work)
 	unsigned int status;
 	u8 buf[7];
 
+
 	mutex_lock(&ltr->ops_lock);
 
 	/* avoid fake interrupt */
 	if (!ltr->power_enabled) {
 		dev_dbg(&ltr->i2c->dev, "fake interrupt triggered\n");
+
 		goto exit;
 	}
 
@@ -1144,6 +1147,7 @@ static int ltr553_enable_ps(struct ltr553_data *ltr, int enable)
 
 		ltr->ps_enabled = true;
 
+
 	} else {
 		/* disable ps_sensor */
 		rc = regmap_write(ltr->regmap, LTR553_REG_PS_CTL,
@@ -1155,6 +1159,7 @@ static int ltr553_enable_ps(struct ltr553_data *ltr, int enable)
 		}
 
 		ltr->ps_enabled = false;
+
 	}
 exit:
 	return rc;
@@ -1212,6 +1217,7 @@ static int ltr553_enable_als(struct ltr553_data *ltr, int enable)
 		}
 
 		ltr->als_enabled = true;
+
 	} else {
 		/* disable als sensor */
 		rc = regmap_write(ltr->regmap, LTR553_REG_ALS_CTL,
@@ -1223,6 +1229,7 @@ static int ltr553_enable_als(struct ltr553_data *ltr, int enable)
 		}
 
 		ltr->als_enabled = false;
+
 	}
 
 exit:
@@ -1959,6 +1966,7 @@ static int ltr553_probe(struct i2c_client *client,
 
 		/* device wakeup initialization */
 		device_init_wakeup(&client->dev, 1);
+
 
 		ltr->workqueue = alloc_workqueue("ltr553_workqueue",
 				WQ_NON_REENTRANT | WQ_FREEZABLE, 0);

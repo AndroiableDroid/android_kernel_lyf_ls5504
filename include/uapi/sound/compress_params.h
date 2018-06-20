@@ -92,7 +92,9 @@
 #define SND_AUDIOCODEC_WMA_PRO               ((__u32) 0x00000016)
 #define SND_AUDIOCODEC_DTS             	     ((__u32) 0x00000017)
 #define SND_AUDIOCODEC_EAC3                  ((__u32) 0x00000018)
-#define SND_AUDIOCODEC_MAX                   SND_AUDIOCODEC_EAC3
+#define SND_AUDIOCODEC_ALAC                  ((__u32) 0x00000019)
+#define SND_AUDIOCODEC_APE                   ((__u32) 0x00000020)
+#define SND_AUDIOCODEC_MAX                   SND_AUDIOCODEC_APE
 /*
  * Profile and modes are listed with bit masks. This allows for a
  * more compact representation of fields that will not evolve
@@ -262,6 +264,7 @@ struct snd_enc_wma {
 	__u32 encodeopt;
 	__u32 encodeopt1;
 	__u32 encodeopt2;
+	__u32 avg_bit_rate;
 };
 
 
@@ -341,7 +344,7 @@ struct snd_dec_ddp {
 	__u32 params_length;
 	__u32 params_id[18];
 	__u32 params_value[18];
-};
+} __attribute__((packed, aligned(4)));
 struct snd_dec_flac {
 	__u16 sample_size;
 	__u16 min_blk_size;

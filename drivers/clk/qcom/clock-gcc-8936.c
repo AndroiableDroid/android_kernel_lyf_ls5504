@@ -274,6 +274,7 @@ static void __iomem *virt_dbgbase;
 #define BIMC_GPU_CBCR					0x31040
 #define GCC_SPARE3_REG					0x7E004
 
+
 #define APCS_CCI_PLL_MODE				0x00000
 #define APCS_CCI_PLL_L_VAL				0x00004
 #define APCS_CCI_PLL_M_VAL				0x00008
@@ -2973,6 +2974,18 @@ static struct pll_config_regs gpll4_regs = {
 	.base = &virt_bases[GCC_BASE],
 };
 
+static struct gate_clk gcc_snoc_qosgen_clk = {
+	.en_mask = BIT(0),
+	.en_reg = SNOC_QOSGEN,
+	.base = &virt_bases[GCC_BASE],
+	.c = {
+		.dbg_name = "gcc_snoc_qosgen_clk",
+		.ops = &clk_ops_gate,
+		.flags = CLKFLAG_SKIP_HANDOFF,
+		CLK_INIT(gcc_snoc_qosgen_clk.c),
+	},
+};
+
 static struct mux_clk gcc_debug_mux;
 static struct clk_ops clk_ops_debug_mux;
 
@@ -3311,6 +3324,17 @@ static struct clk_lookup msm_clocks_lookup[] = {
 	CLK_LIST(gcc_crypto_ahb_clk),
 	CLK_LIST(gcc_crypto_axi_clk),
 	CLK_LIST(crypto_clk_src),
+
+	/* QoS Reference clock */
+	CLK_LIST(gcc_snoc_qosgen_clk),
+};
+
+static struct clk_lookup msm_clocks_lookup_v1[] = {
+	CLK_LIST(gcc_oxili_gmem_clk),
+};
+
+static struct clk_lookup msm_clocks_lookup_v3[] = {
+	CLK_LIST(gcc_oxili_gmem_gate_clk),
 };
 
 static struct clk_lookup msm_clocks_lookup_v1[] = {

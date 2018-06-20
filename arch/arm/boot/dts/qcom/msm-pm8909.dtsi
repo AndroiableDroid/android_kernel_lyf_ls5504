@@ -33,6 +33,7 @@
 			qcom,system-reset;
 			qcom,clear-warm-reset;
 
+
 			qcom,pon_1 {
 				qcom,pon-type = <0>;
 				qcom,support-reset = <1>;

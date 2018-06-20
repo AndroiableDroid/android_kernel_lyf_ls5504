@@ -18,8 +18,6 @@
 
 #include "wmfw.h"
 
-struct regulator;
-
 struct wm_adsp_region {
 	int type;
 	unsigned int base;
@@ -47,6 +45,7 @@ struct wm_adsp {
 	struct list_head alg_regions;
 
 	int fw_id;
+	int fw_id_version;
 
 	const struct wm_adsp_region *mem;
 	int num_mems;
@@ -55,6 +54,37 @@ struct wm_adsp {
 	bool running;
 
 	struct regulator *dvfs;
+	int fw_ver;
+	u32 running;
+
+	struct mutex ctl_lock;
+	struct list_head ctl_list;
+
+	u32 host_buf_ptr;
+
+	int max_dsp_read_bytes;
+	u32 dsp_error;
+	u32 *raw_capt_buf;
+	struct circ_buf capt_buf;
+	int capt_buf_size;
+	u32 capt_watermark;
+	struct wm_adsp_buffer_region *host_regions;
+	bool buffer_drain_pending;
+
+	int num_firmwares;
+	struct wm_adsp_fw_defs *firmwares;
+
+	struct wm_adsp_fw_features fw_features;
+
+	struct mutex *fw_lock;
+	struct work_struct boot_work;
+
+#ifdef CONFIG_DEBUG_FS
+	struct dentry *debugfs_root;
+	char *wmfw_file_loaded;
+	char *bin_file_loaded;
+#endif
+
 };
 
 #define WM_ADSP1(wname, num) \
@@ -70,8 +100,23 @@ struct wm_adsp {
 extern const struct snd_kcontrol_new wm_adsp1_fw_controls[];
 extern const struct snd_kcontrol_new wm_adsp2_fw_controls[];
 
-int wm_adsp1_init(struct wm_adsp *adsp);
-int wm_adsp2_init(struct wm_adsp *adsp, bool dvfs);
+int wm_adsp1_init(struct wm_adsp *dsp);
+int wm_adsp2_init(struct wm_adsp *dsp, struct mutex *fw_lock);
+
+#ifdef CONFIG_DEBUG_FS
+void wm_adsp_init_debugfs(struct wm_adsp *dsp, struct snd_soc_codec *codec);
+void wm_adsp_cleanup_debugfs(struct wm_adsp *dsp);
+#else
+static inline void wm_adsp_init_debugfs(struct wm_adsp *dsp,
+					struct snd_soc_codec *codec)
+{
+}
+
+void wm_adsp_cleanup_debugfs(struct wm_adsp *dsp)
+{
+}
+#endif
+
 int wm_adsp1_event(struct snd_soc_dapm_widget *w,
 		   struct snd_kcontrol *kcontrol, int event);
 int wm_adsp2_event(struct snd_soc_dapm_widget *w,

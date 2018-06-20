@@ -244,20 +244,20 @@ static int arizona_wait_for_boot(struct arizona *arizona)
 
 static int arizona_apply_hardware_patch(struct arizona* arizona)
 {
-	unsigned int fll, sysclk;
 	int ret, err;
 
 	regcache_cache_bypass(arizona->regmap, true);
 
 	/* Cache existing FLL and SYSCLK settings */
-	ret = regmap_read(arizona->regmap, ARIZONA_FLL1_CONTROL_1, &fll);
-	if (ret != 0) {
+	ret = regmap_read(arizona->regmap, ARIZONA_FLL1_CONTROL_1, &state->fll);
+	if (ret) {
 		dev_err(arizona->dev, "Failed to cache FLL settings: %d\n",
 			ret);
 		return ret;
 	}
-	ret = regmap_read(arizona->regmap, ARIZONA_SYSTEM_CLOCK_1, &sysclk);
-	if (ret != 0) {
+	ret = regmap_read(arizona->regmap, ARIZONA_SYSTEM_CLOCK_1,
+			  &state->sysclk);
+	if (ret) {
 		dev_err(arizona->dev, "Failed to cache SYSCLK settings: %d\n",
 			ret);
 		return ret;
@@ -266,7 +266,7 @@ static int arizona_apply_hardware_patch(struct arizona* arizona)
 	/* Start up SYSCLK using the FLL in free running mode */
 	ret = regmap_write(arizona->regmap, ARIZONA_FLL1_CONTROL_1,
 			ARIZONA_FLL1_ENA | ARIZONA_FLL1_FREERUN);
-	if (ret != 0) {
+	if (ret) {
 		dev_err(arizona->dev,
 			"Failed to start FLL in freerunning mode: %d\n",
 			ret);
@@ -275,13 +275,13 @@ static int arizona_apply_hardware_patch(struct arizona* arizona)
 	ret = arizona_poll_reg(arizona, 25, ARIZONA_INTERRUPT_RAW_STATUS_5,
 			       ARIZONA_FLL1_CLOCK_OK_STS,
 			       ARIZONA_FLL1_CLOCK_OK_STS);
-	if (ret != 0) {
+	if (ret) {
 		ret = -ETIMEDOUT;
 		goto err_fll;
 	}
 
 	ret = regmap_write(arizona->regmap, ARIZONA_SYSTEM_CLOCK_1, 0x0144);
-	if (ret != 0) {
+	if (ret) {
 		dev_err(arizona->dev, "Failed to start SYSCLK: %d\n", ret);
 		goto err_fll;
 	}
@@ -306,25 +306,33 @@ err_sysclk:
 	err = regmap_write(arizona->regmap, ARIZONA_SYSTEM_CLOCK_1, sysclk);
 	if (err != 0) {
 		dev_err(arizona->dev,
-			"Failed to re-apply old SYSCLK settings: %d\n",
-			err);
-	}
+			"Failed to re-apply old FLL settings: %d\n", err);
 
-err_fll:
-	err = regmap_write(arizona->regmap, ARIZONA_FLL1_CONTROL_1, fll);
-	if (err != 0) {
+	return ret;
+}
+
+static int arizona_disable_freerun_sysclk(struct arizona *arizona,
+					  struct arizona_sysclk_state *state)
+{
+	int ret;
+
+	ret = regmap_write(arizona->regmap, ARIZONA_SYSTEM_CLOCK_1,
+			   state->sysclk);
+	if (ret) {
 		dev_err(arizona->dev,
-			"Failed to re-apply old FLL settings: %d\n",
-			err);
+			"Failed to re-apply old SYSCLK settings: %d\n", ret);
+		return ret;
 	}
 
 	regcache_cache_bypass(arizona->regmap, false);
 
 	if (ret != 0)
 		return ret;
-	else
-		return err;
+	}
+
+	return 0;
 }
+
 
 #ifdef CONFIG_PM_RUNTIME
 static int arizona_runtime_resume(struct device *dev)
@@ -333,6 +341,7 @@ static int arizona_runtime_resume(struct device *dev)
 	int ret;
 
 	dev_dbg(arizona->dev, "Leaving AoD mode\n");
+
 
 	ret = regulator_enable(arizona->dcvdd);
 	if (ret != 0) {
@@ -351,8 +360,8 @@ static int arizona_runtime_resume(struct device *dev)
 			goto err;
 		}
 
-		ret = arizona_apply_hardware_patch(arizona);
-		if (ret != 0) {
+		ret = wm5102_apply_hardware_patch(arizona);
+		if (ret) {
 			dev_err(arizona->dev,
 				"Failed to apply hardware patch: %d\n",
 				ret);
@@ -506,9 +515,9 @@ int arizona_dev_init(struct arizona *arizona)
 
 	if (arizona->pdata.reset) {
 		/* Start out with /RESET low to put the chip into reset */
-		ret = gpio_request_one(arizona->pdata.reset,
-				       GPIOF_DIR_OUT | GPIOF_INIT_LOW,
-				       "arizona /RESET");
+		ret = devm_gpio_request_one(arizona->dev, arizona->pdata.reset,
+					    GPIOF_DIR_OUT | GPIOF_INIT_LOW,
+					    "arizona /RESET");
 		if (ret != 0) {
 			dev_err(dev, "Failed to request /RESET: %d\n", ret);
 			goto err_early;
@@ -617,8 +626,10 @@ int arizona_dev_init(struct arizona *arizona)
 				"Device failed initial boot: %d\n", ret);
 			goto err_reset;
 		}
+
 		break;
 	}
+
 
 	if (apply_patch) {
 		ret = apply_patch(arizona);
@@ -630,14 +641,15 @@ int arizona_dev_init(struct arizona *arizona)
 
 		switch (arizona->type) {
 		case WM5102:
-			ret = arizona_apply_hardware_patch(arizona);
-			if (ret != 0) {
+			ret = wm5102_apply_hardware_patch(arizona);
+			if (ret) {
 				dev_err(arizona->dev,
 					"Failed to apply hardware patch: %d\n",
 					ret);
 				goto err_reset;
 			}
 			break;
+
 		default:
 			break;
 		}
@@ -787,10 +799,7 @@ int arizona_dev_init(struct arizona *arizona)
 err_irq:
 	arizona_irq_exit(arizona);
 err_reset:
-	if (arizona->pdata.reset) {
-		gpio_set_value_cansleep(arizona->pdata.reset, 0);
-		gpio_free(arizona->pdata.reset);
-	}
+	arizona_enable_reset(arizona);
 	regulator_disable(arizona->dcvdd);
 err_enable:
 	regulator_bulk_disable(arizona->num_core_supplies,
@@ -809,6 +818,7 @@ int arizona_dev_exit(struct arizona *arizona)
 	arizona_free_irq(arizona, ARIZONA_IRQ_CLKGEN_ERR, arizona);
 	pm_runtime_disable(arizona->dev);
 	arizona_irq_exit(arizona);
+
 	return 0;
 }
 EXPORT_SYMBOL_GPL(arizona_dev_exit);

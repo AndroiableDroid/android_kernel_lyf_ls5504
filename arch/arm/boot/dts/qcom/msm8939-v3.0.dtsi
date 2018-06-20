@@ -468,6 +468,7 @@
 
 	/delete-node/ regulator@b018000;
 
+
 	apc_vreg_corner: regulator@b018000 {
 		compatible = "qcom,cpr-regulator";
 		reg = <0xb018000 0x1000>, <0xb011064 4>, <0x58000 0x1000>;

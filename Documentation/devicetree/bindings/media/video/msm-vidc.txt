@@ -113,6 +113,7 @@ Optional properties:
 - qcom,enable-idle-indicator = A bool to enable video hardware to generate
   idle message when it is in idle state.
 
+
 Example:
 
 

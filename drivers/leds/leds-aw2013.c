@@ -22,6 +22,7 @@
 #include <linux/regulator/consumer.h>
 #include <linux/leds-aw2013.h>
 
+
 /* register address */
 #define AW_REG_RESET			0x00
 #define AW_REG_GLOBAL_CONTROL		0x01
@@ -62,6 +63,7 @@ struct aw2013_led {
 	int num_leds;
 	int id;
 	bool poweron;
+
 };
 
 static int aw2013_write(struct aw2013_led *led, u8 reg, u8 val)
@@ -134,6 +136,7 @@ fail_disable_reg:
 
 	return rc;
 }
+
 
 static int aw2013_power_init(struct aw2013_led *led, bool on)
 {
@@ -327,6 +330,7 @@ static ssize_t aw2013_store_blink(struct device *dev,
 	return len;
 }
 
+
 static ssize_t aw2013_led_time_show(struct device *dev,
 				struct device_attribute *attr, char *buf)
 {
@@ -466,6 +470,7 @@ static int aw2013_led_parse_child_node(struct aw2013_led *led_array,
 				"Failure reading max-current, rc = %d\n", rc);
 			goto free_pdata;
 		}
+
 
 		rc = of_property_read_u32(temp, "aw2013,rise-time-ms",
 			&led->pdata->rise_time_ms);

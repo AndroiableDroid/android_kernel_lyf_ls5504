@@ -98,6 +98,7 @@
 		interrupt-names = "ispif";
 		clocks = <&clock_gcc clk_gcc_camss_ispif_ahb_clk>,
 			<&clock_gcc clk_gcc_camss_ahb_clk>,
+
 			<&clock_gcc clk_csi0_clk_src>,
 			<&clock_gcc clk_gcc_camss_csi0_clk>,
 			<&clock_gcc clk_gcc_camss_csi0pix_clk>,
@@ -110,6 +111,7 @@
 			<&clock_gcc clk_gcc_camss_vfe0_clk>,
 			<&clock_gcc clk_gcc_camss_csi_vfe0_clk>;
 		clock-names = "ispif_ahb_clk","camss_ahb_clk",
+
 			"csi0_src_clk", "csi0_clk",
 			"csi0_pix_clk","csi0_rdi_clk", "csi1_src_clk",
 			"csi1_clk", "csi1_pix_clk", "csi1_rdi_clk",

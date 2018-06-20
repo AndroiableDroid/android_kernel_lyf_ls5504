@@ -15,6 +15,7 @@
 #include "msm-pm8909.dtsi"
 #include "msm8909-regulator.dtsi"
 
+
 &pm8909_vadc {
 	chan@0 {
 		label = "usb_in";

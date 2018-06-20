@@ -92,6 +92,7 @@
 	};
 };
 
+
 &dsi_hx8394d_720_vid {
 	qcom,mdss-dsi-pwm-gpio = <&pm8916_mpps 4 0>;
 };

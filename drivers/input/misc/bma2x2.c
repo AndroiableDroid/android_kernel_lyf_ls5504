@@ -32,6 +32,7 @@
 #include <linux/regulator/consumer.h>
 #include <linux/of_gpio.h>
 #include <linux/sensors.h>
+#include <linux/kthread.h>
 
 #ifdef CONFIG_HAS_EARLYSUSPEND
 #include <linux/earlysuspend.h>
@@ -88,6 +89,7 @@
 /* wait 10ms for self test  done */
 #define SELF_TEST_DELAY()           usleep_range(10000, 15000)
 
+#ifdef USE_BMA_INTERRUPT
 #define LOW_G_INTERRUPT             REL_Z
 #define HIGH_G_INTERRUPT            REL_HWHEEL
 #define SLOP_INTERRUPT              REL_DIAL
@@ -96,6 +98,17 @@
 #define ORIENT_INTERRUPT            ABS_PRESSURE
 #define FLAT_INTERRUPT              ABS_DISTANCE
 #define SLOW_NO_MOTION_INTERRUPT    REL_Y
+#else
+/* AndroidM didn't use the dev-interrupt,bypass above defines */
+#define LOW_G_INTERRUPT             REL_Z
+#define HIGH_G_INTERRUPT            REL_Z
+#define SLOP_INTERRUPT              REL_Z
+#define DOUBLE_TAP_INTERRUPT        REL_Z
+#define SINGLE_TAP_INTERRUPT        REL_Z
+#define ORIENT_INTERRUPT            REL_Z
+#define FLAT_INTERRUPT              REL_Z
+#define SLOW_NO_MOTION_INTERRUPT    REL_Z
+#endif
 
 #define HIGH_G_INTERRUPT_X_HAPPENED                 1
 #define HIGH_G_INTERRUPT_Y_HAPPENED                 2
@@ -1393,6 +1406,7 @@ static const struct interrupt_map_t int_map[] = {
 #define POLL_INTERVAL_MAX_MS	4000
 #define POLL_DEFAULT_INTERVAL_MS 200
 
+
 /* Interrupt delay in msecs */
 #define BMA_INT_MAX_DELAY	64
 
@@ -1472,6 +1486,7 @@ struct bma2x2_platform_data {
 	s8 place;
 	bool int_en;
 	bool use_int2; /* Use interrupt pin2 */
+
 };
 
 struct bma2x2_suspend_state {
@@ -1506,9 +1521,15 @@ struct bma2x2_data {
 	struct mutex value_mutex;
 	struct mutex enable_mutex;
 	struct mutex mode_mutex;
+
 	struct workqueue_struct *data_wq;
 	struct delayed_work work;
 	struct work_struct irq_work;
+	struct hrtimer accel_timer;
+	int accel_wkp_flag;
+	struct task_struct *accel_task;
+	bool accel_delay_change;
+	wait_queue_head_t accel_wq;
 	struct regulator *vdd;
 	struct regulator *vio;
 	bool power_enabled;
@@ -5047,6 +5068,7 @@ static void bma2x2_work_func(struct work_struct *work)
 	bma2x2->value = value;
 	mutex_unlock(&bma2x2->value_mutex);
 	queue_delayed_work(bma2x2->data_wq, &bma2x2->work, delay);
+
 }
 
 static ssize_t bma2x2_register_store(struct device *dev,
@@ -5347,6 +5369,8 @@ static void bma2x2_set_enable(struct device *dev, int enable)
 	struct i2c_client *client = to_i2c_client(dev);
 	struct bma2x2_data *bma2x2 = i2c_get_clientdata(client);
 	int pre_enable = atomic_read(&bma2x2->enable);
+	ktime_t ktime;
+	int delay_ms;
 
 	if (atomic_read(&bma2x2->cal_status)) {
 		dev_err(dev, "can not enable or disable when calibration\n");
@@ -7230,6 +7254,25 @@ static irqreturn_t bma2x2_irq_handler(int irq, void *handle)
 		"Interrupt feature is not enabled!\n");
 	return IRQ_HANDLED;
 }
+#else
+static void bma2x2_irq_work_func(struct work_struct *work)
+{
+	struct bma2x2_data *bma2x2 = container_of((struct work_struct *)work,
+			struct bma2x2_data, irq_work);
+
+	dev_dbg(&bma2x2->bma2x2_client->dev,
+		"Interrupt feature is not enabled!\n");
+	return;
+}
+
+static irqreturn_t bma2x2_irq_handler(int irq, void *handle)
+{
+	struct bma2x2_data *bma2x2 = handle;
+
+	dev_dbg(&bma2x2->bma2x2_client->dev,
+		"Interrupt feature is not enabled!\n");
+	return IRQ_HANDLED;
+}
 #endif /* defined(BMA2X2_ENABLE_INT1)||defined(BMA2X2_ENABLE_INT2) */
 
 static int bma2x2_power_ctl(struct bma2x2_data *data, bool on)
@@ -7381,6 +7424,7 @@ static int bma2x2_parse_dt(struct device *dev,
 	pdata->int_en = of_property_read_bool(np, "bosch,use-interrupt");
 
 	pdata->use_int2 = of_property_read_bool(np, "bosch,use-int2");
+
 
 	pdata->gpio_int1 = of_get_named_gpio_flags(dev->of_node,
 				"bosch,gpio-int1", 0, &pdata->int1_flag);
@@ -7637,6 +7681,7 @@ static int bma2x2_probe(struct i2c_client *client,
 	mutex_init(&data->value_mutex);
 	mutex_init(&data->mode_mutex);
 	mutex_init(&data->enable_mutex);
+	mutex_init(&data->op_lock);
 	data->bandwidth = BMA2X2_BW_SET;
 	data->range = BMA2X2_RANGE_SET;
 	data->sensitivity = bosch_sensor_range_map[0];
@@ -8036,6 +8081,12 @@ static int bma2x2_remove(struct i2c_client *client)
 
 	destroy_workqueue(data->data_wq);
 	bma2x2_set_enable(&client->dev, 0);
+	if (!data->pdata->use_hrtimer) {
+		destroy_workqueue(data->data_wq);
+	} else {
+		hrtimer_cancel(&data->accel_timer);
+		kthread_stop(data->accel_task);
+	}
 	bma2x2_power_deinit(data);
 	i2c_set_clientdata(client, NULL);
 	if (data->pdata && (client->dev.of_node))

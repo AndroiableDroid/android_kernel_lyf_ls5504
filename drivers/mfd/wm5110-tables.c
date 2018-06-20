@@ -499,10 +499,14 @@ static const struct reg_default wm5110_reg_default[] = {
 	{ 0x00000219, 0x01A6 },    /* R537   - Mic Bias Ctrl 2 */
 	{ 0x0000021A, 0x01A6 },    /* R538   - Mic Bias Ctrl 3 */
 	{ 0x00000293, 0x0000 },    /* R659   - Accessory Detect Mode 1 */
-	{ 0x0000029B, 0x0020 },    /* R667   - Headphone Detect 1 */
-	{ 0x0000029C, 0x0000 },    /* R668   - Headphone Detect 2 */
+	{ 0x0000029B, 0x0028 },    /* R667   - Headphone Detect 1 */
+	{ 0x000002A2, 0x0000 },    /* R674   - Micd clamp control */
 	{ 0x000002A3, 0x1102 },    /* R675   - Mic Detect 1 */
 	{ 0x000002A4, 0x009F },    /* R676   - Mic Detect 2 */
+	{ 0x000002A6, 0x3737 },    /* R678   - Mic Detect Level 1 */
+	{ 0x000002A7, 0x372C },    /* R679   - Mic Detect Level 2 */
+	{ 0x000002A8, 0x1422 },    /* R680   - Mic Detect Level 3 */
+	{ 0x000002A9, 0x300A },    /* R681   - Mic Detect Level 4 */
 	{ 0x000002C3, 0x0000 },    /* R707   - Mic noise mix control 1 */
 	{ 0x000002D3, 0x0000 },    /* R723   - Jack detect analogue */
 	{ 0x00000300, 0x0000 },    /* R768   - Input Enables */
@@ -583,9 +587,45 @@ static const struct reg_default wm5110_reg_default[] = {
 	{ 0x0000043E, 0x0080 },    /* R1086  - DAC Volume Limit 6R */
 	{ 0x0000043F, 0x0800 },    /* R1087  - Noise Gate Select 6R */
 	{ 0x00000450, 0x0000 },    /* R1104  - DAC AEC Control 1 */
+<<<<<<< HEAD:drivers/mfd/wm5110-tables.c
 	{ 0x00000458, 0x0001 },    /* R1112  - Noise Gate Control */
 	{ 0x00000480, 0x0040 },    /* R1152  - Class W ANC Threshold 1 */
 	{ 0x00000481, 0x0040 },    /* R1153  - Class W ANC Threshold 2 */
+=======
+	{ 0x00000458, 0x0000 },    /* R1112  - Noise Gate Control */
+	{ 0x00000460, 0x0C40 },
+	{ 0x00000461, 0x8000 },
+	{ 0x00000462, 0x0C41 },
+	{ 0x00000463, 0x4820 },
+	{ 0x00000464, 0x0C41 },
+	{ 0x00000465, 0x4040 },
+	{ 0x00000466, 0x0C41 },
+	{ 0x00000467, 0x3940 },
+	{ 0x00000468, 0x0C42 },
+	{ 0x00000469, 0x2030 },
+	{ 0x0000046A, 0x0842 },
+	{ 0x0000046B, 0x1990 },
+	{ 0x0000046C, 0x08C2 },
+	{ 0x0000046D, 0x1450 },
+	{ 0x0000046E, 0x08C6 },
+	{ 0x0000046F, 0x1020 },
+	{ 0x00000470, 0x08C6 },
+	{ 0x00000471, 0x0CD0 },
+	{ 0x00000472, 0x08C6 },
+	{ 0x00000473, 0x0A30 },
+	{ 0x00000474, 0x0442 },
+	{ 0x00000475, 0x0660 },
+	{ 0x00000476, 0x0446 },
+	{ 0x00000477, 0x0510 },
+	{ 0x00000478, 0x04C6 },
+	{ 0x00000479, 0x0400 },
+	{ 0x0000047A, 0x04CE },
+	{ 0x0000047B, 0x0330 },
+	{ 0x0000047C, 0x05DF },
+	{ 0x0000047D, 0x0001 },
+	{ 0x0000047E, 0x07FF },
+	{ 0x00000483, 0x0826 },
+>>>>>>> ff59b2a95bafd4a5ced1a0700067b39cf3b37bed:drivers/mfd/florida-tables.c
 	{ 0x00000490, 0x0069 },    /* R1168  - PDM SPK1 CTRL 1 */
 	{ 0x00000491, 0x0000 },    /* R1169  - PDM SPK1 CTRL 2 */
 	{ 0x00000492, 0x0069 },    /* R1170  - PDM SPK2 CTRL 1 */
@@ -1200,7 +1240,6 @@ static const struct reg_default wm5110_reg_default[] = {
 	{ 0x00000D54, 0xFFFF },    /* R3412  - AOD IRQ Mask IRQ2 */
 	{ 0x00000D56, 0x0000 },    /* R3414  - Jack detect debounce */
 	{ 0x00000E00, 0x0000 },    /* R3584  - FX_Ctrl1 */
-	{ 0x00000E01, 0x0000 },    /* R3585  - FX_Ctrl2 */
 	{ 0x00000E10, 0x6318 },    /* R3600  - EQ1_1 */
 	{ 0x00000E11, 0x6300 },    /* R3601  - EQ1_2 */
 	{ 0x00000E12, 0x0FC8 },    /* R3602  - EQ1_3 */
@@ -1518,6 +1557,13 @@ static bool wm5110_readable_register(struct device *dev, unsigned int reg)
 	case ARIZONA_PDM_SPK1_CTRL_2:
 	case ARIZONA_PDM_SPK2_CTRL_1:
 	case ARIZONA_PDM_SPK2_CTRL_2:
+<<<<<<< HEAD:drivers/mfd/wm5110-tables.c
+=======
+	case ARIZONA_HP1_SHORT_CIRCUIT_CTRL:
+	case ARIZONA_HP2_SHORT_CIRCUIT_CTRL:
+	case ARIZONA_HP3_SHORT_CIRCUIT_CTRL:
+	case ARIZONA_HP_TEST_CTRL_1:
+>>>>>>> ff59b2a95bafd4a5ced1a0700067b39cf3b37bed:drivers/mfd/florida-tables.c
 	case ARIZONA_AIF1_BCLK_CTRL:
 	case ARIZONA_AIF1_TX_PIN_CTRL:
 	case ARIZONA_AIF1_RX_PIN_CTRL:
@@ -2285,6 +2331,37 @@ static bool wm5110_readable_register(struct device *dev, unsigned int reg)
 	case ARIZONA_DSP4_CLOCKING_1:
 	case ARIZONA_DSP4_STATUS_1:
 	case ARIZONA_DSP4_STATUS_2:
+<<<<<<< HEAD:drivers/mfd/wm5110-tables.c
+=======
+	case ARIZONA_DSP4_STATUS_3:
+	case ARIZONA_DSP4_STATUS_4:
+	case ARIZONA_DSP4_WDMA_BUFFER_1:
+	case ARIZONA_DSP4_WDMA_BUFFER_2:
+	case ARIZONA_DSP4_WDMA_BUFFER_3:
+	case ARIZONA_DSP4_WDMA_BUFFER_4:
+	case ARIZONA_DSP4_WDMA_BUFFER_5:
+	case ARIZONA_DSP4_WDMA_BUFFER_6:
+	case ARIZONA_DSP4_WDMA_BUFFER_7:
+	case ARIZONA_DSP4_WDMA_BUFFER_8:
+	case ARIZONA_DSP4_RDMA_BUFFER_1:
+	case ARIZONA_DSP4_RDMA_BUFFER_2:
+	case ARIZONA_DSP4_RDMA_BUFFER_3:
+	case ARIZONA_DSP4_RDMA_BUFFER_4:
+	case ARIZONA_DSP4_RDMA_BUFFER_5:
+	case ARIZONA_DSP4_RDMA_BUFFER_6:
+	case ARIZONA_DSP4_WDMA_CONFIG_1:
+	case ARIZONA_DSP4_WDMA_CONFIG_2:
+	case ARIZONA_DSP4_WDMA_OFFSET_1:
+	case ARIZONA_DSP4_RDMA_CONFIG_1:
+	case ARIZONA_DSP4_RDMA_OFFSET_1:
+	case ARIZONA_DSP4_EXTERNAL_START_SELECT_1:
+	case ARIZONA_DSP4_SCRATCH_0:
+	case ARIZONA_DSP4_SCRATCH_1:
+	case ARIZONA_DSP4_SCRATCH_2:
+	case ARIZONA_DSP4_SCRATCH_3:
+	case 0x460 ... 0x47E:
+	case 0x483:
+>>>>>>> ff59b2a95bafd4a5ced1a0700067b39cf3b37bed:drivers/mfd/florida-tables.c
 		return true;
 	default:
 		return false;

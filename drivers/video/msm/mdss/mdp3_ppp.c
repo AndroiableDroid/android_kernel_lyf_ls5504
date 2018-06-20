@@ -1,4 +1,4 @@
-/* Copyright (c) 2007, 2013-2015, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2007, 2013-2016, The Linux Foundation. All rights reserved.
  * Copyright (C) 2007 Google Incorporated
  *
  * This software is licensed under the terms of the GNU General Public
@@ -446,6 +446,7 @@ bool mdp3_is_scale(struct mdp_blit_req *req)
 	return false;
 }
 
+
 u32 mdp3_clk_calc(struct msm_fb_data_type *mfd,
 				struct blit_req_list *lreq, u32 fps)
 {
@@ -532,6 +533,7 @@ int mdp3_calc_ppp_res(struct msm_fb_data_type *mfd,  struct blit_req_list *lreq)
 	int i, lcount = 0;
 	struct mdp_blit_req *req;
 	struct bpp_info bpp;
+
 	u64 src_read_bw = 0;
 	u32 bg_read_bw = 0;
 	u32 dst_write_bw = 0;
@@ -1292,6 +1294,7 @@ void mdp3_ppp_req_pop(struct blit_req_queue *req_q)
 
 void mdp3_free_fw_timer_func(unsigned long arg)
 {
+	mdp3_res->solid_fill_vote_en = false;
 	schedule_work(&ppp_stat->free_bw_work);
 }
 

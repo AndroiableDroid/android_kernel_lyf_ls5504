@@ -16,6 +16,7 @@
 #include "msm8916-regulator.dtsi"
 #include "msm8909-pm8916-camera.dtsi"
 
+
 &soc {
 	/* remove msm8916 acc/cpr regulator node */
 	/delete-node/ regulator@1946000;

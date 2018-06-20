@@ -15,6 +15,7 @@
 #define _WCNSS_WLAN_H_
 
 #include <linux/device.h>
+#include <linux/sched.h>
 
 enum wcnss_opcode {
 	WCNSS_WLAN_SWITCH_OFF = 0,
@@ -31,6 +32,7 @@ struct wcnss_wlan_config {
 	int	is_pronto_vt;
 	int	is_pronto_v3;
 	void __iomem	*msm_wcnss_base;
+
 	int	vbatt;
 };
 
@@ -106,6 +108,7 @@ int wcnss_hardware_type(void);
 void *wcnss_prealloc_get(unsigned int size);
 int wcnss_prealloc_put(void *ptr);
 void wcnss_reset_intr(void);
+void wcnss_reset_fiq(bool clk_chk_en);
 void wcnss_suspend_notify(void);
 void wcnss_resume_notify(void);
 void wcnss_riva_log_debug_regs(void);

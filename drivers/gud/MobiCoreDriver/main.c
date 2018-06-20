@@ -1394,7 +1394,11 @@ out:
  * This device is installed and registered as cdev, then interrupt and
  * queue handling is set up
  */
+#if defined(MC_CRYPTO_CLOCK_MANAGEMENT) && defined(MC_USE_DEVICE_TREE)
+static int mobicore_init(void)
+#else
 static int __init mobicore_init(void)
+#endif
 {
 	int ret = 0;
 	dev_set_name(mcd, "mcd");
@@ -1489,7 +1493,11 @@ error:
 /*
  * This function removes this device driver from the Linux device manager .
  */
+#if defined(MC_CRYPTO_CLOCK_MANAGEMENT) && defined(MC_USE_DEVICE_TREE)
+static void mobicore_exit(void)
+#else
 static void __exit mobicore_exit(void)
+#endif
 {
 	MCDRV_DBG_VERBOSE(mcd, "enter");
 #ifdef MC_MEM_TRACES

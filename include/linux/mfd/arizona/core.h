@@ -117,7 +117,38 @@ int arizona_request_irq(struct arizona *arizona, int irq, char *name,
 void arizona_free_irq(struct arizona *arizona, int irq, void *data);
 int arizona_set_irq_wake(struct arizona *arizona, int irq, int on);
 
+#ifdef CONFIG_MFD_WM5102
 int wm5102_patch(struct arizona *arizona);
 int wm5110_patch(struct arizona *arizona);
 
+#else
+static inline int wm5102_patch(struct arizona *arizona)
+{
+	return 0;
+}
+#endif
+
+int florida_patch(struct arizona *arizona);
+int wm8997_patch(struct arizona *arizona);
+int vegas_patch(struct arizona *arizona);
+int clearwater_patch(struct arizona *arizona);
+int largo_patch(struct arizona *arizona);
+int marley_patch(struct arizona *arizona);
+
+extern int arizona_of_get_named_gpio(struct arizona *arizona, const char *prop,
+				     bool mandatory);
+extern int arizona_of_read_u32_array(struct arizona *arizona, const char *prop,
+				     bool mandatory, u32 *data, size_t num);
+extern int arizona_of_read_u32(struct arizona *arizona, const char* prop,
+			       bool mandatory, u32 *data);
+
+extern void arizona_florida_mute_analog(struct arizona* arizona,
+					unsigned int mute);
+extern void arizona_florida_clear_input(struct arizona *arizona);
+
+static inline int arizona_of_read_s32(struct arizona *arizona, const char *prop,
+				      bool mandatory, s32 *data)
+{
+	return arizona_of_read_u32(arizona, prop, mandatory, (u32 *)data);
+}
 #endif

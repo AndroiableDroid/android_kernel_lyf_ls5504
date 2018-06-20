@@ -80,7 +80,7 @@ struct arizona_extcon_info {
 	bool detecting;
 	int jack_flips;
 
-	int hpdet_ip;
+	int hpdet_ip_version;
 
 	struct extcon_dev edev;
 };
@@ -357,7 +357,7 @@ static int arizona_hpdet_read(struct arizona_extcon_info *info)
 		return ret;
 	}
 
-	switch (info->hpdet_ip) {
+	switch (info->hpdet_ip_version) {
 	case 0:
 		if (!(val & ARIZONA_HP_DONE)) {
 			dev_err(arizona->dev, "HPDET did not complete: %x\n",
@@ -416,7 +416,7 @@ static int arizona_hpdet_read(struct arizona_extcon_info *info)
 
 	default:
 		dev_warn(arizona->dev, "Unknown HPDET IP revision %d\n",
-			 info->hpdet_ip);
+			 info->hpdet_ip_version);
 	case 2:
 		if (!(val & ARIZONA_HP_DONE_B)) {
 			dev_err(arizona->dev, "HPDET did not complete: %x\n",
@@ -1115,7 +1115,7 @@ static int arizona_extcon_probe(struct platform_device *pdev)
 			break;
 		default:
 			info->micd_clamp = true;
-			info->hpdet_ip = 1;
+			info->hpdet_ip_version = 1;
 			break;
 		}
 		break;
@@ -1346,10 +1346,35 @@ static int arizona_extcon_probe(struct platform_device *pdev)
 	}
 
 	arizona_clk32k_enable(arizona);
-	regmap_update_bits(arizona->regmap, ARIZONA_JACK_DETECT_DEBOUNCE,
-			   ARIZONA_JD1_DB, ARIZONA_JD1_DB);
+
+	switch (arizona->type) {
+	case WM8997:
+	case WM5102:
+	case WM1814:
+	case WM8998:
+	case WM8280:
+	case WM5110:
+		debounce_reg = ARIZONA_JACK_DETECT_DEBOUNCE;
+		debounce_val = ARIZONA_JD1_DB;
+		analog_val = ARIZONA_JD1_ENA;
+		break;
+	default:
+		debounce_reg = CLEARWATER_INTERRUPT_DEBOUNCE_7;
+
+		if (arizona->pdata.jd_gpio5) {
+			debounce_val = CLEARWATER_JD1_DB | CLEARWATER_JD2_DB;
+			analog_val = ARIZONA_JD1_ENA | ARIZONA_JD2_ENA;
+		} else {
+			debounce_val = CLEARWATER_JD1_DB;
+			analog_val = ARIZONA_JD1_ENA;
+		}
+		break;
+	}
+
+	regmap_update_bits(arizona->regmap, debounce_reg,
+			   debounce_val, debounce_val);
 	regmap_update_bits(arizona->regmap, ARIZONA_JACK_DETECT_ANALOGUE,
-			   ARIZONA_JD1_ENA, ARIZONA_JD1_ENA);
+			   analog_val, analog_val);
 
 	ret = regulator_allow_bypass(info->micvdd, true);
 	if (ret != 0)

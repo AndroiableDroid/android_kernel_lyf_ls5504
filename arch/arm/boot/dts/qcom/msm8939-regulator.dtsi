@@ -183,6 +183,7 @@
 			<2          2          1 0xffffffff 0xffffffff 0xffffffff>,
 			<2          2          2 0xffffffff 0xffffffff 0xffffffff>,
 			<2          2          3 0xffffffff 0xffffffff 0xffffffff>,
+
 			<0xffffffff 0xffffffff 0 0xffffffff 0xffffffff 0xffffffff>,
 			<0xffffffff 0xffffffff 1 0xffffffff 0xffffffff 0xffffffff>,
 			<0xffffffff 0xffffffff 2 0xffffffff 0xffffffff 0xffffffff>,
@@ -217,6 +218,7 @@
 					<0 (-20) (-124)>, /* NOM - 10mv, TURBO - 60mv	*/
 					<0  104  (-124)>, /* NOM + 50mv, TURBO - 60mv	*/
 					<0   41  (-124)>, /* NOM + 20mv, TURBO - 60mv	*/
+
 					<0  104   (-41)>, /* NOM + 50mv, TURBO - 20mv	*/
 					<0   41   (-41)>, /* NOM + 20mv, TURBO - 20mv	*/
 					<0  104   (-41)>, /* NOM + 50mv, TURBO - 20mv	*/
@@ -238,6 +240,7 @@
 					<0 0 40>,
 					<0 0 40>,
 					<0 0 40>,
+
 					<0 0 40>;
 		qcom,cpr-virtual-corner-quotient-adjustment =
 			<0 0 0 (-104) (-104) (-104) (-104) (-104) (-104) (-104)
@@ -266,6 +269,7 @@
 			 (-104) (-41) (-41) 0 0 0 0 0 0 0 0 0 0 196 0 0 0 0>,
 			<0 0 0 (-104) (-104) (-104) (-104) (-104) (-104) (-104)
 			 (-104) (-104) (-41) 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0>,
+
 			<0 0 0 (-104) (-104) (-104) (-104) (-104) (-104) (-104)
 			 (-104) (-41) (-41) 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0>,
 			<0 0 0 (-104) (-104) (-104) (-104) (-104) (-104) (-104)
@@ -288,6 +292,7 @@
 			<0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0     0 0 0 0 0>,
 			<0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0     0 0 0 0 0>,
 			<0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0     0 0 0 0 0>,
+
 			<0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0     0 0 0 0 0>;
 		qcom,cpr-voltage-floor-override =
 			<0xffffffff 0xffffffff 1050000 1050000 1050000 1050000
